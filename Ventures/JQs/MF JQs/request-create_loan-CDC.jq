@@ -35,6 +35,8 @@
     "vehicles": "Automobile",
     "life_insurance": "Life Insurance",
     "All Assets": "Business Assets",
+    "all_assets": "Business Assets",
+    "all_business_assets": "Business Assets",
     "inventory_accounts_receivable": "Inventory",
     "other": "Other",
     "cash_and_equivalents": "Other",
@@ -47,10 +49,18 @@
     sbaApplicationNumber: .sba_loan_app_number,
     referenceNumber: (.application_number // null | tostring),
     purposeType: (if $purposeType[.loan_purpose] then $purposeType[.loan_purpose] else "Other" end) ,
-    loanTermMonths: .term_in_months,
+    loanTermMonths: (.loan_approval.approved_term // null),
     submittalDate: (if .submitted_date then .submitted_date | split("T")[0] else "" end),
     impactWomanOwnedBusiness: .cra_female_owned_business,
-    impactVeteranOwnedBusiness: (if .details.boarding_details.veteran_owned_business == "yes" or .details.boarding_details.veteran_owned_business == "Yes" then true else false end),
+    impactVeteranOwnedBusiness: (
+        if (
+            .details.boarding_details.veteran_owned_business == "yes" 
+            or .details.boarding_details.veteran_owned_business == "Yes"
+        )
+            then true 
+        else false 
+        end
+    ),
     impactMinorityOwnedBusiness: .cra_minority_owned_business,
     loanType: "7A",
     loanStatus: "Approved",
@@ -58,28 +68,33 @@
     approvalDate: (.loan_decisioned_at // null),
     closingDate: (.closing_date // null),
     sbaProcessingMethodCode: "7AG",
-    impactLmi: (.details.low_to_moderate_community),
+    impactLmi: .details.etran_community_advantage.low_to_moderate_community,
     sbssScore: (if .sbss_score then .sbss_score | tonumber else "" end),
     sbssScoreDate:( try (.loan_interfaces[] | select(.interface_type == "fico" and .is_latest == true) | .details.fico_data.FI_LiquidCredit.timestamp | split(" ")[0] | strptime("%Y%m%d") | strftime("%Y-%m-%d") ) //null) ,
     riskRatingGrade: .risk_rating,
     riskRatingDate: (if .uw_completion_date then .uw_completion_date | split("T")[0] else "" end),
     riskRatingReviewerContactId:236705 ,
-    impactJobsCreatedByLoan: (.loan_relations[] | select(.is_primary_borrower == true) | .questionaire_responses[0].responses.jobs_created),
-    impactJobsRetainedByLoan: (.loan_relations[] | select(.is_primary_borrower == true) | .questionaire_responses[0].responses.jobs_saved),
-    achAccountName: .bank_details.bank_name,
+    impactJobsCreatedByLoan: (.loan_relations[] | select(.is_primary_borrower == true) | .questionaire_responses[0].responses.jobs_created | tonumber // null),
+    impactJobsRetainedByLoan: (.loan_relations[] | select(.is_primary_borrower == true) | .questionaire_responses[0].responses.jobs_saved | tonumber // null),
+    achAccountName: (.loan_relations[] | select(.is_primary_borrower==true) | .full_name // null),
     achAccountNumber: .bank_details.account_number,
     achRoutingNumber: .bank_details.routing_number,
     achAccountType: .bank_details.account_type,
-    impactEmpowermentZoneEnterpriseCommunity: (.details.empowerment_zone),
-    impactHubZone: (.details.hub_zone),
-    impactPromiseZone: (.details.promise_zone),
-    impactRural: (.loan_relations[] | select(.is_primary_borrower == true) | .details.rural_zone),
-    impactOpportunityZone: (.loan_relations[] | select(.is_primary_borrower == true) | .details.opportunity_zone),
-    impactLowIncomeWorkforce: (.details.resides_in_low_income),
-    impactSbaVeteransAdvantage: (.details.eligibility_for_SBA_veterans),
+    impactEmpowermentZoneEnterpriseCommunity: (.details.etran_community_advantage.empowerment_zone),
+    impactHubZone: (.details.etran_community_advantage.hub_zone),
+    impactPromiseZone: (.details.etran_community_advantage.promise_zone),
+    impactRural: (.details.etran_community_advantage.rural_zone),
+    impactOpportunityZone: (.details.etran_community_advantage.opportunity_zone),
+    impactLowIncomeWorkforce: (.details.etran_community_advantage.resides_in_low_income),
+    impactSbaVeteransAdvantage: (.details.etran_community_advantage.eligibility_for_SBA_veterans),
     collateralAnalysisNarrative: "Federal Flood Insurance if business location or collateral falls in a special flood hazard area, Worker's Compensation Insurance - upon hire of W-2 employees, Business Personal Property Insurance, full replacement costs, General Business Liability Insurance",
     keyManInsuranceNarrative: "General Lending Guidelines do not require Key Man Life and Disability insurance for small business loans $350,000 or less.",
-    first2Years: (.details.new_businesses),
+    first2Years: ( 
+        (.submitted_date | capture("^(?<date>\\d{4}-\\d{2}-\\d{2})").date) as $sub
+        | (.loan_relations[] | select(.is_primary_borrower).business_established_date) as $est
+        | ($sub | capture("(?<y>\\d{4})-(?<m>\\d{2})-(?<d>\\d{2})")) as $p
+        | $est < (((($p.y|tonumber)-2)|tostring) + "-" + $p.m + "-" + $p.d)
+    ),
     officeId: (if .details.boarding_details.branchCode then .details.boarding_details.branchCode | tonumber else null end),
     interestRatePercent: .loan_approval.approved_rate,
     sop: "50 10 7.1",
@@ -104,13 +119,16 @@
     date:(if .created then (.created | split("T")[0]) else "" end)}] ,
     useOfProceeds: ( .uop_id_mapping as $UOPIdMapping | [ .use_of_proceed_details[] | 
         { 
-            useOfProceedTypeId: (if .purpose and $useOfProceedType[.purpose] and $UOPIdMapping[$useOfProceedType[.purpose]] then $UOPIdMapping[$useOfProceedType[.purpose]] else $UOPIdMapping["Others"] end),
+            useOfProceedTypeId: (if .purpose and $useOfProceedType[.purpose] and $UOPIdMapping[$useOfProceedType[.purpose]] then $UOPIdMapping[$useOfProceedType[.purpose]] else $UOPIdMapping["Other Cost"] end),
             Amount:(.amount|gsub(",|\\s";"")|tonumber) ,
             Description: .name 
         } 
     ]),
-    collaterals:( .approved_amount as $loan_amount | .collateral_types_mapping as $CollateralTypesMapping | [ .collaterals[] | 
-        { 
+    collaterals:( 
+        .approved_amount as $loan_amount 
+        | .collateral_types_mapping as $CollateralTypesMapping 
+        | [ .collaterals[] 
+        | { 
             collateralTypeId: (if .collateral_type and $collateralType[.collateral_type_verbose] and $CollateralTypesMapping[$collateralType[.collateral_type_verbose]] then $CollateralTypesMapping[$collateralType[.collateral_type_verbose]] else ( if .category and $collateralType[.category] and $CollateralTypesMapping[$collateralType[.category]] then $CollateralTypesMapping[$collateralType[.category]] else $CollateralTypesMapping["Other"] end) end),
             value:(if .collateral_value then .collateral_value else $loan_amount end),
             lienPosition:(if .lien_position == "first" then 1 elif .lien_position == "second" then 2 elif .lien_position == "third" then 3 elif .lien_position == "fourth" then 4 elif .lien_position == "fifth" then 5 elif .lien_position == "subordinate" then 2 else null end),
@@ -123,8 +141,8 @@
                     Comment:(if .business_name and .business_name != "" then .business_name else .first_name + " " + .last_name end)
                 } 
             ] 
-        } 
-    ] as $collaterals | $collaterals | map( . + {primary: (.value == ($collaterals | max_by(.value) | .value))} )),
+        } ] as $collaterals | $collaterals | map( . + {primary: (.value == ($collaterals | max_by(.value) | .value))} )
+    ),
     mailingAddress: ( .loan_relations[] 
         | select(.is_primary_borrower == true) 
         | (.details.mailing_address_flag // false) as $mailingAddressFlag 
@@ -196,7 +214,8 @@
                     taxIdType: .tin_type,
                     entityType: "Sole Proprietorship",
                     naicsCode: ( if .naics_code then .naics_code | tostring else null end ),
-                    businessPhone: ((.work_phone|tostring) // null) 
+                    businessPhone: ((.work_phone|tostring) // null),
+                    currentOwnershipEstablishedDate: .business_established_date
                 } 
         } 
         else {
@@ -268,6 +287,7 @@
                             else "" end
                         ) + " " + $loan_relations.last_name end
                     ),
+                    jobTitle: "Proprietor",
                     ownershipPercentage: 100,
                     signer: ($loan_relations.is_signer),
                     controllingMember: ($loan_relations.is_ben_owner_by_control) 
@@ -281,6 +301,12 @@
                             then .borrower_name 
                             else empty end
                         ) end
+                    ),
+                    jobTitle: (
+                        if $loan_relations.position == "Managing Member" 
+                            then "Member/Manager" 
+                        else $loan_relations.position
+                        end // null
                     ),
                     ownershipPercentage: $loan_relations.ownership_percentage,
                     signer: ($loan_relations.is_signer),

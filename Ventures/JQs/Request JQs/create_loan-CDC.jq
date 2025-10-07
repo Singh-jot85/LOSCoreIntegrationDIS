@@ -51,8 +51,12 @@
     loanTermMonths: (.loan_approval.approved_term // null),
     submittalDate: (if .submitted_date then .submitted_date | split("T")[0] else "" end),
     impactWomanOwnedBusiness: .cra_female_owned_business,
-    impactVeteranOwnedBusiness: (if .details.boarding_details.veteran_owned_business == "yes" or .details.boarding_details.veteran_owned_business == "Yes" 
-        then true 
+    impactVeteranOwnedBusiness: (
+        if (
+            .details.boarding_details.veteran_owned_business == "yes" 
+            or .details.boarding_details.veteran_owned_business == "Yes"
+        )
+            then true 
         else false 
         end
     ),
@@ -114,13 +118,16 @@
     date:(if .created then (.created | split("T")[0]) else "" end)}] ,
     useOfProceeds: ( .uop_id_mapping as $UOPIdMapping | [ .use_of_proceed_details[] | 
         { 
-            useOfProceedTypeId: (if .purpose and $useOfProceedType[.purpose] and $UOPIdMapping[$useOfProceedType[.purpose]] then $UOPIdMapping[$useOfProceedType[.purpose]] else $UOPIdMapping["Others"] end),
+            useOfProceedTypeId: (if .purpose and $useOfProceedType[.purpose] and $UOPIdMapping[$useOfProceedType[.purpose]] then $UOPIdMapping[$useOfProceedType[.purpose]] else $UOPIdMapping["Other Cost"] end),
             Amount:(.amount|gsub(",|\\s";"")|tonumber) ,
             Description: .name 
         } 
     ]),
-    collaterals:( .approved_amount as $loan_amount | .collateral_types_mapping as $CollateralTypesMapping | [ .loan_relations[] | .collaterals[] | 
-        { 
+    collaterals:( 
+        .approved_amount as $loan_amount
+        | .collateral_types_mapping as $CollateralTypesMapping 
+        | [ .loan_relations[] | .collaterals[] 
+        | { 
             collateralTypeId: (if .collateral_type and $collateralType[.collateral_type_verbose] and $CollateralTypesMapping[$collateralType[.collateral_type_verbose]] then $CollateralTypesMapping[$collateralType[.collateral_type_verbose]] else ( if .category and $collateralType[.category] and $CollateralTypesMapping[$collateralType[.category]] then $CollateralTypesMapping[$collateralType[.category]] else $CollateralTypesMapping["Other"] end) end),
             value:(if .collateral_value then .collateral_value else $loan_amount end),
             lienPosition:(if .lien_position == "first" then 1 elif .lien_position == "second" then 2 elif .lien_position == "third" then 3 elif .lien_position == "fourth" then 4 elif .lien_position == "fifth" then 5 elif .lien_position == "subordinate" then 2 else null end),
@@ -133,10 +140,14 @@
                     Comment:(if .business_name and .business_name != "" then .business_name else .first_name + " " + .last_name end)
                 } 
             ] 
-        } 
-    ] as $collaterals | $collaterals | map( . + {primary: (.value == ($collaterals | max_by(.value) | .value))} )),
-    mailingAddress: ( .loan_relations[] | select(.is_primary_borrower == true) | .relation_addresses[] | select(.address_type == "mailing") | 
-        { 
+        } ] as $collaterals | $collaterals | map( . + {primary: (.value == ($collaterals | max_by(.value) | .value))} )
+    ),
+    mailingAddress: (
+        .loan_relations[] 
+        | select(.is_primary_borrower == true) 
+        | .relation_addresses[] 
+        | select(.address_type == "mailing") 
+        | { 
             city: .city,
             street1: .address_line_1,
             street2: .address_line_2,
