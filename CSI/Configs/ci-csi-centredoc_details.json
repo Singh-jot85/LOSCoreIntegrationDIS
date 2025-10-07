@@ -1,0 +1,5 @@
+{
+    "timeout": 120,
+    "response_body_spec": "{\n apiSuccess: (if has(\"apiSuccess\") then .apiSuccess else true end),\n errors: ((if .apiSuccess == false and .errors then (.errors | {\"errorMsg\": (if (.errorMsg | has(\"InnerException\")) then .errorMsg.InnerException.InnerException.Message else .errorMsg.title end), \"errorNum\": (if .errorNum then .errorNum elif .statusCode then .statusCode else null end)}) else null end) // null),\n responses: (if .apiSuccess and .responses then .responses else null end) \n}",
+    "response_body_spec_config": "{}"
+}

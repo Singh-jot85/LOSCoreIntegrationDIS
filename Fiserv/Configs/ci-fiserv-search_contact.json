@@ -1,0 +1,7 @@
+{
+    "validation_spec": "{}",
+    "request_body_spec": "{ \"Input\": { \"Requests\": [ { \"__type\": \"PersonSearchRequest:http://www.opensolutions.com/CoreApi\", \"TaxId\": ((.loan_relations[] | .tin) // null) } ], \"UserAuthentication\": {} } }",
+    "response_body_spec": "( .responses | \n { \n apiSuccess: (if .Output.Responses[0].WasSuccessful then .Output.Responses[0].WasSuccessful else false end),\n errors: .Output.UserAuthentication.Errors[0].ErrorMessage,\n responses: ( .Output.Responses[] | ( if .WasSuccessful and .Persons then (.Persons[] | [\n { \n cif: .PersonNumber,\n customer_details: \n { \n first_name: .FirstName,\n middle_name: ( .MiddleName // \"\"),\n last_name: .LastName,\n tin: .TaxId \n } \n }\n ]) else null end ) )\n }\n)",
+    "request_body_spec_config": "{}",
+    "response_body_spec_config": "{}"
+}

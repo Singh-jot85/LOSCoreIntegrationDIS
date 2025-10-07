@@ -1,0 +1,61 @@
+{
+    "method_config": [
+        {
+            "document_type": {
+                "method": "fetch_configuration_data",
+                "flavour": "DocumentType"
+            }
+        },
+        {
+            "custom_object": {
+                "method": "fetch_configuration_data",
+                "flavour": "CustomObject"
+            }
+        },
+        {
+            "custom_field": {
+                "method": "fetch_configuration_data",
+                "flavour": "CustomField"
+            }
+        },
+        {
+            "uop_purpose_types": {
+                "method": "fetch_configuration_data",
+                "flavour": "UseOfProceedType"
+            }
+        },
+        {
+            "collateral_types": {
+                "method": "fetch_configuration_data",
+                "flavour": "CollateralType"
+            }
+        }
+    ],
+    "relation_types": [
+        "borrower",
+        "co_borrower",
+        "owner"
+    ],
+    "create_customer": {
+        "method_name": {
+            "entity": "execute_create_company_request",
+            "individual": "execute_create_contact_request"
+        },
+        "get_tranformed_config": {
+            "entity": "create_company",
+            "individual": "create_contact"
+        }
+    },
+    "search_accounts": {},
+    "search_customers": {
+        "method_name": {
+            "entity": "execute_search_company_request",
+            "individual": "execute_search_contact_request"
+        },
+        "get_tranformed_config": {
+            "entity": "search_company",
+            "individual": "search_contact"
+        }
+    },
+    "default_document_type": "APP MISCELLANEOUS"
+}

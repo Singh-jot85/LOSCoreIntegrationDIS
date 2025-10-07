@@ -1,0 +1,39 @@
+{
+    "method_config": [
+        {
+            "document_type": {
+                "method": "get_document_types",
+                "flavour": "DocumentType"
+            }
+        }
+    ],
+    "relation_types": [
+        "borrower",
+        "guarantor"
+    ],
+    "create_customer": {
+        "method_name": {
+            "entity": "execute_create_customer_request",
+            "individual": "execute_create_customer_request"
+        },
+        "get_tranformed_config": {
+            "entity": "create_customer",
+            "individual": "create_customer"
+        }
+    },
+    "search_accounts": {
+        "method_name": "execute_search_accounts_request",
+        "get_tranformed_config": "search_accounts"
+    },
+    "search_customers": {
+        "method_name": {
+            "entity": "execute_search_customers_request",
+            "individual": "execute_search_customers_request"
+        },
+        "get_tranformed_config": {
+            "entity": "search_customers",
+            "individual": "search_customers"
+        }
+    },
+    "default_document_type": "Miscellaneous Documents"
+}

@@ -1,0 +1,12 @@
+For local:
+    ssh -i ct-los-preprod-bastion-primary.pem -L 9178:10.170.27.30:443 ec2-user@13.59.3.92
+
+PEM file issue: 
+    chmod 400 ct-los-preprod-bastion-primary.pem
+No shell: 
+    ssh -i ct-los-preprod-bastion-primary.pem -N -L 8000:10.170.27.30:443 ec2-user@13.59.3.92
+Default-docker-ip:
+    ssh -i ct-los-preprod-bastion-primary.pem -L 172.17.0.1:8000:10.170.27.30:443 ec2-user@13.59.3.92
+
+Status for a port:
+    netstat -na | grep 9178

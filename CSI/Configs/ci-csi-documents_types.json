@@ -1,0 +1,423 @@
+{
+    "timeout": 120,
+    "response_body_spec": "{\n apiSuccess: (if has(\"apiSuccess\") then .apiSuccess else true end),\n errors: ((if .apiSuccess == false and .errors then (.errors | {\"errorMsg\": (if (.errorMsg | has(\"InnerException\")) then .errorMsg.InnerException.InnerException.Message else .errorMsg.title end), \"errorNum\": (if .errorNum then .errorNum elif .statusCode then .statusCode else null end)}) else null end) // null),\n responses: (if .apiSuccess and .responses then .responses else null end) \n}",
+    "document_type_mapping": {
+        "Title": {
+            "applicationName": "Loan",
+            "documentTypeName": "Vehicle Title"
+        },
+        "Bylaws": {
+            "applicationName": "Customer",
+            "documentTypeName": "By Laws"
+        },
+        "UCC Search": {
+            "applicationName": "Loan",
+            "documentTypeName": "Lien/Judgement/UCC Search"
+        },
+        "Credit Memo": {
+            "applicationName": "Customer",
+            "documentTypeName": "Loan Approval"
+        },
+        "Fico Report": {
+            "applicationName": "Customer",
+            "documentTypeName": "Credit Report"
+        },
+        "Tax Archive": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Information"
+        },
+        "US Passport": {
+            "applicationName": "Customer",
+            "documentTypeName": "Photo ID"
+        },
+        "Spreading Data": {
+            "applicationName": "Customer",
+            "documentTypeName": "Business Financial Spread"
+        },
+        "Stock Transfer": {
+            "applicationName": "Loan",
+            "documentTypeName": "Stock/Bond"
+        },
+        "Lease Agreement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Leases"
+        },
+        "Board Resolution": {
+            "applicationName": "Customer",
+            "documentTypeName": "Authorization/Resolution"
+        },
+        "Commitment Letter": {
+            "applicationName": "Loan",
+            "documentTypeName": "Loan Commitment"
+        },
+        "Power Of Attorney": {
+            "applicationName": "Customer",
+            "documentTypeName": "Power Of Attorney"
+        },
+        "UCC Search Report": {
+            "applicationName": "Loan",
+            "documentTypeName": "Lien/Judgement/UCC Search"
+        },
+        "Approval Worksheet": {
+            "applicationName": "Customer",
+            "documentTypeName": "Loan Approval"
+        },
+        "Driver’s License": {
+            "applicationName": "Customer",
+            "documentTypeName": "Photo ID"
+        },
+        "Purchase Agreement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Purchase Agreement"
+        },
+        "Stock Certificates": {
+            "applicationName": "Loan",
+            "documentTypeName": "Stock Valuation"
+        },
+        "Tax Spreading Data": {
+            "applicationName": "Loan",
+            "documentTypeName": "Miscellaneous Documents"
+        },
+        "UCC Filing Preview": {
+            "applicationName": "Loan",
+            "documentTypeName": "UCC Filing"
+        },
+        "Closing document(s)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Closing Documents"
+        },
+        "Franchise Agreement": {
+            "applicationName": "Customer",
+            "documentTypeName": "Agency Franchise Agreements"
+        },
+        "Operating Agreement": {
+            "applicationName": "Customer",
+            "documentTypeName": "Operating Agreement"
+        },
+        "Regulation B Notice": {
+            "applicationName": "Loan",
+            "documentTypeName": "Miscellaneous Documents"
+        },
+        "UCC Acknowledgement": {
+            "applicationName": "Loan",
+            "documentTypeName": "UCC Filing"
+        },
+        "Classified Documents": {
+            "applicationName": "Loan",
+            "documentTypeName": "Miscellaneous Documents"
+        },
+        "Corporate Resolution": {
+            "applicationName": "Customer",
+            "documentTypeName": "Authorization/Resolution of Corporate LLC Member"
+        },
+        "Credit Memo Document": {
+            "applicationName": "Customer",
+            "documentTypeName": "Loan Approval"
+        },
+        "Invoice/Bill of Sale": {
+            "applicationName": "Loan",
+            "documentTypeName": "Invoices"
+        },
+        "Management Agreement": {
+            "applicationName": "Customer",
+            "documentTypeName": "Management Agreement"
+        },
+        "Partnership Agreement": {
+            "applicationName": "Customer",
+            "documentTypeName": "Partnership Agreement"
+        },
+        "CAIVRS Search Document": {
+            "applicationName": "Loan",
+            "documentTypeName": "Miscellaneous Documents"
+        },
+        "Deposit Decline Letter": {
+            "applicationName": "Customer",
+            "documentTypeName": "Deposit Account Documents"
+        },
+        "Preclosing document(s)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Closing Documents"
+        },
+        "Unclassified Documents": {
+            "applicationName": "Loan",
+            "documentTypeName": "Miscellaneous Documents"
+        },
+        "Complete Trust Document": {
+            "applicationName": "Customer",
+            "documentTypeName": "Legal Docs-trust"
+        },
+        "Customer Correspondence": {
+            "applicationName": "Customer",
+            "documentTypeName": "Correspondence"
+        },
+        "Loan Exception Document": {
+            "applicationName": "Loan",
+            "documentTypeName": "Exception Form"
+        },
+        "SAM.gov Search Document": {
+            "applicationName": "Loan",
+            "documentTypeName": "SAM-Excluded Parties Search"
+        },
+        "Sole Prop Certification": {
+            "applicationName": "Customer",
+            "documentTypeName": "Sole Ownership Authority"
+        },
+        "State Title Application": {
+            "applicationName": "Loan",
+            "documentTypeName": "Application for Certificate of Title"
+        },
+        "ETRAN Servicing Document": {
+            "applicationName": "Loan",
+            "documentTypeName": "SBA - Miscellaneous Documents"
+        },
+        "Etran Loan Auth Document": {
+            "applicationName": "Loan",
+            "documentTypeName": "SBA Authorization"
+        },
+        "Underwriting document(s)": {
+            "applicationName": "Customer",
+            "documentTypeName": "Underwriting Decision Report"
+        },
+        "Certificate of Trade Name": {
+            "applicationName": "Customer",
+            "documentTypeName": "Certificate"
+        },
+        "Counter Offer document(s)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Notice to Borrower"
+        },
+        "Good Standing Certificate": {
+            "applicationName": "Customer",
+            "documentTypeName": "Certificate of Good Standing"
+        },
+        "Lender Requested Document": {
+            "applicationName": "Loan",
+            "documentTypeName": "Miscellaneous Documents"
+        },
+        "Proof of Business Address": {
+            "applicationName": "Loan",
+            "documentTypeName": "Property Address"
+        },
+        "Proof of Personal Address": {
+            "applicationName": "Loan",
+            "documentTypeName": "Property Address"
+        },
+        "Property Insurance Policy": {
+            "applicationName": "Loan",
+            "documentTypeName": "Proof of Insurance"
+        },
+        "Closing signed document(s)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Note & Mortgage Documents"
+        },
+        "Flood Determination Report": {
+            "applicationName": "Loan",
+            "documentTypeName": "Flood Search"
+        },
+        "Loan amortization schedule": {
+            "applicationName": "Loan",
+            "documentTypeName": "Amortization Schedule"
+        },
+        "Bill of Sale (new purchase)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Purchase Agreement"
+        },
+        "Certificate of Organization": {
+            "applicationName": "Customer",
+            "documentTypeName": "Certificate of Inc/Org/LLP"
+        },
+        "Closing summary document(s)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Note & Mortgage Documents"
+        },
+        "Fictitious Name Certificate": {
+            "applicationName": "Customer",
+            "documentTypeName": "Assumed Name Certificate"
+        },
+        "Insurance Declarations page": {
+            "applicationName": "Loan",
+            "documentTypeName": "Proof of Insurance"
+        },
+        "Auto/Business Auto Insurance": {
+            "applicationName": "Loan",
+            "documentTypeName": "Proof of Insurance"
+        },
+        "Copy of Management Agreement": {
+            "applicationName": "Customer",
+            "documentTypeName": "Management Agreement"
+        },
+        "Signed 8821 Consent Document": {
+            "applicationName": "Customer",
+            "documentTypeName": "Tax Returns - Misc"
+        },
+        "KYC Risk Flag Report document": {
+            "applicationName": "Loan",
+            "documentTypeName": "Miscellaneous Documents"
+        },
+        "Application signed document(s)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Application - Final"
+        },
+        "Franchise or Similar Agreement": {
+            "applicationName": "Customer",
+            "documentTypeName": "Agency Franchise Agreements"
+        },
+        "US Armed Forces or Military ID": {
+            "applicationName": "Customer",
+            "documentTypeName": "Photo ID"
+        },
+        "Unsigned 8821 Consent Document": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Bill Authorization"
+        },
+        "Application summary document(s)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Application"
+        },
+        "Primary Identification Document": {
+            "applicationName": "Customer",
+            "documentTypeName": "Photo ID"
+        },
+        "State or County DBA Certificate": {
+            "applicationName": "Customer",
+            "documentTypeName": "Business License"
+        },
+        "Federal Tax Return (most recent)": {
+            "applicationName": "Customer",
+            "documentTypeName": "Business Tax Return"
+        },
+        "Post Boarding Document - Officer": {
+            "applicationName": "Loan",
+            "documentTypeName": "Miscellaneous Documents"
+        },
+        "Approval with conditions document": {
+            "applicationName": "Loan",
+            "documentTypeName": "Miscellaneous Documents"
+        },
+        "Secondary Identification Document": {
+            "applicationName": "Customer",
+            "documentTypeName": "Photo ID"
+        },
+        "Certificate of Limited Partnership": {
+            "applicationName": "Customer",
+            "documentTypeName": "Certificate of Inc/Org/LLP"
+        },
+        "IRS Letter Regarding 501(c) status": {
+            "applicationName": "Customer",
+            "documentTypeName": "Entity Documents - Miscellaneous"
+        },
+        "Post Boarding Document - Depositor": {
+            "applicationName": "Loan",
+            "documentTypeName": "Miscellaneous Documents"
+        },
+        "IRS Letter Regarding 501(c3) Status": {
+            "applicationName": "Customer",
+            "documentTypeName": "Entity Documents - Miscellaneous"
+        },
+        "Property Insurance Declarations Page": {
+            "applicationName": "Loan",
+            "documentTypeName": "Proof of Insurance"
+        },
+        "Certificate of Title for used vessels": {
+            "applicationName": "Loan",
+            "documentTypeName": "Vehicle Title"
+        },
+        "State or Federal Government Issued ID": {
+            "applicationName": "Customer",
+            "documentTypeName": "Photo ID"
+        },
+        "Signed document(s) from Manual closing": {
+            "applicationName": "Loan",
+            "documentTypeName": "Closing Documents"
+        },
+        "Hazard insurance (could be auto policy)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Proof of Insurance"
+        },
+        "Limited Liability Partnership Agreement": {
+            "applicationName": "Customer",
+            "documentTypeName": "Authorization/Resolution of LLC Partner"
+        },
+        "Pre Closing Document signed document(s)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Closing Documents"
+        },
+        "Reg B Timer Exception Approval Document": {
+            "applicationName": "Loan",
+            "documentTypeName": "Miscellaneous Documents"
+        },
+        "Schedule K-1 on Guarantor (most recent)": {
+            "applicationName": "Customer",
+            "documentTypeName": "Schedule K-1"
+        },
+        "US Permanent Resident Card (Green Card)": {
+            "applicationName": "Customer",
+            "documentTypeName": "Photo ID"
+        },
+        "Pre Closing Document summary document(s)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Closing Documents"
+        },
+        "Officer Roster or Organization Resolution": {
+            "applicationName": "Customer",
+            "documentTypeName": "Authorization/Resolution"
+        },
+        "Hazard insurance/Business Personal Property": {
+            "applicationName": "Loan",
+            "documentTypeName": "Proof of Insurance"
+        },
+        "Assumed Name Certificate or Business License": {
+            "applicationName": "Customer",
+            "documentTypeName": "Business License"
+        },
+        "Hazard insurance (could be Marine Insurance)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Proof of Insurance"
+        },
+        "Articles of Incorporation (dated and certified)": {
+            "applicationName": "Customer",
+            "documentTypeName": "Articles of INC/ORG/LLP"
+        },
+        "Signed Etran Loan Authorization (T&C) Documents": {
+            "applicationName": "Loan",
+            "documentTypeName": "SBA Authorization"
+        },
+        "Copy of most recent Schedule K-1 on Guarantor(s)": {
+            "applicationName": "Customer",
+            "documentTypeName": "Schedule K-1"
+        },
+        "Manufacture Statement of Origin, if new purchase": {
+            "applicationName": "Loan",
+            "documentTypeName": "Miscellaneous Documents"
+        },
+        "Certificate of Organization (dated and certified)": {
+            "applicationName": "Customer",
+            "documentTypeName": "Certificate of Inc/Org/LLP"
+        },
+        "Articles of Association with at least two signatures": {
+            "applicationName": "Customer",
+            "documentTypeName": "Articles"
+        },
+        "IRS SS4 TIN Issuance Letter with correct name and EIN": {
+            "applicationName": "Customer",
+            "documentTypeName": "Tax Returns - Misc"
+        },
+        "Operating Agreement (if ownership percentage is stated)": {
+            "applicationName": "Customer",
+            "documentTypeName": "Operating Agreement"
+        },
+        "Most recent filed federal tax returns (Two years preferred)": {
+            "applicationName": "Customer",
+            "documentTypeName": "Business Tax Return"
+        },
+        "Meeting minutes appointing signers and signed by Association Secretary": {
+            "applicationName": "Customer",
+            "documentTypeName": "Meeting Minutes"
+        },
+        "Evidence that the ESOP is in compliance with all applicable IRS, Treasury, and Department of Labor requirements.": {
+            "applicationName": "Customer",
+            "documentTypeName": "Compliance Documents"
+        }
+    },
+    "response_body_spec_config": "{}"
+}

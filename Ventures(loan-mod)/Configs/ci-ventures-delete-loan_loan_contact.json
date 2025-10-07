@@ -1,0 +1,7 @@
+{
+    "validation_spec": "{}",
+    "request_body_spec": "{}",
+    "response_body_spec": "{\n  apiSuccess: (.apiSuccess and (.responses.succeeded // false)),\n  responses: (if (.apiSuccess and (.responses.succeeded // false)) then \n    {customerid: .responses.result.id} \n  else \n    null \n  end),\n  errors: (if (.apiSuccess and (.responses.succeeded // false)) then \n    null \n  else \n    {\n      errorNum: .errors.errorNum,\n      errorMsg: .errors.errorMsg\n    } \n  end)\n}",
+    "request_body_spec_config": "{}",
+    "response_body_spec_config": "{}"
+}

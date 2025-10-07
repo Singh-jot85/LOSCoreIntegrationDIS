@@ -1,0 +1,7 @@
+{
+    "validation_spec": "{}",
+    "request_body_spec": "{}",
+    "response_body_spec": "(\n    . as $root\n    | (.apiSuccess and .responses.succeeded) as $success\n    | {\n        apiSuccess: $success,\n        errors: ( if ($success | not)\n            then .errors\n            else null\n            end\n        ),\n        responses: ( if $success \n            then {\n                status: \"success\"\n            }\n            else null\n            end\n        ) \n    }\n)",
+    "request_body_spec_config": "{}",
+    "response_body_spec_config": "{}"
+}

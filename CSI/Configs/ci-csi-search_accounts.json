@@ -1,0 +1,5 @@
+{
+    "validation_spec": "{}",
+    "response_body_spec": "{\n apiSuccess: (if has(\"apiSuccess\") then .apiSuccess else false end),\n errors: ((if .apiSuccess == false and .errors then ({\"errorMsg\": (if .errors.errorMsg|type == \"string\" then .errors.errorMsg elif .errors.errorMsg | has(\"InnerException\") then .errors.errorMsg.InnerException.InnerException.Message else .errors.errorMsg.title end), \"errorNum\": (if .errors|has(\"errorNum\") then .errors.errorNum else null end)}) else null end) // null),\n responses: (if .apiSuccess then {accountDetails:.responses} else null end) \n}",
+    "response_body_spec_config": "{}"
+}

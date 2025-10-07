@@ -1,0 +1,21 @@
+{
+    "method_config": [],
+    "relation_types": [
+        "borrower",
+        "co_borrower",
+        "owner",
+        "guarantor"
+    ],
+    "search_accounts": {},
+    "search_customers": {
+        "method_name": {
+            "entity": "execute_search_company_request",
+            "individual": "execute_search_contact_request"
+        },
+        "get_tranformed_config": {
+            "entity": "search_company",
+            "individual": "search_contact"
+        }
+    },
+    "default_document_type": ""
+}

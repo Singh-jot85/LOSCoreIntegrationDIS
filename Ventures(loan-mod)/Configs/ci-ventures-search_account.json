@@ -1,0 +1,7 @@
+{
+    "validation_spec": "{}",
+    "request_body_spec": ".",
+    "response_body_spec": "{\n  apiSuccess: (if .responses|has(\"succeeded\") then .responses|.succeeded else false end), \n  errors: .responses|.messages,\n  responses: (\n    if .responses|.succeeded and .result then \n        if (.responses.result | type == \"array\") then \n            [.responses.result[]]\n        elif (.responses.result|type == \"object\") then \n            [.responses.result]\n        else null end\n  else null end)\n}",
+    "request_body_spec_config": "{}",
+    "response_body_spec_config": "{}"
+}

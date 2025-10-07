@@ -1,0 +1,80 @@
+[
+	{
+		"free_reduced_prices": {
+			"ventures_field": "Offers Free, Reduced, or Sliding Scale Prices",
+			"ventures_object": "Loan: Eligibility"
+		}
+	},
+	{
+		"first_time_borrower": {
+			"ventures_field": "First Time Borrower",
+			"ventures_object": "Loan: Eligibility"
+		}
+	},
+	{
+		"first_time_business_owner": {
+			"ventures_field": "First Time Business Owner",
+			"ventures_object": "Loan: Eligibility"
+		}
+	},
+	{
+		"low_income_clients": {
+			"ventures_field": "Serves Low-Income Individuals",
+			"ventures_object": "Loan: Eligibility"
+		}
+	},
+	{
+		"projected_percent_of_low_income_clients": {
+			"ventures_field": "Projected Percent of Low-Income Individuals",
+			"ventures_object": "Loan: Eligibility"
+		}
+	},
+	{
+		"clients_currently_served": {
+			"ventures_field": "Clients/Customers Currently Served",
+			"ventures_object": "Loan: Eligibility"
+		}
+	},
+	{
+		"projected_clients_served": {
+			"ventures_field": "Projected Clients/Customers Served",
+			"ventures_object": "Loan: Eligibility"
+		}
+	},
+	{
+		"living_wage": {
+			"ventures_field": "Living Wage",
+			"ventures_object": "Loan: Eligibility"
+		}
+	},
+	{
+		"percent_employees_paid_above_living_wage": {
+			"ventures_field": "Percent of Employees Making Above a Living Wage",
+			"ventures_object": "Loan: Eligibility"
+		}
+	},
+	{
+		"loan_sale_reviewed": {
+			"ventures_field": "Loan Sale - Reviewed",
+			"ventures_object": "Loan: General"
+		}
+	},
+	{
+		"lumos_credit_score": {
+			"ventures_field": "Lumos Credit Score",
+			"ventures_object": "Loan: Eligibility"
+		}
+	},
+	{
+		"lumos_credit_score_date": {
+			"ventures_field": "Lumos Credit Score Date",
+			"ventures_object": "Loan: Eligibility"
+		}
+	},
+	{
+		"lumos_expected_loss": {
+			"ventures_field": "Lumos Expected Loss",
+			"ventures_object": "Loan: Eligibility"
+		}
+	}
+]

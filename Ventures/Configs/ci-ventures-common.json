@@ -1,0 +1,12 @@
+{
+    "validation_spec": "{}",
+    "request_body_spec": "{}",
+    "response_body_spec": {
+            "errors": {
+                "errorMsg": "", 
+                "errorNum": ""
+            }, 
+        "responses": "", 
+        "apiSuccess": true
+    }
+}

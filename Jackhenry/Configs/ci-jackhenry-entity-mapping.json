@@ -1,0 +1,54 @@
+{
+    "method_config": [],
+    "relation_types": [
+        "borrower",
+        "co_borrower",
+        "owner"
+    ],
+    "create_loan": {
+        "method_name": {
+            "loan_account_creation": "execute_create_loan_request",
+            "collateral": "execute_collateral_track_add_request",
+            "payment_term": "execute_payment_schedule_add_request",
+            "rate_detail": "execute_rate_schedule_add_request"
+        },
+        "get_tranformed_config": {
+            "loan_account_creation": "create_loan",
+            "collateral": "collateral_track_add",
+            "payment_term": "payment_schedule_add",
+            "rate_detail": "rate_schedule_add"
+        }
+    },
+    "customer_realtion_addition": {
+        "method_name": {
+            "owner": "execute_owner_customer_relation_add_request",
+            "borrower": "execute_coborrower_customer_relation_add_request"
+        },
+        "get_tranformed_config": {
+            "owner": "customer_relation_owner_add",
+            "borrower": "customer_relation_coborrower_add"
+        }
+    },
+    "create_customer": {
+        "method_name": {
+            "entity": "execute_create_customer_request",
+            "individual": "execute_create_customer_request"
+        },
+        "get_tranformed_config": {
+            "entity": "create_customer",
+            "individual": "create_customer"
+        }
+    },
+    "search_accounts": {},
+    "search_customers": {
+        "method_name": {
+            "entity": "execute_search_customer_request",
+            "individual": "execute_search_customer_request"
+        },
+        "get_tranformed_config": {
+            "entity": "search_customer",
+            "individual": "search_customer"
+        }
+    },
+    "default_document_type": ""
+}

@@ -1,0 +1,5 @@
+{
+    "validation_spec": "{}",
+    "response_body_spec": "{\n   apiSuccess: .responses.succeeded,\n   errors: .errors,\n   responses: [.responses.result[]]}",
+    "response_body_spec_config": "{}"
+}

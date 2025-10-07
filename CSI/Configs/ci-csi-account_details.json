@@ -1,0 +1,6 @@
+{
+    "request_body": "50000",
+    "validation_spec": "{}",
+    "response_body_spec": "{\n apiSuccess: (if has(\"apiSuccess\") then .apiSuccess else true end),\n errors: ((if .apiSuccess == false and .errors then (.errors | {\"errorMsg\": (if .errorMsg then .errorMsg elif .errorMsg|has(\"InnerException\") then .errorMsg.InnerException.InnerException.Message else null end), \"errorNum\": (if .errorNum then .errorNum else null end)}) else null end) // null),\n responses: (if .apiSuccess and .responses then {AccountNumber: .responses.borrowerNumberonNote | tostring} else null end) \n}",
+    "response_body_spec_config": "{}"
+}

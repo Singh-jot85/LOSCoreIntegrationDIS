@@ -1,0 +1,1360 @@
+{
+    "request_body": "50000",
+    "validation_spec": "{}",
+    "response_body_spec": "{\n apiSuccess: .responses.succeeded,\n errors: .errors,\n responses: [(if .responses.succeeded then .responses.result[] | {\n documentTypeGuid:.id,\n documentTypeName:.name,\n uuid:.uuid,\n applicationName:\"Loan\"} else null end)] }",
+    "document_type_mapping": {
+        "W2": {
+            "applicationName": "Loan",
+            "documentTypeName": "IRS W-2"
+        },
+        "LOI": {
+            "applicationName": "Loan",
+            "documentTypeName": "Letter of Intent"
+        },
+        "Visa": {
+            "applicationName": "Loan",
+            "documentTypeName": "Visa"
+        },
+        "W-9s": {
+            "applicationName": "Loan",
+            "documentTypeName": "W-9"
+        },
+        "Title": {
+            "applicationName": "Loan",
+            "documentTypeName": "Title"
+        },
+        "Bylaws": {
+            "applicationName": "Loan",
+            "documentTypeName": "Bylaws"
+        },
+        "Others": {
+            "applicationName": "Loan",
+            "documentTypeName": "Other Supporting Application Documents"
+        },
+        "Survey": {
+            "applicationName": "Loan",
+            "documentTypeName": "Survey"
+        },
+        "By-Laws": {
+            "applicationName": "Loan",
+            "documentTypeName": "Bylaws"
+        },
+        "Invoice": {
+            "applicationName": "Loan",
+            "documentTypeName": "Invoice"
+        },
+        "Passport": {
+            "applicationName": "Loan",
+            "documentTypeName": "US Passport ID"
+        },
+        "Appraisal": {
+            "applicationName": "Loan",
+            "documentTypeName": "Appraisal"
+        },
+        "Asset List": {
+            "applicationName": "Loan",
+            "documentTypeName": "Asset List"
+        },
+        "Term Sheet": {
+            "applicationName": "Loan",
+            "documentTypeName": "Term Sheet"
+        },
+        "Credit Memo": {
+            "applicationName": "Loan",
+            "documentTypeName": "Credit Memorandum"
+        },
+        "RSRA Report": {
+            "applicationName": "Loan",
+            "documentTypeName": "RSRA Report"
+        },
+        "Seller Note": {
+            "applicationName": "Loan",
+            "documentTypeName": "Seller Note"
+        },
+        "US Passport": {
+            "applicationName": "Loan",
+            "documentTypeName": "US Passport ID"
+        },
+        "Bill of Sale": {
+            "applicationName": "Loan",
+            "documentTypeName": "Bill of Sale"
+        },
+        "IRS Form 941": {
+            "applicationName": "Loan",
+            "documentTypeName": "IRS Form 941"
+        },
+        "Schedule K-1": {
+            "applicationName": "Loan",
+            "documentTypeName": "Schedule K-1"
+        },
+        "Business Plan": {
+            "applicationName": "Loan",
+            "documentTypeName": "Business Plan"
+        },
+        "Debt Schedule": {
+            "applicationName": "Loan",
+            "documentTypeName": "Debt Schedule"
+        },
+        "Deed of Trust": {
+            "applicationName": "Loan",
+            "documentTypeName": "Deed Trust"
+        },
+        "Due Diligence": {
+            "applicationName": "Loan",
+            "documentTypeName": "Due Diligence"
+        },
+        "Survey report": {
+            "applicationName": "Loan",
+            "documentTypeName": "Survey"
+        },
+        "Vehicle Title": {
+            "applicationName": "Loan",
+            "documentTypeName": "Vehicle Title"
+        },
+        "Veteran-DD214": {
+            "applicationName": "Loan",
+            "documentTypeName": "Veteran-DD214"
+        },
+        "Auto Insurance": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance - Automobile "
+        },
+        "Equipment List": {
+            "applicationName": "Loan",
+            "documentTypeName": "Equipment List"
+        },
+        "Gift Affidavit": {
+            "applicationName": "Loan",
+            "documentTypeName": "Gift Affidavit"
+        },
+        "Name Affidavit": {
+            "applicationName": "Loan",
+            "documentTypeName": "Name Affidavit"
+        },
+        "Officer Roster": {
+            "applicationName": "Loan",
+            "documentTypeName": "Officer Roster"
+        },
+        "Spreading Data": {
+            "applicationName": "Loan",
+            "documentTypeName": "Spreading Data"
+        },
+        "Wind Insurance": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance - Wind"
+        },
+        "Asset Agreement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Asset Agreement"
+        },
+        "Building Permit": {
+            "applicationName": "Loan",
+            "documentTypeName": "Building Permit"
+        },
+        "Drivers License": {
+            "applicationName": "Loan",
+            "documentTypeName": "State Issued ID/Drivers License"
+        },
+        "Equipment Quote": {
+            "applicationName": "Loan",
+            "documentTypeName": "Equipment Quote"
+        },
+        "Flood Insurance": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance - Flood"
+        },
+        "Lease Agreement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Lease"
+        },
+        "Other Documents": {
+            "applicationName": "Loan",
+            "documentTypeName": "Other Supporting Application Documents"
+        },
+        "Payment History": {
+            "applicationName": "Loan",
+            "documentTypeName": "Payment History"
+        },
+        "Title Insurance": {
+            "applicationName": "Loan",
+            "documentTypeName": "Title Insurance"
+        },
+        "Trust Agreement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Trust Agreement"
+        },
+        "Veteran-ID Card": {
+            "applicationName": "Loan",
+            "documentTypeName": "Military ID"
+        },
+        "Appraisal Report": {
+            "applicationName": "Loan",
+            "documentTypeName": "Appraisal"
+        },
+        "Archive Document": {
+            "applicationName": "Loan",
+            "documentTypeName": "Archive Document"
+        },
+        "Board Resolution": {
+            "applicationName": "Loan",
+            "documentTypeName": "Board Resolution"
+        },
+        "Building Permits": {
+            "applicationName": "Loan",
+            "documentTypeName": "Building Permit"
+        },
+        "Business License": {
+            "applicationName": "Loan",
+            "documentTypeName": "Business Licenses"
+        },
+        "Core Screenshots": {
+            "applicationName": "Loan",
+            "documentTypeName": "Core Screenshots"
+        },
+        "Corporate Bylaws": {
+            "applicationName": "Loan",
+            "documentTypeName": "Corporate Bylaws"
+        },
+        "DBA Registration": {
+            "applicationName": "Loan",
+            "documentTypeName": "DBA Registration"
+        },
+        "Driver's License": {
+            "applicationName": "Loan",
+            "documentTypeName": "State Issued ID/Drivers License"
+        },
+        "Equity Injection": {
+            "applicationName": "Loan",
+            "documentTypeName": "Equity Injection Documentation"
+        },
+        "Expenses Prepaid": {
+            "applicationName": "Loan",
+            "documentTypeName": "Prepaid Expenses"
+        },
+        "Hazard Insurance": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance - Hazard"
+        },
+        "Installment Plan": {
+            "applicationName": "Loan",
+            "documentTypeName": "Installment Plan"
+        },
+        "Marine Insurance": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance - Inland Marine"
+        },
+        "Payoff Statement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Loan Payoff Statement"
+        },
+        "Title Commitment": {
+            "applicationName": "Loan",
+            "documentTypeName": "Title Commitment"
+        },
+        "USCIS Form G-845": {
+            "applicationName": "Loan",
+            "documentTypeName": "USCIS Verification"
+        },
+        "Valuation Report": {
+            "applicationName": "Loan",
+            "documentTypeName": "Business Valuation"
+        },
+        "Current Rent Roll": {
+            "applicationName": "Loan",
+            "documentTypeName": "Rent Roll"
+        },
+        "Landlord's Waiver": {
+            "applicationName": "Loan",
+            "documentTypeName": "Landlord's Waiver"
+        },
+        "Management Resume": {
+            "applicationName": "Loan",
+            "documentTypeName": "Resume"
+        },
+        "Original Approval": {
+            "applicationName": "Loan",
+            "documentTypeName": "Original Approval"
+        },
+        "Owner Certificate": {
+            "applicationName": "Loan",
+            "documentTypeName": "Owner Certificate"
+        },
+        "Power Of Attorney": {
+            "applicationName": "Loan",
+            "documentTypeName": "Power of Attorney"
+        },
+        "Required Document": {
+            "applicationName": "Loan",
+            "documentTypeName": "Miscellaneous Documents"
+        },
+        "Vehicle Insurance": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance - Automobile "
+        },
+        "Wire Instructions": {
+            "applicationName": "Loan",
+            "documentTypeName": "Wire Instructions"
+        },
+        "Borrower Pro Forma": {
+            "applicationName": "Loan",
+            "documentTypeName": "Borrower Pro Forma"
+        },
+        "Construction Quote": {
+            "applicationName": "Loan",
+            "documentTypeName": "Construction Bids"
+        },
+        "Purchase Agreement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Purchase Agreement"
+        },
+        "Stock Certificates": {
+            "applicationName": "Loan",
+            "documentTypeName": "Stock Certificates"
+        },
+        "Annual STARR Report": {
+            "applicationName": "Loan",
+            "documentTypeName": "Annual STARR Report"
+        },
+        "Construction Budget": {
+            "applicationName": "Loan",
+            "documentTypeName": "Construction Budget"
+        },
+        "Contractors License": {
+            "applicationName": "Loan",
+            "documentTypeName": "Contractors License"
+        },
+        "Equity Confirmation": {
+            "applicationName": "Loan",
+            "documentTypeName": "Equity Confirmation"
+        },
+        "Franchise Agreement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Franchise Documents"
+        },
+        "History of Business": {
+            "applicationName": "Loan",
+            "documentTypeName": "History of Business"
+        },
+        "IRS Tax Transcripts": {
+            "applicationName": "Loan",
+            "documentTypeName": "IRS Tax Transcripts"
+        },
+        "One Month Statement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Statement"
+        },
+        "Operating Agreement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Operating Agreement"
+        },
+        "Personal Tax Return": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Personal"
+        },
+        "State or Federal ID": {
+            "applicationName": "Loan",
+            "documentTypeName": "State Issued ID/Drivers License"
+        },
+        "Title Search Report": {
+            "applicationName": "Loan",
+            "documentTypeName": "Title Search Report"
+        },
+        "Verification of EIN": {
+            "applicationName": "Loan",
+            "documentTypeName": "Verification of EIN"
+        },
+        "Classified Documents": {
+            "applicationName": "Loan",
+            "documentTypeName": "Classified Documents"
+        },
+        "Corporate Resolution": {
+            "applicationName": "Loan",
+            "documentTypeName": "Corporate Resolution"
+        },
+        "Credit Bureau Report": {
+            "applicationName": "Loan",
+            "documentTypeName": "Credit Report - Personal"
+        },
+        "Credit Memo Document": {
+            "applicationName": "Loan",
+            "documentTypeName": "Credit Memorandum"
+        },
+        "Financial Statements": {
+            "applicationName": "Loan",
+            "documentTypeName": "Financial Statements"
+        },
+        "Franchise Agreement ": {
+            "applicationName": "Loan",
+            "documentTypeName": "Franchise Documents"
+        },
+        "Invoice/Bill of Sale": {
+            "applicationName": "Loan",
+            "documentTypeName": "Bill of Sale"
+        },
+        "Licenses and Permits": {
+            "applicationName": "Loan",
+            "documentTypeName": "Licenses/Permits"
+        },
+        "Management Agreement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Management Agreement"
+        },
+        "Occupational License": {
+            "applicationName": "Loan",
+            "documentTypeName": "Occupational License"
+        },
+        "Organizational Chart": {
+            "applicationName": "Loan",
+            "documentTypeName": "Organizational Chart"
+        },
+        "Plan and Cost Review": {
+            "applicationName": "Loan",
+            "documentTypeName": "Plan and Cost Review"
+        },
+        "Proof of Tax Payment": {
+            "applicationName": "Loan",
+            "documentTypeName": "Proof of Tax Payment"
+        },
+        "Relationship Summary": {
+            "applicationName": "Loan",
+            "documentTypeName": "Relationship Summary"
+        },
+        "Social Security Card": {
+            "applicationName": "Loan",
+            "documentTypeName": "Social Security Card"
+        },
+        "Sources & Uses Chart": {
+            "applicationName": "Loan",
+            "documentTypeName": "Sources & Uses Chart"
+        },
+        "Board Meeting Minutes": {
+            "applicationName": "Loan",
+            "documentTypeName": "Board Meeting Minutes"
+        },
+        "Business Voided Check": {
+            "applicationName": "Loan",
+            "documentTypeName": "ACH Form With Voided Check"
+        },
+        "Construction Contract": {
+            "applicationName": "Loan",
+            "documentTypeName": "Construction Contract"
+        },
+        "Credit Card Statement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Credit Card Statement"
+        },
+        "Current Profit & Loss": {
+            "applicationName": "Loan",
+            "documentTypeName": "Profit & Loss"
+        },
+        "Interim Balance Sheet": {
+            "applicationName": "Loan",
+            "documentTypeName": "Balance Sheet"
+        },
+        "Life Insurance Policy": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance - Life"
+        },
+        "Malpractice Insurance": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance - Malpractice"
+        },
+        "Non-Compete Agreement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Non-Compete Agreement"
+        },
+        "Partnership Agreement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Partnership Agreement"
+        },
+        "Business Debt Schedule": {
+            "applicationName": "Loan",
+            "documentTypeName": "Debt Schedule"
+        },
+        "CAIVRS Search Document": {
+            "applicationName": "Loan",
+            "documentTypeName": "CAIVRS & SAM"
+        },
+        "Deposit Decline Letter": {
+            "applicationName": "Loan",
+            "documentTypeName": "Deposit Decline Letter"
+        },
+        "Insurance Certificates": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance - Other"
+        },
+        "Invoice / Bill of Sale": {
+            "applicationName": "Loan",
+            "documentTypeName": "Bill of Sale"
+        },
+        "Projection Assumptions": {
+            "applicationName": "Loan",
+            "documentTypeName": "Business Projections with Assumptions"
+        },
+        "SBA Addendum Form 2462": {
+            "applicationName": "Loan",
+            "documentTypeName": "SBA Addendum Form 2462"
+        },
+        "Site Inspection Report": {
+            "applicationName": "Loan",
+            "documentTypeName": "Site Visit"
+        },
+        "Tax Lien Documentation": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Lien Documentation"
+        },
+        "Unclassified Documents": {
+            "applicationName": "Loan",
+            "documentTypeName": "Unclassified Documents"
+        },
+        "Veteran-Spouse ID Card": {
+            "applicationName": "Loan",
+            "documentTypeName": "Military ID"
+        },
+        "Year End Balance Sheet": {
+            "applicationName": "Loan",
+            "documentTypeName": "Balance Sheet"
+        },
+        "Year End Profit & Loss": {
+            "applicationName": "Loan",
+            "documentTypeName": "Profit & Loss"
+        },
+        "Bank Account Statements": {
+            "applicationName": "Loan",
+            "documentTypeName": "Bank Statements - Business/Personal"
+        },
+        "Builders Risk Insurance": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance - Builders Risk"
+        },
+        "Complete Trust Document": {
+            "applicationName": "Loan",
+            "documentTypeName": "Complete Trust Document"
+        },
+        "Copies Of Paid Invoices": {
+            "applicationName": "Loan",
+            "documentTypeName": "Copy of Paid Invoices"
+        },
+        "Landlord Consent/Waiver": {
+            "applicationName": "Loan",
+            "documentTypeName": "Landlord Consent/Waiver"
+        },
+        "Organization Resolution": {
+            "applicationName": "Loan",
+            "documentTypeName": "Organization Resolution"
+        },
+        "SAM.gov Search Document": {
+            "applicationName": "Loan",
+            "documentTypeName": "CAIVRS & SAM"
+        },
+        "Sole Prop Certification": {
+            "applicationName": "Loan",
+            "documentTypeName": "Sole Prop Certificate"
+        },
+        "State Title Application": {
+            "applicationName": "Loan",
+            "documentTypeName": "State Title Application"
+        },
+        "Assumed Name Certificate": {
+            "applicationName": "Loan",
+            "documentTypeName": "Fictitious Or Assumed Name Cert"
+        },
+        "Borrower's Certification": {
+            "applicationName": "Loan",
+            "documentTypeName": "Borrower/OC Certification"
+        },
+        "Contingent Debt Schedule": {
+            "applicationName": "Loan",
+            "documentTypeName": "Contingent Debt Schedule"
+        },
+        "ETRAN Servicing Document": {
+            "applicationName": "Loan",
+            "documentTypeName": "ETRAN Servicing Document"
+        },
+        "Employment Authorization": {
+            "applicationName": "Loan",
+            "documentTypeName": "Employment Authorization"
+        },
+        "Etran Loan Auth Document": {
+            "applicationName": "Loan",
+            "documentTypeName": "Etran Loan Auth Document"
+        },
+        "Expected Completion Date": {
+            "applicationName": "Loan",
+            "documentTypeName": "Expected Completion Date"
+        },
+        "I-94 Form (Front & Back)": {
+            "applicationName": "Loan",
+            "documentTypeName": "I-94 Form"
+        },
+        "Incumbency Certification": {
+            "applicationName": "Loan",
+            "documentTypeName": "Incumbency Certification"
+        },
+        "Interest reserve details": {
+            "applicationName": "Loan",
+            "documentTypeName": "Interest reserve details"
+        },
+        "Most Recent Schedule K-1": {
+            "applicationName": "Loan",
+            "documentTypeName": "Schedule K-1"
+        },
+        "Seller Tax Return - 2021": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Sellers"
+        },
+        "Seller Tax Return - 2022": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Sellers"
+        },
+        "Seller Tax Return - 2023": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Sellers"
+        },
+        "Seller Tax Return - 2024": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Sellers"
+        },
+        "Seller Tax Return - 2025": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Sellers"
+        },
+        "Stock Purchase Agreement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Purchase Agreement (Business/Stock/Asset)"
+        },
+        "Articles of Incorporation": {
+            "applicationName": "Loan",
+            "documentTypeName": "Articles of Incorporation"
+        },
+        "Certificate Of Trade Name": {
+            "applicationName": "Loan",
+            "documentTypeName": "Certificate Of Trade Name"
+        },
+        "Certificate of Trade Name": {
+            "applicationName": "Loan",
+            "documentTypeName": "Certificate Of Trade Name"
+        },
+        "Equipment Contract/Quotes": {
+            "applicationName": "Loan",
+            "documentTypeName": "Equipment Quote"
+        },
+        "Good Standing Certificate": {
+            "applicationName": "Loan",
+            "documentTypeName": "Certificate Of Good Standing"
+        },
+        "Lender Requested Document": {
+            "applicationName": "Loan",
+            "documentTypeName": "Lender Requested Document"
+        },
+        "Most Recent Annual Review": {
+            "applicationName": "Loan",
+            "documentTypeName": "Annual Review"
+        },
+        "Property Insurance Policy": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance - Business Personal Property"
+        },
+        "Purchase Agreement or LOI": {
+            "applicationName": "Loan",
+            "documentTypeName": "Purchase Agreement"
+        },
+        "60 Days Account Statements": {
+            "applicationName": "Loan",
+            "documentTypeName": "Bank Statements - Business/Personal"
+        },
+        "Agricultural Balance Sheet": {
+            "applicationName": "Loan",
+            "documentTypeName": "Agricultural Balance Sheet"
+        },
+        "Attorney Engagement Letter": {
+            "applicationName": "Loan",
+            "documentTypeName": "Attorney Engagement Letter"
+        },
+        "Business Tax Return - 2021": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Returns - Business"
+        },
+        "Business Tax Return - 2022": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Returns - Business"
+        },
+        "Business Tax Return - 2023": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Returns - Business"
+        },
+        "Business Tax Return - 2024": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Returns - Business"
+        },
+        "Business Tax Return - 2025": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Returns - Business"
+        },
+        "Certificate of Partnership": {
+            "applicationName": "Loan",
+            "documentTypeName": "Certificate of Partnership"
+        },
+        "Non-Solicitation Agreement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Non-Solicitation Agreement"
+        },
+        "Personal Tax Return - 2021": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Personal"
+        },
+        "Personal Tax Return - 2022": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Personal"
+        },
+        "Personal Tax Return - 2023": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Personal"
+        },
+        "Personal Tax Return - 2024": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Personal"
+        },
+        "Personal Tax Return - 2025": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Personal"
+        },
+        "Purchase Agreement/Invoice": {
+            "applicationName": "Loan",
+            "documentTypeName": "Purchase Agreement"
+        },
+        "Year-to-Date Balance Sheet": {
+            "applicationName": "Loan",
+            "documentTypeName": "Balance Sheet"
+        },
+        "Bill of Sale (new purchase)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Bill of Sale"
+        },
+        "Certificate Of Organization": {
+            "applicationName": "Loan",
+            "documentTypeName": "Certificate Of Organization"
+        },
+        "Certificate of Organization": {
+            "applicationName": "Loan",
+            "documentTypeName": "Certificate Of Organization"
+        },
+        "Closing Instructions Letter": {
+            "applicationName": "Loan",
+            "documentTypeName": "Correspondence - Closing"
+        },
+        "Environmental Questionnaire": {
+            "applicationName": "Loan",
+            "documentTypeName": "Environmental Questionnaire"
+        },
+        "Executed Purchase Agreement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Purchase Agreement"
+        },
+        "Fictitious Name Certificate": {
+            "applicationName": "Loan",
+            "documentTypeName": "Fictitious Or Assumed Name Cert "
+        },
+        "General Liability Insurance": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance - Liability"
+        },
+        "Good Faith Deposit Document": {
+            "applicationName": "Loan",
+            "documentTypeName": "Good Faith Deposit Document"
+        },
+        "Required release provisions": {
+            "applicationName": "Loan",
+            "documentTypeName": "Required Release Provisions"
+        },
+        "12-Month Operating Statement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Operating Statement"
+        },
+        "Assignment of Leases & Rents": {
+            "applicationName": "Loan",
+            "documentTypeName": "Collateral Assign Of Leases And Rents"
+        },
+        "Auto/Business Auto Insurance": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance - Automobile "
+        },
+        "Business/Personal Tax Return": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Returns - Business/Personal"
+        },
+        "Certificate Of Good Standing": {
+            "applicationName": "Loan",
+            "documentTypeName": "Certificate Of Good Standing"
+        },
+        "Certificate of Good Standing": {
+            "applicationName": "Loan",
+            "documentTypeName": "Certificate Of Good Standing"
+        },
+        "Construction Contract/Quotes": {
+            "applicationName": "Loan",
+            "documentTypeName": "Construction Bids"
+        },
+        "Life Insurance Questionnaire": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance - Life"
+        },
+        "Management Control Agreement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Management Control Agreement"
+        },
+        "Manufacturers Specifications": {
+            "applicationName": "Loan",
+            "documentTypeName": "Manufacturers Specifications"
+        },
+        "Payment and Performance Bond": {
+            "applicationName": "Loan",
+            "documentTypeName": "Payment and Performance Bond"
+        },
+        "Personal Financial Statement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Personal Financials"
+        },
+        "Signed 8821 Consent Document": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Verification (8821)"
+        },
+        "12-Months Operating Statement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Operating Statement"
+        },
+        "Accounts Payable Aging Report": {
+            "applicationName": "Loan",
+            "documentTypeName": "Accounts Payable Aging Report"
+        },
+        "Contingent Liability Schedule": {
+            "applicationName": "Loan",
+            "documentTypeName": "Contingent Liability Schedule"
+        },
+        "Copy of Note to Refinance (1)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Notes To Be Refinanced"
+        },
+        "Copy of Note to Refinance (2)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Notes To Be Refinanced"
+        },
+        "Copy of Note to Refinance (3)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Notes To Be Refinanced"
+        },
+        "Copy of Note to Refinance (4)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Notes To Be Refinanced"
+        },
+        "Current Loan Payoff Statement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Loan Payoff Statement"
+        },
+        "Franchise Disclosure Document": {
+            "applicationName": "Loan",
+            "documentTypeName": "Franchise Disclosure Document"
+        },
+        "Personal Financial Statements": {
+            "applicationName": "Loan",
+            "documentTypeName": "Personal Financials"
+        },
+        "Retirement Account Statements": {
+            "applicationName": "Loan",
+            "documentTypeName": "Proof of Income"
+        },
+        "Schedule Of Real Estate Owned": {
+            "applicationName": "Loan",
+            "documentTypeName": "Schedule Of Real Estate Owned"
+        },
+        "Affiliate Business Tax Returns": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Returns - Affiliate"
+        },
+        "Agreement to Provide Insurance": {
+            "applicationName": "Loan",
+            "documentTypeName": "Agreement to Provide Insurance"
+        },
+        "Assumed Name (DBA) Certificate": {
+            "applicationName": "Loan",
+            "documentTypeName": "Fictitious Or Assumed Name Cert"
+        },
+        "Franchise or Similar Agreement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Franchise Documents"
+        },
+        "Most recent federal tax return": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Returns - Business/Personal"
+        },
+        "Non-Disclosure Agreement (NDA)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Non-Disclosure Agreement (NDA)"
+        },
+        "Real Estate Property Insurance": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance - Real Estate Property"
+        },
+        "Seller's current debt schedule": {
+            "applicationName": "Loan",
+            "documentTypeName": "Debt Schedule"
+        },
+        "Business Interruption Insurance": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance - Business Interruption"
+        },
+        "Driver's License (Front & Back)": {
+            "applicationName": "Loan",
+            "documentTypeName": "State Issued ID/Drivers License"
+        },
+        "Primary Identification Document": {
+            "applicationName": "Loan",
+            "documentTypeName": "Primary Identification Document"
+        },
+        "State or County DBA Certificate": {
+            "applicationName": "Loan",
+            "documentTypeName": "Fictitious Or Assumed Name Cert "
+        },
+        "UCC Search Status Certification": {
+            "applicationName": "Loan",
+            "documentTypeName": "UCC Search"
+        },
+        "Worker's Compensation Insurance": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance - Workers Comp"
+        },
+        "Accounts Receivable Aging Report": {
+            "applicationName": "Loan",
+            "documentTypeName": "Accounts Receivable Aging Report"
+        },
+        "Federal Tax Return (most recent)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Returns - Business/Personal"
+        },
+        "Form 1846, Statement of Lobbying": {
+            "applicationName": "Loan",
+            "documentTypeName": "Form 1846, Statement of Lobbying"
+        },
+        "General Liability (GL) Insurance": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance - Liability"
+        },
+        "Post Boarding Document - Officer": {
+            "applicationName": "Loan",
+            "documentTypeName": "Post Boarding Document - Officer"
+        },
+        "Proof of Real Estate Tax Payment": {
+            "applicationName": "Loan",
+            "documentTypeName": "Proof of Tax Payment"
+        },
+        "Assignment of Term Life Insurance": {
+            "applicationName": "Loan",
+            "documentTypeName": "Life Assignment & Acknowledgement"
+        },
+        "Borrower Pro Forma If Unavailable": {
+            "applicationName": "Loan",
+            "documentTypeName": "Borrower Pro Forma"
+        },
+        "DBA / Fictitious Name Certificate": {
+            "applicationName": "Loan",
+            "documentTypeName": "Fictitious Or Assumed Name Cert"
+        },
+        "Employee List and Payroll Summary": {
+            "applicationName": "Loan",
+            "documentTypeName": "Employee List and Payroll Summary"
+        },
+        "Interim Profit and Loss Statement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Profit & Loss"
+        },
+        "Secondary Identification Document": {
+            "applicationName": "Loan",
+            "documentTypeName": "Secondary Identification Document"
+        },
+        "Seller Year-to-Date Balance Sheet": {
+            "applicationName": "Loan",
+            "documentTypeName": "Seller's Financials"
+        },
+        "Subsequent Modifications Approval": {
+            "applicationName": "Loan",
+            "documentTypeName": "Subsequent Modifications Approval"
+        },
+        "Business Tax Return for Prior Year": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Returns - Business"
+        },
+        "Business Tax Return for Prior year": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Returns - Business"
+        },
+        "Business Tax Return for prior year": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Business"
+        },
+        "Certificate of Limited Partnership": {
+            "applicationName": "Loan",
+            "documentTypeName": "Certificate of Limited Partnership"
+        },
+        "Executed mortgage or deed of trust": {
+            "applicationName": "Loan",
+            "documentTypeName": "Deed Trust"
+        },
+        "IRS Letter Regarding 501(C) Status": {
+            "applicationName": "Loan",
+            "documentTypeName": "IRS Letter - 501(C) Status"
+        },
+        "IRS Letter Regarding 501(c) status": {
+            "applicationName": "Loan",
+            "documentTypeName": "IRS Letter - 501(C) Status"
+        },
+        "Personal Tax Return for prior year": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Personal"
+        },
+        "Personal tax return for prior year": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Personal"
+        },
+        "Post Boarding Document - Depositor": {
+            "applicationName": "Loan",
+            "documentTypeName": "Post Boarding Document - Depositor"
+        },
+        "IRS Letter Regarding 501(C3) Status": {
+            "applicationName": "Loan",
+            "documentTypeName": "IRS Letter - 501(C3) Status"
+        },
+        "IRS Letter Regarding 501(c3) Status": {
+            "applicationName": "Loan",
+            "documentTypeName": "IRS Letter - 501(C3) Status"
+        },
+        "Line Item Budget and Cost Breakdown": {
+            "applicationName": "Loan",
+            "documentTypeName": "Line Item Budget and Cost Breakdown"
+        },
+        "Loan History for previous 12 months": {
+            "applicationName": "Loan",
+            "documentTypeName": "Loan History"
+        },
+        "Personal Tax Return (including K-1s)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Personal"
+        },
+        "Property Insurance Declarations Page": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance Declaration Page - Business Personal Property"
+        },
+        "Certificate Of Title For Used Vessels": {
+            "applicationName": "Loan",
+            "documentTypeName": "Certificate Of Title - Vessels"
+        },
+        "Certificate of Title for used vessels": {
+            "applicationName": "Loan",
+            "documentTypeName": "Certificate Of Title - Vessels"
+        },
+        "Personal Tax Return for 2 years prior": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Personal"
+        },
+        "Purchase Agreement / Letter of Intent": {
+            "applicationName": "Loan",
+            "documentTypeName": "Purchase Agreement"
+        },
+        "State or Federal Government Issued ID": {
+            "applicationName": "Loan",
+            "documentTypeName": "State Issued ID/Drivers License"
+        },
+        "Workman's Compensation (WC) Insurance": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance - Workers Comp"
+        },
+        "Alien Registration Card (Front & Bank)": {
+            "applicationName": "Loan",
+            "documentTypeName": "US Permanent Resident Card (Green Card)"
+        },
+        "Business Tax Returns for 2 Years Prior": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Returns - Business"
+        },
+        "Business Tax Returns for 2 years prior": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Returns - Business"
+        },
+        "Signed document(s) from Manual closing": {
+            "applicationName": "Loan",
+            "documentTypeName": "Signed document(s) from Manual closing"
+        },
+        "UCC Statement Pre-filing Authorization": {
+            "applicationName": "Loan",
+            "documentTypeName": "UCC Search"
+        },
+        "Year-to-Date Profit and Loss Statement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Profit & Loss"
+        },
+        "Beneficial Ownership Certification Form": {
+            "applicationName": "Loan",
+            "documentTypeName": "Beneficial Ownership Certification Form"
+        },
+        "Business Tax Returns for 2 years' prior": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Business"
+        },
+        "Hazard insurance (could be auto policy)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance - Hazard"
+        },
+        "Limited Liability Partnership Agreement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Limited Liability Partnership Agreement"
+        },
+        "Marketing plan & anticipated absorption": {
+            "applicationName": "Loan",
+            "documentTypeName": "Marketing Plan/Anticipated Absorption"
+        },
+        "Schedule K-1 on Guarantor (most recent)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Schedule K-1"
+        },
+        "US Permanent Resident Card (Green Card)": {
+            "applicationName": "Loan",
+            "documentTypeName": "US Permanent Resident Card (Green Card)"
+        },
+        "Business Tax Return for most recent year": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Business"
+        },
+        "Personal tax return for most recent year": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Personal"
+        },
+        "Rent Roll & 12-Month Operating Statement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Rent Roll/Operating Statement"
+        },
+        "Dram Shop/Host Liquor Liability Insurance": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance - Liquor"
+        },
+        "Most Recent Federal Tax Return - Business": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Returns - Business"
+        },
+        "Most Recent Federal Tax Return - Personal": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Personal"
+        },
+        "Officer Roster or Organization Resolution": {
+            "applicationName": "Loan",
+            "documentTypeName": "Officer Roster/Organization Resolution"
+        },
+        "Assignment of Tenant Improvement Allowance": {
+            "applicationName": "Loan",
+            "documentTypeName": "Assignment of Tenant Improvement Allowance"
+        },
+        "Environmental Questionnaire Phase I Report": {
+            "applicationName": "Loan",
+            "documentTypeName": "Environmental Report"
+        },
+        "Stock Certificates or Corporate Resolution": {
+            "applicationName": "Loan",
+            "documentTypeName": "Stock Certificates"
+        },
+        "Environmental Questionnaire Phase II Report": {
+            "applicationName": "Loan",
+            "documentTypeName": "Environmental Report"
+        },
+        "Hazard Insurance/Business Personal Property": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance - Business Personal Property"
+        },
+        "Hazard insurance/Business Personal Property": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance - Hazard"
+        },
+        "Personal Financial Statement - SBA Form 413": {
+            "applicationName": "Loan",
+            "documentTypeName": "Personal Financials"
+        },
+        "Assumed Name Certificate or Business License": {
+            "applicationName": "Loan",
+            "documentTypeName": "Assumed Name Certificate/Business License"
+        },
+        "Hazard Insurance (Could Be Marine Insurance)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance - Hazard"
+        },
+        "Hazard insurance (could be Marine Insurance)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Insurance - Hazard"
+        },
+        "Preliminary Review of Plans/Specs and Budget": {
+            "applicationName": "Loan",
+            "documentTypeName": "Preliminary Review of Plans/Specs and Budget"
+        },
+        "Seller's Business Tax Returns for prior year": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Sellers"
+        },
+        "Seller Year-to-Date Profit and Loss Statement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Seller's Financials"
+        },
+        "Federal Tax Return for 1 year prior - Business": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Returns - Business"
+        },
+        "Federal Tax Return for 1 year prior - Personal": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Personal"
+        },
+        "Articles Of Incorporation (Dated And Certified)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Articles of Incorporation"
+        },
+        "Articles of Incorporation (dated and certified)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Articles of Incorporation"
+        },
+        "Federal Tax Return for 2 years prior - Business": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Returns - Business"
+        },
+        "Federal Tax Return for 2 years prior - Personal": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Personal"
+        },
+        "Seller's Business Tax Returns for 2 years prior": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Sellers"
+        },
+        "Signed Etran Loan Authorization (T&C) Documents": {
+            "applicationName": "Loan",
+            "documentTypeName": "Terms and Conditions "
+        },
+        "2 Years of Business Projections with Assumptions": {
+            "applicationName": "Loan",
+            "documentTypeName": "Business Projections with Assumptions"
+        },
+        "Copy of most recent Schedule K-1 on Guarantor(s)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Schedule K-1"
+        },
+        "Manufacture Statement Of Origin, If New Purchase": {
+            "applicationName": "Loan",
+            "documentTypeName": "Manufacture Statement Of Origin"
+        },
+        "Manufacture Statement of Origin, if new purchase": {
+            "applicationName": "Loan",
+            "documentTypeName": "Manufacture Statement Of Origin"
+        },
+        "Most recent 6 months of Business Bank Statements": {
+            "applicationName": "Loan",
+            "documentTypeName": "Bank Statements - Business"
+        },
+        "Certificate of Organization (dated and certified)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Certificate Of Organization"
+        },
+        "Seller's Business Tax Returns for most recent year": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Sellers"
+        },
+        "Verification Of Liquid Assets (Account Statements)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Bank Statements - Business/Personal"
+        },
+        "Business Financial Statement or Business Tax Return": {
+            "applicationName": "Loan",
+            "documentTypeName": "Business Financial Statement/Tax Return"
+        },
+        "Articles Of Association With At Least Two Signatures": {
+            "applicationName": "Loan",
+            "documentTypeName": "Articles of Association"
+        },
+        "Articles of Association with at least two signatures": {
+            "applicationName": "Loan",
+            "documentTypeName": "Articles of Association"
+        },
+        "Business's most recent quarter-to-date Balance Sheet": {
+            "applicationName": "Loan",
+            "documentTypeName": "Balance Sheet"
+        },
+        "Individual K-1'S For Entities Reported On Schedule E": {
+            "applicationName": "Loan",
+            "documentTypeName": "Schedule K-1"
+        },
+        "Business Tax Return for most recent year or extension": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Business"
+        },
+        "IRS SS4 TIN Issuance Letter With Correct Name And EIN": {
+            "applicationName": "Loan",
+            "documentTypeName": "IRS SS4 TIN Issuance Letter"
+        },
+        "IRS SS4 TIN Issuance Letter with correct name and EIN": {
+            "applicationName": "Loan",
+            "documentTypeName": "IRS SS4 TIN Issuance Letter"
+        },
+        "Personal tax return for most recent year or extension": {
+            "applicationName": "Loan",
+            "documentTypeName": "Tax Return - Personal"
+        },
+        "Business's most recent quarter-to-date Income Statement": {
+            "applicationName": "Loan",
+            "documentTypeName": "Business Income Statement"
+        },
+        "Operating Agreement (if ownership percentage is stated)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Operating Agreement"
+        },
+        "2 Years' Business Financial Projections with Assumptions": {
+            "applicationName": "Loan",
+            "documentTypeName": "Business Projections with Assumptions"
+        },
+        "Certificate of Organization or Articles of Incorporation": {
+            "applicationName": "Loan",
+            "documentTypeName": "Certificate Of Organization"
+        },
+        "General Contractor details, including bonding requirements": {
+            "applicationName": "Loan",
+            "documentTypeName": "General Contractor details, including bonding requirements"
+        },
+        "Current Year Social Security Award Letter And Other Retirement Income": {
+            "applicationName": "Loan",
+            "documentTypeName": "Social Security Award Letter/Other Retirement Income"
+        },
+        "Seller's most recent quarter-to-date income statement & balance sheet": {
+            "applicationName": "Loan",
+            "documentTypeName": "Seller's Financials"
+        },
+        "Meeting minutes appointing signers and signed by Association Secretary": {
+            "applicationName": "Loan",
+            "documentTypeName": "Meeting minutes appointing signers and signed by Association Secretary"
+        },
+        "Pre-Sold Inventory Details, Executed Sales Contracts, Letters Of Intent": {
+            "applicationName": "Loan",
+            "documentTypeName": "Pre-Sold Inventory Details, Executed Sales Contracts, Letters Of Intent"
+        },
+        "Most Recent Paystubs Showing Year To Date Income For Pay Period Covering 30 Days": {
+            "applicationName": "Loan",
+            "documentTypeName": "Pay Stubs"
+        },
+        "Lot/Unit Breakdown (including retail sales prices and breakdown of pre-sold vs. spec)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Lot/Unit Breakdown"
+        },
+        "Evidence that the ESOP is in compliance with all applicable IRS, Treasury, and Department of Labor requirements": {
+            "applicationName": "Loan",
+            "documentTypeName": "Evidence ESOP is in Compliance"
+        },
+        "Evidence that the ESOP is in compliance with all applicable IRS, Treasury, and Department of Labor requirements.": {
+            "applicationName": "Loan",
+            "documentTypeName": "Evidence ESOP is in Compliance"
+        },
+        "Flood Search, Appraisal Report, Environmental due diligence, title work, etc. (must be already available/tracked separately)": {
+            "applicationName": "Loan",
+            "documentTypeName": "Flood Search, Appraisal Report, Environmental Due Diligence, Title Work, etc."
+        }
+    },
+    "response_body_spec_config": "{}"
+}

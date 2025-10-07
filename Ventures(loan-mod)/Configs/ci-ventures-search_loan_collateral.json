@@ -1,0 +1,7 @@
+{
+    "validation_spec": "{}",
+    "request_body_spec": "{}",
+    "response_body_spec": ".",
+    "request_body_spec_config": "{}",
+    "response_body_spec_config": "{}"
+}
