@@ -1,49 +1,59 @@
-(
-({
-    "Purchase Equipment or Vehicles": "Equipment",
-    "Working Capital": "Working Capital"
-}) as $purposeType |
-({
-    "Purchase Land only": "Purchase Of Land",
-    "Purchase Land and improvements": "Purchase Land & Building",
-    "Construct a Building": "Construct a Building",
-    "Purchase Equipment": "Equipment",
-    "SBA Guaranty Fee": "Soft Cost (Packaging and closing cost)",
-    "Purchase Furniture and Fixtures": "Fixtures",
-    "Other": "Other Cost",
-    "Add an Addition to an Existing Building": "Building Addition",
-    "Purchase Improvements only": "Purchase Improvement",
-    "Make Renovations to an Existing Building": "Building Renovation",
-    "Leasehold Improvements": "Building Leasehold Improvements",
-    "Pay Notes Payable - not Same Institution Debt": "Pay Notes Payable - NOT Same Institution Debt",
-    "Pay Notes Payable - Same Institution Debt": "Pay Notes Payable - Same Institution Debt",
-    "Pay Off Interim Construction Loan": "Pay Off Interim Construction Loan",
-    "Pay Off Lender's Interim Loan": "Pay Off Lender's Interim Loan",
-    "Purchase Inventory": "Purchase Inventory",
-    "Pay Trade or Accounts Payable": "Pay Trade or Accounts Payable",
-    "Purchase Business - Stock Purchase": "Purchase Business (Change of Ownership)",
-    "Purchase Business - Asset Purchase": "Purchase Business (Change of Ownership)",
-    "Refinance SBA Loan - not Same Institution Debt": "Refinance SBA Loan – NOT Same Institution Debt",
+(    
+    ({
+    "Purchase Vehicle(s)": "Purchase Vehicle(s)",
+    "Start Up Financing": "Start Up Financing",
     "Working Capital": "Working Capital",
-    "Refinance SBA Loan - Same Institution Debt": "Refinance SBA Loan – Same Institution Debt"
-}) as $useOfProceedType |
-({
-    "Equipment": "Equipment",
-    "machinery_and_equipment": "Equipment",
-    "commercial_real_estate": "Commercial Real Estate",
-    "Motor Vehicle": "Automobile",
-    "vehicles": "Automobile",
-    "life_insurance": "Life Insurance",
-    "all_assets": "Business Assets",
-    "all_business_assets": "Business Assets",
-    "inventory_accounts_receivable": "Inventory",
-    "other": "Other",
-    "cash_and_equivalents": "Other",
-    "furniture_fixtures_equipment": "Furniture and Fixtures",
-    "assignment_of_leases": "Assignment of Leases & Rents",
-    "land": "Ground Lease (Land Only No Improvements)"
-}) as $collateralType |
+    "Business Acquisition": "Business Acquisition",
+    "Debt Refinance": "Refinance",
+    "Purchase Inventory": "Inventory",
+    "Purchase Furniture and Fixtures": "Purchase Furniture and Fixtures",
+    "Purchase Equipment": "Equipment",
+    "Improvement to Leased Space": "Leasehold Improvements",
+    "Purchase Commercial Real Estate": "Real Estate Purchase"
+    }) as $purposeType |
+    ({
+        "Purchase Land only": "Purchase Of Land",
+        "Purchase Land and improvements": "Purchase Land & Building",
+        "Construct a Building": "Construct a Building",
+        "Purchase Equipment": "Equipment",
+        "SBA Guaranty Fee": "Soft Cost (Packaging and closing cost)",
+        "Purchase Furniture and Fixtures": "Fixtures",
+        "Other": "Other Cost",
+        "Add an Addition to an Existing Building": "Building Addition",
+        "Purchase Improvements only": "Purchase Improvement",
+        "Make Renovations to an Existing Building": "Building Renovation",
+        "Leasehold Improvements": "Building Leasehold Improvements",
+        "Pay Notes Payable - not Same Institution Debt": "Pay Notes Payable - NOT Same Institution Debt",
+        "Pay Notes Payable - Same Institution Debt": "Pay Notes Payable - Same Institution Debt",
+        "Pay Off Interim Construction Loan": "Pay Off Interim Construction Loan",
+        "Pay Off Lender's Interim Loan": "Pay Off Lender's Interim Loan",
+        "Purchase Inventory": "Purchase Inventory",
+        "Pay Trade or Accounts Payable": "Pay Trade or Accounts Payable",
+        "Purchase Business - Stock Purchase": "Purchase Business (Change of Ownership)",
+        "Purchase Business - Asset Purchase": "Purchase Business (Change of Ownership)",
+        "Refinance SBA Loan - not Same Institution Debt": "Refinance SBA Loan – NOT Same Institution Debt",
+        "Working Capital": "Working Capital",
+        "Refinance SBA Loan - Same Institution Debt": "Refinance SBA Loan – Same Institution Debt"
+    }) as $useOfProceedType | 
+    ({
+        "all_business_assets": "Business Assets",
+        "Equipment": "Equipment",
+        "machinery_and_equipment": "Equipment",
+        "commercial_real_estate": "Commercial Real Estate",
+        "Motor Vehicle": "Automobile",
+        "vehicles": "Automobile",
+        "life_insurance": "Life Insurance",
+        "all_assets": "Business Assets",
+        "inventory_accounts_receivable": "Inventory",
+        "other": "Other",
+        "cash_and_equivalents": "Other",
+        "furniture_fixtures_equipment": "Furniture and Fixtures",
+        "assignment_of_leases": "Assignment of Leases & Rents",
+        "land": "Ground Lease (Land Only No Improvements)"
+    }) as $collateralType |
+    ("SBA 7(a)") as $loanType | 
 { 
+    fundedDate: (.funding_date // null),
     sbaLoanNumber: .sba_number,
     sbaApplicationNumber: .sba_loan_app_number,
     referenceNumber: (.application_number // null | tostring),
@@ -51,38 +61,49 @@
     loanTermMonths: (.loan_approval.approved_term // null),
     submittalDate: (if .submitted_date then .submitted_date | split("T")[0] else "" end),
     impactWomanOwnedBusiness: .cra_female_owned_business,
-    impactVeteranOwnedBusiness: (
-        if (
-            .details.boarding_details.veteran_owned_business == "yes" 
-            or .details.boarding_details.veteran_owned_business == "Yes"
-        )
-            then true 
-        else false 
-        end
-    ),
+    impactVeteranOwnedBusiness: (if .details.boarding_details.veteran_owned_business == "yes" or .details.boarding_details.veteran_owned_business == "Yes" then true else false end),
     impactMinorityOwnedBusiness: .cra_minority_owned_business,
-    loanType: "7A",
-    loanStatus: "Approved",
+    loanType: $loanType,
+    loanStatus: "Funded",
     loanAmount: (.approved_amount // null),
     approvalDate: (.loan_decisioned_at // null),
     closingDate: (.closing_date // null),
-    sbaProcessingMethodCode: "7AG",
-    impactLmi: .details.etran_community_advantage.low_to_moderate_community,
+    sbaProcessingMethodCode: (
+        if (.product.product_code | IN("EL_LOC","EL_TL","7A")) 
+        then "7AG" 
+        else null 
+        end
+    ),
+    impactLmi: (.details.etran_community_advantage.low_to_moderate_community),
     sbssScore: (if .sbss_score then .sbss_score | tonumber else "" end),
-    sbssScoreDate:( try (.loan_interfaces[] | select(.interface_type == "fico" and .is_latest == true) | .details.fico_data.FI_LiquidCredit.timestamp | split(" ")[0] | strptime("%Y%m%d") | strftime("%Y-%m-%d") ) //null) ,
+    sbssScoreDate: (try (.loan_interfaces[] | select(.interface_type == "fico" and .is_latest == true) | .details.fico_data.FI_LiquidCredit.timestamp | split(" ")[0] | strptime("%Y%m%d") | strftime("%Y-%m-%d") ) //null) ,
     riskRatingGrade: .risk_rating,
     riskRatingDate: (if .uw_completion_date then .uw_completion_date | split("T")[0] else "" end),
-    riskRatingReviewerContactId:236705 ,
-    impactJobsCreatedByLoan: (.loan_relations[] | select(.is_primary_borrower == true) | .questionaire_responses[0].responses.jobs_created | tonumber // null),
-    impactJobsRetainedByLoan: (.loan_relations[] | select(.is_primary_borrower == true) | .questionaire_responses[0].responses.jobs_saved | tonumber // null),
+    riskRatingReviewerContactId: .environment_values.lc_user_id ,
+    impactJobsCreatedByLoan: ((
+        .loan_relations[] 
+        | select(.is_primary_borrower == true) as $primaryBorrower
+        | if ( ($primaryBorrower.questionaire_responses | length) != 0 )
+            then ( $primaryBorrower.questionaire_responses[0].responses.jobs_created | tonumber )
+        else null
+        end )
+    ),
+    impactJobsRetainedByLoan: (
+        ( .loan_relations[] 
+        | select(.is_primary_borrower == true) as $primaryBorrower
+        | if ( ($primaryBorrower.questionaire_responses | length) != 0 )
+            then .questionaire_responses[0].responses.jobs_saved | tonumber 
+        else null
+        end )
+    ),
     achAccountName: (.loan_relations[] | select(.is_primary_borrower==true) | .full_name // null),
-    achAccountNumber: .bank_details.account_number,
+    achAccountNumber: .bank_details.account_number, 
     achRoutingNumber: .bank_details.routing_number,
     achAccountType: .bank_details.account_type,
     impactEmpowermentZoneEnterpriseCommunity: (.details.etran_community_advantage.empowerment_zone),
     impactHubZone: (.details.etran_community_advantage.hub_zone),
     impactPromiseZone: (.details.etran_community_advantage.promise_zone),
-    impactRural: (.details.etran_community_advantage.rural_zone),
+    impactRural: (.loan_relations[] | select(.is_primary_borrower == true) | .details.rural_zone),
     impactOpportunityZone: (.details.etran_community_advantage.opportunity_zone),
     impactLowIncomeWorkforce: (.details.etran_community_advantage.resides_in_low_income),
     impactSbaVeteransAdvantage: (.details.etran_community_advantage.eligibility_for_SBA_veterans),
@@ -94,7 +115,12 @@
         | ($sub | capture("(?<y>\\d{4})-(?<m>\\d{2})-(?<d>\\d{2})")) as $p
         | $est < (((($p.y|tonumber)-2)|tostring) + "-" + $p.m + "-" + $p.d)
     ),
-    officeId: (if .details.boarding_details.branchCode then .details.boarding_details.branchCode | tonumber else null end),
+    officeId: (
+        if (.details.boarding_details.branch_code )
+            then .details.boarding_details.branch_code | tonumber 
+        else null 
+        end
+    ),
     interestRatePercent: .loan_approval.approved_rate,
     sop: "50 10 7.1",
     billingContactMethod: "Email",
@@ -103,7 +129,7 @@
     primaryContactId: (if .primary_contact_id then .primary_contact_id | tonumber else null end),
     referrals: [ 
         { 
-            contactId: 236705,
+            contactId:  .environment_values.lc_user_id,
             referralTypeId: 36,
             fee1Description: (.fees[] | select(.fee_setup.fee.fee_code == "express_loan_packaging_fee") | .fee_setup.fee.fee_name // null),
             fee1Amount: (.fees[] | select(.fee_setup.fee.fee_code == "express_loan_packaging_fee") | .approved_fee_amount // null),
@@ -111,22 +137,27 @@
             fee3Description: (.fees[] | select(.fee_setup.fee.fee_code == "broker_or_referral_fee") | .fee_setup.fee.fee_name // null),
             fee3Amount: (.fees[] | select(.fee_setup.fee.fee_code == "broker_or_referral_fee") | .approved_fee_amount // null),
             fee3PaidBy: "Lender" 
+        } 
+    ] ,
+    expenses:[.funding_date as $fundingDate | .fees[] | select( .fee_setup.fee.fee_category == "origination") | 
+        { 
+            description:.fee_setup.fee.description,
+            amount:.approved_fee_amount,
+            date: ($fundingDate // null)
         }
     ] ,
-    expenses:[.fees[] | select( .fee_setup.fee.fee_category == "origination") | { description:.fee_setup.fee.description,
-    amount:.approved_fee_amount,
-    date:(if .created then (.created | split("T")[0]) else "" end)}] ,
     useOfProceeds: ( .uop_id_mapping as $UOPIdMapping | [ .use_of_proceed_details[] | 
         { 
-            useOfProceedTypeId: (if .purpose and $useOfProceedType[.purpose] and $UOPIdMapping[$useOfProceedType[.purpose]] then $UOPIdMapping[$useOfProceedType[.purpose]] else $UOPIdMapping["Other Cost"] end),
+            useOfProceedTypeId: (if .purpose and $useOfProceedType[.purpose] and $UOPIdMapping[$useOfProceedType[.purpose]] then $UOPIdMapping[$useOfProceedType[.purpose]] else $UOPIdMapping["Others"] end),
             Amount:(.amount|gsub(",|\\s";"")|tonumber) ,
             Description: .name 
         } 
     ]),
-    collaterals:( 
-        .approved_amount as $loan_amount
+    collaterals: ( 
+        .approved_amount as $loan_amount 
         | .collateral_types_mapping as $CollateralTypesMapping 
-        | [ .loan_relations[] | .collaterals[] 
+        | .environment_values.lien_holder_id as $lienHolderCompanyId 
+        | [ .collaterals[] 
         | { 
             collateralTypeId: (if .collateral_type and $collateralType[.collateral_type_verbose] and $CollateralTypesMapping[$collateralType[.collateral_type_verbose]] then $CollateralTypesMapping[$collateralType[.collateral_type_verbose]] else ( if .category and $collateralType[.category] and $CollateralTypesMapping[$collateralType[.category]] then $CollateralTypesMapping[$collateralType[.category]] else $CollateralTypesMapping["Other"] end) end),
             value:(if .collateral_value then .collateral_value else $loan_amount end),
@@ -134,19 +165,20 @@
             uccFiled:.is_ucc_filing_applicable,
             liens:[ .lien_holders[] | 
                 { 
-                    lienHolderCompanyId:207029,
+                    lienHolderCompanyId: $lienHolderCompanyId ,
                     lienPosition:(if .lien_position == "first" then 1 elif .lien_position == "second" then 2 elif .lien_position == "third" then 3 elif .lien_position == "fourth" then 4 elif .lien_position == "fifth" then 5 else null end),
                     amount:.original_note_amount ,
                     Comment:(if .business_name and .business_name != "" then .business_name else .first_name + " " + .last_name end)
                 } 
             ] 
-        } ] as $collaterals | $collaterals | map( . + {primary: (.value == ($collaterals | max_by(.value) | .value))} )
-    ),
-    mailingAddress: (
+        } 
+    ] as $collaterals | $collaterals | map( . + {primary: (.value == ($collaterals | max_by(.value) | .value))} )),
+    mailingAddress: ( 
         .loan_relations[] 
         | select(.is_primary_borrower == true) 
+        | (.details.mailing_address_flag // false) as $mailingAddressFlag 
         | .relation_addresses[] 
-        | select(.address_type == "mailing") 
+        | select(.address_type == "mailing" or ($mailingAddressFlag and .address_type=="permanent"))
         | { 
             city: .city,
             street1: .address_line_1,
@@ -158,8 +190,9 @@
     ),
     projectAddress: ( .loan_relations[] 
         | select(.is_primary_borrower == true) 
+        | (.details.project_address_flag // false) as $projectAddressFlag 
         | .relation_addresses[] 
-        | select(.address_type == "project") 
+        | select(.address_type == "project" or ($projectAddressFlag and .address_type=="permanent"))
         | { 
             city: .city,
             street1: .address_line_1,
@@ -171,23 +204,23 @@
     ),
     partners: [ 
         {
-            contactId: 236705,
+            contactId:  .environment_values.lc_user_id,
             roleType: "LoanOfficer"
         },
         {
-            contactId: 236705,
+            contactId:  .environment_values.lc_user_id,
             roleType: "LoanProcessor"
         },
         {
-            contactId: 236705,
+            contactId:  .environment_values.lc_user_id,
             roleType: "ClosingOfficer"
         },
         {
-            contactId: 236705,
+            contactId:  .environment_values.lc_user_id,
             roleType: "CreditAnalyst"
         },
         {
-            contactId: 236705,
+            contactId:  .environment_values.lc_user_id,
             roleType: "ClosingAnalyst"
         } 
     ],
@@ -201,13 +234,14 @@
         and .entity_type == "sole_proprietor" 
         and (.is_collateral_related | not) 
         and .relation_type == "borrower")
-        ) | ( if (.entity_type == "sole_proprietor") then { 
+        ) | 
+        ( if (.entity_type == "sole_proprietor") then { 
             primary: .is_primary_borrower,
             association: "Operating Company",
             guaranteeType: "Unsecured Limited",
             company: 
-                { 
-                    name: ( if .dba_name and .dba_name !="" then .dba_name else .first_name + " " + .last_name end ),
+                {
+                    name: ( if .dba_name and .dba_name !="" then .dba_name else .first_name + (if .middle_name and .middle_name != "" then " " + .middle_name else "" end) + " " + .last_name end ),
                     taxId: .tin,
                     taxIdType: .tin_type,
                     entityType: "Sole Proprietorship",
@@ -216,7 +250,7 @@
                     currentOwnershipEstablishedDate: .business_established_date
                 } 
         } 
-        else {
+        else { 
             companyId: (if .external_customer_id then .external_customer_id | tonumber else "" end),
             borrower:true ,
             association:(if .is_primary_borrower then "Operating Company" else "Affiliate" end) ,
@@ -225,50 +259,51 @@
             employeeCount: (if .is_primary_borrower then .number_of_employees else 0 end),
             primary: .is_primary_borrower,
             forms: [ (if .questionaire_responses[0] then 
-            { 
-                name: "SBA1919_2023",
-                form: 
-                    { 
-                        question1: (if .questionaire_responses[0].responses.epc == "Yes" then true else false end),
-                        question2: (if .questionaire_responses[0].responses.defaulted == "Yes" then true else false end),
-                        question3: (if .questionaire_responses[0].responses.other_business == "Yes" then true else false end),
-                        question4: (if .questionaire_responses[0].responses.probation == "Yes" then true else false end),
-                        question5: (if .questionaire_responses[0].responses.exporting == "Yes" then true else false end),
-                        question7: (if .questionaire_responses[0].responses.gambling == "Yes" then true else false end),
-                        question8: (if .questionaire_responses[0].responses.sba_employee == "Yes" then true else false end),
-                        question9: (if .questionaire_responses[0].responses.sba_employee_2 == "Yes" then true else false end),
-                        question10: (if .questionaire_responses[0].responses.government == "Yes" then true else false end),
-                        question11: (if .questionaire_responses[0].responses.government_2 == "Yes" then true else false end),
-                        question12: (if .questionaire_responses[0].responses.sba_council == "Yes" then true else false end),
-                        question13: (if .questionaire_responses[0].responses.legal_action == "Yes" then true else false end) 
-                    } 
-            } else empty end) 
-        ],
-        company: 
-            { 
-                name: .business_name,
-                stateOfFormation: .state_of_establishment,
-                currentOwnershipEstablishedDate: .business_established_date 
-            },
-        memberOf: [ 
-            { 
-                entityName: (if .memberof then .memberof else empty end),
-                ownershipPercentage: .ownership_percentage,
-                signer: (.is_signer),
-                controllingMember: (.is_ben_owner_by_control) 
-            } 
-        ] 
-    } end ) ] ),
+                { 
+                    name: "SBA1919_2023",
+                    form: 
+                        { 
+                            question1: (if .questionaire_responses[0].responses.epc == "Yes" then true else false end),
+                            question2: (if .questionaire_responses[0].responses.defaulted == "Yes" then true else false end),
+                            question3: (if .questionaire_responses[0].responses.other_business == "Yes" then true else false end),
+                            question4: (if .questionaire_responses[0].responses.probation == "Yes" then true else false end),
+                            question5: (if .questionaire_responses[0].responses.exporting == "Yes" then true else false end),
+                            question7: (if .questionaire_responses[0].responses.gambling == "Yes" then true else false end),
+                            question8: (if .questionaire_responses[0].responses.sba_employee == "Yes" then true else false end),
+                            question9: (if .questionaire_responses[0].responses.sba_employee_2 == "Yes" then true else false end),
+                            question10: (if .questionaire_responses[0].responses.government == "Yes" then true else false end),
+                            question11: (if .questionaire_responses[0].responses.government_2 == "Yes" then true else false end),
+                            question12: (if .questionaire_responses[0].responses.sba_council == "Yes" then true else false end),
+                            question13: (if .questionaire_responses[0].responses.legal_action == "Yes" then true else false end) 
+                        } 
+                } else empty end) 
+            ],
+            company: 
+                { 
+                    name: .business_name,
+                    stateOfFormation: .state_of_establishment,
+                    currentOwnershipEstablishedDate: .business_established_date 
+                },
+            memberOf: [ 
+                { 
+                    entityName: (if .memberof then .memberof else empty end),
+                    ownershipPercentage: .ownership_percentage,
+                    signer: (.is_signer),
+                    controllingMember: (.is_ben_owner_by_control) 
+                } 
+            ] 
+        } end ) 
+    ] ),
     contacts: [ .flat_relations[] as $loan_relations | select(
         $loan_relations.party_type == "individual" 
         and ($loan_relations.relation_type =="borrower" or $loan_relations.relation_type =="owner") 
         and ($loan_relations.relation_type != "collateral_owner") 
         and ($loan_relations.is_collateral_related | not) 
-        and ($loan_relations.is_system_created | not)) | 
-        {
+        and ($loan_relations.is_system_created | not) ) | 
+        { 
             contactID: (if $loan_relations.external_customer_id != "" and $loan_relations.external_customer_id != null then $loan_relations.external_customer_id | tonumber else "" end),
             guaranteeType:(if $loan_relations.ownership_percentage>20 then "Unsecured Full" else "Unsecured Limited" end) ,
-            contact: 
+            contact:
                 { 
                     firstName:$loan_relations.first_name,
                     lastName:$loan_relations.last_name,
@@ -277,41 +312,27 @@
                 },
             memberOf: ( if ($loan_relations.entity_type == "sole_proprietor") then [ 
                 {
-                    entityName: ( 
-                        if $loan_relations.dba_name and $loan_relations.dba_name !="" 
-                            then $loan_relations.dba_name 
-                        else $loan_relations.first_name + (if $loan_relations.middle_name and $loan_relations.middle_name != "" 
-                            then " " + $loan_relations.middle_name 
-                            else "" end
-                        ) + " " + $loan_relations.last_name end
-                    ),
-                    jobTitle: "Proprietor",
+                    entityName: ( if $loan_relations.dba_name and $loan_relations.dba_name !="" then $loan_relations.dba_name else $loan_relations.first_name + (if $loan_relations.middle_name and $loan_relations.middle_name != "" then " " + $loan_relations.middle_name else "" end) + " " + $loan_relations.last_name end),
                     ownershipPercentage: 100,
+                    jobTitle: "Proprietor",
                     signer: ($loan_relations.is_signer),
                     controllingMember: ($loan_relations.is_ben_owner_by_control) 
                 } 
-            ] else [
+            ] else [ 
                 { 
-                    entityName: (
-                        if $loan_relations.memberof 
-                            then $loan_relations.memberof 
-                        else (if $loan_relations.entity_type == "sole_proprietor" 
-                            then .borrower_name 
-                            else empty end
-                        ) end
-                    ),
+                    entityName: (if $loan_relations.memberof then $loan_relations.memberof else (if $loan_relations.entity_type == "sole_proprietor" then .borrower_name else empty end) end),
+                    ownershipPercentage: $loan_relations.ownership_percentage,
                     jobTitle: (
                         if $loan_relations.position == "Managing Member" 
                             then "Member/Manager" 
                         else $loan_relations.position
                         end // null
                     ),
-                    ownershipPercentage: $loan_relations.ownership_percentage,
                     signer: ($loan_relations.is_signer),
                     controllingMember: ($loan_relations.is_ben_owner_by_control) 
-                }
-            ] end)
-        }
-    ]
+                } 
+            ] end) 
+        } 
+    ] 
 }
 )

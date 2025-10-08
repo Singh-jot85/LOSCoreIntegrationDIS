@@ -1,5 +1,4 @@
 (
-    
     ({
         "Purchase Commercial Real Estate": "Purchase Commercial Real Estate",
         "Improvement to Leased Space": "Improvements to Leased Space",
@@ -44,6 +43,7 @@
         "Motor Vehicle": "Automobile",
         "vehicles": "Automobile",
         "life_insurance": "Life Insurance",
+        "All Assets": "Business Assets",
         "all_assets": "Business Assets",
         "inventory_accounts_receivable": "Inventory",
         "other": "Other",

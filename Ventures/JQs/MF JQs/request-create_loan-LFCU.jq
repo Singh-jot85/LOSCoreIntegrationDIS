@@ -1,5 +1,4 @@
-(
-    
+( 
     ({
         "Purchase Commercial Real Estate": "Purchase Commercial Real Estate",
         "Improvement to Leased Space": "Improvements to Leased Space",
@@ -45,6 +44,7 @@
         "vehicles": "Automobile",
         "life_insurance": "Life Insurance",
         "All Assets": "Business Assets",
+        "all_assets": "Business Assets",
         "inventory_accounts_receivable": "Inventory",
         "other": "Other",
         "cash_and_equivalents": "Other",
@@ -59,8 +59,8 @@
         "EL_LOC": "SBA EXPRESS LOC"
     }) as $varialbleLoanTypes |
     ({
-        "SB_TL": "Conventional Term Loan_Fixed",
-        "SB_LOC": "Conventional LOC_Fixed",
+        "SB_TL": "Conventional Term Loan",
+        "SB_LOC": "Conventional LOC",
         "EL_TL": "SBA EXPRESS TERM",
         "EL_LOC": "SBA EXPRESS LOC"
     }) as $fixedLoanTypes |
@@ -71,7 +71,7 @@
     sbaApplicationNumber: .sba_loan_app_number,
     referenceNumber: (.application_number // null | tostring),
     purposeType: (if $purposeType[.loan_purpose] then $purposeType[.loan_purpose] else "Other" end) ,
-    loanTermMonths: .term_in_months,
+    loanTermMonths: (.loan_approval.approved_term // null),
     submittalDate: (if .submitted_date then .submitted_date | split("T")[0] else "" end),
     impactWomanOwnedBusiness: .cra_female_owned_business,
     impactVeteranOwnedBusiness: (if .details.boarding_details.veteran_owned_business == "yes" or .details.boarding_details.veteran_owned_business == "Yes" then true else false end),
@@ -101,25 +101,39 @@
         else null 
         end
     ),
-    impactLmi: (.details.low_to_moderate_community),
+    impactLmi: (.details.etran_community_advantage.low_to_moderate_community),
     sbssScore: (if .sbss_score then .sbss_score | tonumber else "" end),
     sbssScoreDate: (try (.loan_interfaces[] | select(.interface_type == "fico" and .is_latest == true) | .details.fico_data.FI_LiquidCredit.timestamp | split(" ")[0] | strptime("%Y%m%d") | strftime("%Y-%m-%d") ) //null) ,
     riskRatingGrade: .risk_rating,
     riskRatingDate: (if .uw_completion_date then .uw_completion_date | split("T")[0] else "" end),
     riskRatingReviewerContactId: .environment_values.lc_user_id ,
-    impactJobsCreatedByLoan: (.loan_relations[] | select(.is_primary_borrower == true) | .questionaire_responses[0].responses.jobs_created),
-    impactJobsRetainedByLoan: (.loan_relations[] | select(.is_primary_borrower == true) | .questionaire_responses[0].responses.jobs_saved),
+    impactJobsCreatedByLoan: ((
+        .loan_relations[] 
+        | select(.is_primary_borrower == true) as $primaryBorrower
+        | if ( ($primaryBorrower.questionaire_responses | length) != 0 )
+            then ( $primaryBorrower.questionaire_responses[0].responses.jobs_created | tonumber )
+        else null
+        end )
+    ),
+    impactJobsRetainedByLoan: (
+        ( .loan_relations[] 
+        | select(.is_primary_borrower == true) as $primaryBorrower
+        | if ( ($primaryBorrower.questionaire_responses | length) != 0 )
+            then .questionaire_responses[0].responses.jobs_saved | tonumber 
+        else null
+        end )
+    ),
     achAccountName: (.loan_relations[] | select(.is_primary_borrower==true) | .full_name // null),
     achAccountNumber: .bank_details.account_number, 
     achRoutingNumber: .bank_details.routing_number,
     achAccountType: .bank_details.account_type,
-    impactEmpowermentZoneEnterpriseCommunity: (.details.empowerment_zone),
-    impactHubZone: (.details.hub_zone),
-    impactPromiseZone: (.details.promise_zone),
+    impactEmpowermentZoneEnterpriseCommunity: (.details.etran_community_advantage.empowerment_zone),
+    impactHubZone: (.details.etran_community_advantage.hub_zone),
+    impactPromiseZone: (.details.etran_community_advantage.promise_zone),
     impactRural: (.loan_relations[] | select(.is_primary_borrower == true) | .details.rural_zone),
-    impactOpportunityZone: (.loan_relations[] | select(.is_primary_borrower == true) | .details.opportunity_zone),
-    impactLowIncomeWorkforce: (.details.resides_in_low_income),
-    impactSbaVeteransAdvantage: (.details.eligibility_for_SBA_veterans),
+    impactOpportunityZone: (.details.etran_community_advantage.opportunity_zone),
+    impactLowIncomeWorkforce: (.details.etran_community_advantage.resides_in_low_income),
+    impactSbaVeteransAdvantage: (.details.etran_community_advantage.eligibility_for_SBA_veterans),
     collateralAnalysisNarrative: "Federal Flood Insurance if business location or collateral falls in a special flood hazard area, Worker's Compensation Insurance - upon hire of W-2 employees, Business Personal Property Insurance, full replacement costs, General Business Liability Insurance",
     keyManInsuranceNarrative: "General Lending Guidelines do not require Key Man Life and Disability insurance for small business loans $350,000 or less.",
     first2Years: ( 
@@ -166,8 +180,12 @@
             Description: .name 
         } 
     ]),
-    collaterals: ( .approved_amount as $loan_amount | .collateral_types_mapping as $CollateralTypesMapping | .environment_values.lien_holder_id as $lienHolderCompanyId | [ .collaterals[] | 
-        { 
+    collaterals: ( 
+        .approved_amount as $loan_amount 
+        | .collateral_types_mapping as $CollateralTypesMapping 
+        | .environment_values.lien_holder_id as $lienHolderCompanyId 
+        | [ .collaterals[] 
+        | { 
             collateralTypeId: (if .collateral_type and $collateralType[.collateral_type_verbose] and $CollateralTypesMapping[$collateralType[.collateral_type_verbose]] then $CollateralTypesMapping[$collateralType[.collateral_type_verbose]] else ( if .category and $collateralType[.category] and $CollateralTypesMapping[$collateralType[.category]] then $CollateralTypesMapping[$collateralType[.category]] else $CollateralTypesMapping["Other"] end) end),
             value:(if .collateral_value then .collateral_value else $loan_amount end),
             lienPosition:(if .lien_position == "first" then 1 elif .lien_position == "second" then 2 elif .lien_position == "third" then 3 elif .lien_position == "fourth" then 4 elif .lien_position == "fifth" then 5 elif .lien_position == "subordinate" then 2 else null end),
