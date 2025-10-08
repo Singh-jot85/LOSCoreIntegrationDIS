@@ -1,218 +1,218 @@
 (
-("C") as $accrualMethodThisNote |
-("SBA EXPRESS - 50%") as $accountDescription |
-("SBL") as $officer2 |
-("LC*") as $officer3 |
-("3") as $class |
-(6500) as $fasbCost |
-("1763") as $callRPTStmtOfCond |
-("1") as $blockAdvanceOnDelinquentOverride |
-("1") as $creditBureauDoNotReport |
-("0") as $creditBureauAssociationCode |
-(100) as $liabilityPercentage |
-(0) as $mailCode |
-("+") as $marginSign |
-("IN") as $regulatoryStateCode |
-("A") as $autoTransferSetup |
-("08") as $roundingFactor |
-("2") as $expirationDateCode7 |
-("1") as $reportCodeFlag |
-("G") as $consumerRelationshipCode |
-(100.00) as $liabilityPercentage |
-("0") as $mailCode |
-("32") as $iglCode |
-("01") as $paymentFrequency |
-("1") as $paymentRecalcCode |
-("S") as $smPurchaseCode |
-("5") as $additiveRateCode |
-(5.00) as $maturityPastDueRate |
-("50000") as $noteNumber |
-("M001") as $rateReviewInterval |
-("W") as $reportingStatusCode |
-("90") as $lateChargeCode |
-("G") as $rateControlCode |
-({
-    "borrower":"S",
-    "guarantor":"G",
-    "primary":"P",
-    "single":"*"
-}) as $relationship |
-({
-    "SSN" : "S",
-    "EIN" : "E"
-}) as $tinCode |
-({
-    "vehicles": "7",
-    "furniture_fixtures_equipment": "DD",
-    "machinery_and_equipment": "DD",
-    "land": "AA",
-    "residential_real_estate": "J",
-    "commercial_real_estate": "H",
-    "life_insurance": "4",
-    "cash_and_equivalents": "3",
-    "assignment_of_leases": "L",
-    "other": "Z",
-    "inventory_accounts_receivable": "Z",
-    "collateral1Code": "5",
-    "collateral2Code": "U",
-    "collateral3Code": "E",
-    "collateral4Code": "X"
-}) as $collateralCode |
-({
-    "01":31,
-    "02":28,
-    "03":31,
-    "04":30,
-    "05":31,
-    "06":30,
-    "07":31,
-    "08":31,
-    "09":30,
-    "10":31,
-    "11":30,
-    "12":31,
-    "13":29
-}) as $totaldays |
-({
-    "0":"3",
-    "1":"2",
-    "2":"1"
-}) as $dateDueOffset |
-({
-    "Daniel Salmon":"202",
-    "Kelly Mace Miller":"204",
-    "Brian D Miller":"205",
-    "Joe Powers":"206",
-    "Daniel J Salmon":"210",
-    "Brian D Miller":"211",
-    "Kelly K Miller":"213",
-    "DO NOT USE-WORKOUT":"250",
-    "Darrell L Jaggers":"300",
-    "DO NOT USE-UNCOLLECTABLE":"800",
-    "Aracely Ledezma":"A_L",
-    "Amy Varga":"AKV",
-    "Amy Kezy":"ALK",
-    "Andrea Moore":"AM",
-    "Andrew M Steffel":"AMS",
-    "Art Russell":"AR",
-    "Andrea Watson":"AW",
-    "Brad A Duncan":"BAD",
-    "Benjamin C Jefferis":"BCJ",
-    "Brian Ternet":"BCT",
-    "Brian Miller":"BDM",
-    "Bryan G Olund":"BGO",
-    "Barb Jerzyk":"BJ",
-    "Deposit Operations":"BKG",
-    "Branch Loan":"BL",
-    "Brittany Breen":"BNB",
-    "Chris Campbell":"CDC",
-    "Chris Cossell":"CEC",
-    "Clay G Koehler":"CGK",
-    "Christine Milton":"CIM",
-    "Christine Tanjic":"CIT",
-    "Cara l Jones":"CLJ",
-    "Cindy Orzechowicz":"CO",
-    "Doug A Wood":"DAG",
-    "Dan Beechy":"DB",
-    "David Bowers":"DCB",
-    "Dan C Hanson":"DCH",
-    "Dan Peter":"DGP",
-    "David Giedemann":"DJG",
-    "Dan Salmon":"DJS",
-    "David Schnepp":"DLS",
-    "Derek M Phillips":"DMP",
-    "Dana Snyder":"DNS",
-    "Dave R Miller":"DRM",
-    "David Taylor":"DT",
-    "Ed Schiesser":"EAS",
-    "Erik Dombrowski":"ED",
-    "Greg Gottschalk":"GDG",
-    "Greg Widelski":"GFW",
-    "Greg Gordon":"GG",
-    "Gina M Storm":"GMS",
-    "Gabe W Cripe":"GWC",
-    "Jeff A Marsee":"JAM",
-    "Jonathan A. Walker":"JAW",
-    "Juli Beilicek":"JB",
-    "Jonathan Hildebrandt":"JBH",
-    "J Blake Sanderson":"JBS",
-    "John Misiora":"JCM",
-    "Joshua D Stuckey":"JDS",
-    "John D Wingfield":"JDW",
-    "Jeff F Olds":"JFO",
-    "John Rybicki":"JJR",
-    "Jason L Taege":"JLT",
-    "Jennifer Willis":"JLW",
-    "Jean Hershberger":"JMH",
-    "Julie N Birmingham":"JNB",
-    "Jamie Orcutt":"JO",
-    "Joe Powers":"JP",
-    "Jesse Dame":"JVD",
-    "Jami Weinrich":"JW",
-    "Kaylin A Korbelik":"KAK",
-    "Kelly Miller":"KKM",
-    "Kathy Sears":"KLS",
-    "Kevin Cahill":"KMC",
-    "Katie M Westlund":"KMW",
-    "Kevin S Broadstreet":"KSB",
-    "Katie Westlund Ponton":"KWP",
-    "Lydia Bowen":"L_B",
-    "Leonardo A Amat":"LAA",
-    "Lisa Pensinger":"LMP",
-    "Lydia Post":"LP",
-    "Lupita Pacheco Lopez":"LPL",
-    "Mary Dowd":"MCD",
-    "Michael Schrage":"MES",
-    "Michael Hardtke":"MH1",
-    "Mende Jofceski":"MJ",
-    "Mary Jo Kennelly":"MJK",
-    "Mary Panas":"MKP",
-    "Mark Baird":"MLB",
-    "Mark Stevenson":"MSS",
-    "Meredith Thompson":"MT",
-    "Matt Stoops":"MVS",
-    "Nick Matthews":"NRM",
-    "Olivia McGuire":"OAM",
-    "Paul Thiel":"PBT",
-    "Patrick Morrisey":"PCM",
-    "Paycheck Protection Program":"PPP",
-    "Patrick W Collins":"PWC",
-    "QuickLine":"QL",
-    "Ryan Hoffman":"RJH",
-    "Rachael Schroder":"RS",
-    "Rob Slusser":"RS2",
-    "Shelly Carlson":"S_C",
-    "Scott A Norman":"SAN",
-    "Stephanie Schrage":"SAS",
-    "Sharyn Chesna":"SC",
-    "Steve Watts":"SCW",
-    "Sue English":"SE",
-    "Sharon Harrison":"SH",
-    "Sabrina L Kiser":"SLK",
-    "Sheila Sieradzki":"SRS",
-    "Stephanie Snoeberger":"SSS",
-    "Terri Mitchell":"TCM",
-    "Tom Neuffer":"TDN",
-    "Troy Kafka":"TEK",
-    "Tim Turner":"TJT",
-    "Tom Wilk":"TJW",
-    "Tammy L Johnson":"TLJ",
-    "Timothy L Nelson":"TLN",
-    "Terri Mitchell":"TM",
-    "Terry M Ploetz":"TMP",
-    "Timothy M Rudge":"TMR",
-    "Tim Spoelman":"TMS",
-    "Tom Konrad":"TRK",
-    "Tim Woloszyn":"TW1",
-    "Tim Warner":"TWW",
-    "Vicki Hoffman":"VH",
-    "William M Winterhaler":"WMW",
-    "Yolanda Estrada":"YE",
-    "Jessica A Schneider":"ZJS",
-    "Jerry Tomasic":"ZJT",
-    "Zoran Koricanac":"ZK",
-    "Abbey Seberger":"ABY"
-}) as $officerBorrower |
+    ("C") as $accrualMethodThisNote |
+    ("SBA EXPRESS - 50%") as $accountDescription |
+    ("SBL") as $officer2 |
+    ("LC*") as $officer3 |
+    ("3") as $class |
+    (6500) as $fasbCost |
+    ("1763") as $callRPTStmtOfCond |
+    ("1") as $blockAdvanceOnDelinquentOverride |
+    ("1") as $creditBureauDoNotReport |
+    ("0") as $creditBureauAssociationCode |
+    (100) as $liabilityPercentage |
+    (0) as $mailCode |
+    ("+") as $marginSign |
+    ("IN") as $regulatoryStateCode |
+    ("A") as $autoTransferSetup |
+    ("08") as $roundingFactor |
+    ("2") as $expirationDateCode7 |
+    ("1") as $reportCodeFlag |
+    ("G") as $consumerRelationshipCode |
+    (100.00) as $liabilityPercentage |
+    ("0") as $mailCode |
+    ("32") as $iglCode |
+    ("01") as $paymentFrequency |
+    ("1") as $paymentRecalcCode |
+    ("S") as $smPurchaseCode |
+    ("5") as $additiveRateCode |
+    (5.00) as $maturityPastDueRate |
+    ("50000") as $noteNumber |
+    ("M001") as $rateReviewInterval |
+    ("W") as $reportingStatusCode |
+    ("90") as $lateChargeCode |
+    ("G") as $rateControlCode |
+    ({
+        "borrower":"S",
+        "guarantor":"G",
+        "primary":"P",
+        "single":"*"
+    }) as $relationship |
+    ({
+        "SSN" : "S",
+        "EIN" : "E"
+    }) as $tinCode |
+    ({
+        "vehicles": "7",
+        "furniture_fixtures_equipment": "DD",
+        "machinery_and_equipment": "DD",
+        "land": "AA",
+        "residential_real_estate": "J",
+        "commercial_real_estate": "H",
+        "life_insurance": "4",
+        "cash_and_equivalents": "3",
+        "assignment_of_leases": "L",
+        "other": "Z",
+        "inventory_accounts_receivable": "Z",
+        "collateral1Code": "5",
+        "collateral2Code": "U",
+        "collateral3Code": "E",
+        "collateral4Code": "X"
+    }) as $collateralCode |
+    ({
+        "01":31,
+        "02":28,
+        "03":31,
+        "04":30,
+        "05":31,
+        "06":30,
+        "07":31,
+        "08":31,
+        "09":30,
+        "10":31,
+        "11":30,
+        "12":31,
+        "13":29
+    }) as $totaldays |
+    ({
+        "0":"3",
+        "1":"2",
+        "2":"1"
+    }) as $dateDueOffset |
+    ({
+        "Daniel Salmon":"202",
+        "Kelly Mace Miller":"204",
+        "Brian D Miller":"205",
+        "Joe Powers":"206",
+        "Daniel J Salmon":"210",
+        "Brian D Miller":"211",
+        "Kelly K Miller":"213",
+        "DO NOT USE-WORKOUT":"250",
+        "Darrell L Jaggers":"300",
+        "DO NOT USE-UNCOLLECTABLE":"800",
+        "Aracely Ledezma":"A_L",
+        "Amy Varga":"AKV",
+        "Amy Kezy":"ALK",
+        "Andrea Moore":"AM",
+        "Andrew M Steffel":"AMS",
+        "Art Russell":"AR",
+        "Andrea Watson":"AW",
+        "Brad A Duncan":"BAD",
+        "Benjamin C Jefferis":"BCJ",
+        "Brian Ternet":"BCT",
+        "Brian Miller":"BDM",
+        "Bryan G Olund":"BGO",
+        "Barb Jerzyk":"BJ",
+        "Deposit Operations":"BKG",
+        "Branch Loan":"BL",
+        "Brittany Breen":"BNB",
+        "Chris Campbell":"CDC",
+        "Chris Cossell":"CEC",
+        "Clay G Koehler":"CGK",
+        "Christine Milton":"CIM",
+        "Christine Tanjic":"CIT",
+        "Cara l Jones":"CLJ",
+        "Cindy Orzechowicz":"CO",
+        "Doug A Wood":"DAG",
+        "Dan Beechy":"DB",
+        "David Bowers":"DCB",
+        "Dan C Hanson":"DCH",
+        "Dan Peter":"DGP",
+        "David Giedemann":"DJG",
+        "Dan Salmon":"DJS",
+        "David Schnepp":"DLS",
+        "Derek M Phillips":"DMP",
+        "Dana Snyder":"DNS",
+        "Dave R Miller":"DRM",
+        "David Taylor":"DT",
+        "Ed Schiesser":"EAS",
+        "Erik Dombrowski":"ED",
+        "Greg Gottschalk":"GDG",
+        "Greg Widelski":"GFW",
+        "Greg Gordon":"GG",
+        "Gina M Storm":"GMS",
+        "Gabe W Cripe":"GWC",
+        "Jeff A Marsee":"JAM",
+        "Jonathan A. Walker":"JAW",
+        "Juli Beilicek":"JB",
+        "Jonathan Hildebrandt":"JBH",
+        "J Blake Sanderson":"JBS",
+        "John Misiora":"JCM",
+        "Joshua D Stuckey":"JDS",
+        "John D Wingfield":"JDW",
+        "Jeff F Olds":"JFO",
+        "John Rybicki":"JJR",
+        "Jason L Taege":"JLT",
+        "Jennifer Willis":"JLW",
+        "Jean Hershberger":"JMH",
+        "Julie N Birmingham":"JNB",
+        "Jamie Orcutt":"JO",
+        "Joe Powers":"JP",
+        "Jesse Dame":"JVD",
+        "Jami Weinrich":"JW",
+        "Kaylin A Korbelik":"KAK",
+        "Kelly Miller":"KKM",
+        "Kathy Sears":"KLS",
+        "Kevin Cahill":"KMC",
+        "Katie M Westlund":"KMW",
+        "Kevin S Broadstreet":"KSB",
+        "Katie Westlund Ponton":"KWP",
+        "Lydia Bowen":"L_B",
+        "Leonardo A Amat":"LAA",
+        "Lisa Pensinger":"LMP",
+        "Lydia Post":"LP",
+        "Lupita Pacheco Lopez":"LPL",
+        "Mary Dowd":"MCD",
+        "Michael Schrage":"MES",
+        "Michael Hardtke":"MH1",
+        "Mende Jofceski":"MJ",
+        "Mary Jo Kennelly":"MJK",
+        "Mary Panas":"MKP",
+        "Mark Baird":"MLB",
+        "Mark Stevenson":"MSS",
+        "Meredith Thompson":"MT",
+        "Matt Stoops":"MVS",
+        "Nick Matthews":"NRM",
+        "Olivia McGuire":"OAM",
+        "Paul Thiel":"PBT",
+        "Patrick Morrisey":"PCM",
+        "Paycheck Protection Program":"PPP",
+        "Patrick W Collins":"PWC",
+        "QuickLine":"QL",
+        "Ryan Hoffman":"RJH",
+        "Rachael Schroder":"RS",
+        "Rob Slusser":"RS2",
+        "Shelly Carlson":"S_C",
+        "Scott A Norman":"SAN",
+        "Stephanie Schrage":"SAS",
+        "Sharyn Chesna":"SC",
+        "Steve Watts":"SCW",
+        "Sue English":"SE",
+        "Sharon Harrison":"SH",
+        "Sabrina L Kiser":"SLK",
+        "Sheila Sieradzki":"SRS",
+        "Stephanie Snoeberger":"SSS",
+        "Terri Mitchell":"TCM",
+        "Tom Neuffer":"TDN",
+        "Troy Kafka":"TEK",
+        "Tim Turner":"TJT",
+        "Tom Wilk":"TJW",
+        "Tammy L Johnson":"TLJ",
+        "Timothy L Nelson":"TLN",
+        "Terri Mitchell":"TM",
+        "Terry M Ploetz":"TMP",
+        "Timothy M Rudge":"TMR",
+        "Tim Spoelman":"TMS",
+        "Tom Konrad":"TRK",
+        "Tim Woloszyn":"TW1",
+        "Tim Warner":"TWW",
+        "Vicki Hoffman":"VH",
+        "William M Winterhaler":"WMW",
+        "Yolanda Estrada":"YE",
+        "Jessica A Schneider":"ZJS",
+        "Jerry Tomasic":"ZJT",
+        "Zoran Koricanac":"ZK",
+        "Abbey Seberger":"ABY"
+    }) as $officerBorrower |
 
 {
     borrowerData: 
@@ -323,15 +323,15 @@
             officer3: $officer3,
             branchCode: ((if (.details and .details.boarding_details and .details.boarding_details.branchCode) then .details.boarding_details.branchCode else null end) // null),
             controlCat: ((if .product.product_code == "EL_TL" or .product.product_code == "EL_LOC" then "M" else "C" end) // null),
-            collateral1Code: ((.loan_relations[] | select(.is_primary_borrower == true) | if(any(.collaterals[]; .collateral_type_verbose == "All Assets" or .collateral_type_verbose == "all_assets")) then $collateralCode["collateral1Code"] else ((if .collaterals | length > 0 then (.collaterals[0] | (if .category then $collateralCode[.category] else $collateralCode[.collateral_type_verbose] end)) else null end)) end ) // null),
-            collateral2Code: ((.loan_relations[] | select(.is_primary_borrower == true) | if(any(.collaterals[]; .collateral_type_verbose == "All Assets" or .collateral_type_verbose == "all_assets")) then $collateralCode["collateral2Code"] else ((if .collaterals | length > 1 then (.collaterals[1] | (if .category then $collateralCode[.category] else $collateralCode[.collateral_type_verbose] end)) else null end)) end ) // null),
-            collateral3Code: ((.loan_relations[] | select(.is_primary_borrower == true) | if(any(.collaterals[]; .collateral_type_verbose == "All Assets" or .collateral_type_verbose == "all_assets")) then $collateralCode["collateral3Code"] else ((if .collaterals | length > 2 then (.collaterals[2] | (if .category then $collateralCode[.category] else $collateralCode[.collateral_type_verbose] end)) else null end)) end ) // null),
-            collateral4Code: ((.loan_relations[] | select(.is_primary_borrower == true) | if(any(.collaterals[]; .collateral_type_verbose == "All Assets" or .collateral_type_verbose == "all_assets")) then $collateralCode["collateral4Code"] else ((if .collaterals | length > 3 then (.collaterals[3] | (if .category then $collateralCode[.category] else $collateralCode[.collateral_type_verbose] end)) else null end)) end ) // null),
-            collateral5Code: ((.loan_relations[] | select(.is_primary_borrower == true) | ((if .collaterals | length > 4 then (.collaterals[4] | (if .category then $collateralCode[.category] else $collateralCode[.collateral_type_verbose] end)) else null end))) // null),
-            collateral6Code: ((.loan_relations[] | select(.is_primary_borrower == true) | ((if .collaterals | length > 5 then (.collaterals[5] | (if .category then $collateralCode[.category] else $collateralCode[.collateral_type_verbose] end)) else null end))) // null),
-            collateral7Code: ((.loan_relations[] | select(.is_primary_borrower == true) | ((if .collaterals | length > 6 then (.collaterals[6] | (if .category then $collateralCode[.category] else $collateralCode[.collateral_type_verbose] end)) else null end))) // null),
-            collateral8Code: ((.loan_relations[] | select(.is_primary_borrower == true) | ((if .collaterals | length > 7 then (.collaterals[7] | (if .category then $collateralCode[.category] else $collateralCode[.collateral_type_verbose] end)) else null end))) // null),
-            collateral9Code: ((.loan_relations[] | select(.is_primary_borrower == true) | ((if .collaterals | length > 8 then (.collaterals[8] | (if .category then $collateralCode[.category] else $collateralCode[.collateral_type_verbose] end)) else null end))) // null),
+            collateral1Code: (( [.collaterals[] ] as $collateralList | if(any($collateralList; .collateral_type_verbose == "All Assets" or .collateral_type_verbose == "all_assets")) then $collateralCode["collateral1Code"] else ((if $collateralList | length > 0 then ($collateralList[0] | (if .category then $collateralCode[.category] else $collateralCode[.collateral_type_verbose] end)) else null end)) end ) // null),
+            collateral2Code: (( [.collaterals[] ] as $collateralList | if(any($collateralList; .collateral_type_verbose == "All Assets" or .collateral_type_verbose == "all_assets")) then $collateralCode["collateral2Code"] else ((if $collateralList | length > 1 then ($collateralList[1] | (if .category then $collateralCode[.category] else $collateralCode[.collateral_type_verbose] end)) else null end)) end ) // null),
+            collateral3Code: (( [.collaterals[] ] as $collateralList | if(any($collateralList; .collateral_type_verbose == "All Assets" or .collateral_type_verbose == "all_assets")) then $collateralCode["collateral3Code"] else ((if $collateralList | length > 2 then ($collateralList[2] | (if .category then $collateralCode[.category] else $collateralCode[.collateral_type_verbose] end)) else null end)) end ) // null),
+            collateral4Code: (( [.collaterals[] ] as $collateralList | if(any($collateralList; .collateral_type_verbose == "All Assets" or .collateral_type_verbose == "all_assets")) then $collateralCode["collateral4Code"] else ((if $collateralList | length > 3 then ($collateralList[3] | (if .category then $collateralCode[.category] else $collateralCode[.collateral_type_verbose] end)) else null end)) end ) // null),
+            collateral5Code: (( [.collaterals[] ] as $collateralList | ((if $collateralList | length > 4 then ($collateralList[4] | (if .category then $collateralCode[.category] else $collateralCode[.collateral_type_verbose] end)) else null end))) // null),
+            collateral6Code: (( [.collaterals[] ] as $collateralList | ((if $collateralList | length > 5 then ($collateralList[5] | (if .category then $collateralCode[.category] else $collateralCode[.collateral_type_verbose] end)) else null end))) // null),
+            collateral7Code: (( [.collaterals[] ] as $collateralList | ((if $collateralList | length > 6 then ($collateralList[6] | (if .category then $collateralCode[.category] else $collateralCode[.collateral_type_verbose] end)) else null end))) // null),
+            collateral8Code: (( [.collaterals[] ] as $collateralList | ((if $collateralList | length > 7 then ($collateralList[7] | (if .category then $collateralCode[.category] else $collateralCode[.collateral_type_verbose] end)) else null end))) // null),
+            collateral9Code: (( [.collaterals[] ] as $collateralList | ((if $collateralList | length > 8 then ($collateralList[8] | (if .category then $collateralCode[.category] else $collateralCode[.collateral_type_verbose] end)) else null end))) // null),
             noticeCode: null,
             class: $class,
             rateControlCode: $rateControlCode,
@@ -524,7 +524,7 @@
             userDefinedField2: null,
             userDefinedField3: null,
             userDefinedField4: null,
-            userDefinedField5: ((.loan_relations[] | select(.is_primary_borrower == true) | ((if .collaterals | length > 0 then (.collaterals[] | (select(.collateral_type_verbose == "Motor Vehicle") | .rolling_stock_details | .model + " " + (.year % 100 | tostring) + " " + .make + " " + .vin) // null) else null end))) // null),
+            userDefinedField5: (( [.collaterals[] ] as $collateralList | ((if $collateralList | length > 0 then ($collateralList[] | (select(.collateral_type_verbose == "Motor Vehicle") | .rolling_stock_details | .model + " " + (.year % 100 | tostring) + " " + .make + " " + .vin) // null) else null end))) // null),
             letterofCreditRolloverDays: null,
             balloonLoanIndicator: null,
             balloonLoanTerm: null,
