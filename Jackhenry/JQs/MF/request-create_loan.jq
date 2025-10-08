@@ -91,33 +91,10 @@
             MatRate: "0"
         },
         LnRealEstateInfo: {
-            PropState: (
-                ([.loan_relations[] | 
-                select(.is_primary_borrower == true and( (.collaterals | length) > 0))
-                | .collaterals[0]
-                | .collateral_addresses[0]
-                | .state][0] // null)
-            ),
-            PropPostalCode: (
-                ([.loan_relations[]
-                | select(.is_primary_borrower == true and (.collaterals | length) > 0)
-                | .collaterals[0]
-                | .collateral_addresses[0]
-                | .zip_code][0] // null)
-            ),
-            PropCity: (
-                ([.loan_relations[]
-                | select(.is_primary_borrower == true and (.collaterals | length) > 0)
-                | .collaterals[0]
-                | .collateral_addresses[0]
-                | .city][0] // null)
-            ),
-            ApprVal: (
-                ([.loan_relations[] 
-                | select(.is_primary_borrower == true and (.collaterals | length) > 0)
-                | .collaterals[0]
-                | .collateral_appraisal.details.report_price][0] // null)
-            )
+            PropState: ( [ .collaterals[0] | .collateral_addresses[0] | .state][0] // null ),
+            PropPostalCode: ( [ .collaterals[0] | .collateral_addresses[0] | .zip_code][0] // null ),
+            PropCity: ( [ .collaterals[0] | .collateral_addresses[0] | .city][0] // null ),
+            ApprVal: ( [ .collaterals[0] | .collateral_appraisal.details.report_price][0] // null )
         },
         LnRegRptInfo: {
             NAICSCode: (.account_naics_code // null),
