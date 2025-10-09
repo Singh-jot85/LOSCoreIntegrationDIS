@@ -73,8 +73,22 @@
     riskRatingGrade: .risk_rating,
     riskRatingDate: (if .uw_completion_date then .uw_completion_date | split("T")[0] else "" end),
     riskRatingReviewerContactId:236705 ,
-    impactJobsCreatedByLoan: (.loan_relations[] | select(.is_primary_borrower == true) | .questionaire_responses[0].responses.jobs_created | tonumber // null),
-    impactJobsRetainedByLoan: (.loan_relations[] | select(.is_primary_borrower == true) | .questionaire_responses[0].responses.jobs_saved | tonumber // null),
+    impactJobsCreatedByLoan: ((
+        .loan_relations[] 
+        | select(.is_primary_borrower == true) as $primaryBorrower
+        | if ( ($primaryBorrower.questionaire_responses | length) != 0 )
+            then ( $primaryBorrower.questionaire_responses[0].responses.jobs_created | tonumber )
+        else null
+        end )
+    ),
+    impactJobsRetainedByLoan: (
+        ( .loan_relations[] 
+        | select(.is_primary_borrower == true) as $primaryBorrower
+        | if ( ($primaryBorrower.questionaire_responses | length) != 0 )
+            then .questionaire_responses[0].responses.jobs_saved | tonumber 
+        else null
+        end )
+    ),
     achAccountName: (.loan_relations[] | select(.is_primary_borrower==true) | .full_name // null),
     achAccountNumber: .bank_details.account_number,
     achRoutingNumber: .bank_details.routing_number,
