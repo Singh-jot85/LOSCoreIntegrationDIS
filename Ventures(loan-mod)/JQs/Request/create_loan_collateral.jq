@@ -14,6 +14,14 @@
     "assignment_of_leases": "Assignment of Leases & Rents",
     "land": "Ground Lease (Land Only No Improvements)"
 }) as $collateralType |
+({
+    "first": 1,
+    "second": 2,
+    "third": 3,
+    "fourth": 4,
+    "fifth": 5,
+    "subordinate": 2
+}) as $lienPositionMapping |
 (
 . as $root | 
 .collateral_types_mapping as $CollateralTypesMapping | 
@@ -41,7 +49,7 @@
             end)
         ),
         value: ($collateral.collateral_value // null),
-        lienPosition: ( $collateral.lien_position // null),
+        lienPosition: ($lienPositionMapping[.lien_position] // null),
         address: ($collateral.collateral_addresses[] 
             | select(.address_type == "permanent") 
             | {
@@ -59,20 +67,7 @@
                 then [.lien_holders[] 
                     | { 
                         lienHolderCompanyId: 207029,
-                        lienPosition: (
-                            if .lien_position == "first" 
-                                then 1 
-                            elif .lien_position == "second" 
-                                then 2 
-                            elif .lien_position == "third" 
-                                then 3 
-                            elif .lien_position == "fourth" 
-                                then 4 
-                            elif .lien_position == "fifth" 
-                                then 5 
-                            else null 
-                            end
-                        ),
+                        lienPosition: ($lienPositionMapping[.lien_position] // null),
                         amount:.original_note_amount ,
                         Comment:(
                             if .business_name and .business_name != "" 
