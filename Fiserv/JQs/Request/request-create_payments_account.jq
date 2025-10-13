@@ -1,5 +1,8 @@
 (
-    ("1753106520000") as $currentDateTime | 
+({
+    "checking": "CK",
+    "saving": "SAV"
+}) as $ACHAccTypeMapping |
 {
     Input: {
         Requests: [
@@ -8,7 +11,7 @@
                 RequestNumber: "1",
                 AllotmentRequests: [
                     {
-                        ACHReceivingAccountTypeCode: "LN",
+                        ACHReceivingAccountTypeCode: ($ACHAccTypeMapping[.bank_details.account_type] // null),
                         ACHReceivingTypeCode: "ORG",
                         BalanceCategoryCode: "NOTE",
                         BalanceTypeCode: "BAL",
@@ -22,17 +25,8 @@
                         // null),
                         CalenderPeriodCode: "MNTH",
                         FundTypeCode: "EL",
-                        DueDayNumber: null, #01
-                        EffectiveDate: "/Date(\($currentDateTime))/",
-                        InitialDueDate: (
-                            if (.loan_approval.approved_first_payment_date)
-                                then (.loan_approval.approved_first_payment_date 
-                                    | (.+ "T00:00:00Z" | fromdateiso8601 * 1000) 
-                                    | "/Date(\(.))/"
-                                )
-                            else null
-                            end
-                        ),
+                        DueDayNumber: 1,
+                        EffectiveDate: "/Date(\(now*1000 | floor))/",
                         NextDisbursementDate: (
                             if (.loan_approval.approved_first_payment_date)
                                 then (.loan_approval.approved_first_payment_date 
@@ -60,19 +54,44 @@
                             end
                         ),
                         GraceDays: 0,
-                        IsACHOriginated: (
-                            if (.bank_details.is_internal_account != null)
-                                then (.bank_details.is_internal_account | not)
+                        IsACHOriginated: (.bank_details?.is_internal_account // null),
+                        ACHOriginatedOrganizationNumber: 1,
+                        ExternalAccountName: ( 
+                            if .bank_details.is_internal_account == false
+                                then .loan_relations[] | select(.is_primary_borrower==true) | .full_name
                             else null
                             end
                         ),
-                        ACHOriginatedOrganizationNumber: 1,
-                        ExternalAccountName: ( .loan_relations[] | select(.is_primary_borrower==true) | .full_name),
-                        ReceivingRouteNumber: (.bank_details.routing_number // null),
-                        ExternalAccountNumber: (.bank_details.account_number // null),
+                        ReceivingRouteNumber: (
+                            if .bank_details.is_internal_account == false
+                                then .bank_details.routing_number // null
+                            else null
+                            end
+                        ),
+                        ExternalAccountNumber: (
+                            if .bank_details.is_internal_account == false
+                                then .bank_details.account_number // null
+                            else null
+                            end
+                        ),
                         AccountNumber: (.loan_number // null),
-                        EndDate: null, #"/Date(1910623380000)/"
-                        ReceivingPersonNumber: null, #"920933"
+                        EndDate: null,
+                        ReceivingPersonNumber: null,
+                        IsFutureReceivable: false,
+                        AllotmentDescription: (
+                            .bank_details?.account_number as $accNum
+                            | "Commercial loan payment \($accNum)"
+                        ),
+                        AdditionalDescription: (
+                            .bank_details?.account_number as $accNum
+                            | "SECU Loan Payment \($accNum)"
+                        ),
+                        ReceivingInternalAccountNumber: (
+                            if .bank_details.is_internal_account == true
+                                then .bank_details.account_number
+                            else null
+                            end
+                        )
                     }
                 ]
             }
