@@ -223,7 +223,12 @@
             guaranteeType: "Unsecured Limited",
             company: 
                 { 
-                    name: ( if .dba_name and .dba_name !="" then .dba_name else .first_name + " " + .last_name end ),
+                    name: ( 
+                        if (.dba_name and .dba_name !="") 
+                            then .dba_name 
+                        else .first_name + " " + .last_name 
+                        end 
+                    ),
                     taxId: .tin,
                     taxIdType: .tin_type,
                     entityType: "Sole Proprietorship",
@@ -262,7 +267,12 @@
         ],
         company: 
             { 
-                name: .business_name,
+                name: ( 
+                    if (.dba_name and .dba_name !="") 
+                        then .dba_name 
+                    else (.full_name) 
+                    end 
+                ),
                 stateOfFormation: .state_of_establishment,
                 currentOwnershipEstablishedDate: .business_established_date 
             },
