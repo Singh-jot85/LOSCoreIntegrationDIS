@@ -1,7 +1,7 @@
 (
 ({
     "checking": "CK",
-    "saving": "SAV"
+    "savings": "SAV"
 }) as $ACHAccTypeMapping |
 {
     Input: {
@@ -11,7 +11,12 @@
                 RequestNumber: "1",
                 AllotmentRequests: [
                     {
-                        ACHReceivingAccountTypeCode: ($ACHAccTypeMapping[.bank_details.account_type] // null),
+                        ACHReceivingAccountTypeCode: (
+                            if .bank_details?.account_type != null
+                                then ($ACHAccTypeMapping[.bank_details?.account_type] // null)
+                            else null
+                            end
+                        ),
                         ACHReceivingTypeCode: "ORG",
                         BalanceCategoryCode: "NOTE",
                         BalanceTypeCode: "BAL",
@@ -54,7 +59,7 @@
                             end
                         ),
                         GraceDays: 0,
-                        IsACHOriginated: (.bank_details?.is_internal_account // null),
+                        IsACHOriginated: .bank_details?.is_internal_account,
                         ACHOriginatedOrganizationNumber: 1,
                         ExternalAccountName: ( 
                             if .bank_details.is_internal_account == false
