@@ -234,11 +234,22 @@ def get_NCUACategoryCode($collateral; $creTypes):
                             ) + 
                             ( 
                                 .details.boarding_details | to_entries
-                                | map(select(.key != "branch_code"))
+                                | map(
+                                    select(
+                                        ( .key | IN("acto","loff","oemp") )
+                                        and .value != null 
+                                        and .value != "" 
+                                    )
+                                )
                                 | map(
                                     {
                                         AccountRoleCode: (.key | ascii_upcase),
-                                        AccountRoleValue: (.value | tonumber),
+                                        AccountRoleValue: (
+                                            if .value 
+                                                then (.value | tonumber)
+                                            else null
+                                            end
+                                        ),
                                         EntityTypeCode: "PERS",
                                         IsRemove: null,
                                         LiabilityAmount: null,
