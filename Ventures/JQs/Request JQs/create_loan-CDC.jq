@@ -214,6 +214,7 @@
         or (.party_type == "individual" 
         and .entity_type == "sole_proprietor" 
         and (.is_collateral_related | not) 
+        and (.is_member_of_guarantor | not)
         and .relation_type == "borrower")
         ) | ( if (.entity_type == "sole_proprietor") then { 
             primary: .is_primary_borrower,
@@ -221,7 +222,12 @@
             guaranteeType: "Unsecured Limited",
             company: 
                 { 
-                    name: ( if .dba_name and .dba_name !="" then .dba_name else .first_name + " " + .last_name end ),
+                    name: ( 
+                        if (.dba_name and .dba_name !="") 
+                            then .dba_name 
+                        else (.full_name) 
+                        end 
+                    ),
                     taxId: .tin,
                     taxIdType: .tin_type,
                     entityType: "Sole Proprietorship",
@@ -260,7 +266,12 @@
         ],
         company: 
             { 
-                name: .business_name,
+                name: ( 
+                    if (.dba_name and .dba_name !="") 
+                        then .dba_name 
+                    else (.full_name) 
+                    end 
+                ),
                 stateOfFormation: .state_of_establishment,
                 currentOwnershipEstablishedDate: .business_established_date 
             },
@@ -278,6 +289,7 @@
         and ($loan_relations.relation_type =="borrower" or $loan_relations.relation_type =="owner") 
         and ($loan_relations.relation_type != "collateral_owner") 
         and ($loan_relations.is_collateral_related | not) 
+        and ($loan_relations.is_member_of_guarantor | not)
         and ($loan_relations.is_system_created | not)) | 
         {
             contactID: (if $loan_relations.external_customer_id != "" and $loan_relations.external_customer_id != null then $loan_relations.external_customer_id | tonumber else "" end),
