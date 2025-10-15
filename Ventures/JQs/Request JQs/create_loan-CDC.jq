@@ -214,7 +214,7 @@
         or (.party_type == "individual" 
         and .entity_type == "sole_proprietor" 
         and (.is_collateral_related | not) 
-        and (.is_parent_collateral_owner | not)
+        and (.is_member_of_guarantor | not)
         and .relation_type == "borrower")
         ) | ( if (.entity_type == "sole_proprietor") then { 
             primary: .is_primary_borrower,
@@ -289,7 +289,7 @@
         and ($loan_relations.relation_type =="borrower" or $loan_relations.relation_type =="owner") 
         and ($loan_relations.relation_type != "collateral_owner") 
         and ($loan_relations.is_collateral_related | not) 
-        and ($loan_relations.is_parent_collateral_owner | not)
+        and ($loan_relations.is_member_of_guarantor | not)
         and ($loan_relations.is_system_created | not)) | 
         {
             contactID: (if $loan_relations.external_customer_id != "" and $loan_relations.external_customer_id != null then $loan_relations.external_customer_id | tonumber else "" end),
