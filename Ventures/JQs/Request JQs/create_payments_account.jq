@@ -30,7 +30,7 @@
         else .maturity_date 
         end // null
     ),
-    rateType: (.pricing_details[] | select(.term_position == "term_1") | (.rate_type) // null),
+    rateType: (.pricing_details[] ? | select(.term_position == "term_1") | (.rate_type) // null),
     adjustmentPeriod: (null),
     balloonPaymentAmount: ( if( .product.product_code == "SB_TL" and(
     .pricing_details | map( select(
