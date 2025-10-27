@@ -38,7 +38,7 @@
                 ventures_field: (.customData[] | select(.low_income_clients) | .low_income_clients.ventures_field), 
                 value: .details.impact_data | (if .low_income_clients == "yes" 
                     then "true" 
-                    elif .first_time_business_owner == "no"
+                    elif .low_income_clients == "no"
                         then "false"
                     else empty
                     end
