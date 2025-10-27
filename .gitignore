@@ -2,3 +2,4 @@
 *.pem
 my-workspace/
 *.DS_Store
+CI/
