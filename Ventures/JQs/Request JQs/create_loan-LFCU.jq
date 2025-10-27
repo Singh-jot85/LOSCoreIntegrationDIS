@@ -175,7 +175,7 @@
     ] ,
     useOfProceeds: ( .uop_id_mapping as $UOPIdMapping | [ .use_of_proceed_details[] | 
         { 
-            useOfProceedTypeId: (if .purpose and $useOfProceedType[.purpose] and $UOPIdMapping[$useOfProceedType[.purpose]] then $UOPIdMapping[$useOfProceedType[.purpose]] else $UOPIdMapping["Others"] end),
+            useOfProceedTypeId: (if .purpose and $useOfProceedType[.purpose] and $UOPIdMapping[$useOfProceedType[.purpose]] then $UOPIdMapping[$useOfProceedType[.purpose]] else $UOPIdMapping["Other Cost"] end),
             Amount:(.amount|gsub(",|\\s";"")|tonumber) ,
             Description: .name 
         } 
