@@ -22,7 +22,7 @@
                 ventures_field:(.customData[] | select(.first_time_business_owner) | .first_time_business_owner.ventures_field), 
                 value: .details.impact_data | (if .first_time_business_owner == "yes" 
                     then "true" 
-                    elif .first_time_borrower == "no"
+                    elif .first_time_business_owner == "no"
                         then "false"
                     else empty
                     end
@@ -38,7 +38,7 @@
                 ventures_field: (.customData[] | select(.low_income_clients) | .low_income_clients.ventures_field), 
                 value: .details.impact_data | (if .low_income_clients == "yes" 
                     then "true" 
-                    elif .first_time_borrower == "no"
+                    elif .low_income_clients == "no"
                         then "false"
                     else empty
                     end
