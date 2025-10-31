@@ -46,6 +46,6 @@
             } 
         else null end 
         ] 
-    else [{}] end
+    else null end
     ) 
 }

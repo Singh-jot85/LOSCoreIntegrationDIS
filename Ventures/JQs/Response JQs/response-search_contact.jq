@@ -38,8 +38,8 @@
                     country:.homeAddress.countryCode, 
                     state:.homeAddress.stateCode 
                 }
-            })  else [{}] end 
+            })  else null end 
         ]) 
-        else [{}] end
+        else null end
     ) 
 }
