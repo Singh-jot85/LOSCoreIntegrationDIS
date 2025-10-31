@@ -123,7 +123,7 @@
         else null
         end )
     ),
-    achAccountName: (.loan_relations[] | select(.is_primary_borrower==true) | .full_name // null),
+    achAccountName: (.loan_relations[] | select(.is_primary_borrower==true) | if(.full_name == .business_name) then .full_name else (if .title and .title != "" then .title + " " + .first_name else .first_name end) + (if .middle_name and .middle_name != "" then " " + .middle_name else "" end) + " " + (if .suffix and .suffix != "" then .last_name + " " + .suffix else .last_name end) end // null),
     achAccountNumber: .bank_details.account_number, 
     achRoutingNumber: .bank_details.routing_number,
     achAccountType: .bank_details.account_type,
@@ -264,12 +264,7 @@
             guaranteeType: "Unsecured Limited",
             company: 
                 {
-                    name: ( 
-                        if (.dba_name and .dba_name !="") 
-                            then .dba_name 
-                        else (.full_name) 
-                        end 
-                    ),
+                    name: ( if (.dba_name and .dba_name !="") then .dba_name else (if(.full_name == .business_name) then .business_name else (if .title then .title + " " + .first_name else .first_name end) + (if .middle_name and .middle_name != "" then " " + .middle_name else "" end) + " " + (if .suffix then .last_name + " " + .suffix else .last_name end) end // null) end ),
                     taxId: .tin,
                     taxIdType: .tin_type,
                     entityType: "Sole Proprietorship",
@@ -309,11 +304,7 @@
             company: 
                 { 
                     name: ( 
-                        if (.dba_name and .dba_name !="") 
-                            then .dba_name 
-                        else (.full_name) 
-                        end 
-                    ),
+                        (if (.dba_name and .dba_name != "") then .dba_name else ( if(.full_name == .business_name) then .full_name else (if .title and .title != "" then .title + " " + .first_name else .first_name end) + (if (.middle_name and .middle_name != "") then " " + .middle_name else "" end) + " " + (if (.suffix and .suffix != "") then .last_name + " " + .suffix else .last_name end )end) end )),
                     stateOfFormation: .state_of_establishment,
                     currentOwnershipEstablishedDate: .business_established_date 
                 },
@@ -346,7 +337,7 @@
                 },
             memberOf: ( if ($loan_relations.entity_type == "sole_proprietor") then [ 
                 {
-                    entityName: ( if $loan_relations.dba_name and $loan_relations.dba_name !="" then $loan_relations.dba_name else $loan_relations.first_name + (if $loan_relations.middle_name and $loan_relations.middle_name != "" then " " + $loan_relations.middle_name else "" end) + " " + $loan_relations.last_name end),
+                    entityName: (if ($loan_relations.dba_name and $loan_relations.dba_name != "") then $loan_relations.dba_name else ( (if $loan_relations.title and $loan_relations.title != "" then $loan_relations.title + " " + $loan_relations.first_name else $loan_relations.first_name end) + (if ($loan_relations.middle_name and $loan_relations.middle_name != "") then " " + $loan_relations.middle_name else "" end) + " " + (if ($loan_relations.suffix and $loan_relations.suffix != "") then $loan_relations.last_name + " " + $loan_relations.suffix else $loan_relations.last_name end ) ) end ),
                     ownershipPercentage: 100,
                     jobTitle: "Proprietor",
                     signer: ($loan_relations.is_signer),
