@@ -22,7 +22,7 @@
                                     (
                                         if ( .category | IN("residential_real_estate", "commercial_real_estate", "land") )
                                             then { 
-                                                MarginPercent: ( .conditions_data["REAL-ESTATE"].collateral_margin | tonumber? / 100 ) 
+                                                MarginPercent: ( .details.collateral_margin | tonumber? / 100 ) 
                                             }
                                         else {}
                                         end
