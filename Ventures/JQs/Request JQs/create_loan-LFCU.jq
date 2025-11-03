@@ -55,8 +55,8 @@
     ({
         "SB_TL": "Conventional Term Loan_Variable",
         "SB_LOC": "Conventional LOC_Variable",
-        "EL_TL": "SBA EXPRESS TERM",
-        "EL_LOC": "SBA EXPRESS LOC"
+        "EL_TL": "SBA EXPRESS TERM_VARIABLE",
+        "EL_LOC": "SBA EXPRESS LOC_VARIABLE"
     }) as $varialbleLoanTypes |
     ({
         "SB_TL": "Conventional Term Loan",
@@ -76,20 +76,23 @@
     impactWomanOwnedBusiness: .cra_female_owned_business,
     impactVeteranOwnedBusiness: (if .details.boarding_details.veteran_owned_business == "yes" or .details.boarding_details.veteran_owned_business == "Yes" then true else false end),
     impactMinorityOwnedBusiness: .cra_minority_owned_business,
-    loanType: (
-        if .product.product_code == "7A_TL" 
-            then (
-                if .loan_amount>500000 
-                then "SBA 7(a)" 
-                else "SMALL SBA 7(a)" 
-            end ) 
-        else 
-            if (.loan_approval.approved_rate_type == "Fixed")
-                then ($fixedLoanTypes[.product.product_code] // null)
-            elif (.loan_approval.approved_rate_type == "Variable")
-                then ($varialbleLoanTypes[.product.product_code] // null)
-            end
-        end // null
+    loanType: ( .product.product_code as $productCode | .loan_approval.approved_rate_type as $rateType |
+        if ($rateType == "Fixed")
+            then if ($productCode == "7A_TL" and .loan_amount>500000 )
+                    then "SBA 7(a)"
+                elif ($productCode == "7A_TL")
+                    then "SMALL SBA 7(a)"
+                else ($fixedLoanTypes[.product.product_code] // null)
+                end
+        elif ($rateType == "Variable")
+            then if ($productCode == "7A_TL" and .loan_amount>500000 )
+                    then "SBA 7(a)_VARIABLE"
+                elif ($productCode == "7A_TL")
+                    then "SMALL SBA 7(a)_VARIABLE"
+                else ($varialbleLoanTypes[.product.product_code] // null)
+                end
+        else null
+        end
     ),
     loanStatus: "Funded",
     loanAmount: (.approved_amount // null),

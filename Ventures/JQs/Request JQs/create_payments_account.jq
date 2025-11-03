@@ -24,12 +24,7 @@
     initialDisbursement: (((.loan_approval.approved_amount // 0) - (.disbursements.remaining_amount // 0)) // null),
     interestRatePercent: ((.loan_approval.approved_rate) // null),
     loanId: ((if .loan_number then .loan_number | tonumber else null end) // null),
-    maturityDate: (
-        if ((.product.product_code | IN("SB_LOC","EL_LOC")) and .is_demand_loan)
-            then "2099-12-30"
-        else .maturity_date 
-        end // null
-    ),
+    maturityDate: ( .maturity_date // null ),
     rateType: (.pricing_details[] | select(.term_position == "term_1") | (.rate_type) // null),
     adjustmentPeriod: (null),
     balloonPaymentAmount: ( if( .product.product_code == "SB_TL" and(
@@ -46,7 +41,12 @@
             and .details.outLOAN_BUILDER.AmTable.AmLine?
     ) | (.details.outLOAN_BUILDER.AmTable.AmLine | max_by(.Idx) | .Pmt | tonumber)
     ) else null end ),
-    finalPayment: (null),
+    finalPayment: (.pricing_details[] | select(.term_position == "term_1") | 
+        if .repayment_type == "interest_only"
+            then "DueOnRegularDueDate"
+        else null
+        end // null 
+    ),
     firstPAndIPaymentAmount: (if(.product.product_code == "SB_TL" or .product.product_code == "7A_TL")  then ( .loan_interfaces[] | select(
         .interface_type == "sherman"
         and .is_latest == true
