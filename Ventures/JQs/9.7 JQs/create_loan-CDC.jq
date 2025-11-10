@@ -90,7 +90,7 @@
         else null
         end )
     ),
-    achAccountName: (.loan_relations[] | select(.is_primary_borrower==true) | .full_name // null),
+    achAccountName: (.loan_relations[] | select(.is_primary_borrower==true) | if(.full_name == .business_name) then .full_name else (if .title and .title != "" then .title + " " + .first_name else .first_name end) + (if .middle_name and .middle_name != "" then " " + .middle_name else "" end) + " " + (if .suffix and .suffix != "" then .last_name + " " + .suffix else .last_name end) end // null),
     achAccountNumber: .bank_details.account_number,
     achRoutingNumber: .bank_details.routing_number,
     achAccountType: .bank_details.account_type,

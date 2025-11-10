@@ -1,15 +1,15 @@
-(
+(    
     ({
-        "Purchase Commercial Real Estate": "Purchase Commercial Real Estate",
-        "Improvement to Leased Space": "Improvements to Leased Space",
-        "Purchase Equipment": "Purchase Equipment",
-        "Purchase Furniture and Fixtures": "Purchase Furniture and Fixtures",
-        "Purchase Inventory": "Purchase Inventory",
-        "Debt Refinance": "Debt Refinance",
-        "Business Acquisition": "Business Acquisition",
-        "Working Capital": "Working Capital",
-        "Purchase Vehicle(s)": "Purchase Vehicle(s)",
-        "Start Up Financing": "Start Up Financing"
+    "Purchase Vehicle(s)": "Purchase Vehicle(s)",
+    "Start Up Financing": "Start Up Financing",
+    "Working Capital": "Working Capital",
+    "Business Acquisition": "Business Acquisition",
+    "Debt Refinance": "Refinance",
+    "Purchase Inventory": "Inventory",
+    "Purchase Furniture and Fixtures": "Purchase Furniture and Fixtures",
+    "Purchase Equipment": "Equipment",
+    "Improvement to Leased Space": "Leasehold Improvements",
+    "Purchase Commercial Real Estate": "Real Estate Purchase"
     }) as $purposeType |
     ({
         "Purchase Land only": "Purchase Of Land",
@@ -43,7 +43,6 @@
         "Motor Vehicle": "Automobile",
         "vehicles": "Automobile",
         "life_insurance": "Life Insurance",
-        "All Assets": "Business Assets",
         "all_assets": "Business Assets",
         "inventory_accounts_receivable": "Inventory",
         "other": "Other",
@@ -52,23 +51,19 @@
         "assignment_of_leases": "Assignment of Leases & Rents",
         "land": "Ground Lease (Land Only No Improvements)"
     }) as $collateralType |
-    ({
-        "SB_TL": "Conventional Term Loan_Variable",
-        "SB_LOC": "Conventional LOC_Variable",
-        "EL_TL": "SBA EXPRESS TERM_VARIABLE",
-        "EL_LOC": "SBA EXPRESS LOC_VARIABLE"
-    }) as $varialbleLoanTypes |
-    ({
-        "SB_TL": "Conventional Term Loan",
-        "SB_LOC": "Conventional LOC",
-        "EL_TL": "SBA EXPRESS TERM",
-        "EL_LOC": "SBA EXPRESS LOC"
-    }) as $fixedLoanTypes |
-
+    ("SBA 7(a)") as $loanType | 
+    (
+        ["EL_LOC", "EL_TL", "7A_TL", "504_TL", "MARC_7A_LOC", "MARC_7A_TL"]
+    ) as $SBAproductCodes |
 { 
     fundedDate: (.funding_date // null),
-    sbaLoanNumber: .sba_number,
-    sbaApplicationNumber: .sba_loan_app_number,
+    sbaLoanNumber: (.product.product_code as $productCode | 
+        if ($SBAproductCodes | index($productCode) != null)
+            then (.sba_number // null)
+        else (.application_number // null | tostring)
+        end
+    ),
+    sbaApplicationNumber: (.sba_loan_app_number // null),
     referenceNumber: (.application_number // null | tostring),
     purposeType: (if $purposeType[.loan_purpose] then $purposeType[.loan_purpose] else "Other" end) ,
     loanTermMonths: (.loan_approval.approved_term // null),
@@ -76,24 +71,7 @@
     impactWomanOwnedBusiness: .cra_female_owned_business,
     impactVeteranOwnedBusiness: (if .details.boarding_details.veteran_owned_business == "yes" or .details.boarding_details.veteran_owned_business == "Yes" then true else false end),
     impactMinorityOwnedBusiness: .cra_minority_owned_business,
-    loanType: ( .product.product_code as $productCode | .loan_approval.approved_rate_type as $rateType |
-        if ($rateType == "Fixed")
-            then if ($productCode == "7A_TL" and .loan_amount>500000 )
-                    then "SBA 7(a)"
-                elif ($productCode == "7A_TL")
-                    then "SMALL SBA 7(a)"
-                else ($fixedLoanTypes[.product.product_code] // null)
-                end
-        elif ($rateType == "Variable")
-            then if ($productCode == "7A_TL" and .loan_amount>500000 )
-                    then "SBA 7(a)_VARIABLE"
-                elif ($productCode == "7A_TL")
-                    then "SMALL SBA 7(a)_VARIABLE"
-                else ($varialbleLoanTypes[.product.product_code] // null)
-                end
-        else null
-        end
-    ),
+    loanType: $loanType,
     loanStatus: "Funded",
     loanAmount: (.approved_amount // null),
     approvalDate: (.loan_decisioned_at // null),
@@ -187,8 +165,7 @@
         .approved_amount as $loan_amount 
         | .collateral_types_mapping as $CollateralTypesMapping 
         | .environment_values.lien_holder_id as $lienHolderCompanyId 
-        | [ .loan_relations[] 
-        | .collaterals[] 
+        | [ .collaterals[] 
         | { 
             collateralTypeId: (if .collateral_type and $collateralType[.collateral_type_verbose] and $CollateralTypesMapping[$collateralType[.collateral_type_verbose]] then $CollateralTypesMapping[$collateralType[.collateral_type_verbose]] else ( if .category and $collateralType[.category] and $CollateralTypesMapping[$collateralType[.category]] then $CollateralTypesMapping[$collateralType[.category]] else $CollateralTypesMapping["Other"] end) end),
             value:(if .collateral_value then .collateral_value else $loan_amount end),
@@ -204,8 +181,13 @@
             ] 
         } 
     ] as $collaterals | $collaterals | map( . + {primary: (.value == ($collaterals | max_by(.value) | .value))} )),
-    mailingAddress: ( .loan_relations[] | select(.is_primary_borrower == true) | .relation_addresses[] | select(.address_type == "mailing") | 
-        { 
+    mailingAddress: ( 
+        .loan_relations[] 
+        | select(.is_primary_borrower == true) 
+        | (.details.mailing_address_flag // false) as $mailingAddressFlag 
+        | .relation_addresses[] 
+        | select(.address_type == "mailing" or ($mailingAddressFlag and .address_type=="permanent"))
+        | { 
             city: .city,
             street1: .address_line_1,
             street2: .address_line_2,
@@ -216,8 +198,9 @@
     ),
     projectAddress: ( .loan_relations[] 
         | select(.is_primary_borrower == true) 
+        | (.details.project_address_flag // false) as $projectAddressFlag 
         | .relation_addresses[] 
-        | select(.address_type == "project") 
+        | select(.address_type == "project" or ($projectAddressFlag and .address_type=="permanent"))
         | { 
             city: .city,
             street1: .address_line_1,
@@ -249,14 +232,30 @@
             roleType: "ClosingAnalyst"
         } 
     ],
-    entities : ( [ .loan_entities[] | 
+    entities : ( [ .flat_relations[] | select(
+        (
+            .party_type == "entity" 
+            and (.relation_type == "borrower" or .relation_type == "co_borrower" or .relation_type == "owner") 
+            and (.is_collateral_related | not)
+        ) 
+        or (.party_type == "individual" 
+        and .entity_type == "sole_proprietor" 
+        and (.is_collateral_related | not) 
+        and (.is_member_of_guarantor | not)
+        and .relation_type == "borrower")
+        ) | 
         ( if (.entity_type == "sole_proprietor") then { 
             primary: .is_primary_borrower,
             association: "Operating Company",
             guaranteeType: "Unsecured Limited",
             company: 
                 {
-                    name: ( if (.dba_name and .dba_name !="") then .dba_name else (if(.full_name == .business_name) then .business_name else (if .title then .title + " " + .first_name else .first_name end) + (if .middle_name and .middle_name != "" then " " + .middle_name else "" end) + " " + (if .suffix then .last_name + " " + .suffix else .last_name end) end // null) end ),
+                    name: ( 
+                        if (.dba_name and .dba_name !="") 
+                            then .dba_name 
+                        else (.full_name) 
+                        end 
+                    ),
                     taxId: .tin,
                     taxIdType: .tin_type,
                     entityType: "Sole Proprietorship",
@@ -296,7 +295,11 @@
             company: 
                 { 
                     name: ( 
-                        (if (.dba_name and .dba_name != "") then .dba_name else ( if(.full_name == .business_name) then .full_name else (if .title and .title != "" then .title + " " + .first_name else .first_name end) + (if (.middle_name and .middle_name != "") then " " + .middle_name else "" end) + " " + (if (.suffix and .suffix != "") then .last_name + " " + .suffix else .last_name end )end) end )),
+                        if (.dba_name and .dba_name !="") 
+                            then .dba_name 
+                        else (.full_name) 
+                        end 
+                    ),
                     stateOfFormation: .state_of_establishment,
                     currentOwnershipEstablishedDate: .business_established_date 
                 },
@@ -310,7 +313,13 @@
             ] 
         } end ) 
     ] ),
-    contacts: [ .loan_contacts[] as $loan_relations | 
+    contacts: [ .flat_relations[] as $loan_relations | select(
+        $loan_relations.party_type == "individual" 
+        and ($loan_relations.relation_type =="borrower" or $loan_relations.relation_type =="owner") 
+        and ($loan_relations.relation_type != "collateral_owner") 
+        and ($loan_relations.is_collateral_related | not) 
+        and ($loan_relations.is_member_of_guarantor | not)
+        and ($loan_relations.is_system_created | not) ) | 
         { 
             contactID: (if $loan_relations.external_customer_id != "" and $loan_relations.external_customer_id != null then $loan_relations.external_customer_id | tonumber else "" end),
             guaranteeType:(if $loan_relations.ownership_percentage>20 then "Unsecured Full" else "Unsecured Limited" end) ,
@@ -323,7 +332,7 @@
                 },
             memberOf: ( if ($loan_relations.entity_type == "sole_proprietor") then [ 
                 {
-                    entityName: (if ($loan_relations.dba_name and $loan_relations.dba_name != "") then $loan_relations.dba_name else ( (if $loan_relations.title and $loan_relations.title != "" then $loan_relations.title + " " + $loan_relations.first_name else $loan_relations.first_name end) + (if ($loan_relations.middle_name and $loan_relations.middle_name != "") then " " + $loan_relations.middle_name else "" end) + " " + (if ($loan_relations.suffix and $loan_relations.suffix != "") then $loan_relations.last_name + " " + $loan_relations.suffix else $loan_relations.last_name end ) ) end ),
+                    entityName: ( if $loan_relations.dba_name and $loan_relations.dba_name !="" then $loan_relations.dba_name else $loan_relations.first_name + (if $loan_relations.middle_name and $loan_relations.middle_name != "" then " " + $loan_relations.middle_name else "" end) + " " + $loan_relations.last_name end),
                     ownershipPercentage: 100,
                     jobTitle: "Proprietor",
                     signer: ($loan_relations.is_signer),

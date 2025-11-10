@@ -52,10 +52,18 @@
         "land": "Ground Lease (Land Only No Improvements)"
     }) as $collateralType |
     ("SBA 7(a)") as $loanType | 
+    (
+        ["EL_LOC", "EL_TL", "7A_TL", "504_TL", "MARC_7A_LOC", "MARC_7A_TL"]
+    ) as $SBAproductCodes | 
 { 
     fundedDate: (.funding_date // null),
-    sbaLoanNumber: .sba_number,
-    sbaApplicationNumber: .sba_loan_app_number,
+    sbaLoanNumber: (.product.product_code as $productCode | 
+        if ($SBAproductCodes | index($productCode) != null)
+            then (.sba_number // null)
+        else (.application_number // null | tostring)
+        end
+    ),
+    sbaApplicationNumber: (.sba_loan_app_number // null),
     referenceNumber: (.application_number // null | tostring),
     purposeType: (if $purposeType[.loan_purpose] then $purposeType[.loan_purpose] else "Other" end) ,
     loanTermMonths: (.loan_approval.approved_term // null),
@@ -96,7 +104,7 @@
         else null
         end )
     ),
-    achAccountName: (.loan_relations[] | select(.is_primary_borrower==true) | .full_name // null),
+    achAccountName: (.loan_relations[] | select(.is_primary_borrower==true) | if(.full_name == .business_name) then .full_name else (if .title and .title != "" then .title + " " + .first_name else .first_name end) + (if .middle_name and .middle_name != "" then " " + .middle_name else "" end) + " " + (if .suffix and .suffix != "" then .last_name + " " + .suffix else .last_name end) end // null),
     achAccountNumber: .bank_details.account_number, 
     achRoutingNumber: .bank_details.routing_number,
     achAccountType: .bank_details.account_type,
