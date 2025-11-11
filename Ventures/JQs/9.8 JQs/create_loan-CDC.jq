@@ -212,9 +212,9 @@
             company: 
                 { 
                     name: ( 
-                        if (.dba_name and .dba_name !="") 
+                         if (.dba_name and .dba_name !="") 
                             then .dba_name 
-                        else (.full_name) 
+                        else (if .title and .title != "" then .title + " " + .first_name else .first_name end) + (if .middle_name and .middle_name != "" then " " + .middle_name else "" end) + " " + (if .suffix and .suffix != "" then .last_name + " " + .suffix else .last_name end)
                         end 
                     ),
                     taxId: .tin,
@@ -256,10 +256,7 @@
         company: 
             { 
                 name: ( 
-                    if (.dba_name and .dba_name !="") 
-                        then .dba_name 
-                    else (.full_name) 
-                    end 
+                  .business_name
                 ),
                 stateOfFormation: .state_of_establishment,
                 currentOwnershipEstablishedDate: .business_established_date 
@@ -279,21 +276,14 @@
             guaranteeType:(if $loan_relation.ownership_percentage>20 then "Unsecured Full" else "Unsecured Limited" end) ,
             contact: 
                 { 
-                    firstName:$loan_relation.first_name,
-                    lastName:$loan_relation.last_name,
+                    firstName:if $loan_relations.title and $loan_relations.title != "" then $loan_relations.title + " " + $loan_relations.first_name else $loan_relations.first_name end,
+                    lastName:if $loan_relations.suffix and $loan_relations.suffix != "" then $loan_relations.last_name + " " + $loan_relations.suffix else $loan_relations.last_name end,
                     creditScore:( try (.loan_aggregator[] | select(.aggregator_type == "fico" and .is_latest == true) | .details.fico.principals[] | select(.SSN == $loan_relation.tin) | .ficoScore | tonumber) //null),
                     creditScoreDate:(try (.loan_aggregator[] | select(.aggregator_type == "fico" and .is_latest == true) | (if .modified then .modified | split("T")[0] else "" end) ) // null) 
                 },
             memberOf: ( if ($loan_relation.entity_type == "sole_proprietor") then [ 
                 {
-                    entityName: ( 
-                        if $loan_relation.dba_name and $loan_relation.dba_name !="" 
-                            then $loan_relation.dba_name 
-                        else $loan_relation.first_name + (if $loan_relation.middle_name and $loan_relation.middle_name != "" 
-                            then " " + $loan_relation.middle_name 
-                            else "" end
-                        ) + " " + $loan_relation.last_name end
-                    ),
+                    entityName: (if ($loan_relations.dba_name and $loan_relations.dba_name != "") then $loan_relations.dba_name else ( (if $loan_relations.title and $loan_relations.title != "" then $loan_relations.title + " " + $loan_relations.first_name else $loan_relations.first_name end) + (if ($loan_relations.middle_name and $loan_relations.middle_name != "") then " " + $loan_relations.middle_name else "" end) + " " + (if ($loan_relations.suffix and $loan_relations.suffix != "") then $loan_relations.last_name + " " + $loan_relations.suffix else $loan_relations.last_name end ) ) end ),
                     jobTitle: "Proprietor",
                     ownershipPercentage: 100,
                     signer: ($loan_relation.is_signer),
@@ -301,14 +291,7 @@
                 } 
             ] else [
                 { 
-                    entityName: (
-                        if $loan_relation.memberof 
-                            then $loan_relation.memberof 
-                        else (if $loan_relation.entity_type == "sole_proprietor" 
-                            then .borrower_name 
-                            else empty end
-                        ) end
-                    ),
+                    entityName: (if $loan_relations.memberof then $loan_relations.memberof else (if $loan_relations.entity_type == "sole_proprietor" then (if ($loan_relations.dba_name and $loan_relations.dba_name != "") then $loan_relations.dba_name else ( (if $loan_relations.title and $loan_relations.title != "" then $loan_relations.title + " " + $loan_relations.first_name else $loan_relations.first_name end) + (if ($loan_relations.middle_name and $loan_relations.middle_name != "") then " " + $loan_relations.middle_name else "" end) + " " + (if ($loan_relations.suffix and $loan_relations.suffix != "") then $loan_relations.last_name + " " + $loan_relations.suffix else $loan_relations.last_name end ) ) end ) else empty end) end),
                     jobTitle: (
                         if $loan_relation.position == "Managing Member" 
                             then "Member/Manager" 

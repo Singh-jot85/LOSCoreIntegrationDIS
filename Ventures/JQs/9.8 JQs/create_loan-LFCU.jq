@@ -324,8 +324,8 @@
             guaranteeType:(if $loan_relations.ownership_percentage>20 then "Unsecured Full" else "Unsecured Limited" end) ,
             contact:
                 { 
-                    firstName:$loan_relations.first_name,
-                    lastName:$loan_relations.last_name,
+                    firstName:if $loan_relations.title and $loan_relations.title != "" then $loan_relations.title + " " + $loan_relations.first_name else $loan_relations.first_name end,
+                    lastName:if $loan_relations.suffix and $loan_relations.suffix != "" then $loan_relations.last_name + " " + $loan_relations.suffix else $loan_relations.last_name end,
                     creditScore:( try (.loan_aggregator[] | select(.aggregator_type == "fico" and .is_latest == true) | .details.fico.principals[] | select(.SSN == $loan_relations.tin) | .ficoScore | tonumber) //null),
                     creditScoreDate:(try (.loan_aggregator[] | select(.aggregator_type == "fico" and .is_latest == true) | (if .modified then .modified | split("T")[0] else "" end) ) // null) 
                 },
@@ -339,7 +339,7 @@
                 } 
             ] else [ 
                 { 
-                    entityName: (if $loan_relations.memberof then $loan_relations.memberof else (if $loan_relations.entity_type == "sole_proprietor" then .borrower_name else empty end) end),
+                    entityName: (if $loan_relations.memberof then $loan_relations.memberof else (if $loan_relations.entity_type == "sole_proprietor" then (if ($loan_relations.dba_name and $loan_relations.dba_name != "") then $loan_relations.dba_name else ( (if $loan_relations.title and $loan_relations.title != "" then $loan_relations.title + " " + $loan_relations.first_name else $loan_relations.first_name end) + (if ($loan_relations.middle_name and $loan_relations.middle_name != "") then " " + $loan_relations.middle_name else "" end) + " " + (if ($loan_relations.suffix and $loan_relations.suffix != "") then $loan_relations.last_name + " " + $loan_relations.suffix else $loan_relations.last_name end ) ) end ) else empty end) end),
                     ownershipPercentage: $loan_relations.ownership_percentage,
                     jobTitle: (
                         if $loan_relations.position == "Managing Member" 
