@@ -287,8 +287,8 @@
             guaranteeType:(if $loan_relations.ownership_percentage>20 then "Unsecured Full" else "Unsecured Limited" end) ,
             contact: 
                 { 
-                    firstName:if $loan_relations.title and $loan_relations.title != "" then $loan_relations.title + " " + $loan_relations.first_name else $loan_relations.first_name end,
-                    lastName:if $loan_relations.suffix and $loan_relations.suffix != "" then $loan_relations.last_name + " " + $loan_relations.suffix else $loan_relations.last_name end,
+                    firstName:(if $loan_relations.title and $loan_relations.title != "" then $loan_relations.title + " " + $loan_relations.first_name else $loan_relations.first_name end),
+                    lastName:(if $loan_relations.suffix and $loan_relations.suffix != "" then $loan_relations.last_name + " " + $loan_relations.suffix else $loan_relations.last_name end),
                     creditScore:( try (.loan_aggregator[] | select(.aggregator_type == "fico" and .is_latest == true) | .details.fico.principals[] | select(.SSN == $loan_relations.tin) | .ficoScore | tonumber) //null),
                     creditScoreDate:(try (.loan_aggregator[] | select(.aggregator_type == "fico" and .is_latest == true) | (if .modified then .modified | split("T")[0] else "" end) ) // null) 
                 },
