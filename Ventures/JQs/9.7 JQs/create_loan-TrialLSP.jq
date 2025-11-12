@@ -52,17 +52,10 @@
         "land": "Ground Lease (Land Only No Improvements)"
     }) as $collateralType |
     ("SBA 7(a)") as $loanType | 
-    (
-        ["EL_LOC", "EL_TL", "7A_TL", "504_TL", "MARC_7A_LOC", "MARC_7A_TL"]
-    ) as $SBAproductCodes |
+
 { 
     fundedDate: (.funding_date // null),
-    sbaLoanNumber: (.product.product_code as $productCode | 
-        if ($SBAproductCodes | index($productCode) != null)
-            then (.sba_number // null)
-        else (.application_number // null | tostring)
-        end
-    ),
+  
     sbaApplicationNumber: (.sba_loan_app_number // null),
     referenceNumber: (.application_number // null | tostring),
     purposeType: (if $purposeType[.loan_purpose] then $purposeType[.loan_purpose] else "Other" end) ,
@@ -167,21 +160,33 @@
         | .environment_values.lien_holder_id as $lienHolderCompanyId 
         | [ .collaterals[] 
         | { 
-            collateralTypeId: (if .collateral_type and $collateralType[.collateral_type_verbose] and $CollateralTypesMapping[$collateralType[.collateral_type_verbose]] then $CollateralTypesMapping[$collateralType[.collateral_type_verbose]] else ( if .category and $collateralType[.category] and $CollateralTypesMapping[$collateralType[.category]] then $CollateralTypesMapping[$collateralType[.category]] else $CollateralTypesMapping["Other"] end) end),
-            value:(if .collateral_value then .collateral_value else $loan_amount end),
+            collateralTypeId: (if .collateral_type and $collateralType[.collateral_type_verbose
+      ] and $CollateralTypesMapping[$collateralType[.collateral_type_verbose
+        ]
+      ] then $CollateralTypesMapping[$collateralType[.collateral_type_verbose
+        ]
+      ] else ( if .category and $collateralType[.category
+      ] and $CollateralTypesMapping[$collateralType[.category
+        ]
+      ] then $CollateralTypesMapping[$collateralType[.category
+        ]
+      ] else $CollateralTypesMapping[
+        "Other"
+      ] end) end), value:(if .collateral_value then .collateral_value else $loan_amount end),
             lienPosition:(if .lien_position == "first" then 1 elif .lien_position == "second" then 2 elif .lien_position == "third" then 3 elif .lien_position == "fourth" then 4 elif .lien_position == "fifth" then 5 elif .lien_position == "subordinate" then 2 else null end),
             uccFiled:.is_ucc_filing_applicable,
-            liens:[ .lien_holders[] | 
+            liens: [ .lien_holders[] | 
                 { 
                     lienHolderCompanyId: $lienHolderCompanyId ,
                     lienPosition:(if .lien_position == "first" then 1 elif .lien_position == "second" then 2 elif .lien_position == "third" then 3 elif .lien_position == "fourth" then 4 elif .lien_position == "fifth" then 5 else null end),
                     amount:.original_note_amount ,
                     Comment:(if .business_name and .business_name != "" then .business_name else .first_name + " " + .last_name end)
-                } 
-            ] 
-        } 
-    ] as $collaterals | $collaterals | map( . + {primary: (.value == ($collaterals | max_by(.value) | .value))} )),
-    mailingAddress: ( 
+        }
+      ]
+    }
+  ] as $collaterals | $collaterals | map( . + {primary: (.value == ($collaterals | max_by(.value) | .value))
+  } )),
+       mailingAddress: ( 
         .loan_relations[] 
         | select(.is_primary_borrower == true) 
         | (.details.mailing_address_flag // false) as $mailingAddressFlag 
@@ -250,12 +255,7 @@
             guaranteeType: "Unsecured Limited",
             company: 
                 {
-                    name: ( 
-                        if (.dba_name and .dba_name !="") 
-                            then .dba_name 
-                        else (.full_name) 
-                        end 
-                    ),
+                    name: ( if (.dba_name and .dba_name !="") then .dba_name else (if(.full_name == .business_name) then .business_name else (if .title then .title + " " + .first_name else .first_name end) + (if .middle_name and .middle_name != "" then " " + .middle_name else "" end) + " " + (if .suffix then .last_name + " " + .suffix else .last_name end) end // null) end ),
                     taxId: .tin,
                     taxIdType: .tin_type,
                     entityType: "Sole Proprietorship",
@@ -294,12 +294,7 @@
             ],
             company: 
                 { 
-                    name: ( 
-                        if (.dba_name and .dba_name !="") 
-                            then .dba_name 
-                        else (.full_name) 
-                        end 
-                    ),
+                    name: ( .business_name),
                     stateOfFormation: .state_of_establishment,
                     currentOwnershipEstablishedDate: .business_established_date 
                 },
@@ -325,14 +320,14 @@
             guaranteeType:(if $loan_relations.ownership_percentage>20 then "Unsecured Full" else "Unsecured Limited" end) ,
             contact:
                 { 
-                    firstName:$loan_relations.first_name,
-                    lastName:$loan_relations.last_name,
+                    firstName:(if $loan_relations.title and $loan_relations.title != "" then $loan_relations.title + " " + $loan_relations.first_name else $loan_relations.first_name end),
+                    lastName:(if $loan_relations.suffix and $loan_relations.suffix != "" then $loan_relations.last_name + " " + $loan_relations.suffix else $loan_relations.last_name end),
                     creditScore:( try (.loan_aggregator[] | select(.aggregator_type == "fico" and .is_latest == true) | .details.fico.principals[] | select(.SSN == $loan_relations.tin) | .ficoScore | tonumber) //null),
                     creditScoreDate:(try (.loan_aggregator[] | select(.aggregator_type == "fico" and .is_latest == true) | (if .modified then .modified | split("T")[0] else "" end) ) // null) 
                 },
             memberOf: ( if ($loan_relations.entity_type == "sole_proprietor") then [ 
                 {
-                    entityName: ( if $loan_relations.dba_name and $loan_relations.dba_name !="" then $loan_relations.dba_name else $loan_relations.first_name + (if $loan_relations.middle_name and $loan_relations.middle_name != "" then " " + $loan_relations.middle_name else "" end) + " " + $loan_relations.last_name end),
+                    entityName: (if ($loan_relations.dba_name and $loan_relations.dba_name != "") then $loan_relations.dba_name else ( (if $loan_relations.title and $loan_relations.title != "" then $loan_relations.title + " " + $loan_relations.first_name else $loan_relations.first_name end) + (if ($loan_relations.middle_name and $loan_relations.middle_name != "") then " " + $loan_relations.middle_name else "" end) + " " + (if ($loan_relations.suffix and $loan_relations.suffix != "") then $loan_relations.last_name + " " + $loan_relations.suffix else $loan_relations.last_name end ) ) end ),
                     ownershipPercentage: 100,
                     jobTitle: "Proprietor",
                     signer: ($loan_relations.is_signer),
@@ -340,7 +335,7 @@
                 } 
             ] else [ 
                 { 
-                    entityName: (if $loan_relations.memberof then $loan_relations.memberof else (if $loan_relations.entity_type == "sole_proprietor" then .borrower_name else empty end) end),
+                    entityName: (if $loan_relations.memberof then $loan_relations.memberof else (if $loan_relations.entity_type == "sole_proprietor" then (if ($loan_relations.dba_name and $loan_relations.dba_name != "") then $loan_relations.dba_name else ( (if $loan_relations.title and $loan_relations.title != "" then $loan_relations.title + " " + $loan_relations.first_name else $loan_relations.first_name end) + (if ($loan_relations.middle_name and $loan_relations.middle_name != "") then " " + $loan_relations.middle_name else "" end) + " " + (if ($loan_relations.suffix and $loan_relations.suffix != "") then $loan_relations.last_name + " " + $loan_relations.suffix else $loan_relations.last_name end ) ) end ) else empty end) end),
                     ownershipPercentage: $loan_relations.ownership_percentage,
                     jobTitle: (
                         if $loan_relations.position == "Managing Member" 

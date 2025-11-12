@@ -303,8 +303,7 @@
             ],
             company: 
                 { 
-                    name: ( 
-                        (if (.dba_name and .dba_name != "") then .dba_name else ( if(.full_name == .business_name) then .full_name else (if .title and .title != "" then .title + " " + .first_name else .first_name end) + (if (.middle_name and .middle_name != "") then " " + .middle_name else "" end) + " " + (if (.suffix and .suffix != "") then .last_name + " " + .suffix else .last_name end )end) end )),
+                    name: (.business_name),
                     stateOfFormation: .state_of_establishment,
                     currentOwnershipEstablishedDate: .business_established_date 
                 },
