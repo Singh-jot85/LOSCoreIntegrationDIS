@@ -1,6 +1,6 @@
 { 
-    firstName: ((.loan_relations[0].first_name) // null),
-    lastName: ((.loan_relations[0].last_name) // null),
+    firstName: ((if .loan_relations[0].title then .loan_relations[0].title + " " + .loan_relations[0].first_name else .loan_relations[0].first_name end) // null),
+    lastName: ((if .loan_relations[0].suffix then .loan_relations[0].last_name + " " + .loan_relations[0].suffix else .loan_relations[0].last_name end) // null),
     middleName: ((.loan_relations[0].middle_name) // null),
     businessPhone: ((.loan_relations[0].work_phone|tostring) // null),
     homePhone: ((.loan_relations[0].home_phone|tostring) // null),

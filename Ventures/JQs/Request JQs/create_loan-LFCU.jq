@@ -306,8 +306,7 @@
             ],
             company: 
                 { 
-                    name: ( 
-                        (if (.dba_name and .dba_name != "") then .dba_name else ( if(.full_name == .business_name) then .full_name else (if .title and .title != "" then .title + " " + .first_name else .first_name end) + (if (.middle_name and .middle_name != "") then " " + .middle_name else "" end) + " " + (if (.suffix and .suffix != "") then .last_name + " " + .suffix else .last_name end )end) end )),
+                    name: ( .business_name),
                     stateOfFormation: .state_of_establishment,
                     currentOwnershipEstablishedDate: .business_established_date 
                 },
@@ -333,8 +332,8 @@
             guaranteeType:(if $loan_relations.ownership_percentage>20 then "Unsecured Full" else "Unsecured Limited" end) ,
             contact:
                 { 
-                    firstName:$loan_relations.first_name,
-                    lastName:$loan_relations.last_name,
+                    firstName:(if $loan_relations.title and $loan_relations.title != "" then $loan_relations.title + " " + $loan_relations.first_name else $loan_relations.first_name end),
+                    lastName:(if $loan_relations.suffix and $loan_relations.suffix != "" then $loan_relations.last_name + " " + $loan_relations.suffix else $loan_relations.last_name end),
                     creditScore:( try (.loan_aggregator[] | select(.aggregator_type == "fico" and .is_latest == true) | .details.fico.principals[] | select(.SSN == $loan_relations.tin) | .ficoScore | tonumber) //null),
                     creditScoreDate:(try (.loan_aggregator[] | select(.aggregator_type == "fico" and .is_latest == true) | (if .modified then .modified | split("T")[0] else "" end) ) // null) 
                 },
