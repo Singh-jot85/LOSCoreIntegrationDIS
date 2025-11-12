@@ -1,0 +1,174 @@
+<?xml version= "1.0" encoding= "UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV= "http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd= "http://www.w3.org/2001/XMLSchema" xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance">
+    <SOAP-ENV:Header>
+        <wsse:Security xmlns:wsse= "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu= "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+            <wsse:UsernameToken xmlns:wsse= "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+                <wsse:Username>{{XUserName}}</wsse:Username>
+                <wsse:Password Type= "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">{{XPassword}}</wsse:Password>
+                <wsu:Created xmlns:wsu= "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">{{current_timestamp}}</wsu:Created>
+            </wsse:UsernameToken>
+        </wsse:Security>
+    </SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <CustAdd xmlns= "http://jackhenry.com/jxchange/TPG/2008">
+            <MsgRqHdr>
+                <jXchangeHdr>
+                    <JxVer />
+                    <AuditUsrId>{{XAuditUser}}</AuditUsrId>
+                    <AuditWsId>{{XAuditWorkStation}}</AuditWsId>
+                    <Ver_1 />
+                    <jXLogTrackingId>{{jXLogTrackingId}}</jXLogTrackingId>
+                    <Ver_2 />
+                    <InstRtId>{{XInstitutionRoutingID}}</InstRtId>
+                    <InstEnv>{{XEnvironment}}</InstEnv>
+                    <Ver_3 />
+                    <BusCorrelId>{{BusCorrelId}}</BusCorrelId>
+                    <Ver_4 />
+                    <WorkflowCorrelId />
+                    <Ver_5 />
+                    <ValidConsmName>{{XValidConsumerName}}</ValidConsmName>
+                    <ValidConsmProd>{{XValidConsumerProduct}}</ValidConsmProd>
+                    <Ver_6 />
+                </jXchangeHdr>
+            </MsgRqHdr>
+            <ErrOvrRdInfoArray>
+                <ErrOvrRd>
+                    <ErrCode>410023</ErrCode>
+                    <Ver_1 />
+                </ErrOvrRd>
+                <ErrOvrRd>
+                    <ErrCode>14</ErrCode>
+                    <Ver_1 />
+                </ErrOvrRd>
+                <ErrOvrRd>
+                    <ErrCode>400004</ErrCode>
+                    <Ver_1 />
+                </ErrOvrRd>
+                <ErrOvrRd>
+                    <ErrCode>13</ErrCode>
+                    <Ver_1 />
+                </ErrOvrRd>
+                <ErrOvrRd>
+                    <ErrCode>400110</ErrCode>
+                    <Ver_1 />
+                </ErrOvrRd>
+                <ErrOvrRd>
+                    <ErrCode>410050</ErrCode>
+                    <Ver_1 />
+                </ErrOvrRd>
+                <ErrOvrRd>
+                    <ErrCode>410059</ErrCode>
+                    <Ver_1 />
+                </ErrOvrRd>
+                <ErrOvrRd>
+                    <ErrCode>410079</ErrCode>
+                    <Ver_1 />
+                </ErrOvrRd>
+                <ErrOvrRd>
+                    <ErrCode>410017</ErrCode>
+                    <Ver_1 />
+                </ErrOvrRd>
+                <ErrOvrRd>
+                    <ErrCode>410010</ErrCode>
+                    <Ver_1 />
+                </ErrOvrRd>
+            </ErrOvrRdInfoArray>
+            <CustDetail>
+                <PersonName>
+                    <ComName>{{FullName}}</ComName>
+                    <FirstName>{{FirstName}}</FirstName>
+                    <MiddleName>{{MiddleName}}</MiddleName>
+                    <LastName>{{LastName}}</LastName>
+                </PersonName>
+                <Addr>
+                    <StreetAddr1>{{StreetAddr1}}</StreetAddr1>
+                    <StreetAddr2>{{StreetAddr2}}</StreetAddr2>
+                    <City>{{City}}</City>
+                    <StateCode>{{StateCode}}</StateCode>
+                    <PostalCode>{{PostalCode}}</PostalCode>
+                    <CntryType>{{CntryType}}</CntryType>
+                </Addr>
+                <Ver_1 />
+                <Ver_2 />
+                <Ver_3 />
+                <Ver_4 />
+                <Ver_5 />
+                <Ver_6 />
+                <NAICSCode>{{NAICSCode}}</NAICSCode>
+                <CustType>{{CustType}}</CustType>
+                <BirthDt>{{BirthDt}}</BirthDt>
+                <EmplName>{{EmplName}}</EmplName>
+                <OccType>{{OccType}}</OccType>
+                <EmailArray>
+                    <EmailInfo>
+                        <EmailAddr>{{EmailAddr}}</EmailAddr>
+                        <EmailType>Primary E-Mail</EmailType>
+                    </EmailInfo>
+                </EmailArray>
+                <PhoneArray>
+                    <PhoneInfo>
+                        <PhoneType>{{PhoneType}}</PhoneType>
+                        <Ver_1 />
+                        <Ver_2 />
+                        <Ver_3 />
+                        <Ver_4 />
+                        <PhoneNumDsp>{{PhoneNumDsp}}</PhoneNumDsp>
+                    </PhoneInfo>
+                </PhoneArray>
+                <Ver_1 />
+                <Ver_2 />
+                <Ver_3 />
+                <Ver_4 />
+                <Ver_5 />
+                <Ver_6 />
+            </CustDetail>
+            <TaxDetail>
+                <TINInfo>
+                    <TINCode>{{TINCode}}</TINCode>
+                    <TaxId>{{TaxId}}</TaxId>
+                </TINInfo>
+            </TaxDetail>
+            <BusDetail>
+                <OffCode />
+                <BrCode />
+                <GroupCode xsi:nil= "true" />
+                <AbbrCustDesc>Individual</AbbrCustDesc>
+                <InsiderCode xsi:nil= "true" />
+                <CustImporCode>N</CustImporCode>
+                <LeaseSecCode xsi:nil= "true" />
+                <NetWorth xsi:nil= "true" />
+                <CustCycleCode xsi:nil= "true" />
+                <MailDirCode xsi:nil= "true" />
+                <ProfAnlys xsi:nil= "true" />
+                <FinStmtWavCode xsi:nil= "true" />
+                <FinStmtWavDt xsi:nil= "true" />
+                <LastFinStmtDt xsi:nil= "true" />
+                <FinStmtExpDt xsi:nil= "true" />
+                <LastFinStmtLtrDt xsi:nil= "true" />
+                <Custom />
+                <Ver_1 />
+                <Ver_2 />
+                <Ver_3 />
+                <Ver_4 />
+                <Ver_5 />
+                <Ver_6 />
+                <LangType xsi:nil= "true" />
+            </BusDetail>
+            <RegDetail>
+                <DoNotCallExpDt xsi:nil= "true" />
+                <DoNotCallCode>N</DoNotCallCode>
+                <RegPOptOutCode>N</RegPOptOutCode>
+                <RegPSentDt xsi:nil= "true" />
+                <AflOptOutCode>N</AflOptOutCode>
+                <AflOptOutExcptCode xsi:nil= "true" />
+                <AflOptOutExcptDt xsi:nil= "true" />
+                <AflOptOutExpDt xsi:nil= "true" />
+                <CustDataRtnPeriod xsi:nil= "true" />
+                <Ver_1 />
+                <ReqLegalEntityType>{{ReqLegalEntityType}}</ReqLegalEntityType>
+            </RegDetail>
+            <Custom xsi:nil= "true" />
+            <Ver_1 />
+        </CustAdd>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

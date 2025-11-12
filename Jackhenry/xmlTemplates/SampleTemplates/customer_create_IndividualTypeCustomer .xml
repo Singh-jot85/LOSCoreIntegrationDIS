@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope
+    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <SOAP-ENV:Header>
+        <wsse:Security
+            xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+            xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+            <wsse:UsernameToken
+                xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+                <wsse:Username>{{X-UserName}}</wsse:Username>
+                <wsse:Password
+                    Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">
+                    {{X-Password}}</wsse:Password>
+                <wsu:Created
+                    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+                    {{current_timestamp}}</wsu:Created>
+            </wsse:UsernameToken>
+        </wsse:Security>
+    </SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <CustAdd
+            xmlns="http://jackhenry.com/jxchange/TPG/2008">
+            <MsgRqHdr>
+                <jXchangeHdr>
+                    <JxVer />
+                    <AuditUsrId>{{X-AuditUser}}</AuditUsrId>
+                    <AuditWsId>{{X-AuditWorkStation}}</AuditWsId>
+                    <AuthenUsrId />
+                    <ConsumerName />
+                    <ConsumerProd />
+                    <Ver_1 />
+                    <jXLogTrackingId>{{$guid}}</jXLogTrackingId>
+                    <Ver_2 />
+                    <InstRtId>{{X-InstitutionRoutingID}}</InstRtId>
+                    <InstEnv>{{X-Environment}}</InstEnv>
+                    <Ver_3 />
+                    <BusCorrelId>{{$guid}}</BusCorrelId>
+                    <Ver_4 />
+                    <WorkflowCorrelId />
+                    <Ver_5 />
+                    <ValidConsmName>{{X-ValidConsumerName}}</ValidConsmName>
+                    <ValidConsmProd>{{X-ValidConsumerProduct}}</ValidConsmProd>
+                    <Ver_6 />
+                </jXchangeHdr>
+            </MsgRqHdr>
+            <ErrOvrRdInfoArray>
+                <ErrOvrRd>
+                    <ErrCode>410023</ErrCode>
+                    <Ver_1 />
+                </ErrOvrRd>
+                <ErrOvrRd>
+                    <ErrCode>410050</ErrCode>
+                    <Ver_1 />
+                </ErrOvrRd>
+                <ErrOvrRd>
+                    <ErrCode>410059</ErrCode>
+                    <Ver_1 />
+                </ErrOvrRd>
+                <ErrOvrRd>
+                    <ErrCode>410079</ErrCode>
+                    <Ver_1 />
+                </ErrOvrRd>
+                <ErrOvrRd>
+                    <ErrCode>410017</ErrCode>
+                    <Ver_1 />
+                </ErrOvrRd>
+            </ErrOvrRdInfoArray>
+            <CustDetail>
+                <PersonName>
+                    <ComName>John A Doe</ComName>
+                    <FirstName>John</FirstName>
+                    <MiddleName>A</MiddleName>
+                    <LastName>Doe</LastName>
+                    <x_PersonName>
+                        <NameSuffix>Jr</NameSuffix>
+                        <LegalName>John A Doe Jr</LegalName>
+                    </x_PersonName>
+                </PersonName>
+                <Addr>
+                    <StreetAddr1>123 Main St</StreetAddr1>
+                    <StreetAddr2>Suite 400</StreetAddr2>
+                    <City>Springfield</City>
+                    <StateCode>IL</StateCode>
+                    <PostalCode>62701</PostalCode>
+                    <DlvryPt>123456</DlvryPt>
+                </Addr>
+                <CustType>Y</CustType>
+                <BirthDt>1985-06-15</BirthDt>
+                <EmplName>XYZ Industries</EmplName>
+                <EmailArray>
+                    <EmailInfo>
+                        <EmailAddr>pkumar+4310@thesummitgrp.com</EmailAddr>
+                        <EmailType>Primary E-Mail</EmailType>
+                    </EmailInfo>
+                </EmailArray>
+                <PhoneArray>
+                    <PhoneInfo>
+                        <PhoneType>Home Cell Phone</PhoneType>
+                        <Ver_1 />
+                        <Ver_2 />
+                        <Ver_3 />
+                        <Ver_4 />
+                        <PhoneNum>2342342342</PhoneNum>
+                    </PhoneInfo>
+                </PhoneArray>
+                <CrScoreArray>
+                    <CrScoreInfo>
+                        <CrScoreId>212</CrScoreId>
+                    </CrScoreInfo>
+                </CrScoreArray>
+            </CustDetail>
+            <TaxDetail>
+                <TINInfo>
+                    <TINCode>I</TINCode>
+                    <TaxId>987704131</TaxId>
+                    <CertCode>C</CertCode>
+                    <CertCodeDt>2025-08-06</CertCodeDt>
+                </TINInfo>
+                <Alien>
+                    <CitzCntryType>US</CitzCntryType>
+                </Alien>
+                <FedWithCode>0</FedWithCode>
+                <StateWithCode>0</StateWithCode>
+            </TaxDetail>
+            <BusDetail>
+                <BrCode>51</BrCode>
+                <OffCode>BNO</OffCode>
+                <CustCode>I</CustCode>
+                <InsiderCode>E</InsiderCode>
+                <NetWorth>500000</NetWorth>
+                <NetWorthAmt>500000</NetWorthAmt>
+            </BusDetail>
+            <RegDetail>
+                <ReqLegalEntityType>false</ReqLegalEntityType>
+                <BenflOwnExclCode>NP</BenflOwnExclCode>
+                <AnnRevenueAmt>1200000</AnnRevenueAmt>
+                <CRARec>
+                    <CRAStateCode>2</CRAStateCode>
+                    <CRACountyCode>170</CRACountyCode>
+                    <CRACenTract>1.01</CRACenTract>
+                    <CRASMSACode>11260</CRASMSACode>
+                    <CRAIncmLvl>1</CRAIncmLvl>
+                </CRARec>
+            </RegDetail>
+        </CustAdd>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
