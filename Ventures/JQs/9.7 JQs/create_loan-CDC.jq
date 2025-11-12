@@ -273,8 +273,7 @@
         ],
         company: 
             { 
-                name: ( .business_name,
-                ),
+                name: ( .business_name),
                 stateOfFormation: .state_of_establishment,
                 currentOwnershipEstablishedDate: .business_established_date 
             },
