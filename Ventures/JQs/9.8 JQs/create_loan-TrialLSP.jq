@@ -52,10 +52,18 @@
         "land": "Ground Lease (Land Only No Improvements)"
     }) as $collateralType |
     ("SBA 7(a)") as $loanType | 
+    (
+        ["EL_LOC", "EL_TL", "7A_TL", "504_TL", "MARC_7A_LOC", "MARC_7A_TL"]
+    ) as $SBAproductCodes |
 
 { 
     fundedDate: (.funding_date // null),
-  
+    sbaLoanNumber: (.product.product_code as $productCode | 
+        if ($SBAproductCodes | index($productCode) != null)
+            then (.sba_number // null)
+        else (.application_number // null | tostring)
+        end
+    ),
     sbaApplicationNumber: (.sba_loan_app_number // null),
     referenceNumber: (.application_number // null | tostring),
     purposeType: (if $purposeType[.loan_purpose] then $purposeType[.loan_purpose] else "Other" end) ,
