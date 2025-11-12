@@ -158,11 +158,13 @@
             ] 
         } ] as $collaterals | $collaterals | map( . + {primary: (.value == ($collaterals | max_by(.value) | .value))} )
     ),
-    mailingAddress: ( .loan_relations[] 
-        | select(.is_primary_borrower == true) 
-        | (.details.mailing_address_flag // false) as $mailingAddressFlag 
-        | .relation_addresses[] 
-        | select(.address_type == "mailing" or ($mailingAddressFlag and .address_type=="permanent"))
+    mailingAddress: ( [
+            .loan_relations[] 
+            | select(.is_primary_borrower == true) 
+            | (.details.mailing_address_flag // false) as $mailingAddressFlag 
+            | .relation_addresses[] 
+            | select(.address_type == "mailing" or ($mailingAddressFlag and .address_type=="permanent"))
+        ][0]
         | { 
             city: .city,
             street1: .address_line_1,
@@ -172,11 +174,13 @@
             stateCode: .state 
         } 
     ),
-    projectAddress: ( .loan_relations[] 
-        | select(.is_primary_borrower == true) 
-        | (.details.project_address_flag // false) as $projectAddressFlag 
-        | .relation_addresses[] 
-        | select(.address_type == "project" or ($projectAddressFlag and .address_type=="permanent"))
+    projectAddress: ( [
+            .loan_relations[] 
+            | select(.is_primary_borrower == true) 
+            | (.details.project_address_flag // false) as $projectAddressFlag 
+            | .relation_addresses[] 
+            | select(.address_type == "project" or ($projectAddressFlag and .address_type=="permanent"))
+        ][0]
         | { 
             city: .city,
             street1: .address_line_1,

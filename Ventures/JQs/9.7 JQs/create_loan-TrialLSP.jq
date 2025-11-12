@@ -52,10 +52,18 @@
         "land": "Ground Lease (Land Only No Improvements)"
     }) as $collateralType |
     ("SBA 7(a)") as $loanType | 
+    (
+        ["EL_LOC", "EL_TL", "7A_TL", "504_TL", "MARC_7A_LOC", "MARC_7A_TL"]
+    ) as $SBAproductCodes |
 
 { 
     fundedDate: (.funding_date // null),
-  
+    sbaLoanNumber: (.product.product_code as $productCode | 
+        if ($SBAproductCodes | index($productCode) != null)
+            then (.sba_number // null)
+        else (.application_number // null | tostring)
+        end
+    ),
     sbaApplicationNumber: (.sba_loan_app_number // null),
     referenceNumber: (.application_number // null | tostring),
     purposeType: (if $purposeType[.loan_purpose] then $purposeType[.loan_purpose] else "Other" end) ,
@@ -158,40 +166,51 @@
         .approved_amount as $loan_amount 
         | .collateral_types_mapping as $CollateralTypesMapping 
         | .environment_values.lien_holder_id as $lienHolderCompanyId 
-        | [ .collaterals[] 
-        | { 
-            collateralTypeId: (if .collateral_type and $collateralType[.collateral_type_verbose
-      ] and $CollateralTypesMapping[$collateralType[.collateral_type_verbose
-        ]
-      ] then $CollateralTypesMapping[$collateralType[.collateral_type_verbose
-        ]
-      ] else ( if .category and $collateralType[.category
-      ] and $CollateralTypesMapping[$collateralType[.category
-        ]
-      ] then $CollateralTypesMapping[$collateralType[.category
-        ]
-      ] else $CollateralTypesMapping[
-        "Other"
-      ] end) end), value:(if .collateral_value then .collateral_value else $loan_amount end),
-            lienPosition:(if .lien_position == "first" then 1 elif .lien_position == "second" then 2 elif .lien_position == "third" then 3 elif .lien_position == "fourth" then 4 elif .lien_position == "fifth" then 5 elif .lien_position == "subordinate" then 2 else null end),
-            uccFiled:.is_ucc_filing_applicable,
-            liens: [ .lien_holders[] | 
-                { 
-                    lienHolderCompanyId: $lienHolderCompanyId ,
-                    lienPosition:(if .lien_position == "first" then 1 elif .lien_position == "second" then 2 elif .lien_position == "third" then 3 elif .lien_position == "fourth" then 4 elif .lien_position == "fifth" then 5 else null end),
-                    amount:.original_note_amount ,
-                    Comment:(if .business_name and .business_name != "" then .business_name else .first_name + " " + .last_name end)
-        }
-      ]
-    }
-  ] as $collaterals | $collaterals | map( . + {primary: (.value == ($collaterals | max_by(.value) | .value))
-  } )),
-       mailingAddress: ( 
-        .loan_relations[] 
-        | select(.is_primary_borrower == true) 
-        | (.details.mailing_address_flag // false) as $mailingAddressFlag 
-        | .relation_addresses[] 
-        | select(.address_type == "mailing" or ($mailingAddressFlag and .address_type=="permanent"))
+        | [ .collaterals[] | { 
+                collateralTypeId: (
+                    if (
+                        .collateral_type 
+                        and $collateralType[.collateral_type_verbose] 
+                        and $CollateralTypesMapping[$collateralType[.collateral_type_verbose]] 
+                    )
+                        then $CollateralTypesMapping[$collateralType[.collateral_type_verbose]] 
+                    else ( 
+                        if (
+                            .category 
+                            and $collateralType[.category] 
+                            and $CollateralTypesMapping[$collateralType[.category]]
+                        ) 
+                            then $CollateralTypesMapping[$collateralType[.category]] 
+                        else $CollateralTypesMapping["Other"] 
+                        end
+                    ) 
+                    end
+                ), 
+                value:(if .collateral_value then .collateral_value else $loan_amount end),
+                lienPosition:(if .lien_position == "first" then 1 elif .lien_position == "second" then 2 elif .lien_position == "third" then 3 elif .lien_position == "fourth" then 4 elif .lien_position == "fifth" then 5 elif .lien_position == "subordinate" then 2 else null end),
+                uccFiled:.is_ucc_filing_applicable,
+                liens: [ .lien_holders[] | 
+                    { 
+                        lienHolderCompanyId: $lienHolderCompanyId ,
+                        lienPosition:(if .lien_position == "first" then 1 elif .lien_position == "second" then 2 elif .lien_position == "third" then 3 elif .lien_position == "fourth" then 4 elif .lien_position == "fifth" then 5 else null end),
+                        amount:.original_note_amount ,
+                        Comment:(if .business_name and .business_name != "" then .business_name else .first_name + " " + .last_name end)
+                    }
+                ]
+            } 
+        ] as $collaterals | $collaterals | map( . + 
+            {
+                primary: (.value == ($collaterals | max_by(.value) | .value))
+            } 
+        )
+    ),
+    mailingAddress: ( [
+            .loan_relations[] 
+            | select(.is_primary_borrower == true) 
+            | (.details.mailing_address_flag // false) as $mailingAddressFlag 
+            | .relation_addresses[] 
+            | select(.address_type == "mailing" or ($mailingAddressFlag and .address_type=="permanent"))
+        ][0]
         | { 
             city: .city,
             street1: .address_line_1,
@@ -201,11 +220,13 @@
             stateCode: .state 
         } 
     ),
-    projectAddress: ( .loan_relations[] 
-        | select(.is_primary_borrower == true) 
-        | (.details.project_address_flag // false) as $projectAddressFlag 
-        | .relation_addresses[] 
-        | select(.address_type == "project" or ($projectAddressFlag and .address_type=="permanent"))
+    projectAddress: ( [
+            .loan_relations[] 
+            | select(.is_primary_borrower == true) 
+            | (.details.project_address_flag // false) as $projectAddressFlag 
+            | .relation_addresses[] 
+            | select(.address_type == "project" or ($projectAddressFlag and .address_type=="permanent"))
+        ][0]
         | { 
             city: .city,
             street1: .address_line_1,

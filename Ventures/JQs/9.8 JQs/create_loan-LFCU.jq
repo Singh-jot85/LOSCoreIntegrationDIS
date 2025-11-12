@@ -195,8 +195,7 @@
         .approved_amount as $loan_amount 
         | .collateral_types_mapping as $CollateralTypesMapping 
         | .environment_values.lien_holder_id as $lienHolderCompanyId 
-        | [ .loan_relations[] 
-        | .collaterals[] 
+        | [ .collaterals[] 
         | { 
             collateralTypeId: (if .collateral_type and $collateralType[.collateral_type_verbose] and $CollateralTypesMapping[$collateralType[.collateral_type_verbose]] then $CollateralTypesMapping[$collateralType[.collateral_type_verbose]] else ( if .category and $collateralType[.category] and $CollateralTypesMapping[$collateralType[.category]] then $CollateralTypesMapping[$collateralType[.category]] else $CollateralTypesMapping["Other"] end) end),
             value:(if .collateral_value then .collateral_value else $loan_amount end),
@@ -212,8 +211,14 @@
             ] 
         } 
     ] as $collaterals | $collaterals | map( . + {primary: (.value == ($collaterals | max_by(.value) | .value))} )),
-    mailingAddress: ( .loan_relations[] | select(.is_primary_borrower == true) | .relation_addresses[] | select(.address_type == "mailing") | 
-        { 
+    mailingAddress: ( [
+            .loan_relations[] 
+            | select(.is_primary_borrower == true) 
+            | (.details.mailing_address_flag // false) as $mailingAddressFlag 
+            | .relation_addresses[] 
+            | select(.address_type == "mailing" or ($mailingAddressFlag and .address_type=="permanent"))
+        ][0]
+        | { 
             city: .city,
             street1: .address_line_1,
             street2: .address_line_2,
@@ -222,10 +227,13 @@
             stateCode: .state 
         } 
     ),
-    projectAddress: ( .loan_relations[] 
-        | select(.is_primary_borrower == true) 
-        | .relation_addresses[] 
-        | select(.address_type == "project") 
+    projectAddress: ( [
+            .loan_relations[] 
+            | select(.is_primary_borrower == true) 
+            | (.details.project_address_flag // false) as $projectAddressFlag 
+            | .relation_addresses[] 
+            | select(.address_type == "project" or ($projectAddressFlag and .address_type=="permanent"))
+        ][0]
         | { 
             city: .city,
             street1: .address_line_1,
@@ -264,7 +272,12 @@
             guaranteeType: "Unsecured Limited",
             company: 
                 {
-                    name: ( if (.dba_name and .dba_name !="") then .dba_name else (if(.full_name == .business_name) then .business_name else (if .title then .title + " " + .first_name else .first_name end) + (if .middle_name and .middle_name != "" then " " + .middle_name else "" end) + " " + (if .suffix then .last_name + " " + .suffix else .last_name end) end // null) end ),
+                     name: ( 
+                        if (.dba_name and .dba_name !="") 
+                            then .dba_name 
+                        else (if .title and .title != "" then .title + " " + .first_name else .first_name end) + (if .middle_name and .middle_name != "" then " " + .middle_name else "" end) + " " + (if .suffix and .suffix != "" then .last_name + " " + .suffix else .last_name end)
+                        end 
+                    ),
                     taxId: .tin,
                     taxIdType: .tin_type,
                     entityType: "Sole Proprietorship",
@@ -303,7 +316,8 @@
             ],
             company: 
                 { 
-                    name: (.business_name),
+                    name: ( 
+                        .business_name ),
                     stateOfFormation: .state_of_establishment,
                     currentOwnershipEstablishedDate: .business_established_date 
                 },
