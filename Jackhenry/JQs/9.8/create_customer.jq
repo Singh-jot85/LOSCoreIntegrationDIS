@@ -1,17 +1,22 @@
 ( 
     .loan_relations[0] | { 
-        FullName: (.full_name // null),
+        # flags
+        ISSOLEPROP: ( // false),        
+
+        ComName: (.full_name // null),
         FirstName: (.first_name // ""),
         MiddleName: (.middle_name // ""),
         LastName: (.last_name // ""),
         NameSuffix: (.suffix // ""),
-        BusinessName: (.business_name // ""),
-        StreetAddr1: "27 W. 24th St.",
-        StreetAddr2: "",
-        City: "New York",
-        StateCode: "NY",
-        PostalCode: "67899",
-        CntryType: "US",
+        LegalName: (.business_name // ""),
+
+        StreetAddr1: (.relation_addresses[0].address_line_1 // null),
+        StreetAddr2: (.relation_addresses[0].address_line_2 // null),
+        City: (.relation_addresses[0].city // null),
+        StateCode: (.relation_addresses[0].state // null),
+        PostalCode: (.relation_addresses[0].zip_code // null),
+        DlvryPt: (.relation_addresses[0].zip_code_plus4 // null),
+
         NAICSCode: (.naics_code // ""),
         CustType: ( if .party_type == "individual" then "Y" else "N" end),
         BirthDt: (if .party_type == "individual" then .dob else "" end),
@@ -22,6 +27,7 @@
         PhoneNumDsp: (.work_phone // ""),
         TINCode: (if .party_type == "individual" then "I" else "B" end),
         TaxId: .tin,
-        ReqLegalEntityType: "true" 
+        ReqLegalEntityType: "true",
+        ErrOvrRds: [410023, 410050, 410059, 410079, 410017],
     } 
 )

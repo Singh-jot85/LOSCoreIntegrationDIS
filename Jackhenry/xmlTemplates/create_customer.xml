@@ -9,10 +9,10 @@
             xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
             <wsse:UsernameToken
                 xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
-                <wsse:Username>{{X-UserName}}</wsse:Username>
+                <wsse:Username>{{XUserName}}</wsse:Username>
                 <wsse:Password
                     Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">
-                    {{X-Password}}</wsse:Password>
+                    {{XPassword}}</wsse:Password>
                 <wsu:Created
                     xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
                     {{current_timestamp}}</wsu:Created>
@@ -25,82 +25,72 @@
             <MsgRqHdr>
                 <jXchangeHdr>
                     <JxVer />
-                    <AuditUsrId>{{X-AuditUser}}</AuditUsrId>
-                    <AuditWsId>{{X-AuditWorkStation}}</AuditWsId>
+                    <AuditUsrId>{{XAuditUser}}</AuditUsrId>
+                    <AuditWsId>{{XAuditWorkStation}}</AuditWsId>
                     <AuthenUsrId />
                     <ConsumerName />
                     <ConsumerProd />
                     <Ver_1 />
-                    <jXLogTrackingId>{{$guid}}</jXLogTrackingId>
+                    <jXLogTrackingId>{{guid}}</jXLogTrackingId>
                     <Ver_2 />
-                    <InstRtId>{{X-InstitutionRoutingID}}</InstRtId>
-                    <InstEnv>{{X-Environment}}</InstEnv>
+                    <InstRtId>{{XInstitutionRoutingID}}</InstRtId>
+                    <InstEnv>{{XEnvironment}}</InstEnv>
                     <Ver_3 />
-                    <BusCorrelId>{{$guid}}</BusCorrelId>
+                    <BusCorrelId>{{guid}}</BusCorrelId>
                     <Ver_4 />
                     <WorkflowCorrelId />
                     <Ver_5 />
-                    <ValidConsmName>{{X-ValidConsumerName}}</ValidConsmName>
-                    <ValidConsmProd>{{X-ValidConsumerProduct}}</ValidConsmProd>
+                    <ValidConsmName>{{XValidConsumerName}}</ValidConsmName>
+                    <ValidConsmProd>{{XValidConsumerProduct}}</ValidConsmProd>
                     <Ver_6 />
                 </jXchangeHdr>
             </MsgRqHdr>
             <ErrOvrRdInfoArray>
+                {% for ErrOvrRd in ErrOvrRds %}
                 <ErrOvrRd>
                     <ErrCode>410023</ErrCode>
                     <Ver_1 />
                 </ErrOvrRd>
-                <ErrOvrRd>
-                    <ErrCode>410050</ErrCode>
-                    <Ver_1 />
-                </ErrOvrRd>
-                <ErrOvrRd>
-                    <ErrCode>410059</ErrCode>
-                    <Ver_1 />
-                </ErrOvrRd>
-                <ErrOvrRd>
-                    <ErrCode>410079</ErrCode>
-                    <Ver_1 />
-                </ErrOvrRd>
-                <ErrOvrRd>
-                    <ErrCode>410017</ErrCode>
-                    <Ver_1 />
-                </ErrOvrRd>
+                {% endfor %}
             </ErrOvrRdInfoArray>
             <CustDetail>
                 <PersonName>
-                    <ComName>{{FullName}}</ComName>
-                    {% if ENTITY_TYPE == "individual" %}
+                    <ComName>{{ComName}}</ComName>
+                    {% if entity_type == "individual" %}
                     <FirstName>{{FirstName}}</FirstName>
                     <MiddleName>{{MiddleName}}</MiddleName>
                     <LastName>{{LastName}}</LastName>
                         <NameSuffix>{{NameSuffix}}</NameSuffix>
                     </x_PersonName>
                     {% endif %}
-                    {% if ENTITY_TYPE == "entity" %}
+                    {% if entity_type == "entity" %}
                     <x_PersonName>
-                        <LegalName>{{BusinessName}}</LegalName>
+                        <LegalName>{{LegalName}}</LegalName>
                     </x_PersonName>
                     {% endif %}
                 </PersonName>
                 <Addr>
-                    <StreetAddr1>123 Main St</StreetAddr1>
-                    <StreetAddr2>Suite 400</StreetAddr2>
-                    <City>Springfield</City>
-                    <StateCode>IL</StateCode>
-                    <PostalCode>62701</PostalCode>
+                    <StreetAddr1>{{StreetAddr1}}</StreetAddr1>
+                    <StreetAddr2>{{StreetAddr2}}</StreetAddr2>
+                    <City>{{City}}</City>
+                    <StateCode>{{StateCode}}</StateCode>
+                    <PostalCode>{{PostalCode}}</PostalCode>
                     <DlvryPt>123456</DlvryPt>
                 </Addr>
                 <CustType>N</CustType>
-                {% if ENTITY_TYPE == "entity" or IS_SOLE_PROP == true %}
+                
+                {% if entity_type == "entity" or ISSOLEPROP == true %}
                 <NAICSCode>111940</NAICSCode>
                 {% endif %}
-                {% if ENTITY_TYPE == "individual" %}
+
+                {% if entity_type == "individual" %}
                 <BirthDt>1985-06-15</BirthDt>
                 {% endif %}
-                {% if IS_SOLE_PROP == true %}
+
+                {% if ISSOLEPROP == true %}
                 <EmplName>XYZ Industries</EmplName>
                 {% endif %}
+
                 <EmailArray>
                     <EmailInfo>
                         <EmailAddr>pkumar+42309@thesummitgrp.com</EmailAddr>
@@ -120,7 +110,7 @@
                 <CrScoreArray>
                     <CrScoreInfo>
                         <CrScoreId>212</CrScoreId>
-                        {% if ENTITY_TYPE == "individual" %}
+                        {% if entity_type == "individual" %}
                         <CertCode>C</CertCode>
                         <CertCodeDt>2025-08-06</CertCodeDt>
                         {% endif %}
@@ -131,12 +121,12 @@
                 <TINInfo>
                     <TINCode>B</TINCode>
                     <TaxId>987691031</TaxId>
-                    {% if ENTITY_TYPE == "individual" %}
+                    {% if entity_type == "individual" %}
                     <CertCode>C</CertCode>
                     <CertCodeDt>2025-08-06</CertCodeDt>
                     {% endif %}
                 </TINInfo>
-                {% if ENTITY_TYPE == "individual" %}
+                {% if entity_type == "individual" %}
                 <Alien>
                     <CitzCntryType>US</CitzCntryType>
                 </Alien>
@@ -148,7 +138,7 @@
                 <BrCode>51</BrCode>
                 <OffCode>BNO</OffCode>
                 <CustCode>B</CustCode>
-                {% if ENTITY_TYPE == "individual" %}
+                {% if entity_type == "individual" %}
                 <InsiderCode>E</InsiderCode>
                 <NetWorth>500000</NetWorth>
                 {% endif %}
@@ -156,7 +146,7 @@
             </BusDetail>
             <RegDetail>
                 <ReqLegalEntityType>true</ReqLegalEntityType>
-                {% if ENTITY_TYPE == "individual" and IS_SOLE_PROP != true %}
+                {% if entity_type == "individual" and ISSOLEPROP != true %}
                 <BenflOwnExclCode>NP</BenflOwnExclCode>
                 {% endif %}
                 <AnnRevenueAmt>1200000</AnnRevenueAmt>
