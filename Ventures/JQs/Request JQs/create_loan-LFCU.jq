@@ -105,7 +105,7 @@
         end
     ),
     impactLmi: (.details.etran_community_advantage.low_to_moderate_community),
-    sbssScore: (if .sbss_score then .sbss_score | tonumber else "" end),
+    sbssScore: (if .sbss_score then .sbss_score | tonumber else null end),
     sbssScoreDate: (try (.loan_interfaces[] | select(.interface_type == "fico" and .is_latest == true) | .details.fico_data.FI_LiquidCredit.timestamp | split(" ")[0] | strptime("%Y%m%d") | strftime("%Y-%m-%d") ) //null) ,
     riskRatingGrade: .risk_rating,
     riskRatingDate: (if .uw_completion_date then .uw_completion_date | split("T")[0] else "" end),
