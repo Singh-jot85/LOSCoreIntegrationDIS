@@ -20,7 +20,14 @@
                         ACHReceivingTypeCode: "ORG",
                         BalanceCategoryCode: "NOTE",
                         BalanceTypeCode: "BAL",
-                        RtxnTypeCode: "XWTH",
+                        RtxnTypeCode: (
+                            if (.bank_details?.is_internal_account == true)
+                                then "SPMT"
+                            elif (.bank_details?.is_internal_account == false)
+                                then "XWTH"
+                            else null
+                            end
+                        ),
                         AllotmentTypeCode: (
                             if (.product.product_code == "SB_LOC")
                                 then "LPMT"
@@ -59,7 +66,7 @@
                             end
                         ),
                         GraceDays: 0,
-                        IsACHOriginated: .bank_details?.is_internal_account,
+                        IsACHOriginated: (.bank_details?.is_internal_account | not),
                         ACHOriginatedOrganizationNumber: 1,
                         ExternalAccountName: ( 
                             if .bank_details.is_internal_account == false
@@ -79,21 +86,28 @@
                             else null
                             end
                         ),
-                        AccountNumber: (.loan_number // null),
+                        AccountNumber: (
+                            if (.bank_details?.account_number == true)
+                                then (.bank_details.account_number)
+                            elif (.bank_details.account_number == false)
+                                then .loan_number // null
+                            else null
+                            end
+                        ),
                         EndDate: null,
                         ReceivingPersonNumber: null,
                         IsFutureReceivable: false,
                         AllotmentDescription: (
-                            .bank_details?.account_number as $accNum
-                            | "Commercial loan payment \($accNum)"
+                            .loan_number as $loanNum
+                            | "Commercial loan payment \($loanNum)"
                         ),
                         AdditionalDescription: (
-                            .bank_details?.account_number as $accNum
-                            | "SECU Loan Payment \($accNum)"
+                            .loan_number as $loanNum
+                            | "SECU Loan Payment \($loanNum)"
                         ),
                         ReceivingInternalAccountNumber: (
-                            if .bank_details.is_internal_account == true
-                                then .bank_details.account_number
+                            if (.bank_details?.is_internal_account == true)
+                                then (.loan_number)
                             else null
                             end
                         )

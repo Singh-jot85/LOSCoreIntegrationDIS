@@ -38,6 +38,7 @@
                                         IsPropertyNew: false,
                                         PropertyTypeCode: (if .type == "multi_family_dwelling" then "MFPR" elif .type == "1_4_family_dwelling" then "14FR" else null end),
                                         PropertyTypeDetailCode: "RE1",
+                                        LocationDescription: (.collateral_addresses[0] | .address_line_1 + " " + .address_line_2 + " " + .city),
                                         PropertyDescription: (.collateral_addresses[0] | .address_line_1 + " " + .address_line_2 + " " + .city),
                                         PropertyValue: (.collateral_value // null),
                                         PropertyId: (.conditions_data["REAL-ESTATE"].current_parcel_id),
@@ -67,7 +68,12 @@
                                         PropertyMake: (.details.make // null),
                                         PropertyModel: (.details.model // null),
                                         PropertyValue: (.collateral_value // null),
-                                        PropertyDescription: ((.details.year | tostring) + " " + .details.make + " " + .details.model)
+                                        PropertyDescription: (
+                                            (.details.year | tostring) 
+                                            + " "  + .details.make 
+                                            + " " + .details.model 
+                                            + " " + .details.vin
+                                        )
                                     } 
                                 elif .category == "all_business_assets" and .type == "all_assets" 
                                     then {
@@ -90,6 +96,7 @@
                                         IsPropertyNew: false,
                                         PropertyTypeCode: ( $creTypeMapping[.type] // "CREO"),
                                         PropertyTypeDetailCode: "RE1",
+                                        LocationDescription: (.collateral_addresses[0] | .address_line_1 + " " + .address_line_2 + " " + .city),
                                         PropertyDescription: (.collateral_addresses[0] | .address_line_1 + " " + .address_line_2 + " " + .city),
                                         PropertyId: (.conditions_data["REAL-ESTATE"].current_parcel_id),
                                         ParcelNumber: (.conditions_data["REAL-ESTATE"].current_parcel_id),
@@ -101,6 +108,7 @@
                                         IsPropertyNew: false,
                                         PropertyTypeCode: (if .type == "land_for_development" then "CLCD" else null end),
                                         PropertyTypeDetailCode: "RE1",
+                                        LocationDescription: (.collateral_addresses[0] | .address_line_1 + " " + .address_line_2 + " " + .city),
                                         PropertyDescription: (.collateral_addresses[0] | .address_line_1 + " " + .address_line_2 + " " + .city),
                                         PropertyId: (.conditions_data["REAL-ESTATE"].current_parcel_id),
                                         ParcelNumber: (.conditions_data["REAL-ESTATE"].current_parcel_id),
