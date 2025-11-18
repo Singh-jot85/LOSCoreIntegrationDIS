@@ -28,6 +28,10 @@
     "cash_and_equivalents"  
 ]) as $equipmentCategoryTypes |
 
+
+
+
+(
 def first_of_next_month_date:
   (now | strftime("%Y-%m-01") | strptime("%Y-%m-%d") | mktime) 
   + (32*24*60*60)
@@ -204,8 +208,11 @@ def get_NCUACategoryCode($collateral; $creTypes):
                                             LiabilityPercent: null
                                         } 
                                     ] 
-                                else [ .flat_relations[] | select(.external_customer_id != null) ] 
-                                    # | unique_by(.external_customer_id) 
+                                else [ .flat_relations[] 
+                                    | select(
+                                        .external_customer_id != null
+                                        and .is_collateral_related == false
+                                    ) ]
                                     | map(
                                         {
                                             AccountRoleCode: ( 
@@ -380,4 +387,7 @@ def get_NCUACategoryCode($collateral; $creTypes):
         UserAuthentication: {}
     }
 }
+)
+
+
 )

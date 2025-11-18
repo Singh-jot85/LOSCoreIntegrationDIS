@@ -204,8 +204,11 @@ def get_NCUACategoryCode($collateral; $creTypes):
                                             LiabilityPercent: null
                                         } 
                                     ] 
-                                else [ .flat_relations[] | select(.external_customer_id != null) ] 
-                                    # | unique_by(.external_customer_id) 
+                                else [ .flat_relations[] 
+                                    | select(
+                                        .external_customer_id != null
+                                        and .is_collateral_related == false
+                                    ) ]
                                     | map(
                                         {
                                             AccountRoleCode: ( 

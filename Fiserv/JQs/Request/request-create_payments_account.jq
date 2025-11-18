@@ -87,9 +87,9 @@
                             end
                         ),
                         AccountNumber: (
-                            if (.bank_details?.account_number == true)
+                            if (.bank_details?.is_internal_account == true)
                                 then (.bank_details.account_number)
-                            elif (.bank_details.account_number == false)
+                            elif (.bank_details?.is_internal_account == false)
                                 then .loan_number // null
                             else null
                             end
