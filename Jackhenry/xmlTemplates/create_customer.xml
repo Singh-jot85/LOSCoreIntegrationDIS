@@ -20,8 +20,7 @@
         </wsse:Security>
     </SOAP-ENV:Header>
     <SOAP-ENV:Body>
-        <CustAdd
-            xmlns="http://jackhenry.com/jxchange/TPG/2008">
+        <CustAdd xmlns="http://jackhenry.com/jxchange/TPG/2008">
             <MsgRqHdr>
                 <jXchangeHdr>
                     <JxVer />
@@ -45,119 +44,141 @@
                     <Ver_6 />
                 </jXchangeHdr>
             </MsgRqHdr>
+            
             <ErrOvrRdInfoArray>
-                {% for ErrOvrRd in ErrOvrRds %}
+                {% for ErrOvrRd in conditioningData.ErrOvrRds %}
                 <ErrOvrRd>
-                    <ErrCode>410023</ErrCode>
+                    <ErrCode>{{ErrOvrRd}}</ErrCode>
                     <Ver_1 />
                 </ErrOvrRd>
                 {% endfor %}
             </ErrOvrRdInfoArray>
+            
             <CustDetail>
                 <PersonName>
-                    <ComName>{{ComName}}</ComName>
-                    {% if entity_type == "individual" %}
-                    <FirstName>{{FirstName}}</FirstName>
-                    <MiddleName>{{MiddleName}}</MiddleName>
-                    <LastName>{{LastName}}</LastName>
-                        <NameSuffix>{{NameSuffix}}</NameSuffix>
-                    </x_PersonName>
+                    <ConName>{{CustDetail.PersonName.ConName}}</ConName>
+
+                    {% if conditioningData.partyType == "individual" %}
+                    <FirstName>{{CustDetail.PersonName.FirstName}}</FirstName>
+                    <MiddleName>{{CustDetail.PersonName.MiddleName}}</MiddleName>
+                    <LastName>{{CustDetail.PersonName.LastName}}</LastName>
                     {% endif %}
-                    {% if entity_type == "entity" %}
+
                     <x_PersonName>
-                        <LegalName>{{LegalName}}</LegalName>
+                        {% if conditioningData.partyType == "individual" %}
+                        <NameSuffix>{{CustDetail.PersonName.x_PersonName.NameSuffix}}</NameSuffix>
+                        {% endif %}
+
+                        {% if conditioningData.partyType == "entity" %}
+                        <LegalName>{{CustDetail.PersonName.x_PersonName.LegalName}}</LegalName>
+                        {% endif %}
                     </x_PersonName>
-                    {% endif %}
                 </PersonName>
+
                 <Addr>
-                    <StreetAddr1>{{StreetAddr1}}</StreetAddr1>
-                    <StreetAddr2>{{StreetAddr2}}</StreetAddr2>
-                    <City>{{City}}</City>
-                    <StateCode>{{StateCode}}</StateCode>
-                    <PostalCode>{{PostalCode}}</PostalCode>
-                    <DlvryPt>123456</DlvryPt>
+                    <StreetAddr1>{{CustDetail.Addr.StreetAddr1}}</StreetAddr1>
+                    <StreetAddr2>{{CustDetail.Addr.StreetAddr2}}</StreetAddr2>
+                    <City>{{CustDetail.Addr.City}}</City>
+                    <StateCode>{{CustDetail.Addr.StateCode}}</StateCode>
+                    <PostalCode>{{CustDetail.Addr.PostalCode}}</PostalCode>
+                    <DlvryPt>{{CustDetail.Addr.DlvryPt}}</DlvryPt>
                 </Addr>
-                <CustType>N</CustType>
-                
-                {% if entity_type == "entity" or ISSOLEPROP == true %}
-                <NAICSCode>111940</NAICSCode>
+
+                <CustType>{{CustDetail.CustType}}</CustType>
+
+                {% if conditioningData.isSoleProp or conditioningData.partyType == "entity" %}
+                <NAICSCode>{{CustDetail.NAICSCode}}</NAICSCode>
                 {% endif %}
 
-                {% if entity_type == "individual" %}
-                <BirthDt>1985-06-15</BirthDt>
+                {% if conditioningData.partyType == "individual" %}
+                <BirthDt>{{CustDetail.BirthDt}}</BirthDt>
                 {% endif %}
 
-                {% if ISSOLEPROP == true %}
-                <EmplName>XYZ Industries</EmplName>
+                {% if conditioningData.isSoleProp %}
+                <EmplName>{{CustDetail.EmplName}}</EmplName>
                 {% endif %}
 
                 <EmailArray>
                     <EmailInfo>
-                        <EmailAddr>pkumar+42309@thesummitgrp.com</EmailAddr>
+                        <EmailAddr>{{CustDetail.EmailArray.EmailInfo.EmailAddr}}</EmailAddr>
                         <EmailType>Primary E-Mail</EmailType>
                     </EmailInfo>
                 </EmailArray>
+
                 <PhoneArray>
                     <PhoneInfo>
-                        <PhoneType>Business Phone</PhoneType>
-                        <Ver_1 />
-                        <Ver_2 />
-                        <Ver_3 />
-                        <Ver_4 />
-                        <PhoneNum>2342342342</PhoneNum>
+                        <PhoneType>{{CustDetail.PhoneArray.PhoneInfo.PhoneType}}</PhoneType>
+                        <PhoneExt>{{CustDetail.PhoneArray.PhoneInfo.PhoneExt}}</PhoneExt>
+                        <PhoneNum>{{CustDetail.PhoneArray.PhoneInfo.PhoneNum}}</PhoneNum>
                     </PhoneInfo>
                 </PhoneArray>
+
                 <CrScoreArray>
                     <CrScoreInfo>
-                        <CrScoreId>212</CrScoreId>
-                        {% if entity_type == "individual" %}
-                        <CertCode>C</CertCode>
-                        <CertCodeDt>2025-08-06</CertCodeDt>
+                        <CrScoreId>{{CustDetail.CrScoreArray.CrScoreInfo.CrScoreId}}</CrScoreId>
+
+                        {% if conditioningData.partyType == "individual" %}
+                        <CertCode>{{CustDetail.CrScoreArray.CrScoreInfo.CertCode}}</CertCode>
+                        <CertCodeDt>{{CustDetail.CrScoreArray.CrScoreInfo.CertCodeDt}}</CertCodeDt>
                         {% endif %}
+
                     </CrScoreInfo>
                 </CrScoreArray>
             </CustDetail>
+
             <TaxDetail>
                 <TINInfo>
-                    <TINCode>B</TINCode>
-                    <TaxId>987691031</TaxId>
-                    {% if entity_type == "individual" %}
-                    <CertCode>C</CertCode>
+                    <TINCode>{{TaxDetail.TINInfo.TINCode}}</TINCode>
+                    <TaxId>{{TaxDetail.TINInfo.TaxId}}</TaxId>
+
+                    {% if conditioningData.partyType == "individual" %}
+                    <CertCode>{{TaxDetail.TINInfo.CertCode}}</CertCode>
                     <CertCodeDt>2025-08-06</CertCodeDt>
                     {% endif %}
+
                 </TINInfo>
-                {% if entity_type == "individual" %}
+
+                {% if conditioningData.partyType == "individual" %}
                 <Alien>
-                    <CitzCntryType>US</CitzCntryType>
+                    <CitzCntryType>{{TaxDetail.Alien.CitzCntryType}}</CitzCntryType>
                 </Alien>
                 {% endif %}
-                <FedWithCode>0</FedWithCode>
-                <StateWithCode>0</StateWithCode>
+
+                <FedWithCode>{{TaxDetail.FedWithCode}}</FedWithCode>
+                <StateWithCode>{{TaxDetail.StateWithCode}}</StateWithCode>
             </TaxDetail>
+
             <BusDetail>
-                <BrCode>51</BrCode>
-                <OffCode>BNO</OffCode>
-                <CustCode>B</CustCode>
-                {% if entity_type == "individual" %}
-                <InsiderCode>E</InsiderCode>
-                <NetWorth>500000</NetWorth>
-                {% endif %}
-                <NetWorthAmt>500000</NetWorthAmt>
+                <BrCode>{{BusDetail.BrCode}}</BrCode>
+                <OffCode>{{BusDetail.OffCode}}</OffCode>
+                <CustCode>{{BusDetail.CustCode}}</CustCode>
+
+                <InsiderCode>{{BusDetail.InsiderCode}}</InsiderCode>
+
+                <LangType>{{BusDetail.LangType}}</LangType>
+                <NetWorth>{{BusDetail.NetWorth}}</NetWorth>
+                <NetWorthAmt>{{BusDetail.NetWorthAmt}}</NetWorthAmt>
             </BusDetail>
+
             <RegDetail>
-                <ReqLegalEntityType>true</ReqLegalEntityType>
-                {% if entity_type == "individual" and ISSOLEPROP != true %}
-                <BenflOwnExclCode>NP</BenflOwnExclCode>
+                <ReqLegalEntityType>{{RegDetail.ReqLegalEntityType}}</ReqLegalEntityType>
+
+                {% if conditioningData.partyType == "individual" %}
+                <BenflOwnExclCode>{{RegDetail.BenflOwnExclCode}}</BenflOwnExclCode>
                 {% endif %}
-                <AnnRevenueAmt>1200000</AnnRevenueAmt>
+
+                <AnnRevenueAmt>{{RegDetail.AnnRevenueAmt}}</AnnRevenueAmt>
+
                 <CRARec>
-                    <CRAStateCode>2</CRAStateCode>
-                    <CRACountyCode>170</CRACountyCode>
-                    <CRACenTract>1.01</CRACenTract>
-                    <CRASMSACode>11260</CRASMSACode>
-                    <CRAIncmLvl>1</CRAIncmLvl>
+                    <CRAStateCode>{{RegDetail.CRARec.CRAStateCode}}</CRAStateCode>
+                    <CRACountyCode>{{RegDetail.CRARec.CRACountyCode}}</CRACountyCode>
+                    <CRACenTract>{{RegDetail.CRARec.CRACenTract}}</CRACenTract>
+                    <CRASMSACode>{{RegDetail.CRARec.CRASMSACode}}</CRASMSACode>
+                    <CRALoc>{{RegDetail.CRARec.CRALoc}}</CRALoc>
+                    <CRAIncmLvl>{{RegDetail.CRARec.CRAIncmLvl}}</CRAIncmLvl>
                 </CRARec>
             </RegDetail>
         </CustAdd>
     </SOAP-ENV:Body>
+
 </SOAP-ENV:Envelope>
