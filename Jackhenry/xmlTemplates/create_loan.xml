@@ -1,28 +1,39 @@
-<?xml version= "1.0" encoding= "UTF-8"?>
-<SOAP-ENV:Envelope xmlns:SOAP-ENV= "http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd= "http://www.w3.org/2001/XMLSchema" xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance">
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <SOAP-ENV:Header>
-        <wsse:Security xmlns:wsse= "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu= "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
-            <wsse:UsernameToken xmlns:wsse= "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+        <wsse:Security
+            xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+            xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+            <wsse:UsernameToken
+                xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
                 <wsse:Username>{{XUserName}}</wsse:Username>
-                <wsse:Password Type= "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">{{XPassword}}</wsse:Password>
-                <wsu:Created xmlns:wsu= "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">{{current_timestamp}}</wsu:Created>
+                <wsse:Password
+                    Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">
+                    {{XPassword}}</wsse:Password>
+                <wsu:Created
+                    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+                    {{current_timestamp}}</wsu:Created>
             </wsse:UsernameToken>
         </wsse:Security>
     </SOAP-ENV:Header>
     <SOAP-ENV:Body>
-        <CustAdd xmlns= "http://jackhenry.com/jxchange/TPG/2008">
+        <AcctAdd xmlns="http://jackhenry.com/jxchange/TPG/2008">
             <MsgRqHdr>
                 <jXchangeHdr>
                     <JxVer />
                     <AuditUsrId>{{XAuditUser}}</AuditUsrId>
                     <AuditWsId>{{XAuditWorkStation}}</AuditWsId>
+                    <AuthenUsrId />
+                    <ConsumerName />
+                    <ConsumerProd />
                     <Ver_1 />
-                    <jXLogTrackingId>{{jXLogTrackingId}}</jXLogTrackingId>
+                    <jXLogTrackingId>{{$guid}}</jXLogTrackingId>
                     <Ver_2 />
                     <InstRtId>{{XInstitutionRoutingID}}</InstRtId>
                     <InstEnv>{{XEnvironment}}</InstEnv>
                     <Ver_3 />
-                    <BusCorrelId>{{BusCorrelId}}</BusCorrelId>
+                    <BusCorrelId>{{$guid}}</BusCorrelId>
                     <Ver_4 />
                     <WorkflowCorrelId />
                     <Ver_5 />
@@ -30,145 +41,116 @@
                     <ValidConsmProd>{{XValidConsumerProduct}}</ValidConsmProd>
                     <Ver_6 />
                 </jXchangeHdr>
+                <Ver_1 />
+                <Ver_2 />
+                <Ver_3 />
             </MsgRqHdr>
+
             <ErrOvrRdInfoArray>
                 <ErrOvrRd>
-                    <ErrCode>410023</ErrCode>
+                    <ErrCode />
                     <Ver_1 />
+                    <BusSvcType />
+                    <Ver_2 />
                 </ErrOvrRd>
                 <ErrOvrRd>
-                    <ErrCode>14</ErrCode>
+                    <ErrCode />
                     <Ver_1 />
-                </ErrOvrRd>
-                <ErrOvrRd>
-                    <ErrCode>400004</ErrCode>
-                    <Ver_1 />
-                </ErrOvrRd>
-                <ErrOvrRd>
-                    <ErrCode>13</ErrCode>
-                    <Ver_1 />
-                </ErrOvrRd>
-                <ErrOvrRd>
-                    <ErrCode>400110</ErrCode>
-                    <Ver_1 />
-                </ErrOvrRd>
-                <ErrOvrRd>
-                    <ErrCode>410050</ErrCode>
-                    <Ver_1 />
-                </ErrOvrRd>
-                <ErrOvrRd>
-                    <ErrCode>410059</ErrCode>
-                    <Ver_1 />
-                </ErrOvrRd>
-                <ErrOvrRd>
-                    <ErrCode>410079</ErrCode>
-                    <Ver_1 />
-                </ErrOvrRd>
-                <ErrOvrRd>
-                    <ErrCode>410017</ErrCode>
-                    <Ver_1 />
-                </ErrOvrRd>
-                <ErrOvrRd>
-                    <ErrCode>410010</ErrCode>
-                    <Ver_1 />
+                    <BusSvcType />
+                    <Ver_2 />
                 </ErrOvrRd>
             </ErrOvrRdInfoArray>
-            <CustDetail>
-                <PersonName>
-                    <ComName>{{FullName}}</ComName>
-                    <FirstName>{{FirstName}}</FirstName>
-                    <MiddleName>{{MiddleName}}</MiddleName>
-                    <LastName>{{LastName}}</LastName>
-                </PersonName>
-                <Addr>
-                    <StreetAddr1>{{StreetAddr1}}</StreetAddr1>
-                    <StreetAddr2>{{StreetAddr2}}</StreetAddr2>
-                    <City>{{City}}</City>
-                    <StateCode>{{StateCode}}</StateCode>
-                    <PostalCode>{{PostalCode}}</PostalCode>
-                    <CntryType>{{CntryType}}</CntryType>
-                </Addr>
-                <Ver_1 />
-                <Ver_2 />
-                <Ver_3 />
-                <Ver_4 />
-                <Ver_5 />
-                <Ver_6 />
-                <NAICSCode>{{NAICSCode}}</NAICSCode>
-                <CustType>{{CustType}}</CustType>
-                <BirthDt>{{BirthDt}}</BirthDt>
-                <EmplName>{{EmplName}}</EmplName>
-                <OccType>{{OccType}}</OccType>
-                <EmailArray>
-                    <EmailInfo>
-                        <EmailAddr>{{EmailAddr}}</EmailAddr>
-                        <EmailType>Primary E-Mail</EmailType>
-                    </EmailInfo>
-                </EmailArray>
-                <PhoneArray>
-                    <PhoneInfo>
-                        <PhoneType>{{PhoneType}}</PhoneType>
-                        <Ver_1 />
-                        <Ver_2 />
-                        <Ver_3 />
-                        <Ver_4 />
-                        <PhoneNumDsp>{{PhoneNumDsp}}</PhoneNumDsp>
-                    </PhoneInfo>
-                </PhoneArray>
-                <Ver_1 />
-                <Ver_2 />
-                <Ver_3 />
-                <Ver_4 />
-                <Ver_5 />
-                <Ver_6 />
-            </CustDetail>
-            <TaxDetail>
-                <TINInfo>
-                    <TINCode>{{TINCode}}</TINCode>
-                    <TaxId>{{TaxId}}</TaxId>
-                </TINInfo>
-            </TaxDetail>
-            <BusDetail>
-                <OffCode />
-                <BrCode />
-                <GroupCode xsi:nil= "true" />
-                <AbbrCustDesc>Individual</AbbrCustDesc>
-                <InsiderCode xsi:nil= "true" />
-                <CustImporCode>N</CustImporCode>
-                <LeaseSecCode xsi:nil= "true" />
-                <NetWorth xsi:nil= "true" />
-                <CustCycleCode xsi:nil= "true" />
-                <MailDirCode xsi:nil= "true" />
-                <ProfAnlys xsi:nil= "true" />
-                <FinStmtWavCode xsi:nil= "true" />
-                <FinStmtWavDt xsi:nil= "true" />
-                <LastFinStmtDt xsi:nil= "true" />
-                <FinStmtExpDt xsi:nil= "true" />
-                <LastFinStmtLtrDt xsi:nil= "true" />
-                <Custom />
-                <Ver_1 />
-                <Ver_2 />
-                <Ver_3 />
-                <Ver_4 />
-                <Ver_5 />
-                <Ver_6 />
-                <LangType xsi:nil= "true" />
-            </BusDetail>
-            <RegDetail>
-                <DoNotCallExpDt xsi:nil= "true" />
-                <DoNotCallCode>N</DoNotCallCode>
-                <RegPOptOutCode>N</RegPOptOutCode>
-                <RegPSentDt xsi:nil= "true" />
-                <AflOptOutCode>N</AflOptOutCode>
-                <AflOptOutExcptCode xsi:nil= "true" />
-                <AflOptOutExcptDt xsi:nil= "true" />
-                <AflOptOutExpDt xsi:nil= "true" />
-                <CustDataRtnPeriod xsi:nil= "true" />
-                <Ver_1 />
-                <ReqLegalEntityType>{{ReqLegalEntityType}}</ReqLegalEntityType>
-            </RegDetail>
-            <Custom xsi:nil= "true" />
-            <Ver_1 />
-        </CustAdd>
+
+            <AccountId>
+                <AcctId>{{AccountId.AcctId}}</AcctId>
+                <AcctType>{{AccountId.AcctType}}</AcctType>
+            </AccountId>
+
+            <LnAdd>
+                <LnInfoRec>
+                    <Term>
+                        <TermCnt>{{LnAdd.LnInfoRec.Term.TermCnt}}</TermCnt>
+                        <TermUnits>{{LnAdd.LnInfoRec.Term.TermUnits}}</TermUnits>
+                    </Term>
+                    <RemPmtCnt>{{LnAdd.LnInfoRec.RemPmtCnt}}</RemPmtCnt>
+                    <PmtTermUnits>{{LnAdd.LnInfoRec.PmtTermUnits}}</PmtTermUnits>
+                    <PmtTerm>{{LnAdd.LnInfoRec.PmtTerm}}</PmtTerm>
+                    <PmtCode>{{LnAdd.LnInfoRec.PmtCode}}</PmtCode>
+                    <PmtAmt>{{LnAdd.LnInfoRec.PmtAmt}}</PmtAmt>
+                    <PIAmt>{{LnAdd.LnInfoRec.PIAmt}}</PIAmt>
+                    <OrigBal>{{LnAdd.LnInfoRec.OrigBal}}</OrigBal>
+                    <OpenDt>{{LnAdd.LnInfoRec.OpenDt}}</OpenDt>
+                    <OffCode>{{LnAdd.LnInfoRec.OffCode}}</OffCode>
+                    <MatDt>{{LnAdd.LnInfoRec.MatDt}}</MatDt>
+                    <IntRate>{{LnAdd.LnInfoRec.IntRate}}</IntRate>
+                    <BrCode>{{LnAdd.LnInfoRec.BrCode}}</BrCode>
+                    <ProdCode>{{LnAdd.LnInfoRec.ProdCode}}</ProdCode>
+                    <AcctStat>{{LnAdd.LnInfoRec.AcctStat}}</AcctStat>
+                    <CustId>{{LnAdd.LnInfoRec.CustId}}</CustId>
+                    <OddDaysIntBasis>{{LnAdd.LnInfoRec.OddDaysIntBasis}}</OddDaysIntBasis>
+                </LnInfoRec>
+
+                <LnAcctInfo>
+                    <SubPrimeLnCode>{{LnAdd.LnAcctInfo.SubPrimeLnCode}}</SubPrimeLnCode>
+                    <State>{{LnAdd.LnAcctInfo.State}}</State>
+                    <PurpCode>{{LnAdd.LnAcctInfo.PurpCode}}</PurpCode>
+                    <PrtPastDueNotCode>{{LnAdd.LnAcctInfo.PrtPastDueNotCode}}</PrtPastDueNotCode>
+                    <OrigLnToValRatio>{{LnAdd.LnAcctInfo.OrigLnToValRatio}}</OrigLnToValRatio>
+                    <LateChgCode>{{LnAdd.LnAcctInfo.LateChgCode}}</LateChgCode>
+                    <DeptCode>{{LnAdd.LnAcctInfo.DeptCode}}</DeptCode>
+                    <CurLnToValRatio>{{LnAdd.LnAcctInfo.CurLnToValRatio}}</CurLnToValRatio>
+                    <CrRatingCode>{{LnAdd.LnAcctInfo.CrRatingCode}}</CrRatingCode>
+                    <CollatCode>{{LnAdd.LnAcctInfo.CollatCode}}</CollatCode>
+                    <AnnIncmAmt>{{LnAdd.LnAcctInfo.AnnIncmAmt}}</AnnIncmAmt>
+                    <AcctClsfCode>{{LnAdd.LnAcctInfo.AcctClsfCode}}</AcctClsfCode>
+                    <CombLTV>{{LnAdd.LnAcctInfo.CombLTV}}</CombLTV>
+                    <CrScoreId>{{LnAdd.LnAcctInfo.CrScoreId}}</CrScoreId>
+                    <MoIncmAmt>{{LnAdd.LnAcctInfo.MoIncmAmt}}</MoIncmAmt>
+                    <NumBorw>{{LnAdd.LnAcctInfo.NumBorw}}</NumBorw>
+                    <TotDebtPct>{{LnAdd.LnAcctInfo.TotDebtPct}}</TotDebtPct>
+                    <CrBureauRptCode>{{LnAdd.LnAcctInfo.CrBureauRptCode}}</CrBureauRptCode>
+                    <PrtCouponBook>{{LnAdd.LnAcctInfo.PrtCouponBook}}</PrtCouponBook>
+                </LnAcctInfo>
+
+                <LnBalDtInfo>
+                    <FirstPmtDt>{{LnAdd.LnBalDtInfo.FirstPmtDt}}</FirstPmtDt>
+                </LnBalDtInfo>
+
+                <LnPmtInfo>
+                    <UsePmtSusp>{{LnAdd.LnPmtInfo.UsePmtSusp}}</UsePmtSusp>
+                    <BilLeadDays>{{LnAdd.LnPmtInfo.BilLeadDays}}</BilLeadDays>
+                </LnPmtInfo>
+
+                <LnRateInfo>
+                    <RateVarCode>{{LnAdd.LnRateInfo.RateVarCode}}</RateVarCode>
+                    <RateVar>{{LnAdd.LnRateInfo.RateVar}}</RateVar>
+                    <RateFlr>{{LnAdd.LnRateInfo.RateFlr}}</RateFlr>
+                    <RateCeil>{{LnAdd.LnRateInfo.RateCeil}}</RateCeil>
+                    <OrigIdxVal>{{LnAdd.LnRateInfo.OrigIdxVal}}</OrigIdxVal>
+                </LnRateInfo>
+
+                <LnRealEstateInfo>
+                    <PropStreet>{{LnAdd.LnRealEstateInfo.PropStreet}}</PropStreet>
+                    <PropState>{{LnAdd.LnRealEstateInfo.PropState}}</PropState>
+                    <PropPostalCode>{{LnAdd.LnRealEstateInfo.PropPostalCode}}</PropPostalCode>
+                    <PropCity>{{LnAdd.LnRealEstateInfo.PropCity}}</PropCity>
+                    <FloodInsurCode>{{LnAdd.LnRealEstateInfo.FloodInsurCode}}</FloodInsurCode>
+                    <ApprVal>{{LnAdd.LnRealEstateInfo.ApprVal}}</ApprVal>
+                    <ApprDt>{{LnAdd.LnRealEstateInfo.ApprDt}}</ApprDt>
+                    <OccupCode>{{LnAdd.LnRealEstateInfo.OccupCode}}</OccupCode>
+                    <PropCounty>{{LnAdd.LnRealEstateInfo.PropCounty}}</PropCounty>
+                </LnRealEstateInfo>
+
+                <LnRegRptInfo>
+                    <NAICSCode>{{LnAdd.LnRegRptInfo.NAICSCode}}</NAICSCode>
+                    <CallRptCode>{{LnAdd.LnRegRptInfo.CallRptCode}}</CallRptCode>
+                    <Req1098>{{LnAdd.LnRegRptInfo.Req1098}}</Req1098>
+                    <SBAGuarPct>{{LnAdd.LnRegRptInfo.SBAGuarPct}}</SBAGuarPct>
+                    <SBAGuarId>{{LnAdd.LnRegRptInfo.SBAGuarId}}</SBAGuarId>
+                    <SBABasisPts>{{LnAdd.LnRegRptInfo.SBABasisPts}}</SBABasisPts>
+                    <GLCostCtr>{{LnAdd.LnRegRptInfo.GLCostCtr}}</GLCostCtr>
+                </LnRegRptInfo>
+            </LnAdd>
+        </AcctAdd>
     </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
