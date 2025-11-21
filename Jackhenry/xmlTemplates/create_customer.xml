@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope
+    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <SOAP-ENV:Header>
+        <wsse:Security
+            xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+            xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+            <wsse:UsernameToken
+                xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+                <wsse:Username>{{XUserName}}</wsse:Username>
+                <wsse:Password
+                    Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">
+                    {{XPassword}}</wsse:Password>
+                <wsu:Created
+                    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+                    {{current_timestamp}}</wsu:Created>
+            </wsse:UsernameToken>
+        </wsse:Security>
+    </SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <CustAdd xmlns="http://jackhenry.com/jxchange/TPG/2008">
+            <MsgRqHdr>
+                <jXchangeHdr>
+                    <JxVer />
+                    <AuditUsrId>{{XAuditUser}}</AuditUsrId>
+                    <AuditWsId>{{XAuditWorkStation}}</AuditWsId>
+                    <AuthenUsrId />
+                    <ConsumerName />
+                    <ConsumerProd />
+                    <Ver_1 />
+                    <jXLogTrackingId>{{guid}}</jXLogTrackingId>
+                    <Ver_2 />
+                    <InstRtId>{{XInstitutionRoutingID}}</InstRtId>
+                    <InstEnv>{{XEnvironment}}</InstEnv>
+                    <Ver_3 />
+                    <BusCorrelId>{{guid}}</BusCorrelId>
+                    <Ver_4 />
+                    <WorkflowCorrelId />
+                    <Ver_5 />
+                    <ValidConsmName>{{XValidConsumerName}}</ValidConsmName>
+                    <ValidConsmProd>{{XValidConsumerProduct}}</ValidConsmProd>
+                    <Ver_6 />
+                </jXchangeHdr>
+            </MsgRqHdr>
+            
+            <ErrOvrRdInfoArray>
+                {% for ErrOvrRd in conditioningData.ErrOvrRds %}
+                <ErrOvrRd>
+                    <ErrCode>{{ErrOvrRd}}</ErrCode>
+                    <Ver_1 />
+                </ErrOvrRd>
+                {% endfor %}
+            </ErrOvrRdInfoArray>
+            
+            <CustDetail>
+                <PersonName>
+                    <ConName>{{CustDetail.PersonName.ConName}}</ConName>
+
+                    {% if conditioningData.partyType == "individual" %}
+                    <FirstName>{{CustDetail.PersonName.FirstName}}</FirstName>
+                    <MiddleName>{{CustDetail.PersonName.MiddleName}}</MiddleName>
+                    <LastName>{{CustDetail.PersonName.LastName}}</LastName>
+                    {% endif %}
+
+                    <x_PersonName>
+                        {% if conditioningData.partyType == "individual" %}
+                        <NameSuffix>{{CustDetail.PersonName.x_PersonName.NameSuffix}}</NameSuffix>
+                        {% endif %}
+
+                        {% if conditioningData.partyType == "entity" %}
+                        <LegalName>{{CustDetail.PersonName.x_PersonName.LegalName}}</LegalName>
+                        {% endif %}
+                    </x_PersonName>
+                </PersonName>
+
+                <Addr>
+                    <StreetAddr1>{{CustDetail.Addr.StreetAddr1}}</StreetAddr1>
+                    <StreetAddr2>{{CustDetail.Addr.StreetAddr2}}</StreetAddr2>
+                    <City>{{CustDetail.Addr.City}}</City>
+                    <StateCode>{{CustDetail.Addr.StateCode}}</StateCode>
+                    <PostalCode>{{CustDetail.Addr.PostalCode}}</PostalCode>
+                    <DlvryPt>{{CustDetail.Addr.DlvryPt}}</DlvryPt>
+                </Addr>
+
+                <CustType>{{CustDetail.CustType}}</CustType>
+
+                {% if conditioningData.isSoleProp or conditioningData.partyType == "entity" %}
+                <NAICSCode>{{CustDetail.NAICSCode}}</NAICSCode>
+                {% endif %}
+
+                {% if conditioningData.partyType == "individual" %}
+                <BirthDt>{{CustDetail.BirthDt}}</BirthDt>
+                {% endif %}
+
+                {% if conditioningData.isSoleProp %}
+                <EmplName>{{CustDetail.EmplName}}</EmplName>
+                {% endif %}
+
+                <EmailArray>
+                    <EmailInfo>
+                        <EmailAddr>{{CustDetail.EmailArray.EmailInfo.EmailAddr}}</EmailAddr>
+                        <EmailType>Primary E-Mail</EmailType>
+                    </EmailInfo>
+                </EmailArray>
+
+                <PhoneArray>
+                    <PhoneInfo>
+                        <PhoneType>{{CustDetail.PhoneArray.PhoneInfo.PhoneType}}</PhoneType>
+                        <PhoneExt>{{CustDetail.PhoneArray.PhoneInfo.PhoneExt}}</PhoneExt>
+                        <PhoneNum>{{CustDetail.PhoneArray.PhoneInfo.PhoneNum}}</PhoneNum>
+                    </PhoneInfo>
+                </PhoneArray>
+
+                <CrScoreArray>
+                    <CrScoreInfo>
+                        <CrScoreId>{{CustDetail.CrScoreArray.CrScoreInfo.CrScoreId}}</CrScoreId>
+
+                        {% if conditioningData.partyType == "individual" %}
+                        <CertCode>{{CustDetail.CrScoreArray.CrScoreInfo.CertCode}}</CertCode>
+                        <CertCodeDt>{{CustDetail.CrScoreArray.CrScoreInfo.CertCodeDt}}</CertCodeDt>
+                        {% endif %}
+
+                    </CrScoreInfo>
+                </CrScoreArray>
+            </CustDetail>
+
+            <TaxDetail>
+                <TINInfo>
+                    <TINCode>{{TaxDetail.TINInfo.TINCode}}</TINCode>
+                    <TaxId>{{TaxDetail.TINInfo.TaxId}}</TaxId>
+
+                    {% if conditioningData.partyType == "individual" %}
+                    <CertCode>{{TaxDetail.TINInfo.CertCode}}</CertCode>
+                    <CertCodeDt>2025-08-06</CertCodeDt>
+                    {% endif %}
+
+                </TINInfo>
+
+                {% if conditioningData.partyType == "individual" %}
+                <Alien>
+                    <CitzCntryType>{{TaxDetail.Alien.CitzCntryType}}</CitzCntryType>
+                </Alien>
+                {% endif %}
+
+                <FedWithCode>{{TaxDetail.FedWithCode}}</FedWithCode>
+                <StateWithCode>{{TaxDetail.StateWithCode}}</StateWithCode>
+            </TaxDetail>
+
+            <BusDetail>
+                <BrCode>{{BusDetail.BrCode}}</BrCode>
+                <OffCode>{{BusDetail.OffCode}}</OffCode>
+                <CustCode>{{BusDetail.CustCode}}</CustCode>
+
+                <InsiderCode>{{BusDetail.InsiderCode}}</InsiderCode>
+
+                <LangType>{{BusDetail.LangType}}</LangType>
+                <NetWorth>{{BusDetail.NetWorth}}</NetWorth>
+                <NetWorthAmt>{{BusDetail.NetWorthAmt}}</NetWorthAmt>
+            </BusDetail>
+
+            <RegDetail>
+                <ReqLegalEntityType>{{RegDetail.ReqLegalEntityType}}</ReqLegalEntityType>
+
+                {% if conditioningData.partyType == "individual" %}
+                <BenflOwnExclCode>{{RegDetail.BenflOwnExclCode}}</BenflOwnExclCode>
+                {% endif %}
+
+                <AnnRevenueAmt>{{RegDetail.AnnRevenueAmt}}</AnnRevenueAmt>
+
+                <CRARec>
+                    <CRAStateCode>{{RegDetail.CRARec.CRAStateCode}}</CRAStateCode>
+                    <CRACountyCode>{{RegDetail.CRARec.CRACountyCode}}</CRACountyCode>
+                    <CRACenTract>{{RegDetail.CRARec.CRACenTract}}</CRACenTract>
+                    <CRASMSACode>{{RegDetail.CRARec.CRASMSACode}}</CRASMSACode>
+                    <CRALoc>{{RegDetail.CRARec.CRALoc}}</CRALoc>
+                    <CRAIncmLvl>{{RegDetail.CRARec.CRAIncmLvl}}</CRAIncmLvl>
+                </CRARec>
+            </RegDetail>
+        </CustAdd>
+    </SOAP-ENV:Body>
+
+</SOAP-ENV:Envelope>

@@ -218,11 +218,13 @@
             and (.relation_type == "borrower" or .relation_type == "co_borrower" or .relation_type == "owner") 
             and (.is_collateral_related | not)
         ) 
-        or (.party_type == "individual" 
-        and .entity_type == "sole_proprietor" 
-        and (.is_collateral_related | not) 
-        and (.is_member_of_guarantor | not)
-        and .relation_type == "borrower")
+        or (
+            .party_type == "individual" 
+            and .entity_type == "sole_proprietor" 
+            and (.is_collateral_related | not) 
+            and (.is_member_of_guarantor | not)
+            and .relation_type == "borrower"
+        )
         ) | ( if (.entity_type == "sole_proprietor") then { 
             primary: .is_primary_borrower,
             association: "Operating Company",
