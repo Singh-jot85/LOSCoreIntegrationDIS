@@ -50,5 +50,6 @@
             "individual": "search_customer"
         }
     },
-    "default_document_type": ""
+    "default_document_type": "",
+    "stepper_list": ["loan_account_creation", "relation", "collateral", "payment_term", "rate_detail"]
 }

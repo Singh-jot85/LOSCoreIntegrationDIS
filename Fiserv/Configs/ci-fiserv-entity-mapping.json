@@ -17,5 +17,6 @@
             "individual": "search_contact"
         }
     },
-    "default_document_type": ""
+    "default_document_type": "",
+    "stepper_list": ["collaterals", "link_collaterals"]
 }
