@@ -22,7 +22,7 @@
             CustDetail: ( 
                 {
                     PersonName: {
-                        ConName: (.full_name // null),
+                        ComName: (.full_name // null),
                         FirstName: (.first_name // null),
                         MiddleName: (.middle_name // null),
                         LastName:  (.last_name // null),
@@ -65,9 +65,9 @@
                             PhoneExt: "+1",
                             PhoneType: (
                                 if .party_type == "individual" 
-                                    then .home_phone 
+                                    then "Home Cell Phone"
                                 elif .party_type == "entity" 
-                                    then .work_phone 
+                                    then 'Business Phone'
                                 else null 
                                 end
                             )
