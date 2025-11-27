@@ -1,0 +1,702 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+    xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+    xmlns:ns="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://jackhenry.com/jxchange/TPG/2008"
+    targetNamespace="http://jackhenry.com/jxchange/TPG/2008">
+
+    <!-- This starts the Types section  -->
+
+    <types>
+        <xsd:schema elementFormDefault="qualified" attributeFormDefault="qualified"
+            targetNamespace="http://jackhenry.com/jxchange/TPG/2008"
+            xmlns="http://jackhenry.com/jxchange/TPG/2008" version="2024.2.03"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+            <xsd:include schemaLocation="TPG_ENSMaster.xsd" />
+
+        </xsd:schema>
+    </types>
+
+    <!-- This starts the Message section  -->
+
+    <message name="MessageFault">
+        <part name="parameters" element="tns:HdrFault" />
+    </message>
+
+    <message name="PingInput">
+        <part name="parameters" element="tns:Ping" />
+    </message>
+    <message name="PingOutput">
+        <part name="parameters" element="tns:PingResponse" />
+    </message>
+
+    <message name="NotSndAddInput">
+        <part name="parameters" element="tns:NotSndAdd" />
+    </message>
+    <message name="NotSndAddOutput">
+        <part name="parameters" element="tns:NotSndAddResponse" />
+    </message>
+
+    <message name="NotRecipAddInput">
+        <part name="parameters" element="tns:NotRecipAdd" />
+    </message>
+    <message name="NotRecipAddOutput">
+        <part name="parameters" element="tns:NotRecipAddResponse" />
+    </message>
+
+    <message name="NotRecipModInput">
+        <part name="parameters" element="tns:NotRecipMod" />
+    </message>
+    <message name="NotRecipModOutput">
+        <part name="parameters" element="tns:NotRecipModResponse" />
+    </message>
+
+    <message name="NotRecipInqInput">
+        <part name="parameters" element="tns:NotRecipInq" />
+    </message>
+    <message name="NotRecipInqOutput">
+        <part name="parameters" element="tns:NotRecipInqResponse" />
+    </message>
+
+    <message name="NotRecipSrchInput">
+        <part name="parameters" element="tns:NotRecipSrch" />
+    </message>
+    <message name="NotRecipSrchOutput">
+        <part name="parameters" element="tns:NotRecipSrchResponse" />
+    </message>
+
+    <message name="NotRecipSubAddInput">
+        <part name="parameters" element="tns:NotRecipSubAdd" />
+    </message>
+    <message name="NotRecipSubAddOutput">
+        <part name="parameters" element="tns:NotRecipSubAddResponse" />
+    </message>
+
+    <message name="NotRecipSubModInput">
+        <part name="parameters" element="tns:NotRecipSubMod" />
+    </message>
+    <message name="NotRecipSubModOutput">
+        <part name="parameters" element="tns:NotRecipSubModResponse" />
+    </message>
+
+    <message name="NotRecipSubInqInput">
+        <part name="parameters" element="tns:NotRecipSubInq" />
+    </message>
+    <message name="NotRecipSubInqOutput">
+        <part name="parameters" element="tns:NotRecipSubInqResponse" />
+    </message>
+
+    <message name="NotRecipSubSrchInput">
+        <part name="parameters" element="tns:NotRecipSubSrch" />
+    </message>
+    <message name="NotRecipSubSrchOutput">
+        <part name="parameters" element="tns:NotRecipSubSrchResponse" />
+    </message>
+
+    <message name="NotMobPhoneValidateInput">
+        <part name="parameters" element="tns:NotMobPhoneValidate" />
+    </message>
+    <message name="NotMobPhoneValidateOutput">
+        <part name="parameters" element="tns:NotMobPhoneValidateResponse" />
+    </message>
+
+    <message name="NotSMSKeyWordAddInput">
+        <part name="parameters" element="tns:NotSMSKeyWordAdd" />
+    </message>
+    <message name="NotSMSKeyWordAddOutput">
+        <part name="parameters" element="tns:NotSMSKeyWordAddResponse" />
+    </message>
+
+    <message name="NotSMSKeyWordModInput">
+        <part name="parameters" element="tns:NotSMSKeyWordMod" />
+    </message>
+    <message name="NotSMSKeyWordModOutput">
+        <part name="parameters" element="tns:NotSMSKeyWordModResponse" />
+    </message>
+
+    <message name="NotSMSKeyWordInqInput">
+        <part name="parameters" element="tns:NotSMSKeyWordInq" />
+    </message>
+    <message name="NotSMSKeyWordInqOutput">
+        <part name="parameters" element="tns:NotSMSKeyWordInqResponse" />
+    </message>
+
+    <message name="NotSMSKeyWordSrchInput">
+        <part name="parameters" element="tns:NotSMSKeyWordSrch" />
+    </message>
+    <message name="NotSMSKeyWordSrchOutput">
+        <part name="parameters" element="tns:NotSMSKeyWordSrchResponse" />
+    </message>
+
+    <message name="NotExplDataAddInput">
+        <part name="parameters" element="tns:NotExplDataAdd" />
+    </message>
+    <message name="NotExplDataAddOutput">
+        <part name="parameters" element="tns:NotExplDataAddResponse" />
+    </message>
+
+    <message name="NotDistGroupAddInput">
+        <part name="parameters" element="tns:NotDistGroupAdd" />
+    </message>
+    <message name="NotDistGroupAddOutput">
+        <part name="parameters" element="tns:NotDistGroupAddResponse" />
+    </message>
+
+    <message name="NotDistGroupModInput">
+        <part name="parameters" element="tns:NotDistGroupMod" />
+    </message>
+    <message name="NotDistGroupModOutput">
+        <part name="parameters" element="tns:NotDistGroupModResponse" />
+    </message>
+
+    <message name="NotDistGroupInqInput">
+        <part name="parameters" element="tns:NotDistGroupInq" />
+    </message>
+    <message name="NotDistGroupInqOutput">
+        <part name="parameters" element="tns:NotDistGroupInqResponse" />
+    </message>
+
+    <message name="NotDistGroupSrchInput">
+        <part name="parameters" element="tns:NotDistGroupSrch" />
+    </message>
+    <message name="NotDistGroupSrchOutput">
+        <part name="parameters" element="tns:NotDistGroupSrchResponse" />
+    </message>
+
+    <message name="NotActSrchInput">
+        <part name="parameters" element="tns:NotActSrch" />
+    </message>
+    <message name="NotActSrchOutput">
+        <part name="parameters" element="tns:NotActSrchResponse" />
+    </message>
+
+    <message name="NotEmailAlrtAddInput">
+        <part name="parameters" element="tns:NotEmailAlrtAdd" />
+    </message>
+    <message name="NotEmailAlrtAddOutput">
+        <part name="parameters" element="tns:NotEmailAlrtAddResponse" />
+    </message>
+
+    <message name="NotSMSAlrtAddInput">
+        <part name="parameters" element="tns:NotSMSAlrtAdd" />
+    </message>
+    <message name="NotSMSAlrtAddOutput">
+        <part name="parameters" element="tns:NotSMSAlrtAddResponse" />
+    </message>
+
+    <message name="FaxSndAddInput">
+        <part name="parameters" element="tns:FaxSndAdd" />
+    </message>
+    <message name="FaxSndAddOutput">
+        <part name="parameters" element="tns:FaxSndAddResponse" />
+    </message>
+
+    <message name="FaxStatInqInput">
+        <part name="parameters" element="tns:FaxStatInq" />
+    </message>
+    <message name="FaxStatInqOutput">
+        <part name="parameters" element="tns:FaxStatInqResponse" />
+    </message>
+
+    <!-- This starts the PortType section  -->
+
+    <portType name="ENSService">
+
+        <operation name="Ping">
+            <input message="tns:PingInput" />
+            <output message="tns:PingOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="NotSndAdd">
+            <input message="tns:NotSndAddInput" />
+            <output message="tns:NotSndAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="NotRecipAdd">
+            <input message="tns:NotRecipAddInput" />
+            <output message="tns:NotRecipAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="NotRecipMod">
+            <input message="tns:NotRecipModInput" />
+            <output message="tns:NotRecipModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="NotRecipInq">
+            <input message="tns:NotRecipInqInput" />
+            <output message="tns:NotRecipInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="NotRecipSrch">
+            <input message="tns:NotRecipSrchInput" />
+            <output message="tns:NotRecipSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="NotRecipSubAdd">
+            <input message="tns:NotRecipSubAddInput" />
+            <output message="tns:NotRecipSubAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="NotRecipSubMod">
+            <input message="tns:NotRecipSubModInput" />
+            <output message="tns:NotRecipSubModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="NotRecipSubInq">
+            <input message="tns:NotRecipSubInqInput" />
+            <output message="tns:NotRecipSubInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="NotRecipSubSrch">
+            <input message="tns:NotRecipSubSrchInput" />
+            <output message="tns:NotRecipSubSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="NotMobPhoneValidate">
+            <input message="tns:NotMobPhoneValidateInput" />
+            <output message="tns:NotMobPhoneValidateOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="NotSMSKeyWordAdd">
+            <input message="tns:NotSMSKeyWordAddInput" />
+            <output message="tns:NotSMSKeyWordAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="NotSMSKeyWordMod">
+            <input message="tns:NotSMSKeyWordModInput" />
+            <output message="tns:NotSMSKeyWordModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="NotSMSKeyWordInq">
+            <input message="tns:NotSMSKeyWordInqInput" />
+            <output message="tns:NotSMSKeyWordInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="NotSMSKeyWordSrch">
+            <input message="tns:NotSMSKeyWordSrchInput" />
+            <output message="tns:NotSMSKeyWordSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="NotExplDataAdd">
+            <input message="tns:NotExplDataAddInput" />
+            <output message="tns:NotExplDataAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="NotDistGroupAdd">
+            <input message="tns:NotDistGroupAddInput" />
+            <output message="tns:NotDistGroupAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="NotDistGroupMod">
+            <input message="tns:NotDistGroupModInput" />
+            <output message="tns:NotDistGroupModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="NotDistGroupInq">
+            <input message="tns:NotDistGroupInqInput" />
+            <output message="tns:NotDistGroupInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="NotDistGroupSrch">
+            <input message="tns:NotDistGroupSrchInput" />
+            <output message="tns:NotDistGroupSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="NotActSrch">
+            <input message="tns:NotActSrchInput" />
+            <output message="tns:NotActSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="NotEmailAlrtAdd">
+            <input message="tns:NotEmailAlrtAddInput" />
+            <output message="tns:NotEmailAlrtAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="NotSMSAlrtAdd">
+            <input message="tns:NotSMSAlrtAddInput" />
+            <output message="tns:NotSMSAlrtAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="FaxSndAdd">
+            <input message="tns:FaxSndAddInput" />
+            <output message="tns:FaxSndAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="FaxStatInq">
+            <input message="tns:FaxStatInqInput" />
+            <output message="tns:FaxStatInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+    </portType>
+
+    <!-- This starts the Binding section  -->
+
+    <binding name="ENSServiceSoapBinding" type="tns:ENSService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+
+        <operation name="Ping">
+            <soap:operation soapAction="http://jackhenry.com/ws/Ping" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="NotSndAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/NotSndAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="NotRecipAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/NotRecipAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="NotRecipMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/NotRecipMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="NotRecipInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/NotRecipInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="NotRecipSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/NotRecipSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="NotRecipSubAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/NotRecipSubAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="NotRecipSubMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/NotRecipSubMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="NotRecipSubInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/NotRecipSubInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="NotRecipSubSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/NotRecipSubSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="NotMobPhoneValidate">
+            <soap:operation soapAction="http://jackhenry.com/ws/NotMobPhoneValidate" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="NotSMSKeyWordAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/NotSMSKeyWordAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="NotSMSKeyWordMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/NotSMSKeyWordMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="NotSMSKeyWordInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/NotSMSKeyWordInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="NotSMSKeyWordSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/NotSMSKeyWordSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="NotExplDataAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/NotExplDataAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="NotDistGroupAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/NotDistGroupAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="NotDistGroupMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/NotDistGroupMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="NotDistGroupInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/NotDistGroupInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="NotDistGroupSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/NotDistGroupSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="NotActSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/NotActSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="NotEmailAlrtAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/NotEmailAlrtAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="NotSMSAlrtAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/NotSMSAlrtAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="FaxSndAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/FaxSndAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="FaxStatInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/FaxStatInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+    </binding>
+
+    <!-- This starts the Service section  -->
+
+    <service name="ENSService">
+        <documentation>Service Description for the ENSService Interface</documentation>
+        <port name="ENSServiceSoap" binding="tns:ENSServiceSoapBinding">
+            <soap:address location="https://jackhenry.com/jxchange/2008/ServiceGateway/ENS.svc" />
+        </port>
+    </service>
+</definitions>

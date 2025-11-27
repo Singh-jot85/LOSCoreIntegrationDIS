@@ -1,0 +1,754 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+    xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+    xmlns:ns="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://jackhenry.com/jxchange/TPG/2008"
+    targetNamespace="http://jackhenry.com/jxchange/TPG/2008">
+
+    <!-- This starts the Types section  -->
+
+    <types>
+        <xsd:schema elementFormDefault="qualified" attributeFormDefault="qualified"
+            targetNamespace="http://jackhenry.com/jxchange/TPG/2008"
+            xmlns="http://jackhenry.com/jxchange/TPG/2008" version="2024.2.03"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+            <xsd:include schemaLocation="TPG_ImageMaster.xsd" />
+
+        </xsd:schema>
+    </types>
+
+    <!-- This starts the Message section  -->
+
+    <message name="MessageFault">
+        <part name="parameters" element="tns:HdrFault" />
+    </message>
+
+    <message name="PingInput">
+        <part name="parameters" element="tns:Ping" />
+    </message>
+    <message name="PingOutput">
+        <part name="parameters" element="tns:PingResponse" />
+    </message>
+
+    <message name="ChkImgInqInput">
+        <part name="parameters" element="tns:ChkImgInq" />
+    </message>
+    <message name="ChkImgInqOutput">
+        <part name="parameters" element="tns:ChkImgInqResponse" />
+    </message>
+
+    <message name="DocImgAddInput">
+        <part name="parameters" element="tns:DocImgAdd" />
+    </message>
+    <message name="DocImgAddOutput">
+        <part name="parameters" element="tns:DocImgAddResponse" />
+    </message>
+
+    <message name="DocImgSrchInput">
+        <part name="parameters" element="tns:DocImgSrch" />
+    </message>
+    <message name="DocImgSrchOutput">
+        <part name="parameters" element="tns:DocImgSrchResponse" />
+    </message>
+
+    <message name="DocImgModInput">
+        <part name="parameters" element="tns:DocImgMod" />
+    </message>
+    <message name="DocImgModOutput">
+        <part name="parameters" element="tns:DocImgModResponse" />
+    </message>
+
+    <message name="ChkImgStmtSrchInput">
+        <part name="parameters" element="tns:ChkImgStmtSrch" />
+    </message>
+    <message name="ChkImgStmtSrchOutput">
+        <part name="parameters" element="tns:ChkImgStmtSrchResponse" />
+    </message>
+
+    <message name="ChkImgStmtGenInput">
+        <part name="parameters" element="tns:ChkImgStmtGen" />
+    </message>
+    <message name="ChkImgStmtGenOutput">
+        <part name="parameters" element="tns:ChkImgStmtGenResponse" />
+    </message>
+
+    <message name="ChkImgStmtGenInqInput">
+        <part name="parameters" element="tns:ChkImgStmtGenInq" />
+    </message>
+    <message name="ChkImgStmtGenInqOutput">
+        <part name="parameters" element="tns:ChkImgStmtGenInqResponse" />
+    </message>
+
+    <message name="ChkImgSrchInput">
+        <part name="parameters" element="tns:ChkImgSrch" />
+    </message>
+    <message name="ChkImgSrchOutput">
+        <part name="parameters" element="tns:ChkImgSrchResponse" />
+    </message>
+
+    <message name="DocElecSigAddInput">
+        <part name="parameters" element="tns:DocElecSigAdd" />
+    </message>
+    <message name="DocElecSigAddOutput">
+        <part name="parameters" element="tns:DocElecSigAddResponse" />
+    </message>
+
+    <message name="DocBatchSrchInput">
+        <part name="parameters" element="tns:DocBatchSrch" />
+    </message>
+    <message name="DocBatchSrchOutput">
+        <part name="parameters" element="tns:DocBatchSrchResponse" />
+    </message>
+
+    <message name="DocTextFormatInqInput">
+        <part name="parameters" element="tns:DocTextFormatInq" />
+    </message>
+    <message name="DocTextFormatInqOutput">
+        <part name="parameters" element="tns:DocTextFormatInqResponse" />
+    </message>
+
+    <message name="DocOptFormatInqInput">
+        <part name="parameters" element="tns:DocOptFormatInq" />
+    </message>
+    <message name="DocOptFormatInqOutput">
+        <part name="parameters" element="tns:DocOptFormatInqResponse" />
+    </message>
+
+    <message name="FormatDocInqInput">
+        <part name="parameters" element="tns:FormatDocInq" />
+    </message>
+    <message name="FormatDocInqOutput">
+        <part name="parameters" element="tns:FormatDocInqResponse" />
+    </message>
+
+    <message name="DocElecRcptInqInput">
+        <part name="parameters" element="tns:DocElecRcptInq" />
+    </message>
+    <message name="DocElecRcptInqOutput">
+        <part name="parameters" element="tns:DocElecRcptInqResponse" />
+    </message>
+
+    <message name="DocElecInqInput">
+        <part name="parameters" element="tns:DocElecInq" />
+    </message>
+    <message name="DocElecInqOutput">
+        <part name="parameters" element="tns:DocElecInqResponse" />
+    </message>
+
+    <message name="ChkImgDocSrchInput">
+        <part name="parameters" element="tns:ChkImgDocSrch" />
+    </message>
+    <message name="ChkImgDocSrchOutput">
+        <part name="parameters" element="tns:ChkImgDocSrchResponse" />
+    </message>
+
+    <message name="ChkImgDocGenInput">
+        <part name="parameters" element="tns:ChkImgDocGen" />
+    </message>
+    <message name="ChkImgDocGenOutput">
+        <part name="parameters" element="tns:ChkImgDocGenResponse" />
+    </message>
+
+    <message name="ChkImgDocGenInqInput">
+        <part name="parameters" element="tns:ChkImgDocGenInq" />
+    </message>
+    <message name="ChkImgDocGenInqOutput">
+        <part name="parameters" element="tns:ChkImgDocGenInqResponse" />
+    </message>
+
+    <message name="ItemCapAddInput">
+        <part name="parameters" element="tns:ItemCapAdd" />
+    </message>
+    <message name="ItemCapAddOutput">
+        <part name="parameters" element="tns:ItemCapAddResponse" />
+    </message>
+
+    <message name="ItemCapItemInqInput">
+        <part name="parameters" element="tns:ItemCapItemInq" />
+    </message>
+    <message name="ItemCapItemInqOutput">
+        <part name="parameters" element="tns:ItemCapItemInqResponse" />
+    </message>
+
+    <message name="ItemCapTrnSetModInput">
+        <part name="parameters" element="tns:ItemCapTrnSetMod" />
+    </message>
+    <message name="ItemCapTrnSetModOutput">
+        <part name="parameters" element="tns:ItemCapTrnSetModResponse" />
+    </message>
+
+    <message name="ItemCapStatAddInput">
+        <part name="parameters" element="tns:ItemCapStatAdd" />
+    </message>
+    <message name="ItemCapStatAddOutput">
+        <part name="parameters" element="tns:ItemCapStatAddResponse" />
+    </message>
+
+    <message name="ItemCapTrnSetInqInput">
+        <part name="parameters" element="tns:ItemCapTrnSetInq" />
+    </message>
+    <message name="ItemCapTrnSetInqOutput">
+        <part name="parameters" element="tns:ItemCapTrnSetInqResponse" />
+    </message>
+
+    <message name="DocImgAttachInqInput">
+        <part name="parameters" element="tns:DocImgAttachInq" />
+    </message>
+    <message name="DocImgAttachInqOutput">
+        <part name="parameters" element="tns:DocImgAttachInqResponse" />
+    </message>
+
+    <message name="DocImgCrossIdxAddInput">
+        <part name="parameters" element="tns:DocImgCrossIdxAdd" />
+    </message>
+    <message name="DocImgCrossIdxAddOutput">
+        <part name="parameters" element="tns:DocImgCrossIdxAddResponse" />
+    </message>
+
+    <message name="DocElecSigAssigneeModInput">
+        <part name="parameters" element="tns:DocElecSigAssigneeMod" />
+    </message>
+    <message name="DocElecSigAssigneeModOutput">
+        <part name="parameters" element="tns:DocElecSigAssigneeModResponse" />
+    </message>
+
+    <!-- This starts the PortType section  -->
+
+    <portType name="ImageService">
+
+        <operation name="Ping">
+            <input message="tns:PingInput" />
+            <output message="tns:PingOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="ChkImgInq">
+            <input message="tns:ChkImgInqInput" />
+            <output message="tns:ChkImgInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="DocImgAdd">
+            <input message="tns:DocImgAddInput" />
+            <output message="tns:DocImgAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="DocImgSrch">
+            <input message="tns:DocImgSrchInput" />
+            <output message="tns:DocImgSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="DocImgMod">
+            <input message="tns:DocImgModInput" />
+            <output message="tns:DocImgModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="ChkImgStmtSrch">
+            <input message="tns:ChkImgStmtSrchInput" />
+            <output message="tns:ChkImgStmtSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="ChkImgStmtGen">
+            <input message="tns:ChkImgStmtGenInput" />
+            <output message="tns:ChkImgStmtGenOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="ChkImgStmtGenInq">
+            <input message="tns:ChkImgStmtGenInqInput" />
+            <output message="tns:ChkImgStmtGenInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="ChkImgSrch">
+            <input message="tns:ChkImgSrchInput" />
+            <output message="tns:ChkImgSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="DocElecSigAdd">
+            <input message="tns:DocElecSigAddInput" />
+            <output message="tns:DocElecSigAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="DocBatchSrch">
+            <input message="tns:DocBatchSrchInput" />
+            <output message="tns:DocBatchSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="DocTextFormatInq">
+            <input message="tns:DocTextFormatInqInput" />
+            <output message="tns:DocTextFormatInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="DocOptFormatInq">
+            <input message="tns:DocOptFormatInqInput" />
+            <output message="tns:DocOptFormatInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="FormatDocInq">
+            <input message="tns:FormatDocInqInput" />
+            <output message="tns:FormatDocInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="DocElecRcptInq">
+            <input message="tns:DocElecRcptInqInput" />
+            <output message="tns:DocElecRcptInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="DocElecInq">
+            <input message="tns:DocElecInqInput" />
+            <output message="tns:DocElecInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="ChkImgDocSrch">
+            <input message="tns:ChkImgDocSrchInput" />
+            <output message="tns:ChkImgDocSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="ChkImgDocGen">
+            <input message="tns:ChkImgDocGenInput" />
+            <output message="tns:ChkImgDocGenOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="ChkImgDocGenInq">
+            <input message="tns:ChkImgDocGenInqInput" />
+            <output message="tns:ChkImgDocGenInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="ItemCapAdd">
+            <input message="tns:ItemCapAddInput" />
+            <output message="tns:ItemCapAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="ItemCapItemInq">
+            <input message="tns:ItemCapItemInqInput" />
+            <output message="tns:ItemCapItemInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="ItemCapTrnSetMod">
+            <input message="tns:ItemCapTrnSetModInput" />
+            <output message="tns:ItemCapTrnSetModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="ItemCapStatAdd">
+            <input message="tns:ItemCapStatAddInput" />
+            <output message="tns:ItemCapStatAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="ItemCapTrnSetInq">
+            <input message="tns:ItemCapTrnSetInqInput" />
+            <output message="tns:ItemCapTrnSetInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="DocImgAttachInq">
+            <input message="tns:DocImgAttachInqInput" />
+            <output message="tns:DocImgAttachInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="DocImgCrossIdxAdd">
+            <input message="tns:DocImgCrossIdxAddInput" />
+            <output message="tns:DocImgCrossIdxAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="DocElecSigAssigneeMod">
+            <input message="tns:DocElecSigAssigneeModInput" />
+            <output message="tns:DocElecSigAssigneeModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+    </portType>
+
+    <!-- This starts the Binding section  -->
+
+    <binding name="ImageServiceSoapBinding" type="tns:ImageService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+
+        <operation name="Ping">
+            <soap:operation soapAction="http://jackhenry.com/ws/Ping" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="ChkImgInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/ChkImgInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="DocImgAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/DocImgAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="DocImgSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/DocImgSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="DocImgMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/DocImgMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="ChkImgStmtSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/ChkImgStmtSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="ChkImgStmtGen">
+            <soap:operation soapAction="http://jackhenry.com/ws/ChkImgStmtGen" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="ChkImgStmtGenInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/ChkImgStmtGenInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="ChkImgSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/ChkImgSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="DocElecSigAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/DocElecSigAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="DocBatchSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/DocBatchSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="DocTextFormatInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/DocTextFormatInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="DocOptFormatInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/DocOptFormatInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="FormatDocInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/FormatDocInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="DocElecRcptInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/DocElecRcptInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="DocElecInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/DocElecInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="ChkImgDocSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/ChkImgDocSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="ChkImgDocGen">
+            <soap:operation soapAction="http://jackhenry.com/ws/ChkImgDocGen" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="ChkImgDocGenInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/ChkImgDocGenInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="ItemCapAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/ItemCapAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="ItemCapItemInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/ItemCapItemInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="ItemCapTrnSetMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/ItemCapTrnSetMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="ItemCapStatAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/ItemCapStatAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="ItemCapTrnSetInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/ItemCapTrnSetInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="DocImgAttachInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/DocImgAttachInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="DocImgCrossIdxAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/DocImgCrossIdxAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="DocElecSigAssigneeMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/DocElecSigAssigneeMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+    </binding>
+
+    <!-- This starts the Service section  -->
+
+    <service name="ImageService">
+        <documentation>Service Description for the ImageService Interface</documentation>
+        <port name="ImageServiceSoap" binding="tns:ImageServiceSoapBinding">
+            <soap:address location="https://jackhenry.com/jxchange/2008/ServiceGateway/Image.svc" />
+        </port>
+    </service>
+</definitions>

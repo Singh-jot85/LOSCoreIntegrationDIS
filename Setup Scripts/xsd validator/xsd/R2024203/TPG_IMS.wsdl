@@ -1,0 +1,988 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+    xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+    xmlns:ns="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://jackhenry.com/jxchange/TPG/2008"
+    targetNamespace="http://jackhenry.com/jxchange/TPG/2008">
+
+    <!-- This starts the Types section  -->
+
+    <types>
+        <xsd:schema elementFormDefault="qualified" attributeFormDefault="qualified"
+            targetNamespace="http://jackhenry.com/jxchange/TPG/2008"
+            xmlns="http://jackhenry.com/jxchange/TPG/2008" version="2024.2.03"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+            <xsd:include schemaLocation="TPG_IMSMaster.xsd" />
+
+        </xsd:schema>
+    </types>
+
+    <!-- This starts the Message section  -->
+
+    <message name="MessageFault">
+        <part name="parameters" element="tns:HdrFault" />
+    </message>
+
+    <message name="PingInput">
+        <part name="parameters" element="tns:Ping" />
+    </message>
+    <message name="PingOutput">
+        <part name="parameters" element="tns:PingResponse" />
+    </message>
+
+    <message name="CredPolInqInput">
+        <part name="parameters" element="tns:CredPolInq" />
+    </message>
+    <message name="CredPolInqOutput">
+        <part name="parameters" element="tns:CredPolInqResponse" />
+    </message>
+
+    <message name="MFAQnAPolInqInput">
+        <part name="parameters" element="tns:MFAQnAPolInq" />
+    </message>
+    <message name="MFAQnAPolInqOutput">
+        <part name="parameters" element="tns:MFAQnAPolInqResponse" />
+    </message>
+
+    <message name="MFAWaterMarkSrchInput">
+        <part name="parameters" element="tns:MFAWaterMarkSrch" />
+    </message>
+    <message name="MFAWaterMarkSrchOutput">
+        <part name="parameters" element="tns:MFAWaterMarkSrchResponse" />
+    </message>
+
+    <message name="UsrConsmCredAddInput">
+        <part name="parameters" element="tns:UsrConsmCredAdd" />
+    </message>
+    <message name="UsrConsmCredAddOutput">
+        <part name="parameters" element="tns:UsrConsmCredAddResponse" />
+    </message>
+
+    <message name="MFAUsrQnAAddInput">
+        <part name="parameters" element="tns:MFAUsrQnAAdd" />
+    </message>
+    <message name="MFAUsrQnAAddOutput">
+        <part name="parameters" element="tns:MFAUsrQnAAddResponse" />
+    </message>
+
+    <message name="ODISvcCredInput">
+        <part name="parameters" element="tns:ODISvcCred" />
+    </message>
+    <message name="ODISvcCredOutput">
+        <part name="parameters" element="tns:ODISvcCredResponse" />
+    </message>
+
+    <message name="UsrConsmCredModInput">
+        <part name="parameters" element="tns:UsrConsmCredMod" />
+    </message>
+    <message name="UsrConsmCredModOutput">
+        <part name="parameters" element="tns:UsrConsmCredModResponse" />
+    </message>
+
+    <message name="MFAUsrQnAModInput">
+        <part name="parameters" element="tns:MFAUsrQnAMod" />
+    </message>
+    <message name="MFAUsrQnAModOutput">
+        <part name="parameters" element="tns:MFAUsrQnAModResponse" />
+    </message>
+
+    <message name="BSADueDilgntPoolSrchInput">
+        <part name="parameters" element="tns:BSADueDilgntPoolSrch" />
+    </message>
+    <message name="BSADueDilgntPoolSrchOutput">
+        <part name="parameters" element="tns:BSADueDilgntPoolSrchResponse" />
+    </message>
+
+    <message name="BSADueDilgntRsAddInput">
+        <part name="parameters" element="tns:BSADueDilgntRsAdd" />
+    </message>
+    <message name="BSADueDilgntRsAddOutput">
+        <part name="parameters" element="tns:BSADueDilgntRsAddResponse" />
+    </message>
+
+    <message name="BSADueDilgntRsInqInput">
+        <part name="parameters" element="tns:BSADueDilgntRsInq" />
+    </message>
+    <message name="BSADueDilgntRsInqOutput">
+        <part name="parameters" element="tns:BSADueDilgntRsInqResponse" />
+    </message>
+
+    <message name="PmtHubUsrDirInqInput">
+        <part name="parameters" element="tns:PmtHubUsrDirInq" />
+    </message>
+    <message name="PmtHubUsrDirInqOutput">
+        <part name="parameters" element="tns:PmtHubUsrDirInqResponse" />
+    </message>
+
+    <message name="PmtHubUsrDirAddInput">
+        <part name="parameters" element="tns:PmtHubUsrDirAdd" />
+    </message>
+    <message name="PmtHubUsrDirAddOutput">
+        <part name="parameters" element="tns:PmtHubUsrDirAddResponse" />
+    </message>
+
+    <message name="PmtHubUsrDirModInput">
+        <part name="parameters" element="tns:PmtHubUsrDirMod" />
+    </message>
+    <message name="PmtHubUsrDirModOutput">
+        <part name="parameters" element="tns:PmtHubUsrDirModResponse" />
+    </message>
+
+    <message name="EDPPPersonSrchInput">
+        <part name="parameters" element="tns:EDPPPersonSrch" />
+    </message>
+    <message name="EDPPPersonSrchOutput">
+        <part name="parameters" element="tns:EDPPPersonSrchResponse" />
+    </message>
+
+    <message name="EDPPPersonProdDictInqInput">
+        <part name="parameters" element="tns:EDPPPersonProdDictInq" />
+    </message>
+    <message name="EDPPPersonProdDictInqOutput">
+        <part name="parameters" element="tns:EDPPPersonProdDictInqResponse" />
+    </message>
+
+    <message name="EDPPPersonProdModInput">
+        <part name="parameters" element="tns:EDPPPersonProdMod" />
+    </message>
+    <message name="EDPPPersonProdModOutput">
+        <part name="parameters" element="tns:EDPPPersonProdModResponse" />
+    </message>
+
+    <message name="OOBValidateInput">
+        <part name="parameters" element="tns:OOBValidate" />
+    </message>
+    <message name="OOBValidateOutput">
+        <part name="parameters" element="tns:OOBValidateResponse" />
+    </message>
+
+    <message name="MFAActRiskInqInput">
+        <part name="parameters" element="tns:MFAActRiskInq" />
+    </message>
+    <message name="MFAActRiskInqOutput">
+        <part name="parameters" element="tns:MFAActRiskInqResponse" />
+    </message>
+
+    <message name="MFAActAddInput">
+        <part name="parameters" element="tns:MFAActAdd" />
+    </message>
+    <message name="MFAActAddOutput">
+        <part name="parameters" element="tns:MFAActAddResponse" />
+    </message>
+
+    <message name="MFAUsrQnAInqInput">
+        <part name="parameters" element="tns:MFAUsrQnAInq" />
+    </message>
+    <message name="MFAUsrQnAInqOutput">
+        <part name="parameters" element="tns:MFAUsrQnAInqResponse" />
+    </message>
+
+    <message name="MFAUsrQnAValidateInput">
+        <part name="parameters" element="tns:MFAUsrQnAValidate" />
+    </message>
+    <message name="MFAUsrQnAValidateOutput">
+        <part name="parameters" element="tns:MFAUsrQnAValidateResponse" />
+    </message>
+
+    <message name="MFAOOBValidateInput">
+        <part name="parameters" element="tns:MFAOOBValidate" />
+    </message>
+    <message name="MFAOOBValidateOutput">
+        <part name="parameters" element="tns:MFAOOBValidateResponse" />
+    </message>
+
+    <message name="MFAUsrQnAPoolInqInput">
+        <part name="parameters" element="tns:MFAUsrQnAPoolInq" />
+    </message>
+    <message name="MFAUsrQnAPoolInqOutput">
+        <part name="parameters" element="tns:MFAUsrQnAPoolInqResponse" />
+    </message>
+
+    <message name="MFATokenUsrAddInput">
+        <part name="parameters" element="tns:MFATokenUsrAdd" />
+    </message>
+    <message name="MFATokenUsrAddOutput">
+        <part name="parameters" element="tns:MFATokenUsrAddResponse" />
+    </message>
+
+    <message name="MFATokenUsrModInput">
+        <part name="parameters" element="tns:MFATokenUsrMod" />
+    </message>
+    <message name="MFATokenUsrModOutput">
+        <part name="parameters" element="tns:MFATokenUsrModResponse" />
+    </message>
+
+    <message name="MFATokenUsrInqInput">
+        <part name="parameters" element="tns:MFATokenUsrInq" />
+    </message>
+    <message name="MFATokenUsrInqOutput">
+        <part name="parameters" element="tns:MFATokenUsrInqResponse" />
+    </message>
+
+    <message name="MFATokenAddInput">
+        <part name="parameters" element="tns:MFATokenAdd" />
+    </message>
+    <message name="MFATokenAddOutput">
+        <part name="parameters" element="tns:MFATokenAddResponse" />
+    </message>
+
+    <message name="MFATokenModInput">
+        <part name="parameters" element="tns:MFATokenMod" />
+    </message>
+    <message name="MFATokenModOutput">
+        <part name="parameters" element="tns:MFATokenModResponse" />
+    </message>
+
+    <message name="MFATokenInqInput">
+        <part name="parameters" element="tns:MFATokenInq" />
+    </message>
+    <message name="MFATokenInqOutput">
+        <part name="parameters" element="tns:MFATokenInqResponse" />
+    </message>
+
+    <message name="MFATokenValidateInput">
+        <part name="parameters" element="tns:MFATokenValidate" />
+    </message>
+    <message name="MFATokenValidateOutput">
+        <part name="parameters" element="tns:MFATokenValidateResponse" />
+    </message>
+
+    <message name="MFATokenTempPswdInqInput">
+        <part name="parameters" element="tns:MFATokenTempPswdInq" />
+    </message>
+    <message name="MFATokenTempPswdInqOutput">
+        <part name="parameters" element="tns:MFATokenTempPswdInqResponse" />
+    </message>
+
+    <message name="MFATokenPINModInput">
+        <part name="parameters" element="tns:MFATokenPINMod" />
+    </message>
+    <message name="MFATokenPINModOutput">
+        <part name="parameters" element="tns:MFATokenPINModResponse" />
+    </message>
+
+    <message name="PmtHubDevConAddInput">
+        <part name="parameters" element="tns:PmtHubDevConAdd" />
+    </message>
+    <message name="PmtHubDevConAddOutput">
+        <part name="parameters" element="tns:PmtHubDevConAddResponse" />
+    </message>
+
+    <message name="PmtHubDevConInqInput">
+        <part name="parameters" element="tns:PmtHubDevConInq" />
+    </message>
+    <message name="PmtHubDevConInqOutput">
+        <part name="parameters" element="tns:PmtHubDevConInqResponse" />
+    </message>
+
+    <!-- This starts the PortType section  -->
+
+    <portType name="IMSService">
+
+        <operation name="Ping">
+            <input message="tns:PingInput" />
+            <output message="tns:PingOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CredPolInq">
+            <input message="tns:CredPolInqInput" />
+            <output message="tns:CredPolInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="MFAQnAPolInq">
+            <input message="tns:MFAQnAPolInqInput" />
+            <output message="tns:MFAQnAPolInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="MFAWaterMarkSrch">
+            <input message="tns:MFAWaterMarkSrchInput" />
+            <output message="tns:MFAWaterMarkSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="UsrConsmCredAdd">
+            <input message="tns:UsrConsmCredAddInput" />
+            <output message="tns:UsrConsmCredAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="MFAUsrQnAAdd">
+            <input message="tns:MFAUsrQnAAddInput" />
+            <output message="tns:MFAUsrQnAAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="ODISvcCred">
+            <input message="tns:ODISvcCredInput" />
+            <output message="tns:ODISvcCredOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="UsrConsmCredMod">
+            <input message="tns:UsrConsmCredModInput" />
+            <output message="tns:UsrConsmCredModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="MFAUsrQnAMod">
+            <input message="tns:MFAUsrQnAModInput" />
+            <output message="tns:MFAUsrQnAModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="BSADueDilgntPoolSrch">
+            <input message="tns:BSADueDilgntPoolSrchInput" />
+            <output message="tns:BSADueDilgntPoolSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="BSADueDilgntRsAdd">
+            <input message="tns:BSADueDilgntRsAddInput" />
+            <output message="tns:BSADueDilgntRsAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="BSADueDilgntRsInq">
+            <input message="tns:BSADueDilgntRsInqInput" />
+            <output message="tns:BSADueDilgntRsInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="PmtHubUsrDirInq">
+            <input message="tns:PmtHubUsrDirInqInput" />
+            <output message="tns:PmtHubUsrDirInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="PmtHubUsrDirAdd">
+            <input message="tns:PmtHubUsrDirAddInput" />
+            <output message="tns:PmtHubUsrDirAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="PmtHubUsrDirMod">
+            <input message="tns:PmtHubUsrDirModInput" />
+            <output message="tns:PmtHubUsrDirModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="EDPPPersonSrch">
+            <input message="tns:EDPPPersonSrchInput" />
+            <output message="tns:EDPPPersonSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="EDPPPersonProdDictInq">
+            <input message="tns:EDPPPersonProdDictInqInput" />
+            <output message="tns:EDPPPersonProdDictInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="EDPPPersonProdMod">
+            <input message="tns:EDPPPersonProdModInput" />
+            <output message="tns:EDPPPersonProdModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="OOBValidate">
+            <input message="tns:OOBValidateInput" />
+            <output message="tns:OOBValidateOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="MFAActRiskInq">
+            <input message="tns:MFAActRiskInqInput" />
+            <output message="tns:MFAActRiskInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="MFAActAdd">
+            <input message="tns:MFAActAddInput" />
+            <output message="tns:MFAActAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="MFAUsrQnAInq">
+            <input message="tns:MFAUsrQnAInqInput" />
+            <output message="tns:MFAUsrQnAInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="MFAUsrQnAValidate">
+            <input message="tns:MFAUsrQnAValidateInput" />
+            <output message="tns:MFAUsrQnAValidateOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="MFAOOBValidate">
+            <input message="tns:MFAOOBValidateInput" />
+            <output message="tns:MFAOOBValidateOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="MFAUsrQnAPoolInq">
+            <input message="tns:MFAUsrQnAPoolInqInput" />
+            <output message="tns:MFAUsrQnAPoolInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="MFATokenUsrAdd">
+            <input message="tns:MFATokenUsrAddInput" />
+            <output message="tns:MFATokenUsrAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="MFATokenUsrMod">
+            <input message="tns:MFATokenUsrModInput" />
+            <output message="tns:MFATokenUsrModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="MFATokenUsrInq">
+            <input message="tns:MFATokenUsrInqInput" />
+            <output message="tns:MFATokenUsrInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="MFATokenAdd">
+            <input message="tns:MFATokenAddInput" />
+            <output message="tns:MFATokenAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="MFATokenMod">
+            <input message="tns:MFATokenModInput" />
+            <output message="tns:MFATokenModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="MFATokenInq">
+            <input message="tns:MFATokenInqInput" />
+            <output message="tns:MFATokenInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="MFATokenValidate">
+            <input message="tns:MFATokenValidateInput" />
+            <output message="tns:MFATokenValidateOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="MFATokenTempPswdInq">
+            <input message="tns:MFATokenTempPswdInqInput" />
+            <output message="tns:MFATokenTempPswdInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="MFATokenPINMod">
+            <input message="tns:MFATokenPINModInput" />
+            <output message="tns:MFATokenPINModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="PmtHubDevConAdd">
+            <input message="tns:PmtHubDevConAddInput" />
+            <output message="tns:PmtHubDevConAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="PmtHubDevConInq">
+            <input message="tns:PmtHubDevConInqInput" />
+            <output message="tns:PmtHubDevConInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+    </portType>
+
+    <!-- This starts the Binding section  -->
+
+    <binding name="IMSServiceSoapBinding" type="tns:IMSService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+
+        <operation name="Ping">
+            <soap:operation soapAction="http://jackhenry.com/ws/Ping" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CredPolInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/CredPolInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="MFAQnAPolInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/MFAQnAPolInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="MFAWaterMarkSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/MFAWaterMarkSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="UsrConsmCredAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/UsrConsmCredAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="MFAUsrQnAAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/MFAUsrQnAAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="ODISvcCred">
+            <soap:operation soapAction="http://jackhenry.com/ws/ODISvcCred" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="UsrConsmCredMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/UsrConsmCredMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="MFAUsrQnAMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/MFAUsrQnAMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="BSADueDilgntPoolSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/BSADueDilgntPoolSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="BSADueDilgntRsAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/BSADueDilgntRsAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="BSADueDilgntRsInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/BSADueDilgntRsInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="PmtHubUsrDirInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/PmtHubUsrDirInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="PmtHubUsrDirAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/PmtHubUsrDirAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="PmtHubUsrDirMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/PmtHubUsrDirMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="EDPPPersonSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/EDPPPersonSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="EDPPPersonProdDictInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/EDPPPersonProdDictInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="EDPPPersonProdMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/EDPPPersonProdMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="OOBValidate">
+            <soap:operation soapAction="http://jackhenry.com/ws/OOBValidate" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="MFAActRiskInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/MFAActRiskInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="MFAActAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/MFAActAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="MFAUsrQnAInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/MFAUsrQnAInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="MFAUsrQnAValidate">
+            <soap:operation soapAction="http://jackhenry.com/ws/MFAUsrQnAValidate" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="MFAOOBValidate">
+            <soap:operation soapAction="http://jackhenry.com/ws/MFAOOBValidate" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="MFAUsrQnAPoolInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/MFAUsrQnAPoolInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="MFATokenUsrAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/MFATokenUsrAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="MFATokenUsrMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/MFATokenUsrMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="MFATokenUsrInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/MFATokenUsrInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="MFATokenAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/MFATokenAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="MFATokenMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/MFATokenMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="MFATokenInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/MFATokenInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="MFATokenValidate">
+            <soap:operation soapAction="http://jackhenry.com/ws/MFATokenValidate" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="MFATokenTempPswdInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/MFATokenTempPswdInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="MFATokenPINMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/MFATokenPINMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="PmtHubDevConAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/PmtHubDevConAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="PmtHubDevConInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/PmtHubDevConInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+    </binding>
+
+    <!-- This starts the Service section  -->
+
+    <service name="IMSService">
+        <documentation>Service Description for the IMSService Interface</documentation>
+        <port name="IMSServiceSoap" binding="tns:IMSServiceSoapBinding">
+            <soap:address location="https://jackhenry.com/jxchange/2008/ServiceGateway/IMS.svc" />
+        </port>
+    </service>
+</definitions>

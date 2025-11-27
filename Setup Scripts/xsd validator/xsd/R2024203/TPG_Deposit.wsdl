@@ -1,0 +1,806 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+    xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+    xmlns:ns="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://jackhenry.com/jxchange/TPG/2008"
+    targetNamespace="http://jackhenry.com/jxchange/TPG/2008">
+
+    <!-- This starts the Types section  -->
+
+    <types>
+        <xsd:schema elementFormDefault="qualified" attributeFormDefault="qualified"
+            targetNamespace="http://jackhenry.com/jxchange/TPG/2008"
+            xmlns="http://jackhenry.com/jxchange/TPG/2008" version="2024.2.03"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+            <xsd:include schemaLocation="TPG_DepositMaster.xsd" />
+
+        </xsd:schema>
+    </types>
+
+    <!-- This starts the Message section  -->
+
+    <message name="MessageFault">
+        <part name="parameters" element="tns:HdrFault" />
+    </message>
+
+    <message name="PingInput">
+        <part name="parameters" element="tns:Ping" />
+    </message>
+    <message name="PingOutput">
+        <part name="parameters" element="tns:PingResponse" />
+    </message>
+
+    <message name="TaxPlnAddInput">
+        <part name="parameters" element="tns:TaxPlnAdd" />
+    </message>
+    <message name="TaxPlnAddOutput">
+        <part name="parameters" element="tns:TaxPlnAddResponse" />
+    </message>
+
+    <message name="TaxPlnModInput">
+        <part name="parameters" element="tns:TaxPlnMod" />
+    </message>
+    <message name="TaxPlnModOutput">
+        <part name="parameters" element="tns:TaxPlnModResponse" />
+    </message>
+
+    <message name="TaxPlnBenfAddInput">
+        <part name="parameters" element="tns:TaxPlnBenfAdd" />
+    </message>
+    <message name="TaxPlnBenfAddOutput">
+        <part name="parameters" element="tns:TaxPlnBenfAddResponse" />
+    </message>
+
+    <message name="TaxPlnBenfModInput">
+        <part name="parameters" element="tns:TaxPlnBenfMod" />
+    </message>
+    <message name="TaxPlnBenfModOutput">
+        <part name="parameters" element="tns:TaxPlnBenfModResponse" />
+    </message>
+
+    <message name="AcctModInput">
+        <part name="parameters" element="tns:AcctMod" />
+    </message>
+    <message name="AcctModOutput">
+        <part name="parameters" element="tns:AcctModResponse" />
+    </message>
+
+    <message name="AcctAddInput">
+        <part name="parameters" element="tns:AcctAdd" />
+    </message>
+    <message name="AcctAddOutput">
+        <part name="parameters" element="tns:AcctAddResponse" />
+    </message>
+
+    <message name="PltfmAppAddInput">
+        <part name="parameters" element="tns:PltfmAppAdd" />
+    </message>
+    <message name="PltfmAppAddOutput">
+        <part name="parameters" element="tns:PltfmAppAddResponse" />
+    </message>
+
+    <message name="PltfmStatInqInput">
+        <part name="parameters" element="tns:PltfmStatInq" />
+    </message>
+    <message name="PltfmStatInqOutput">
+        <part name="parameters" element="tns:PltfmStatInqResponse" />
+    </message>
+
+    <message name="AcctBenfAddInput">
+        <part name="parameters" element="tns:AcctBenfAdd" />
+    </message>
+    <message name="AcctBenfAddOutput">
+        <part name="parameters" element="tns:AcctBenfAddResponse" />
+    </message>
+
+    <message name="AcctBenfModInput">
+        <part name="parameters" element="tns:AcctBenfMod" />
+    </message>
+    <message name="AcctBenfModOutput">
+        <part name="parameters" element="tns:AcctBenfModResponse" />
+    </message>
+
+    <message name="AcctSweepAddInput">
+        <part name="parameters" element="tns:AcctSweepAdd" />
+    </message>
+    <message name="AcctSweepAddOutput">
+        <part name="parameters" element="tns:AcctSweepAddResponse" />
+    </message>
+
+    <message name="AcctSweepModInput">
+        <part name="parameters" element="tns:AcctSweepMod" />
+    </message>
+    <message name="AcctSweepModOutput">
+        <part name="parameters" element="tns:AcctSweepModResponse" />
+    </message>
+
+    <message name="AcctCombStmtAddInput">
+        <part name="parameters" element="tns:AcctCombStmtAdd" />
+    </message>
+    <message name="AcctCombStmtAddOutput">
+        <part name="parameters" element="tns:AcctCombStmtAddResponse" />
+    </message>
+
+    <message name="AcctCombStmtModInput">
+        <part name="parameters" element="tns:AcctCombStmtMod" />
+    </message>
+    <message name="AcctCombStmtModOutput">
+        <part name="parameters" element="tns:AcctCombStmtModResponse" />
+    </message>
+
+    <message name="AcctProdOvrrdAddInput">
+        <part name="parameters" element="tns:AcctProdOvrrdAdd" />
+    </message>
+    <message name="AcctProdOvrrdAddOutput">
+        <part name="parameters" element="tns:AcctProdOvrrdAddResponse" />
+    </message>
+
+    <message name="AcctProdOvrrdModInput">
+        <part name="parameters" element="tns:AcctProdOvrrdMod" />
+    </message>
+    <message name="AcctProdOvrrdModOutput">
+        <part name="parameters" element="tns:AcctProdOvrrdModResponse" />
+    </message>
+
+    <message name="AcctAddValidateInput">
+        <part name="parameters" element="tns:AcctAddValidate" />
+    </message>
+    <message name="AcctAddValidateOutput">
+        <part name="parameters" element="tns:AcctAddValidateResponse" />
+    </message>
+
+    <message name="TaxPlnAddValidateInput">
+        <part name="parameters" element="tns:TaxPlnAddValidate" />
+    </message>
+    <message name="TaxPlnAddValidateOutput">
+        <part name="parameters" element="tns:TaxPlnAddValidateResponse" />
+    </message>
+
+    <message name="TaxPlnBenfAddValidateInput">
+        <part name="parameters" element="tns:TaxPlnBenfAddValidate" />
+    </message>
+    <message name="TaxPlnBenfAddValidateOutput">
+        <part name="parameters" element="tns:TaxPlnBenfAddValidateResponse" />
+    </message>
+
+    <message name="TimeDepRenOvrrdInput">
+        <part name="parameters" element="tns:TimeDepRenOvrrd" />
+    </message>
+    <message name="TimeDepRenOvrrdOutput">
+        <part name="parameters" element="tns:TimeDepRenOvrrdResponse" />
+    </message>
+
+    <message name="PltfmStatModInput">
+        <part name="parameters" element="tns:PltfmStatMod" />
+    </message>
+    <message name="PltfmStatModOutput">
+        <part name="parameters" element="tns:PltfmStatModResponse" />
+    </message>
+
+    <message name="SafeDepAuditAddInput">
+        <part name="parameters" element="tns:SafeDepAuditAdd" />
+    </message>
+    <message name="SafeDepAuditAddOutput">
+        <part name="parameters" element="tns:SafeDepAuditAddResponse" />
+    </message>
+
+    <message name="AcctAnlysAddInput">
+        <part name="parameters" element="tns:AcctAnlysAdd" />
+    </message>
+    <message name="AcctAnlysAddOutput">
+        <part name="parameters" element="tns:AcctAnlysAddResponse" />
+    </message>
+
+    <message name="AcctAnlysModInput">
+        <part name="parameters" element="tns:AcctAnlysMod" />
+    </message>
+    <message name="AcctAnlysModOutput">
+        <part name="parameters" element="tns:AcctAnlysModResponse" />
+    </message>
+
+    <message name="PltfmAppSrchInput">
+        <part name="parameters" element="tns:PltfmAppSrch" />
+    </message>
+    <message name="PltfmAppSrchOutput">
+        <part name="parameters" element="tns:PltfmAppSrchResponse" />
+    </message>
+
+    <message name="PltfmAppInqInput">
+        <part name="parameters" element="tns:PltfmAppInq" />
+    </message>
+    <message name="PltfmAppInqOutput">
+        <part name="parameters" element="tns:PltfmAppInqResponse" />
+    </message>
+
+    <message name="AcctCommAddInput">
+        <part name="parameters" element="tns:AcctCommAdd" />
+    </message>
+    <message name="AcctCommAddOutput">
+        <part name="parameters" element="tns:AcctCommAddResponse" />
+    </message>
+
+    <message name="ChkRiskDecisionAddInput">
+        <part name="parameters" element="tns:ChkRiskDecisionAdd" />
+    </message>
+    <message name="ChkRiskDecisionAddOutput">
+        <part name="parameters" element="tns:ChkRiskDecisionAddResponse" />
+    </message>
+
+    <!-- This starts the PortType section  -->
+
+    <portType name="DepositService">
+
+        <operation name="Ping">
+            <input message="tns:PingInput" />
+            <output message="tns:PingOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TaxPlnAdd">
+            <input message="tns:TaxPlnAddInput" />
+            <output message="tns:TaxPlnAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TaxPlnMod">
+            <input message="tns:TaxPlnModInput" />
+            <output message="tns:TaxPlnModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TaxPlnBenfAdd">
+            <input message="tns:TaxPlnBenfAddInput" />
+            <output message="tns:TaxPlnBenfAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TaxPlnBenfMod">
+            <input message="tns:TaxPlnBenfModInput" />
+            <output message="tns:TaxPlnBenfModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="AcctMod">
+            <input message="tns:AcctModInput" />
+            <output message="tns:AcctModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="AcctAdd">
+            <input message="tns:AcctAddInput" />
+            <output message="tns:AcctAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="PltfmAppAdd">
+            <input message="tns:PltfmAppAddInput" />
+            <output message="tns:PltfmAppAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="PltfmStatInq">
+            <input message="tns:PltfmStatInqInput" />
+            <output message="tns:PltfmStatInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="AcctBenfAdd">
+            <input message="tns:AcctBenfAddInput" />
+            <output message="tns:AcctBenfAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="AcctBenfMod">
+            <input message="tns:AcctBenfModInput" />
+            <output message="tns:AcctBenfModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="AcctSweepAdd">
+            <input message="tns:AcctSweepAddInput" />
+            <output message="tns:AcctSweepAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="AcctSweepMod">
+            <input message="tns:AcctSweepModInput" />
+            <output message="tns:AcctSweepModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="AcctCombStmtAdd">
+            <input message="tns:AcctCombStmtAddInput" />
+            <output message="tns:AcctCombStmtAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="AcctCombStmtMod">
+            <input message="tns:AcctCombStmtModInput" />
+            <output message="tns:AcctCombStmtModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="AcctProdOvrrdAdd">
+            <input message="tns:AcctProdOvrrdAddInput" />
+            <output message="tns:AcctProdOvrrdAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="AcctProdOvrrdMod">
+            <input message="tns:AcctProdOvrrdModInput" />
+            <output message="tns:AcctProdOvrrdModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="AcctAddValidate">
+            <input message="tns:AcctAddValidateInput" />
+            <output message="tns:AcctAddValidateOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TaxPlnAddValidate">
+            <input message="tns:TaxPlnAddValidateInput" />
+            <output message="tns:TaxPlnAddValidateOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TaxPlnBenfAddValidate">
+            <input message="tns:TaxPlnBenfAddValidateInput" />
+            <output message="tns:TaxPlnBenfAddValidateOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TimeDepRenOvrrd">
+            <input message="tns:TimeDepRenOvrrdInput" />
+            <output message="tns:TimeDepRenOvrrdOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="PltfmStatMod">
+            <input message="tns:PltfmStatModInput" />
+            <output message="tns:PltfmStatModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="SafeDepAuditAdd">
+            <input message="tns:SafeDepAuditAddInput" />
+            <output message="tns:SafeDepAuditAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="AcctAnlysAdd">
+            <input message="tns:AcctAnlysAddInput" />
+            <output message="tns:AcctAnlysAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="AcctAnlysMod">
+            <input message="tns:AcctAnlysModInput" />
+            <output message="tns:AcctAnlysModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="PltfmAppSrch">
+            <input message="tns:PltfmAppSrchInput" />
+            <output message="tns:PltfmAppSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="PltfmAppInq">
+            <input message="tns:PltfmAppInqInput" />
+            <output message="tns:PltfmAppInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="AcctCommAdd">
+            <input message="tns:AcctCommAddInput" />
+            <output message="tns:AcctCommAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="ChkRiskDecisionAdd">
+            <input message="tns:ChkRiskDecisionAddInput" />
+            <output message="tns:ChkRiskDecisionAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+    </portType>
+
+    <!-- This starts the Binding section  -->
+
+    <binding name="DepositServiceSoapBinding" type="tns:DepositService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+
+        <operation name="Ping">
+            <soap:operation soapAction="http://jackhenry.com/ws/Ping" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TaxPlnAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/TaxPlnAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TaxPlnMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/TaxPlnMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TaxPlnBenfAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/TaxPlnBenfAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TaxPlnBenfMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/TaxPlnBenfMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="AcctMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/AcctMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="AcctAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/AcctAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="PltfmAppAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/PltfmAppAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="PltfmStatInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/PltfmStatInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="AcctBenfAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/AcctBenfAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="AcctBenfMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/AcctBenfMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="AcctSweepAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/AcctSweepAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="AcctSweepMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/AcctSweepMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="AcctCombStmtAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/AcctCombStmtAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="AcctCombStmtMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/AcctCombStmtMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="AcctProdOvrrdAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/AcctProdOvrrdAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="AcctProdOvrrdMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/AcctProdOvrrdMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="AcctAddValidate">
+            <soap:operation soapAction="http://jackhenry.com/ws/AcctAddValidate" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TaxPlnAddValidate">
+            <soap:operation soapAction="http://jackhenry.com/ws/TaxPlnAddValidate" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TaxPlnBenfAddValidate">
+            <soap:operation soapAction="http://jackhenry.com/ws/TaxPlnBenfAddValidate" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TimeDepRenOvrrd">
+            <soap:operation soapAction="http://jackhenry.com/ws/TimeDepRenOvrrd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="PltfmStatMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/PltfmStatMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="SafeDepAuditAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/SafeDepAuditAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="AcctAnlysAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/AcctAnlysAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="AcctAnlysMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/AcctAnlysMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="PltfmAppSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/PltfmAppSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="PltfmAppInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/PltfmAppInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="AcctCommAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/AcctCommAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="ChkRiskDecisionAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/ChkRiskDecisionAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+    </binding>
+
+    <!-- This starts the Service section  -->
+
+    <service name="DepositService">
+        <documentation>Service Description for the DepositService Interface</documentation>
+        <port name="DepositServiceSoap" binding="tns:DepositServiceSoapBinding">
+            <soap:address location="https://jackhenry.com/jxchange/2008/ServiceGateway/Deposit.svc" />
+        </port>
+    </service>
+</definitions>
