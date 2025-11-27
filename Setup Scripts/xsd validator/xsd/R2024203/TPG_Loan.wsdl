@@ -1,0 +1,1534 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+    xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+    xmlns:ns="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://jackhenry.com/jxchange/TPG/2008"
+    targetNamespace="http://jackhenry.com/jxchange/TPG/2008">
+
+    <!-- This starts the Types section  -->
+
+    <types>
+        <xsd:schema elementFormDefault="qualified" attributeFormDefault="qualified"
+            targetNamespace="http://jackhenry.com/jxchange/TPG/2008"
+            xmlns="http://jackhenry.com/jxchange/TPG/2008" version="2024.2.03"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+            <xsd:include schemaLocation="TPG_LoanMaster.xsd" />
+
+        </xsd:schema>
+    </types>
+
+    <!-- This starts the Message section  -->
+
+    <message name="MessageFault">
+        <part name="parameters" element="tns:HdrFault" />
+    </message>
+
+    <message name="PingInput">
+        <part name="parameters" element="tns:Ping" />
+    </message>
+    <message name="PingOutput">
+        <part name="parameters" element="tns:PingResponse" />
+    </message>
+
+    <message name="CollatTrackAddInput">
+        <part name="parameters" element="tns:CollatTrackAdd" />
+    </message>
+    <message name="CollatTrackAddOutput">
+        <part name="parameters" element="tns:CollatTrackAddResponse" />
+    </message>
+
+    <message name="CollatTrackModInput">
+        <part name="parameters" element="tns:CollatTrackMod" />
+    </message>
+    <message name="CollatTrackModOutput">
+        <part name="parameters" element="tns:CollatTrackModResponse" />
+    </message>
+
+    <message name="RealEstatePropAddInput">
+        <part name="parameters" element="tns:RealEstatePropAdd" />
+    </message>
+    <message name="RealEstatePropAddOutput">
+        <part name="parameters" element="tns:RealEstatePropAddResponse" />
+    </message>
+
+    <message name="RealEstatePropModInput">
+        <part name="parameters" element="tns:RealEstatePropMod" />
+    </message>
+    <message name="RealEstatePropModOutput">
+        <part name="parameters" element="tns:RealEstatePropModResponse" />
+    </message>
+
+    <message name="LOCAddInput">
+        <part name="parameters" element="tns:LOCAdd" />
+    </message>
+    <message name="LOCAddOutput">
+        <part name="parameters" element="tns:LOCAddResponse" />
+    </message>
+
+    <message name="LOCModInput">
+        <part name="parameters" element="tns:LOCMod" />
+    </message>
+    <message name="LOCModOutput">
+        <part name="parameters" element="tns:LOCModResponse" />
+    </message>
+
+    <message name="EscrwAddInput">
+        <part name="parameters" element="tns:EscrwAdd" />
+    </message>
+    <message name="EscrwAddOutput">
+        <part name="parameters" element="tns:EscrwAddResponse" />
+    </message>
+
+    <message name="EscrwModInput">
+        <part name="parameters" element="tns:EscrwMod" />
+    </message>
+    <message name="EscrwModOutput">
+        <part name="parameters" element="tns:EscrwModResponse" />
+    </message>
+
+    <message name="FASB91AddInput">
+        <part name="parameters" element="tns:FASB91Add" />
+    </message>
+    <message name="FASB91AddOutput">
+        <part name="parameters" element="tns:FASB91AddResponse" />
+    </message>
+
+    <message name="FASB91ModInput">
+        <part name="parameters" element="tns:FASB91Mod" />
+    </message>
+    <message name="FASB91ModOutput">
+        <part name="parameters" element="tns:FASB91ModResponse" />
+    </message>
+
+    <message name="LnAcctAddInput">
+        <part name="parameters" element="tns:LnAcctAdd" />
+    </message>
+    <message name="LnAcctAddOutput">
+        <part name="parameters" element="tns:LnAcctAddResponse" />
+    </message>
+
+    <message name="LnAcctModInput">
+        <part name="parameters" element="tns:LnAcctMod" />
+    </message>
+    <message name="LnAcctModOutput">
+        <part name="parameters" element="tns:LnAcctModResponse" />
+    </message>
+
+    <message name="LnPltfmAppAddInput">
+        <part name="parameters" element="tns:LnPltfmAppAdd" />
+    </message>
+    <message name="LnPltfmAppAddOutput">
+        <part name="parameters" element="tns:LnPltfmAppAddResponse" />
+    </message>
+
+    <message name="PltfmStatInqInput">
+        <part name="parameters" element="tns:PltfmStatInq" />
+    </message>
+    <message name="PltfmStatInqOutput">
+        <part name="parameters" element="tns:PltfmStatInqResponse" />
+    </message>
+
+    <message name="LnAppRgtrAddInput">
+        <part name="parameters" element="tns:LnAppRgtrAdd" />
+    </message>
+    <message name="LnAppRgtrAddOutput">
+        <part name="parameters" element="tns:LnAppRgtrAddResponse" />
+    </message>
+
+    <message name="LnAppRgtrModInput">
+        <part name="parameters" element="tns:LnAppRgtrMod" />
+    </message>
+    <message name="LnAppRgtrModOutput">
+        <part name="parameters" element="tns:LnAppRgtrModResponse" />
+    </message>
+
+    <message name="LnPmtExtInput">
+        <part name="parameters" element="tns:LnPmtExt" />
+    </message>
+    <message name="LnPmtExtOutput">
+        <part name="parameters" element="tns:LnPmtExtResponse" />
+    </message>
+
+    <message name="LnRenInput">
+        <part name="parameters" element="tns:LnRen" />
+    </message>
+    <message name="LnRenOutput">
+        <part name="parameters" element="tns:LnRenResponse" />
+    </message>
+
+    <message name="CrBurInfoAddInput">
+        <part name="parameters" element="tns:CrBurInfoAdd" />
+    </message>
+    <message name="CrBurInfoAddOutput">
+        <part name="parameters" element="tns:CrBurInfoAddResponse" />
+    </message>
+
+    <message name="CrBurInfoModInput">
+        <part name="parameters" element="tns:CrBurInfoMod" />
+    </message>
+    <message name="CrBurInfoModOutput">
+        <part name="parameters" element="tns:CrBurInfoModResponse" />
+    </message>
+
+    <message name="LnPmtSchedAddInput">
+        <part name="parameters" element="tns:LnPmtSchedAdd" />
+    </message>
+    <message name="LnPmtSchedAddOutput">
+        <part name="parameters" element="tns:LnPmtSchedAddResponse" />
+    </message>
+
+    <message name="LnPmtSchedModInput">
+        <part name="parameters" element="tns:LnPmtSchedMod" />
+    </message>
+    <message name="LnPmtSchedModOutput">
+        <part name="parameters" element="tns:LnPmtSchedModResponse" />
+    </message>
+
+    <message name="LnAcctAddValidateInput">
+        <part name="parameters" element="tns:LnAcctAddValidate" />
+    </message>
+    <message name="LnAcctAddValidateOutput">
+        <part name="parameters" element="tns:LnAcctAddValidateResponse" />
+    </message>
+
+    <message name="EscrwAddValidateInput">
+        <part name="parameters" element="tns:EscrwAddValidate" />
+    </message>
+    <message name="EscrwAddValidateOutput">
+        <part name="parameters" element="tns:EscrwAddValidateResponse" />
+    </message>
+
+    <message name="FASB91AddValidateInput">
+        <part name="parameters" element="tns:FASB91AddValidate" />
+    </message>
+    <message name="FASB91AddValidateOutput">
+        <part name="parameters" element="tns:FASB91AddValidateResponse" />
+    </message>
+
+    <message name="LnAppRgtrAddValidateInput">
+        <part name="parameters" element="tns:LnAppRgtrAddValidate" />
+    </message>
+    <message name="LnAppRgtrAddValidateOutput">
+        <part name="parameters" element="tns:LnAppRgtrAddValidateResponse" />
+    </message>
+
+    <message name="LnPmtSchedAddValidateInput">
+        <part name="parameters" element="tns:LnPmtSchedAddValidate" />
+    </message>
+    <message name="LnPmtSchedAddValidateOutput">
+        <part name="parameters" element="tns:LnPmtSchedAddValidateResponse" />
+    </message>
+
+    <message name="LOCAddValidateInput">
+        <part name="parameters" element="tns:LOCAddValidate" />
+    </message>
+    <message name="LOCAddValidateOutput">
+        <part name="parameters" element="tns:LOCAddValidateResponse" />
+    </message>
+
+    <message name="CrBurInfoAddValidateInput">
+        <part name="parameters" element="tns:CrBurInfoAddValidate" />
+    </message>
+    <message name="CrBurInfoAddValidateOutput">
+        <part name="parameters" element="tns:CrBurInfoAddValidateResponse" />
+    </message>
+
+    <message name="CollatTrackAddValidateInput">
+        <part name="parameters" element="tns:CollatTrackAddValidate" />
+    </message>
+    <message name="CollatTrackAddValidateOutput">
+        <part name="parameters" element="tns:CollatTrackAddValidateResponse" />
+    </message>
+
+    <message name="RealEstatePropAddValidateInput">
+        <part name="parameters" element="tns:RealEstatePropAddValidate" />
+    </message>
+    <message name="RealEstatePropAddValidateOutput">
+        <part name="parameters" element="tns:RealEstatePropAddValidateResponse" />
+    </message>
+
+    <message name="LnRateSchedModInput">
+        <part name="parameters" element="tns:LnRateSchedMod" />
+    </message>
+    <message name="LnRateSchedModOutput">
+        <part name="parameters" element="tns:LnRateSchedModResponse" />
+    </message>
+
+    <message name="LnFeeAddInput">
+        <part name="parameters" element="tns:LnFeeAdd" />
+    </message>
+    <message name="LnFeeAddOutput">
+        <part name="parameters" element="tns:LnFeeAddResponse" />
+    </message>
+
+    <message name="LnFeeModInput">
+        <part name="parameters" element="tns:LnFeeMod" />
+    </message>
+    <message name="LnFeeModOutput">
+        <part name="parameters" element="tns:LnFeeModResponse" />
+    </message>
+
+    <message name="LnRateSchedAddInput">
+        <part name="parameters" element="tns:LnRateSchedAdd" />
+    </message>
+    <message name="LnRateSchedAddOutput">
+        <part name="parameters" element="tns:LnRateSchedAddResponse" />
+    </message>
+
+    <message name="LnRateSchedAddValidateInput">
+        <part name="parameters" element="tns:LnRateSchedAddValidate" />
+    </message>
+    <message name="LnRateSchedAddValidateOutput">
+        <part name="parameters" element="tns:LnRateSchedAddValidateResponse" />
+    </message>
+
+    <message name="MLLMasterRelAddInput">
+        <part name="parameters" element="tns:MLLMasterRelAdd" />
+    </message>
+    <message name="MLLMasterRelAddOutput">
+        <part name="parameters" element="tns:MLLMasterRelAddResponse" />
+    </message>
+
+    <message name="MLLTrancheRelAddInput">
+        <part name="parameters" element="tns:MLLTrancheRelAdd" />
+    </message>
+    <message name="MLLTrancheRelAddOutput">
+        <part name="parameters" element="tns:MLLTrancheRelAddResponse" />
+    </message>
+
+    <message name="MLLMasterRelModInput">
+        <part name="parameters" element="tns:MLLMasterRelMod" />
+    </message>
+    <message name="MLLMasterRelModOutput">
+        <part name="parameters" element="tns:MLLMasterRelModResponse" />
+    </message>
+
+    <message name="MLLTrancheRelModInput">
+        <part name="parameters" element="tns:MLLTrancheRelMod" />
+    </message>
+    <message name="MLLTrancheRelModOutput">
+        <part name="parameters" element="tns:MLLTrancheRelModResponse" />
+    </message>
+
+    <message name="LnBilModInput">
+        <part name="parameters" element="tns:LnBilMod" />
+    </message>
+    <message name="LnBilModOutput">
+        <part name="parameters" element="tns:LnBilModResponse" />
+    </message>
+
+    <message name="LnBilAddInput">
+        <part name="parameters" element="tns:LnBilAdd" />
+    </message>
+    <message name="LnBilAddOutput">
+        <part name="parameters" element="tns:LnBilAddResponse" />
+    </message>
+
+    <message name="EscrwAgentDistrAddInput">
+        <part name="parameters" element="tns:EscrwAgentDistrAdd" />
+    </message>
+    <message name="EscrwAgentDistrAddOutput">
+        <part name="parameters" element="tns:EscrwAgentDistrAddResponse" />
+    </message>
+
+    <message name="EscrwAgentDistrModInput">
+        <part name="parameters" element="tns:EscrwAgentDistrMod" />
+    </message>
+    <message name="EscrwAgentDistrModOutput">
+        <part name="parameters" element="tns:EscrwAgentDistrModResponse" />
+    </message>
+
+    <message name="LnRateSwapAddInput">
+        <part name="parameters" element="tns:LnRateSwapAdd" />
+    </message>
+    <message name="LnRateSwapAddOutput">
+        <part name="parameters" element="tns:LnRateSwapAddResponse" />
+    </message>
+
+    <message name="LnRateSwapModInput">
+        <part name="parameters" element="tns:LnRateSwapMod" />
+    </message>
+    <message name="LnRateSwapModOutput">
+        <part name="parameters" element="tns:LnRateSwapModResponse" />
+    </message>
+
+    <message name="LOCConstInProcAddInput">
+        <part name="parameters" element="tns:LOCConstInProcAdd" />
+    </message>
+    <message name="LOCConstInProcAddOutput">
+        <part name="parameters" element="tns:LOCConstInProcAddResponse" />
+    </message>
+
+    <message name="LOCConstInProcModInput">
+        <part name="parameters" element="tns:LOCConstInProcMod" />
+    </message>
+    <message name="LOCConstInProcModOutput">
+        <part name="parameters" element="tns:LOCConstInProcModResponse" />
+    </message>
+
+    <message name="LnShdwModInput">
+        <part name="parameters" element="tns:LnShdwMod" />
+    </message>
+    <message name="LnShdwModOutput">
+        <part name="parameters" element="tns:LnShdwModResponse" />
+    </message>
+
+    <message name="LnUnitAddInput">
+        <part name="parameters" element="tns:LnUnitAdd" />
+    </message>
+    <message name="LnUnitAddOutput">
+        <part name="parameters" element="tns:LnUnitAddResponse" />
+    </message>
+
+    <message name="LnUnitAddValidateInput">
+        <part name="parameters" element="tns:LnUnitAddValidate" />
+    </message>
+    <message name="LnUnitAddValidateOutput">
+        <part name="parameters" element="tns:LnUnitAddValidateResponse" />
+    </message>
+
+    <message name="LnUnitModInput">
+        <part name="parameters" element="tns:LnUnitMod" />
+    </message>
+    <message name="LnUnitModOutput">
+        <part name="parameters" element="tns:LnUnitModResponse" />
+    </message>
+
+    <message name="LnFeePrtcpAddInput">
+        <part name="parameters" element="tns:LnFeePrtcpAdd" />
+    </message>
+    <message name="LnFeePrtcpAddOutput">
+        <part name="parameters" element="tns:LnFeePrtcpAddResponse" />
+    </message>
+
+    <message name="LnFeePrtcpModInput">
+        <part name="parameters" element="tns:LnFeePrtcpMod" />
+    </message>
+    <message name="LnFeePrtcpModOutput">
+        <part name="parameters" element="tns:LnFeePrtcpModResponse" />
+    </message>
+
+    <message name="LnPltfmAppSrchInput">
+        <part name="parameters" element="tns:LnPltfmAppSrch" />
+    </message>
+    <message name="LnPltfmAppSrchOutput">
+        <part name="parameters" element="tns:LnPltfmAppSrchResponse" />
+    </message>
+
+    <message name="LnPltfmAppInqInput">
+        <part name="parameters" element="tns:LnPltfmAppInq" />
+    </message>
+    <message name="LnPltfmAppInqOutput">
+        <part name="parameters" element="tns:LnPltfmAppInqResponse" />
+    </message>
+
+    <!-- This starts the PortType section  -->
+
+    <portType name="LoanService">
+
+        <operation name="Ping">
+            <input message="tns:PingInput" />
+            <output message="tns:PingOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CollatTrackAdd">
+            <input message="tns:CollatTrackAddInput" />
+            <output message="tns:CollatTrackAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CollatTrackMod">
+            <input message="tns:CollatTrackModInput" />
+            <output message="tns:CollatTrackModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="RealEstatePropAdd">
+            <input message="tns:RealEstatePropAddInput" />
+            <output message="tns:RealEstatePropAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="RealEstatePropMod">
+            <input message="tns:RealEstatePropModInput" />
+            <output message="tns:RealEstatePropModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LOCAdd">
+            <input message="tns:LOCAddInput" />
+            <output message="tns:LOCAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LOCMod">
+            <input message="tns:LOCModInput" />
+            <output message="tns:LOCModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="EscrwAdd">
+            <input message="tns:EscrwAddInput" />
+            <output message="tns:EscrwAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="EscrwMod">
+            <input message="tns:EscrwModInput" />
+            <output message="tns:EscrwModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="FASB91Add">
+            <input message="tns:FASB91AddInput" />
+            <output message="tns:FASB91AddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="FASB91Mod">
+            <input message="tns:FASB91ModInput" />
+            <output message="tns:FASB91ModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnAcctAdd">
+            <input message="tns:LnAcctAddInput" />
+            <output message="tns:LnAcctAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnAcctMod">
+            <input message="tns:LnAcctModInput" />
+            <output message="tns:LnAcctModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnPltfmAppAdd">
+            <input message="tns:LnPltfmAppAddInput" />
+            <output message="tns:LnPltfmAppAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="PltfmStatInq">
+            <input message="tns:PltfmStatInqInput" />
+            <output message="tns:PltfmStatInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnAppRgtrAdd">
+            <input message="tns:LnAppRgtrAddInput" />
+            <output message="tns:LnAppRgtrAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnAppRgtrMod">
+            <input message="tns:LnAppRgtrModInput" />
+            <output message="tns:LnAppRgtrModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnPmtExt">
+            <input message="tns:LnPmtExtInput" />
+            <output message="tns:LnPmtExtOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnRen">
+            <input message="tns:LnRenInput" />
+            <output message="tns:LnRenOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CrBurInfoAdd">
+            <input message="tns:CrBurInfoAddInput" />
+            <output message="tns:CrBurInfoAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CrBurInfoMod">
+            <input message="tns:CrBurInfoModInput" />
+            <output message="tns:CrBurInfoModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnPmtSchedAdd">
+            <input message="tns:LnPmtSchedAddInput" />
+            <output message="tns:LnPmtSchedAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnPmtSchedMod">
+            <input message="tns:LnPmtSchedModInput" />
+            <output message="tns:LnPmtSchedModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnAcctAddValidate">
+            <input message="tns:LnAcctAddValidateInput" />
+            <output message="tns:LnAcctAddValidateOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="EscrwAddValidate">
+            <input message="tns:EscrwAddValidateInput" />
+            <output message="tns:EscrwAddValidateOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="FASB91AddValidate">
+            <input message="tns:FASB91AddValidateInput" />
+            <output message="tns:FASB91AddValidateOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnAppRgtrAddValidate">
+            <input message="tns:LnAppRgtrAddValidateInput" />
+            <output message="tns:LnAppRgtrAddValidateOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnPmtSchedAddValidate">
+            <input message="tns:LnPmtSchedAddValidateInput" />
+            <output message="tns:LnPmtSchedAddValidateOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LOCAddValidate">
+            <input message="tns:LOCAddValidateInput" />
+            <output message="tns:LOCAddValidateOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CrBurInfoAddValidate">
+            <input message="tns:CrBurInfoAddValidateInput" />
+            <output message="tns:CrBurInfoAddValidateOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CollatTrackAddValidate">
+            <input message="tns:CollatTrackAddValidateInput" />
+            <output message="tns:CollatTrackAddValidateOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="RealEstatePropAddValidate">
+            <input message="tns:RealEstatePropAddValidateInput" />
+            <output message="tns:RealEstatePropAddValidateOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnRateSchedMod">
+            <input message="tns:LnRateSchedModInput" />
+            <output message="tns:LnRateSchedModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnFeeAdd">
+            <input message="tns:LnFeeAddInput" />
+            <output message="tns:LnFeeAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnFeeMod">
+            <input message="tns:LnFeeModInput" />
+            <output message="tns:LnFeeModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnRateSchedAdd">
+            <input message="tns:LnRateSchedAddInput" />
+            <output message="tns:LnRateSchedAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnRateSchedAddValidate">
+            <input message="tns:LnRateSchedAddValidateInput" />
+            <output message="tns:LnRateSchedAddValidateOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="MLLMasterRelAdd">
+            <input message="tns:MLLMasterRelAddInput" />
+            <output message="tns:MLLMasterRelAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="MLLTrancheRelAdd">
+            <input message="tns:MLLTrancheRelAddInput" />
+            <output message="tns:MLLTrancheRelAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="MLLMasterRelMod">
+            <input message="tns:MLLMasterRelModInput" />
+            <output message="tns:MLLMasterRelModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="MLLTrancheRelMod">
+            <input message="tns:MLLTrancheRelModInput" />
+            <output message="tns:MLLTrancheRelModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnBilMod">
+            <input message="tns:LnBilModInput" />
+            <output message="tns:LnBilModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnBilAdd">
+            <input message="tns:LnBilAddInput" />
+            <output message="tns:LnBilAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="EscrwAgentDistrAdd">
+            <input message="tns:EscrwAgentDistrAddInput" />
+            <output message="tns:EscrwAgentDistrAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="EscrwAgentDistrMod">
+            <input message="tns:EscrwAgentDistrModInput" />
+            <output message="tns:EscrwAgentDistrModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnRateSwapAdd">
+            <input message="tns:LnRateSwapAddInput" />
+            <output message="tns:LnRateSwapAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnRateSwapMod">
+            <input message="tns:LnRateSwapModInput" />
+            <output message="tns:LnRateSwapModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LOCConstInProcAdd">
+            <input message="tns:LOCConstInProcAddInput" />
+            <output message="tns:LOCConstInProcAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LOCConstInProcMod">
+            <input message="tns:LOCConstInProcModInput" />
+            <output message="tns:LOCConstInProcModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnShdwMod">
+            <input message="tns:LnShdwModInput" />
+            <output message="tns:LnShdwModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnUnitAdd">
+            <input message="tns:LnUnitAddInput" />
+            <output message="tns:LnUnitAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnUnitAddValidate">
+            <input message="tns:LnUnitAddValidateInput" />
+            <output message="tns:LnUnitAddValidateOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnUnitMod">
+            <input message="tns:LnUnitModInput" />
+            <output message="tns:LnUnitModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnFeePrtcpAdd">
+            <input message="tns:LnFeePrtcpAddInput" />
+            <output message="tns:LnFeePrtcpAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnFeePrtcpMod">
+            <input message="tns:LnFeePrtcpModInput" />
+            <output message="tns:LnFeePrtcpModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnPltfmAppSrch">
+            <input message="tns:LnPltfmAppSrchInput" />
+            <output message="tns:LnPltfmAppSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="LnPltfmAppInq">
+            <input message="tns:LnPltfmAppInqInput" />
+            <output message="tns:LnPltfmAppInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+    </portType>
+
+    <!-- This starts the Binding section  -->
+
+    <binding name="LoanServiceSoapBinding" type="tns:LoanService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+
+        <operation name="Ping">
+            <soap:operation soapAction="http://jackhenry.com/ws/Ping" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CollatTrackAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/CollatTrackAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CollatTrackMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/CollatTrackMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="RealEstatePropAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/RealEstatePropAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="RealEstatePropMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/RealEstatePropMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LOCAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/LOCAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LOCMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/LOCMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="EscrwAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/EscrwAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="EscrwMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/EscrwMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="FASB91Add">
+            <soap:operation soapAction="http://jackhenry.com/ws/FASB91Add" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="FASB91Mod">
+            <soap:operation soapAction="http://jackhenry.com/ws/FASB91Mod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnAcctAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnAcctAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnAcctMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnAcctMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnPltfmAppAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnPltfmAppAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="PltfmStatInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/PltfmStatInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnAppRgtrAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnAppRgtrAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnAppRgtrMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnAppRgtrMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnPmtExt">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnPmtExt" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnRen">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnRen" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CrBurInfoAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/CrBurInfoAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CrBurInfoMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/CrBurInfoMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnPmtSchedAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnPmtSchedAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnPmtSchedMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnPmtSchedMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnAcctAddValidate">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnAcctAddValidate" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="EscrwAddValidate">
+            <soap:operation soapAction="http://jackhenry.com/ws/EscrwAddValidate" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="FASB91AddValidate">
+            <soap:operation soapAction="http://jackhenry.com/ws/FASB91AddValidate" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnAppRgtrAddValidate">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnAppRgtrAddValidate" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnPmtSchedAddValidate">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnPmtSchedAddValidate" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LOCAddValidate">
+            <soap:operation soapAction="http://jackhenry.com/ws/LOCAddValidate" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CrBurInfoAddValidate">
+            <soap:operation soapAction="http://jackhenry.com/ws/CrBurInfoAddValidate" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CollatTrackAddValidate">
+            <soap:operation soapAction="http://jackhenry.com/ws/CollatTrackAddValidate" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="RealEstatePropAddValidate">
+            <soap:operation soapAction="http://jackhenry.com/ws/RealEstatePropAddValidate" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnRateSchedMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnRateSchedMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnFeeAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnFeeAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnFeeMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnFeeMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnRateSchedAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnRateSchedAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnRateSchedAddValidate">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnRateSchedAddValidate" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="MLLMasterRelAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/MLLMasterRelAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="MLLTrancheRelAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/MLLTrancheRelAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="MLLMasterRelMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/MLLMasterRelMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="MLLTrancheRelMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/MLLTrancheRelMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnBilMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnBilMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnBilAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnBilAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="EscrwAgentDistrAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/EscrwAgentDistrAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="EscrwAgentDistrMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/EscrwAgentDistrMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnRateSwapAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnRateSwapAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnRateSwapMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnRateSwapMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LOCConstInProcAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/LOCConstInProcAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LOCConstInProcMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/LOCConstInProcMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnShdwMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnShdwMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnUnitAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnUnitAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnUnitAddValidate">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnUnitAddValidate" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnUnitMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnUnitMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnFeePrtcpAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnFeePrtcpAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnFeePrtcpMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnFeePrtcpMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnPltfmAppSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnPltfmAppSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="LnPltfmAppInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/LnPltfmAppInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+    </binding>
+
+    <!-- This starts the Service section  -->
+
+    <service name="LoanService">
+        <documentation>Service Description for the LoanService Interface</documentation>
+        <port name="LoanServiceSoap" binding="tns:LoanServiceSoapBinding">
+            <soap:address location="https://jackhenry.com/jxchange/2008/ServiceGateway/Loan.svc" />
+        </port>
+    </service>
+</definitions>

@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+    xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+    xmlns:ns="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://jackhenry.com/jxchange/TPG/2008"
+    targetNamespace="http://jackhenry.com/jxchange/TPG/2008">
+
+    <!-- This starts the Types section  -->
+
+    <types>
+        <xsd:schema elementFormDefault="qualified" attributeFormDefault="qualified"
+            targetNamespace="http://jackhenry.com/jxchange/TPG/2008"
+            xmlns="http://jackhenry.com/jxchange/TPG/2008" version="2024.2.03"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+            <xsd:include schemaLocation="TPG_BillPayMaster.xsd" />
+
+        </xsd:schema>
+    </types>
+
+    <!-- This starts the Message section  -->
+
+    <message name="MessageFault">
+        <part name="parameters" element="tns:HdrFault" />
+    </message>
+
+    <message name="PingInput">
+        <part name="parameters" element="tns:Ping" />
+    </message>
+    <message name="PingOutput">
+        <part name="parameters" element="tns:PingResponse" />
+    </message>
+
+    <message name="BilPayPayeeSrchInput">
+        <part name="parameters" element="tns:BilPayPayeeSrch" />
+    </message>
+    <message name="BilPayPayeeSrchOutput">
+        <part name="parameters" element="tns:BilPayPayeeSrchResponse" />
+    </message>
+
+    <message name="BilPayPayeeInqInput">
+        <part name="parameters" element="tns:BilPayPayeeInq" />
+    </message>
+    <message name="BilPayPayeeInqOutput">
+        <part name="parameters" element="tns:BilPayPayeeInqResponse" />
+    </message>
+
+    <message name="BilPayPayeeAddInput">
+        <part name="parameters" element="tns:BilPayPayeeAdd" />
+    </message>
+    <message name="BilPayPayeeAddOutput">
+        <part name="parameters" element="tns:BilPayPayeeAddResponse" />
+    </message>
+
+    <message name="BilPayPayeeModInput">
+        <part name="parameters" element="tns:BilPayPayeeMod" />
+    </message>
+    <message name="BilPayPayeeModOutput">
+        <part name="parameters" element="tns:BilPayPayeeModResponse" />
+    </message>
+
+    <message name="BilPaySchedPmtSrchInput">
+        <part name="parameters" element="tns:BilPaySchedPmtSrch" />
+    </message>
+    <message name="BilPaySchedPmtSrchOutput">
+        <part name="parameters" element="tns:BilPaySchedPmtSrchResponse" />
+    </message>
+
+    <message name="BilPaySchedPmtInqInput">
+        <part name="parameters" element="tns:BilPaySchedPmtInq" />
+    </message>
+    <message name="BilPaySchedPmtInqOutput">
+        <part name="parameters" element="tns:BilPaySchedPmtInqResponse" />
+    </message>
+
+    <message name="BilPaySchedPmtAddInput">
+        <part name="parameters" element="tns:BilPaySchedPmtAdd" />
+    </message>
+    <message name="BilPaySchedPmtAddOutput">
+        <part name="parameters" element="tns:BilPaySchedPmtAddResponse" />
+    </message>
+
+    <message name="BilPaySchedPmtModInput">
+        <part name="parameters" element="tns:BilPaySchedPmtMod" />
+    </message>
+    <message name="BilPaySchedPmtModOutput">
+        <part name="parameters" element="tns:BilPaySchedPmtModResponse" />
+    </message>
+
+    <message name="BilPaySchedPmtApprvInput">
+        <part name="parameters" element="tns:BilPaySchedPmtApprv" />
+    </message>
+    <message name="BilPaySchedPmtApprvOutput">
+        <part name="parameters" element="tns:BilPaySchedPmtApprvResponse" />
+    </message>
+
+    <message name="BilPayPmtHistSrchInput">
+        <part name="parameters" element="tns:BilPayPmtHistSrch" />
+    </message>
+    <message name="BilPayPmtHistSrchOutput">
+        <part name="parameters" element="tns:BilPayPmtHistSrchResponse" />
+    </message>
+
+    <message name="BilPayPmtHistInqInput">
+        <part name="parameters" element="tns:BilPayPmtHistInq" />
+    </message>
+    <message name="BilPayPmtHistInqOutput">
+        <part name="parameters" element="tns:BilPayPmtHistInqResponse" />
+    </message>
+
+    <message name="BilPaySubSrchInput">
+        <part name="parameters" element="tns:BilPaySubSrch" />
+    </message>
+    <message name="BilPaySubSrchOutput">
+        <part name="parameters" element="tns:BilPaySubSrchResponse" />
+    </message>
+
+    <message name="BilPaySubInqInput">
+        <part name="parameters" element="tns:BilPaySubInq" />
+    </message>
+    <message name="BilPaySubInqOutput">
+        <part name="parameters" element="tns:BilPaySubInqResponse" />
+    </message>
+
+    <message name="BilPaySubAddInput">
+        <part name="parameters" element="tns:BilPaySubAdd" />
+    </message>
+    <message name="BilPaySubAddOutput">
+        <part name="parameters" element="tns:BilPaySubAddResponse" />
+    </message>
+
+    <message name="BilPaySubModInput">
+        <part name="parameters" element="tns:BilPaySubMod" />
+    </message>
+    <message name="BilPaySubModOutput">
+        <part name="parameters" element="tns:BilPaySubModResponse" />
+    </message>
+
+    <message name="BilPaySubConsmCustInqInput">
+        <part name="parameters" element="tns:BilPaySubConsmCustInq" />
+    </message>
+    <message name="BilPaySubConsmCustInqOutput">
+        <part name="parameters" element="tns:BilPaySubConsmCustInqResponse" />
+    </message>
+
+    <message name="BilPayChanInqInput">
+        <part name="parameters" element="tns:BilPayChanInq" />
+    </message>
+    <message name="BilPayChanInqOutput">
+        <part name="parameters" element="tns:BilPayChanInqResponse" />
+    </message>
+
+    <message name="BilPayElecBilSchedSrchInput">
+        <part name="parameters" element="tns:BilPayElecBilSchedSrch" />
+    </message>
+    <message name="BilPayElecBilSchedSrchOutput">
+        <part name="parameters" element="tns:BilPayElecBilSchedSrchResponse" />
+    </message>
+
+    <message name="BilPayElecBilSchedInqInput">
+        <part name="parameters" element="tns:BilPayElecBilSchedInq" />
+    </message>
+    <message name="BilPayElecBilSchedInqOutput">
+        <part name="parameters" element="tns:BilPayElecBilSchedInqResponse" />
+    </message>
+
+    <message name="BilPayElecBilSchedModInput">
+        <part name="parameters" element="tns:BilPayElecBilSchedMod" />
+    </message>
+    <message name="BilPayElecBilSchedModOutput">
+        <part name="parameters" element="tns:BilPayElecBilSchedModResponse" />
+    </message>
+
+    <!-- This starts the PortType section  -->
+
+    <portType name="BillPayService">
+
+        <operation name="Ping">
+            <input message="tns:PingInput" />
+            <output message="tns:PingOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="BilPayPayeeSrch">
+            <input message="tns:BilPayPayeeSrchInput" />
+            <output message="tns:BilPayPayeeSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="BilPayPayeeInq">
+            <input message="tns:BilPayPayeeInqInput" />
+            <output message="tns:BilPayPayeeInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="BilPayPayeeAdd">
+            <input message="tns:BilPayPayeeAddInput" />
+            <output message="tns:BilPayPayeeAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="BilPayPayeeMod">
+            <input message="tns:BilPayPayeeModInput" />
+            <output message="tns:BilPayPayeeModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="BilPaySchedPmtSrch">
+            <input message="tns:BilPaySchedPmtSrchInput" />
+            <output message="tns:BilPaySchedPmtSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="BilPaySchedPmtInq">
+            <input message="tns:BilPaySchedPmtInqInput" />
+            <output message="tns:BilPaySchedPmtInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="BilPaySchedPmtAdd">
+            <input message="tns:BilPaySchedPmtAddInput" />
+            <output message="tns:BilPaySchedPmtAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="BilPaySchedPmtMod">
+            <input message="tns:BilPaySchedPmtModInput" />
+            <output message="tns:BilPaySchedPmtModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="BilPaySchedPmtApprv">
+            <input message="tns:BilPaySchedPmtApprvInput" />
+            <output message="tns:BilPaySchedPmtApprvOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="BilPayPmtHistSrch">
+            <input message="tns:BilPayPmtHistSrchInput" />
+            <output message="tns:BilPayPmtHistSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="BilPayPmtHistInq">
+            <input message="tns:BilPayPmtHistInqInput" />
+            <output message="tns:BilPayPmtHistInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="BilPaySubSrch">
+            <input message="tns:BilPaySubSrchInput" />
+            <output message="tns:BilPaySubSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="BilPaySubInq">
+            <input message="tns:BilPaySubInqInput" />
+            <output message="tns:BilPaySubInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="BilPaySubAdd">
+            <input message="tns:BilPaySubAddInput" />
+            <output message="tns:BilPaySubAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="BilPaySubMod">
+            <input message="tns:BilPaySubModInput" />
+            <output message="tns:BilPaySubModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="BilPaySubConsmCustInq">
+            <input message="tns:BilPaySubConsmCustInqInput" />
+            <output message="tns:BilPaySubConsmCustInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="BilPayChanInq">
+            <input message="tns:BilPayChanInqInput" />
+            <output message="tns:BilPayChanInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="BilPayElecBilSchedSrch">
+            <input message="tns:BilPayElecBilSchedSrchInput" />
+            <output message="tns:BilPayElecBilSchedSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="BilPayElecBilSchedInq">
+            <input message="tns:BilPayElecBilSchedInqInput" />
+            <output message="tns:BilPayElecBilSchedInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="BilPayElecBilSchedMod">
+            <input message="tns:BilPayElecBilSchedModInput" />
+            <output message="tns:BilPayElecBilSchedModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+    </portType>
+
+    <!-- This starts the Binding section  -->
+
+    <binding name="BillPayServiceSoapBinding" type="tns:BillPayService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+
+        <operation name="Ping">
+            <soap:operation soapAction="http://jackhenry.com/ws/Ping" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="BilPayPayeeSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/BilPayPayeeSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="BilPayPayeeInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/BilPayPayeeInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="BilPayPayeeAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/BilPayPayeeAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="BilPayPayeeMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/BilPayPayeeMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="BilPaySchedPmtSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/BilPaySchedPmtSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="BilPaySchedPmtInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/BilPaySchedPmtInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="BilPaySchedPmtAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/BilPaySchedPmtAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="BilPaySchedPmtMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/BilPaySchedPmtMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="BilPaySchedPmtApprv">
+            <soap:operation soapAction="http://jackhenry.com/ws/BilPaySchedPmtApprv" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="BilPayPmtHistSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/BilPayPmtHistSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="BilPayPmtHistInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/BilPayPmtHistInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="BilPaySubSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/BilPaySubSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="BilPaySubInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/BilPaySubInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="BilPaySubAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/BilPaySubAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="BilPaySubMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/BilPaySubMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="BilPaySubConsmCustInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/BilPaySubConsmCustInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="BilPayChanInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/BilPayChanInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="BilPayElecBilSchedSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/BilPayElecBilSchedSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="BilPayElecBilSchedInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/BilPayElecBilSchedInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="BilPayElecBilSchedMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/BilPayElecBilSchedMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+    </binding>
+
+    <!-- This starts the Service section  -->
+
+    <service name="BillPayService">
+        <documentation>Service Description for the BillPayService Interface</documentation>
+        <port name="BillPayServiceSoap" binding="tns:BillPayServiceSoapBinding">
+            <soap:address location="https://jackhenry.com/jxchange/2008/ServiceGateway/BillPay.svc" />
+        </port>
+    </service>
+</definitions>

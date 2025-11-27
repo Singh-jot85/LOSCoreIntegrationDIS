@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+    xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+    xmlns:ns="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://jackhenry.com/jxchange/TPG/2008"
+    targetNamespace="http://jackhenry.com/jxchange/TPG/2008">
+
+    <!-- This starts the Types section  -->
+
+    <types>
+        <xsd:schema elementFormDefault="qualified" attributeFormDefault="qualified"
+            targetNamespace="http://jackhenry.com/jxchange/TPG/2008"
+            xmlns="http://jackhenry.com/jxchange/TPG/2008" version="2024.2.03"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+            <xsd:include schemaLocation="TPG_CustomMaster.xsd" />
+
+        </xsd:schema>
+    </types>
+
+    <!-- This starts the Message section  -->
+
+    <message name="MessageFault">
+        <part name="parameters" element="tns:HdrFault" />
+    </message>
+
+    <message name="PingInput">
+        <part name="parameters" element="tns:Ping" />
+    </message>
+    <message name="PingOutput">
+        <part name="parameters" element="tns:PingResponse" />
+    </message>
+
+    <message name="IntnetFinInstUsrAuthenInqInput">
+        <part name="parameters" element="tns:IntnetFinInstUsrAuthenInq" />
+    </message>
+    <message name="IntnetFinInstUsrAuthenInqOutput">
+        <part name="parameters" element="tns:IntnetFinInstUsrAuthenInqResponse" />
+    </message>
+
+    <message name="IntnetAlrtMsgAddInput">
+        <part name="parameters" element="tns:IntnetAlrtMsgAdd" />
+    </message>
+    <message name="IntnetAlrtMsgAddOutput">
+        <part name="parameters" element="tns:IntnetAlrtMsgAddResponse" />
+    </message>
+
+    <message name="WireAppInfoAddRqInput">
+        <part name="parameters" element="tns:WireAppInfoAddRq" />
+    </message>
+    <message name="WireAppInfoAddRqOutput">
+        <part name="parameters" element="tns:WireAppInfoAddResponse" />
+    </message>
+
+    <message name="WireAppInfoInqRqInput">
+        <part name="parameters" element="tns:WireAppInfoInqRq" />
+    </message>
+    <message name="WireAppInfoInqRqOutput">
+        <part name="parameters" element="tns:WireAppInfoInqResponse" />
+    </message>
+
+    <message name="FarmCrBankRateIdxAddInput">
+        <part name="parameters" element="tns:FarmCrBankRateIdxAdd" />
+    </message>
+    <message name="FarmCrBankRateIdxAddOutput">
+        <part name="parameters" element="tns:FarmCrBankRateIdxAddResponse" />
+    </message>
+
+    <message name="FarmCrBankRateIdxModInput">
+        <part name="parameters" element="tns:FarmCrBankRateIdxMod" />
+    </message>
+    <message name="FarmCrBankRateIdxModOutput">
+        <part name="parameters" element="tns:FarmCrBankRateIdxModResponse" />
+    </message>
+
+    <message name="FarmCrBankRateIdxInqInput">
+        <part name="parameters" element="tns:FarmCrBankRateIdxInq" />
+    </message>
+    <message name="FarmCrBankRateIdxInqOutput">
+        <part name="parameters" element="tns:FarmCrBankRateIdxInqResponse" />
+    </message>
+
+    <message name="BrooklineMAWireTrnAddInput">
+        <part name="parameters" element="tns:BrooklineMAWireTrnAdd" />
+    </message>
+    <message name="BrooklineMAWireTrnAddOutput">
+        <part name="parameters" element="tns:BrooklineMAWireTrnAddResponse" />
+    </message>
+
+    <message name="BrooklineMAWireTrnInqInput">
+        <part name="parameters" element="tns:BrooklineMAWireTrnInq" />
+    </message>
+    <message name="BrooklineMAWireTrnInqOutput">
+        <part name="parameters" element="tns:BrooklineMAWireTrnInqResponse" />
+    </message>
+
+    <message name="SheffieldALIVRPINValidateInput">
+        <part name="parameters" element="tns:SheffieldALIVRPINValidate" />
+    </message>
+    <message name="SheffieldALIVRPINValidateOutput">
+        <part name="parameters" element="tns:SheffieldALIVRPINValidateResponse" />
+    </message>
+
+    <message name="SheffieldALIVRPINModInput">
+        <part name="parameters" element="tns:SheffieldALIVRPINMod" />
+    </message>
+    <message name="SheffieldALIVRPINModOutput">
+        <part name="parameters" element="tns:SheffieldALIVRPINModResponse" />
+    </message>
+
+    <message name="FtWorthTXCrCardLogOnInput">
+        <part name="parameters" element="tns:FtWorthTXCrCardLogOn" />
+    </message>
+    <message name="FtWorthTXCrCardLogOnOutput">
+        <part name="parameters" element="tns:FtWorthTXCrCardLogOnResponse" />
+    </message>
+
+    <message name="FtWorthTXCrCardLogOffInput">
+        <part name="parameters" element="tns:FtWorthTXCrCardLogOff" />
+    </message>
+    <message name="FtWorthTXCrCardLogOffOutput">
+        <part name="parameters" element="tns:FtWorthTXCrCardLogOffResponse" />
+    </message>
+
+    <message name="FtWorthTXCrCardSrchInput">
+        <part name="parameters" element="tns:FtWorthTXCrCardSrch" />
+    </message>
+    <message name="FtWorthTXCrCardSrchOutput">
+        <part name="parameters" element="tns:FtWorthTXCrCardSrchResponse" />
+    </message>
+
+    <message name="FtWorthTXCrCardAuthInqInput">
+        <part name="parameters" element="tns:FtWorthTXCrCardAuthInq" />
+    </message>
+    <message name="FtWorthTXCrCardAuthInqOutput">
+        <part name="parameters" element="tns:FtWorthTXCrCardAuthInqResponse" />
+    </message>
+
+    <message name="WireTrnModInput">
+        <part name="parameters" element="tns:WireTrnMod" />
+    </message>
+    <message name="WireTrnModOutput">
+        <part name="parameters" element="tns:WireTrnModResponse" />
+    </message>
+
+    <message name="WitchitaKSAcctReconRptAddInput">
+        <part name="parameters" element="tns:WitchitaKSAcctReconRptAdd" />
+    </message>
+    <message name="WitchitaKSAcctReconRptAddOutput">
+        <part name="parameters" element="tns:WitchitaKSAcctReconRptAddResponse" />
+    </message>
+
+    <message name="WitchitaKSAcctReconRptInput">
+        <part name="parameters" element="tns:WitchitaKSAcctReconRpt" />
+    </message>
+    <message name="WitchitaKSAcctReconRptOutput">
+        <part name="parameters" element="tns:WitchitaKSAcctReconRptResponse" />
+    </message>
+
+    <message name="WichitaKSWireEntityMatchInqInput">
+        <part name="parameters" element="tns:WichitaKSWireEntityMatchInq" />
+    </message>
+    <message name="WichitaKSWireEntityMatchInqOutput">
+        <part name="parameters" element="tns:WichitaKSWireEntityMatchInqResponse" />
+    </message>
+
+    <message name="WichitaKSWireEntityResultsInqInput">
+        <part name="parameters" element="tns:WichitaKSWireEntityResultsInq" />
+    </message>
+    <message name="WichitaKSWireEntityResultsInqOutput">
+        <part name="parameters" element="tns:WichitaKSWireEntityResultsInqResponse" />
+    </message>
+
+    <message name="FairmontWVWireTrnAddInput">
+        <part name="parameters" element="tns:FairmontWVWireTrnAdd" />
+    </message>
+    <message name="FairmontWVWireTrnAddOutput">
+        <part name="parameters" element="tns:FairmontWVWireTrnAddResponse" />
+    </message>
+
+    <message name="WireStatSrchInput">
+        <part name="parameters" element="tns:WireStatSrch" />
+    </message>
+    <message name="WireStatSrchOutput">
+        <part name="parameters" element="tns:WireStatSrchResponse" />
+    </message>
+
+    <message name="WireStatModInput">
+        <part name="parameters" element="tns:WireStatMod" />
+    </message>
+    <message name="WireStatModOutput">
+        <part name="parameters" element="tns:WireStatModResponse" />
+    </message>
+
+    <!-- This starts the PortType section  -->
+
+    <portType name="CustomService">
+
+        <operation name="Ping">
+            <input message="tns:PingInput" />
+            <output message="tns:PingOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="IntnetFinInstUsrAuthenInq">
+            <input message="tns:IntnetFinInstUsrAuthenInqInput" />
+            <output message="tns:IntnetFinInstUsrAuthenInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="IntnetAlrtMsgAdd">
+            <input message="tns:IntnetAlrtMsgAddInput" />
+            <output message="tns:IntnetAlrtMsgAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireAppInfoAddRq">
+            <input message="tns:WireAppInfoAddRqInput" />
+            <output message="tns:WireAppInfoAddRqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireAppInfoInqRq">
+            <input message="tns:WireAppInfoInqRqInput" />
+            <output message="tns:WireAppInfoInqRqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="FarmCrBankRateIdxAdd">
+            <input message="tns:FarmCrBankRateIdxAddInput" />
+            <output message="tns:FarmCrBankRateIdxAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="FarmCrBankRateIdxMod">
+            <input message="tns:FarmCrBankRateIdxModInput" />
+            <output message="tns:FarmCrBankRateIdxModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="FarmCrBankRateIdxInq">
+            <input message="tns:FarmCrBankRateIdxInqInput" />
+            <output message="tns:FarmCrBankRateIdxInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="BrooklineMAWireTrnAdd">
+            <input message="tns:BrooklineMAWireTrnAddInput" />
+            <output message="tns:BrooklineMAWireTrnAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="BrooklineMAWireTrnInq">
+            <input message="tns:BrooklineMAWireTrnInqInput" />
+            <output message="tns:BrooklineMAWireTrnInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="SheffieldALIVRPINValidate">
+            <input message="tns:SheffieldALIVRPINValidateInput" />
+            <output message="tns:SheffieldALIVRPINValidateOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="SheffieldALIVRPINMod">
+            <input message="tns:SheffieldALIVRPINModInput" />
+            <output message="tns:SheffieldALIVRPINModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="FtWorthTXCrCardLogOn">
+            <input message="tns:FtWorthTXCrCardLogOnInput" />
+            <output message="tns:FtWorthTXCrCardLogOnOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="FtWorthTXCrCardLogOff">
+            <input message="tns:FtWorthTXCrCardLogOffInput" />
+            <output message="tns:FtWorthTXCrCardLogOffOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="FtWorthTXCrCardSrch">
+            <input message="tns:FtWorthTXCrCardSrchInput" />
+            <output message="tns:FtWorthTXCrCardSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="FtWorthTXCrCardAuthInq">
+            <input message="tns:FtWorthTXCrCardAuthInqInput" />
+            <output message="tns:FtWorthTXCrCardAuthInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireTrnMod">
+            <input message="tns:WireTrnModInput" />
+            <output message="tns:WireTrnModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WitchitaKSAcctReconRptAdd">
+            <input message="tns:WitchitaKSAcctReconRptAddInput" />
+            <output message="tns:WitchitaKSAcctReconRptAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WitchitaKSAcctReconRpt">
+            <input message="tns:WitchitaKSAcctReconRptInput" />
+            <output message="tns:WitchitaKSAcctReconRptOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WichitaKSWireEntityMatchInq">
+            <input message="tns:WichitaKSWireEntityMatchInqInput" />
+            <output message="tns:WichitaKSWireEntityMatchInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WichitaKSWireEntityResultsInq">
+            <input message="tns:WichitaKSWireEntityResultsInqInput" />
+            <output message="tns:WichitaKSWireEntityResultsInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="FairmontWVWireTrnAdd">
+            <input message="tns:FairmontWVWireTrnAddInput" />
+            <output message="tns:FairmontWVWireTrnAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireStatSrch">
+            <input message="tns:WireStatSrchInput" />
+            <output message="tns:WireStatSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireStatMod">
+            <input message="tns:WireStatModInput" />
+            <output message="tns:WireStatModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+    </portType>
+
+    <!-- This starts the Binding section  -->
+
+    <binding name="CustomServiceSoapBinding" type="tns:CustomService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+
+        <operation name="Ping">
+            <soap:operation soapAction="http://jackhenry.com/ws/Ping" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="IntnetFinInstUsrAuthenInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/IntnetFinInstUsrAuthenInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="IntnetAlrtMsgAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/IntnetAlrtMsgAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireAppInfoAddRq">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireAppInfoAddRq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireAppInfoInqRq">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireAppInfoInqRq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="FarmCrBankRateIdxAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/FarmCrBankRateIdxAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="FarmCrBankRateIdxMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/FarmCrBankRateIdxMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="FarmCrBankRateIdxInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/FarmCrBankRateIdxInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="BrooklineMAWireTrnAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/BrooklineMAWireTrnAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="BrooklineMAWireTrnInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/BrooklineMAWireTrnInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="SheffieldALIVRPINValidate">
+            <soap:operation soapAction="http://jackhenry.com/ws/SheffieldALIVRPINValidate" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="SheffieldALIVRPINMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/SheffieldALIVRPINMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="FtWorthTXCrCardLogOn">
+            <soap:operation soapAction="http://jackhenry.com/ws/FtWorthTXCrCardLogOn" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="FtWorthTXCrCardLogOff">
+            <soap:operation soapAction="http://jackhenry.com/ws/FtWorthTXCrCardLogOff" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="FtWorthTXCrCardSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/FtWorthTXCrCardSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="FtWorthTXCrCardAuthInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/FtWorthTXCrCardAuthInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireTrnMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireTrnMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WitchitaKSAcctReconRptAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/WitchitaKSAcctReconRptAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WitchitaKSAcctReconRpt">
+            <soap:operation soapAction="http://jackhenry.com/ws/WitchitaKSAcctReconRpt" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WichitaKSWireEntityMatchInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/WichitaKSWireEntityMatchInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WichitaKSWireEntityResultsInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/WichitaKSWireEntityResultsInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="FairmontWVWireTrnAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/FairmontWVWireTrnAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireStatSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireStatSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireStatMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireStatMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+    </binding>
+
+    <!-- This starts the Service section  -->
+
+    <service name="CustomService">
+        <documentation>Service Description for the CustomService Interface</documentation>
+        <port name="CustomServiceSoap" binding="tns:CustomServiceSoapBinding">
+            <soap:address location="https://jackhenry.com/jxchange/2008/ServiceGateway/Custom.svc" />
+        </port>
+    </service>
+</definitions>

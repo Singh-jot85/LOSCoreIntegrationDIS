@@ -1,0 +1,1326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+    xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+    xmlns:ns="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://jackhenry.com/jxchange/TPG/2008"
+    targetNamespace="http://jackhenry.com/jxchange/TPG/2008">
+
+    <!-- This starts the Types section  -->
+
+    <types>
+        <xsd:schema elementFormDefault="qualified" attributeFormDefault="qualified"
+            targetNamespace="http://jackhenry.com/jxchange/TPG/2008"
+            xmlns="http://jackhenry.com/jxchange/TPG/2008" version="2024.2.03"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+            <xsd:include schemaLocation="TPG_WireMaster.xsd" />
+
+        </xsd:schema>
+    </types>
+
+    <!-- This starts the Message section  -->
+
+    <message name="MessageFault">
+        <part name="parameters" element="tns:HdrFault" />
+    </message>
+
+    <message name="PingInput">
+        <part name="parameters" element="tns:Ping" />
+    </message>
+    <message name="PingOutput">
+        <part name="parameters" element="tns:PingResponse" />
+    </message>
+
+    <message name="WireTmpltAddInput">
+        <part name="parameters" element="tns:WireTmpltAdd" />
+    </message>
+    <message name="WireTmpltAddOutput">
+        <part name="parameters" element="tns:WireTmpltAddResponse" />
+    </message>
+
+    <message name="WireTmpltModInput">
+        <part name="parameters" element="tns:WireTmpltMod" />
+    </message>
+    <message name="WireTmpltModOutput">
+        <part name="parameters" element="tns:WireTmpltModResponse" />
+    </message>
+
+    <message name="WireCompInqInput">
+        <part name="parameters" element="tns:WireCompInq" />
+    </message>
+    <message name="WireCompInqOutput">
+        <part name="parameters" element="tns:WireCompInqResponse" />
+    </message>
+
+    <message name="WireCompSrchInput">
+        <part name="parameters" element="tns:WireCompSrch" />
+    </message>
+    <message name="WireCompSrchOutput">
+        <part name="parameters" element="tns:WireCompSrchResponse" />
+    </message>
+
+    <message name="WireTrnAddInput">
+        <part name="parameters" element="tns:WireTrnAdd" />
+    </message>
+    <message name="WireTrnAddOutput">
+        <part name="parameters" element="tns:WireTrnAddResponse" />
+    </message>
+
+    <message name="WireTmpltSrchInput">
+        <part name="parameters" element="tns:WireTmpltSrch" />
+    </message>
+    <message name="WireTmpltSrchOutput">
+        <part name="parameters" element="tns:WireTmpltSrchResponse" />
+    </message>
+
+    <message name="WireTmpltInqInput">
+        <part name="parameters" element="tns:WireTmpltInq" />
+    </message>
+    <message name="WireTmpltInqOutput">
+        <part name="parameters" element="tns:WireTmpltInqResponse" />
+    </message>
+
+    <message name="WireTrnInqInput">
+        <part name="parameters" element="tns:WireTrnInq" />
+    </message>
+    <message name="WireTrnInqOutput">
+        <part name="parameters" element="tns:WireTrnInqResponse" />
+    </message>
+
+    <message name="IntlWireTrnAddInput">
+        <part name="parameters" element="tns:IntlWireTrnAdd" />
+    </message>
+    <message name="IntlWireTrnAddOutput">
+        <part name="parameters" element="tns:IntlWireTrnAddResponse" />
+    </message>
+
+    <message name="EntityMatchWireInqInput">
+        <part name="parameters" element="tns:EntityMatchWireInq" />
+    </message>
+    <message name="EntityMatchWireInqOutput">
+        <part name="parameters" element="tns:EntityMatchWireInqResponse" />
+    </message>
+
+    <message name="WireTrnAddValidateInput">
+        <part name="parameters" element="tns:WireTrnAddValidate" />
+    </message>
+    <message name="WireTrnAddValidateOutput">
+        <part name="parameters" element="tns:WireTrnAddValidateResponse" />
+    </message>
+
+    <message name="WireTrnISOAddInput">
+        <part name="parameters" element="tns:WireTrnISOAdd" />
+    </message>
+    <message name="WireTrnISOAddOutput">
+        <part name="parameters" element="tns:WireTrnISOAddResponse" />
+    </message>
+
+    <message name="WireTrnFinInstISOAddInput">
+        <part name="parameters" element="tns:WireTrnFinInstISOAdd" />
+    </message>
+    <message name="WireTrnFinInstISOAddOutput">
+        <part name="parameters" element="tns:WireTrnFinInstISOAddResponse" />
+    </message>
+
+    <message name="WireDrwdwnTrnAddInput">
+        <part name="parameters" element="tns:WireDrwdwnTrnAdd" />
+    </message>
+    <message name="WireDrwdwnTrnAddOutput">
+        <part name="parameters" element="tns:WireDrwdwnTrnAddResponse" />
+    </message>
+
+    <message name="WireTrnISOModInput">
+        <part name="parameters" element="tns:WireTrnISOMod" />
+    </message>
+    <message name="WireTrnISOModOutput">
+        <part name="parameters" element="tns:WireTrnISOModResponse" />
+    </message>
+
+    <message name="WireTrnISOActFraudInqInput">
+        <part name="parameters" element="tns:WireTrnISOActFraudInq" />
+    </message>
+    <message name="WireTrnISOActFraudInqOutput">
+        <part name="parameters" element="tns:WireTrnISOActFraudInqResponse" />
+    </message>
+
+    <message name="WireTrnFinInstISOActFraudInqInput">
+        <part name="parameters" element="tns:WireTrnFinInstISOActFraudInq" />
+    </message>
+    <message name="WireTrnFinInstISOActFraudInqOutput">
+        <part name="parameters" element="tns:WireTrnFinInstISOActFraudInqResponse" />
+    </message>
+
+    <message name="WireExcTrnModInput">
+        <part name="parameters" element="tns:WireExcTrnMod" />
+    </message>
+    <message name="WireExcTrnModOutput">
+        <part name="parameters" element="tns:WireExcTrnModResponse" />
+    </message>
+
+    <message name="WireExcTrnSrchInput">
+        <part name="parameters" element="tns:WireExcTrnSrch" />
+    </message>
+    <message name="WireExcTrnSrchOutput">
+        <part name="parameters" element="tns:WireExcTrnSrchResponse" />
+    </message>
+
+    <message name="WireHistSrchInput">
+        <part name="parameters" element="tns:WireHistSrch" />
+    </message>
+    <message name="WireHistSrchOutput">
+        <part name="parameters" element="tns:WireHistSrchResponse" />
+    </message>
+
+    <message name="WireTrnRetRqISOAddInput">
+        <part name="parameters" element="tns:WireTrnRetRqISOAdd" />
+    </message>
+    <message name="WireTrnRetRqISOAddOutput">
+        <part name="parameters" element="tns:WireTrnRetRqISOAddResponse" />
+    </message>
+
+    <message name="WireTrnStatusISOAddInput">
+        <part name="parameters" element="tns:WireTrnStatusISOAdd" />
+    </message>
+    <message name="WireTrnStatusISOAddOutput">
+        <part name="parameters" element="tns:WireTrnStatusISOAddResponse" />
+    </message>
+
+    <message name="WireDrwdwnTrnReplyInput">
+        <part name="parameters" element="tns:WireDrwdwnTrnReply" />
+    </message>
+    <message name="WireDrwdwnTrnReplyOutput">
+        <part name="parameters" element="tns:WireDrwdwnTrnReplyResponse" />
+    </message>
+
+    <message name="WireInvstgAddInput">
+        <part name="parameters" element="tns:WireInvstgAdd" />
+    </message>
+    <message name="WireInvstgAddOutput">
+        <part name="parameters" element="tns:WireInvstgAddResponse" />
+    </message>
+
+    <message name="WireInvstgReplyInput">
+        <part name="parameters" element="tns:WireInvstgReply" />
+    </message>
+    <message name="WireInvstgReplyOutput">
+        <part name="parameters" element="tns:WireInvstgReplyResponse" />
+    </message>
+
+    <message name="WireTrnRetRqISOReplyInput">
+        <part name="parameters" element="tns:WireTrnRetRqISOReply" />
+    </message>
+    <message name="WireTrnRetRqISOReplyOutput">
+        <part name="parameters" element="tns:WireTrnRetRqISOReplyResponse" />
+    </message>
+
+    <message name="WireDrwdwnTrnReplyModInput">
+        <part name="parameters" element="tns:WireDrwdwnTrnReplyMod" />
+    </message>
+    <message name="WireDrwdwnTrnReplyModOutput">
+        <part name="parameters" element="tns:WireDrwdwnTrnReplyModResponse" />
+    </message>
+
+    <message name="WireDrwdwnTrnReplyInqInput">
+        <part name="parameters" element="tns:WireDrwdwnTrnReplyInq" />
+    </message>
+    <message name="WireDrwdwnTrnReplyInqOutput">
+        <part name="parameters" element="tns:WireDrwdwnTrnReplyInqResponse" />
+    </message>
+
+    <message name="WireDrwdwnTrnReplySrchInput">
+        <part name="parameters" element="tns:WireDrwdwnTrnReplySrch" />
+    </message>
+    <message name="WireDrwdwnTrnReplySrchOutput">
+        <part name="parameters" element="tns:WireDrwdwnTrnReplySrchResponse" />
+    </message>
+
+    <message name="WireDrwdwnTrnModInput">
+        <part name="parameters" element="tns:WireDrwdwnTrnMod" />
+    </message>
+    <message name="WireDrwdwnTrnModOutput">
+        <part name="parameters" element="tns:WireDrwdwnTrnModResponse" />
+    </message>
+
+    <message name="WireTrnISOTmpltModInput">
+        <part name="parameters" element="tns:WireTrnISOTmpltMod" />
+    </message>
+    <message name="WireTrnISOTmpltModOutput">
+        <part name="parameters" element="tns:WireTrnISOTmpltModResponse" />
+    </message>
+
+    <message name="WireTrnFinInstISOTmpltModInput">
+        <part name="parameters" element="tns:WireTrnFinInstISOTmpltMod" />
+    </message>
+    <message name="WireTrnFinInstISOTmpltModOutput">
+        <part name="parameters" element="tns:WireTrnFinInstISOTmpltModResponse" />
+    </message>
+
+    <message name="WireDrwdwnTrnTmpltModInput">
+        <part name="parameters" element="tns:WireDrwdwnTrnTmpltMod" />
+    </message>
+    <message name="WireDrwdwnTrnTmpltModOutput">
+        <part name="parameters" element="tns:WireDrwdwnTrnTmpltModResponse" />
+    </message>
+
+    <message name="WireInvstgModInput">
+        <part name="parameters" element="tns:WireInvstgMod" />
+    </message>
+    <message name="WireInvstgModOutput">
+        <part name="parameters" element="tns:WireInvstgModResponse" />
+    </message>
+
+    <message name="WireInvstgInqInput">
+        <part name="parameters" element="tns:WireInvstgInq" />
+    </message>
+    <message name="WireInvstgInqOutput">
+        <part name="parameters" element="tns:WireInvstgInqResponse" />
+    </message>
+
+    <message name="WireInvstgSrchInput">
+        <part name="parameters" element="tns:WireInvstgSrch" />
+    </message>
+    <message name="WireInvstgSrchOutput">
+        <part name="parameters" element="tns:WireInvstgSrchResponse" />
+    </message>
+
+    <message name="WirePmtRetAddInput">
+        <part name="parameters" element="tns:WirePmtRetAdd" />
+    </message>
+    <message name="WirePmtRetAddOutput">
+        <part name="parameters" element="tns:WirePmtRetAddResponse" />
+    </message>
+
+    <message name="WirePmtRetModInput">
+        <part name="parameters" element="tns:WirePmtRetMod" />
+    </message>
+    <message name="WirePmtRetModOutput">
+        <part name="parameters" element="tns:WirePmtRetModResponse" />
+    </message>
+
+    <message name="WirePmtRetInqInput">
+        <part name="parameters" element="tns:WirePmtRetInq" />
+    </message>
+    <message name="WirePmtRetInqOutput">
+        <part name="parameters" element="tns:WirePmtRetInqResponse" />
+    </message>
+
+    <message name="WirePmtRetSrchInput">
+        <part name="parameters" element="tns:WirePmtRetSrch" />
+    </message>
+    <message name="WirePmtRetSrchOutput">
+        <part name="parameters" element="tns:WirePmtRetSrchResponse" />
+    </message>
+
+    <message name="WireRegRptInqInput">
+        <part name="parameters" element="tns:WireRegRptInq" />
+    </message>
+    <message name="WireRegRptInqOutput">
+        <part name="parameters" element="tns:WireRegRptInqResponse" />
+    </message>
+
+    <message name="WirePrxyInqInput">
+        <part name="parameters" element="tns:WirePrxyInq" />
+    </message>
+    <message name="WirePrxyInqOutput">
+        <part name="parameters" element="tns:WirePrxyInqResponse" />
+    </message>
+
+    <message name="WireTrnRetISOModInput">
+        <part name="parameters" element="tns:WireTrnRetISOMod" />
+    </message>
+    <message name="WireTrnRetISOModOutput">
+        <part name="parameters" element="tns:WireTrnRetISOModResponse" />
+    </message>
+
+    <message name="WireTrnRetISOInqInput">
+        <part name="parameters" element="tns:WireTrnRetISOInq" />
+    </message>
+    <message name="WireTrnRetISOInqOutput">
+        <part name="parameters" element="tns:WireTrnRetISOInqResponse" />
+    </message>
+
+    <message name="WireTrnRetISOSrchInput">
+        <part name="parameters" element="tns:WireTrnRetISOSrch" />
+    </message>
+    <message name="WireTrnRetISOSrchOutput">
+        <part name="parameters" element="tns:WireTrnRetISOSrchResponse" />
+    </message>
+
+    <message name="WireTrnStatusISOModInput">
+        <part name="parameters" element="tns:WireTrnStatusISOMod" />
+    </message>
+    <message name="WireTrnStatusISOModOutput">
+        <part name="parameters" element="tns:WireTrnStatusISOModResponse" />
+    </message>
+
+    <message name="WireTrnStatusISOSrchInput">
+        <part name="parameters" element="tns:WireTrnStatusISOSrch" />
+    </message>
+    <message name="WireTrnStatusISOSrchOutput">
+        <part name="parameters" element="tns:WireTrnStatusISOSrchResponse" />
+    </message>
+
+    <message name="WireTrnFinInstISOModInput">
+        <part name="parameters" element="tns:WireTrnFinInstISOMod" />
+    </message>
+    <message name="WireTrnFinInstISOModOutput">
+        <part name="parameters" element="tns:WireTrnFinInstISOModResponse" />
+    </message>
+
+    <!-- This starts the PortType section  -->
+
+    <portType name="WireService">
+
+        <operation name="Ping">
+            <input message="tns:PingInput" />
+            <output message="tns:PingOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireTmpltAdd">
+            <input message="tns:WireTmpltAddInput" />
+            <output message="tns:WireTmpltAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireTmpltMod">
+            <input message="tns:WireTmpltModInput" />
+            <output message="tns:WireTmpltModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireCompInq">
+            <input message="tns:WireCompInqInput" />
+            <output message="tns:WireCompInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireCompSrch">
+            <input message="tns:WireCompSrchInput" />
+            <output message="tns:WireCompSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireTrnAdd">
+            <input message="tns:WireTrnAddInput" />
+            <output message="tns:WireTrnAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireTmpltSrch">
+            <input message="tns:WireTmpltSrchInput" />
+            <output message="tns:WireTmpltSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireTmpltInq">
+            <input message="tns:WireTmpltInqInput" />
+            <output message="tns:WireTmpltInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireTrnInq">
+            <input message="tns:WireTrnInqInput" />
+            <output message="tns:WireTrnInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="IntlWireTrnAdd">
+            <input message="tns:IntlWireTrnAddInput" />
+            <output message="tns:IntlWireTrnAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="EntityMatchWireInq">
+            <input message="tns:EntityMatchWireInqInput" />
+            <output message="tns:EntityMatchWireInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireTrnAddValidate">
+            <input message="tns:WireTrnAddValidateInput" />
+            <output message="tns:WireTrnAddValidateOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireTrnISOAdd">
+            <input message="tns:WireTrnISOAddInput" />
+            <output message="tns:WireTrnISOAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireTrnFinInstISOAdd">
+            <input message="tns:WireTrnFinInstISOAddInput" />
+            <output message="tns:WireTrnFinInstISOAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireDrwdwnTrnAdd">
+            <input message="tns:WireDrwdwnTrnAddInput" />
+            <output message="tns:WireDrwdwnTrnAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireTrnISOMod">
+            <input message="tns:WireTrnISOModInput" />
+            <output message="tns:WireTrnISOModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireTrnISOActFraudInq">
+            <input message="tns:WireTrnISOActFraudInqInput" />
+            <output message="tns:WireTrnISOActFraudInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireTrnFinInstISOActFraudInq">
+            <input message="tns:WireTrnFinInstISOActFraudInqInput" />
+            <output message="tns:WireTrnFinInstISOActFraudInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireExcTrnMod">
+            <input message="tns:WireExcTrnModInput" />
+            <output message="tns:WireExcTrnModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireExcTrnSrch">
+            <input message="tns:WireExcTrnSrchInput" />
+            <output message="tns:WireExcTrnSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireHistSrch">
+            <input message="tns:WireHistSrchInput" />
+            <output message="tns:WireHistSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireTrnRetRqISOAdd">
+            <input message="tns:WireTrnRetRqISOAddInput" />
+            <output message="tns:WireTrnRetRqISOAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireTrnStatusISOAdd">
+            <input message="tns:WireTrnStatusISOAddInput" />
+            <output message="tns:WireTrnStatusISOAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireDrwdwnTrnReply">
+            <input message="tns:WireDrwdwnTrnReplyInput" />
+            <output message="tns:WireDrwdwnTrnReplyOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireInvstgAdd">
+            <input message="tns:WireInvstgAddInput" />
+            <output message="tns:WireInvstgAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireInvstgReply">
+            <input message="tns:WireInvstgReplyInput" />
+            <output message="tns:WireInvstgReplyOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireTrnRetRqISOReply">
+            <input message="tns:WireTrnRetRqISOReplyInput" />
+            <output message="tns:WireTrnRetRqISOReplyOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireDrwdwnTrnReplyMod">
+            <input message="tns:WireDrwdwnTrnReplyModInput" />
+            <output message="tns:WireDrwdwnTrnReplyModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireDrwdwnTrnReplyInq">
+            <input message="tns:WireDrwdwnTrnReplyInqInput" />
+            <output message="tns:WireDrwdwnTrnReplyInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireDrwdwnTrnReplySrch">
+            <input message="tns:WireDrwdwnTrnReplySrchInput" />
+            <output message="tns:WireDrwdwnTrnReplySrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireDrwdwnTrnMod">
+            <input message="tns:WireDrwdwnTrnModInput" />
+            <output message="tns:WireDrwdwnTrnModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireTrnISOTmpltMod">
+            <input message="tns:WireTrnISOTmpltModInput" />
+            <output message="tns:WireTrnISOTmpltModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireTrnFinInstISOTmpltMod">
+            <input message="tns:WireTrnFinInstISOTmpltModInput" />
+            <output message="tns:WireTrnFinInstISOTmpltModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireDrwdwnTrnTmpltMod">
+            <input message="tns:WireDrwdwnTrnTmpltModInput" />
+            <output message="tns:WireDrwdwnTrnTmpltModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireInvstgMod">
+            <input message="tns:WireInvstgModInput" />
+            <output message="tns:WireInvstgModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireInvstgInq">
+            <input message="tns:WireInvstgInqInput" />
+            <output message="tns:WireInvstgInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireInvstgSrch">
+            <input message="tns:WireInvstgSrchInput" />
+            <output message="tns:WireInvstgSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WirePmtRetAdd">
+            <input message="tns:WirePmtRetAddInput" />
+            <output message="tns:WirePmtRetAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WirePmtRetMod">
+            <input message="tns:WirePmtRetModInput" />
+            <output message="tns:WirePmtRetModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WirePmtRetInq">
+            <input message="tns:WirePmtRetInqInput" />
+            <output message="tns:WirePmtRetInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WirePmtRetSrch">
+            <input message="tns:WirePmtRetSrchInput" />
+            <output message="tns:WirePmtRetSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireRegRptInq">
+            <input message="tns:WireRegRptInqInput" />
+            <output message="tns:WireRegRptInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WirePrxyInq">
+            <input message="tns:WirePrxyInqInput" />
+            <output message="tns:WirePrxyInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireTrnRetISOMod">
+            <input message="tns:WireTrnRetISOModInput" />
+            <output message="tns:WireTrnRetISOModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireTrnRetISOInq">
+            <input message="tns:WireTrnRetISOInqInput" />
+            <output message="tns:WireTrnRetISOInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireTrnRetISOSrch">
+            <input message="tns:WireTrnRetISOSrchInput" />
+            <output message="tns:WireTrnRetISOSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireTrnStatusISOMod">
+            <input message="tns:WireTrnStatusISOModInput" />
+            <output message="tns:WireTrnStatusISOModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireTrnStatusISOSrch">
+            <input message="tns:WireTrnStatusISOSrchInput" />
+            <output message="tns:WireTrnStatusISOSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="WireTrnFinInstISOMod">
+            <input message="tns:WireTrnFinInstISOModInput" />
+            <output message="tns:WireTrnFinInstISOModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+    </portType>
+
+    <!-- This starts the Binding section  -->
+
+    <binding name="WireServiceSoapBinding" type="tns:WireService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+
+        <operation name="Ping">
+            <soap:operation soapAction="http://jackhenry.com/ws/Ping" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireTmpltAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireTmpltAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireTmpltMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireTmpltMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireCompInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireCompInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireCompSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireCompSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireTrnAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireTrnAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireTmpltSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireTmpltSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireTmpltInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireTmpltInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireTrnInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireTrnInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="IntlWireTrnAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/IntlWireTrnAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="EntityMatchWireInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/EntityMatchWireInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireTrnAddValidate">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireTrnAddValidate" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireTrnISOAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireTrnISOAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireTrnFinInstISOAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireTrnFinInstISOAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireDrwdwnTrnAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireDrwdwnTrnAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireTrnISOMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireTrnISOMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireTrnISOActFraudInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireTrnISOActFraudInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireTrnFinInstISOActFraudInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireTrnFinInstISOActFraudInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireExcTrnMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireExcTrnMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireExcTrnSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireExcTrnSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireHistSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireHistSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireTrnRetRqISOAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireTrnRetRqISOAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireTrnStatusISOAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireTrnStatusISOAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireDrwdwnTrnReply">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireDrwdwnTrnReply" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireInvstgAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireInvstgAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireInvstgReply">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireInvstgReply" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireTrnRetRqISOReply">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireTrnRetRqISOReply" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireDrwdwnTrnReplyMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireDrwdwnTrnReplyMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireDrwdwnTrnReplyInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireDrwdwnTrnReplyInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireDrwdwnTrnReplySrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireDrwdwnTrnReplySrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireDrwdwnTrnMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireDrwdwnTrnMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireTrnISOTmpltMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireTrnISOTmpltMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireTrnFinInstISOTmpltMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireTrnFinInstISOTmpltMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireDrwdwnTrnTmpltMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireDrwdwnTrnTmpltMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireInvstgMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireInvstgMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireInvstgInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireInvstgInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireInvstgSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireInvstgSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WirePmtRetAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/WirePmtRetAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WirePmtRetMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/WirePmtRetMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WirePmtRetInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/WirePmtRetInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WirePmtRetSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/WirePmtRetSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireRegRptInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireRegRptInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WirePrxyInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/WirePrxyInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireTrnRetISOMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireTrnRetISOMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireTrnRetISOInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireTrnRetISOInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireTrnRetISOSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireTrnRetISOSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireTrnStatusISOMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireTrnStatusISOMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireTrnStatusISOSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireTrnStatusISOSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="WireTrnFinInstISOMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/WireTrnFinInstISOMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+    </binding>
+
+    <!-- This starts the Service section  -->
+
+    <service name="WireService">
+        <documentation>Service Description for the WireService Interface</documentation>
+        <port name="WireServiceSoap" binding="tns:WireServiceSoapBinding">
+            <soap:address location="https://jackhenry.com/jxchange/2008/ServiceGateway/Wire.svc" />
+        </port>
+    </service>
+</definitions>

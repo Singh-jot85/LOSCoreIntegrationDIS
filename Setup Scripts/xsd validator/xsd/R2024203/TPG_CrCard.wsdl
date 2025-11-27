@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+    xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+    xmlns:ns="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://jackhenry.com/jxchange/TPG/2008"
+    targetNamespace="http://jackhenry.com/jxchange/TPG/2008">
+
+    <!-- This starts the Types section  -->
+
+    <types>
+        <xsd:schema elementFormDefault="qualified" attributeFormDefault="qualified"
+            targetNamespace="http://jackhenry.com/jxchange/TPG/2008"
+            xmlns="http://jackhenry.com/jxchange/TPG/2008" version="2024.2.03"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+            <xsd:include schemaLocation="TPG_CrCardMaster.xsd" />
+
+        </xsd:schema>
+    </types>
+
+    <!-- This starts the Message section  -->
+
+    <message name="MessageFault">
+        <part name="parameters" element="tns:HdrFault" />
+    </message>
+
+    <message name="PingInput">
+        <part name="parameters" element="tns:Ping" />
+    </message>
+    <message name="PingOutput">
+        <part name="parameters" element="tns:PingResponse" />
+    </message>
+
+    <message name="CrCardTrnHistSrchInput">
+        <part name="parameters" element="tns:CrCardTrnHistSrch" />
+    </message>
+    <message name="CrCardTrnHistSrchOutput">
+        <part name="parameters" element="tns:CrCardTrnHistSrchResponse" />
+    </message>
+
+    <message name="CrCardAcctInqInput">
+        <part name="parameters" element="tns:CrCardAcctInq" />
+    </message>
+    <message name="CrCardAcctInqOutput">
+        <part name="parameters" element="tns:CrCardAcctInqResponse" />
+    </message>
+
+    <message name="CrCardRwrdInqInput">
+        <part name="parameters" element="tns:CrCardRwrdInq" />
+    </message>
+    <message name="CrCardRwrdInqOutput">
+        <part name="parameters" element="tns:CrCardRwrdInqResponse" />
+    </message>
+
+    <message name="CrCardTrnAddInput">
+        <part name="parameters" element="tns:CrCardTrnAdd" />
+    </message>
+    <message name="CrCardTrnAddOutput">
+        <part name="parameters" element="tns:CrCardTrnAddResponse" />
+    </message>
+
+    <message name="CrCardActInput">
+        <part name="parameters" element="tns:CrCardAct" />
+    </message>
+    <message name="CrCardActOutput">
+        <part name="parameters" element="tns:CrCardActResponse" />
+    </message>
+
+    <message name="CrCardRptLostAddInput">
+        <part name="parameters" element="tns:CrCardRptLostAdd" />
+    </message>
+    <message name="CrCardRptLostAddOutput">
+        <part name="parameters" element="tns:CrCardRptLostAddResponse" />
+    </message>
+
+    <message name="CrCardStmtSrchInput">
+        <part name="parameters" element="tns:CrCardStmtSrch" />
+    </message>
+    <message name="CrCardStmtSrchOutput">
+        <part name="parameters" element="tns:CrCardStmtSrchResponse" />
+    </message>
+
+    <message name="CrCardStmtGenInput">
+        <part name="parameters" element="tns:CrCardStmtGen" />
+    </message>
+    <message name="CrCardStmtGenOutput">
+        <part name="parameters" element="tns:CrCardStmtGenResponse" />
+    </message>
+
+    <message name="CrCardAcctSrchInput">
+        <part name="parameters" element="tns:CrCardAcctSrch" />
+    </message>
+    <message name="CrCardAcctSrchOutput">
+        <part name="parameters" element="tns:CrCardAcctSrchResponse" />
+    </message>
+
+    <message name="CrCardStmtModInput">
+        <part name="parameters" element="tns:CrCardStmtMod" />
+    </message>
+    <message name="CrCardStmtModOutput">
+        <part name="parameters" element="tns:CrCardStmtModResponse" />
+    </message>
+
+    <message name="CrCardStmtInqInput">
+        <part name="parameters" element="tns:CrCardStmtInq" />
+    </message>
+    <message name="CrCardStmtInqOutput">
+        <part name="parameters" element="tns:CrCardStmtInqResponse" />
+    </message>
+
+    <message name="CrCardTrnModInput">
+        <part name="parameters" element="tns:CrCardTrnMod" />
+    </message>
+    <message name="CrCardTrnModOutput">
+        <part name="parameters" element="tns:CrCardTrnModResponse" />
+    </message>
+
+    <message name="CrCardOrderAddInput">
+        <part name="parameters" element="tns:CrCardOrderAdd" />
+    </message>
+    <message name="CrCardOrderAddOutput">
+        <part name="parameters" element="tns:CrCardOrderAddResponse" />
+    </message>
+
+    <message name="CrCardAutoPayAddInput">
+        <part name="parameters" element="tns:CrCardAutoPayAdd" />
+    </message>
+    <message name="CrCardAutoPayAddOutput">
+        <part name="parameters" element="tns:CrCardAutoPayAddResponse" />
+    </message>
+
+    <message name="CrCardAutoPayModInput">
+        <part name="parameters" element="tns:CrCardAutoPayMod" />
+    </message>
+    <message name="CrCardAutoPayModOutput">
+        <part name="parameters" element="tns:CrCardAutoPayModResponse" />
+    </message>
+
+    <message name="CrCardAutoPayInqInput">
+        <part name="parameters" element="tns:CrCardAutoPayInq" />
+    </message>
+    <message name="CrCardAutoPayInqOutput">
+        <part name="parameters" element="tns:CrCardAutoPayInqResponse" />
+    </message>
+
+    <message name="CrCardHolderInqInput">
+        <part name="parameters" element="tns:CrCardHolderInq" />
+    </message>
+    <message name="CrCardHolderInqOutput">
+        <part name="parameters" element="tns:CrCardHolderInqResponse" />
+    </message>
+
+    <message name="CrCardPendTrnInqInput">
+        <part name="parameters" element="tns:CrCardPendTrnInq" />
+    </message>
+    <message name="CrCardPendTrnInqOutput">
+        <part name="parameters" element="tns:CrCardPendTrnInqResponse" />
+    </message>
+
+    <message name="CrCardProcIdSrchInput">
+        <part name="parameters" element="tns:CrCardProcIdSrch" />
+    </message>
+    <message name="CrCardProcIdSrchOutput">
+        <part name="parameters" element="tns:CrCardProcIdSrchResponse" />
+    </message>
+
+    <message name="CrCardBalXferAddInput">
+        <part name="parameters" element="tns:CrCardBalXferAdd" />
+    </message>
+    <message name="CrCardBalXferAddOutput">
+        <part name="parameters" element="tns:CrCardBalXferAddResponse" />
+    </message>
+
+    <!-- This starts the PortType section  -->
+
+    <portType name="CrCardService">
+
+        <operation name="Ping">
+            <input message="tns:PingInput" />
+            <output message="tns:PingOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CrCardTrnHistSrch">
+            <input message="tns:CrCardTrnHistSrchInput" />
+            <output message="tns:CrCardTrnHistSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CrCardAcctInq">
+            <input message="tns:CrCardAcctInqInput" />
+            <output message="tns:CrCardAcctInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CrCardRwrdInq">
+            <input message="tns:CrCardRwrdInqInput" />
+            <output message="tns:CrCardRwrdInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CrCardTrnAdd">
+            <input message="tns:CrCardTrnAddInput" />
+            <output message="tns:CrCardTrnAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CrCardAct">
+            <input message="tns:CrCardActInput" />
+            <output message="tns:CrCardActOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CrCardRptLostAdd">
+            <input message="tns:CrCardRptLostAddInput" />
+            <output message="tns:CrCardRptLostAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CrCardStmtSrch">
+            <input message="tns:CrCardStmtSrchInput" />
+            <output message="tns:CrCardStmtSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CrCardStmtGen">
+            <input message="tns:CrCardStmtGenInput" />
+            <output message="tns:CrCardStmtGenOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CrCardAcctSrch">
+            <input message="tns:CrCardAcctSrchInput" />
+            <output message="tns:CrCardAcctSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CrCardStmtMod">
+            <input message="tns:CrCardStmtModInput" />
+            <output message="tns:CrCardStmtModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CrCardStmtInq">
+            <input message="tns:CrCardStmtInqInput" />
+            <output message="tns:CrCardStmtInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CrCardTrnMod">
+            <input message="tns:CrCardTrnModInput" />
+            <output message="tns:CrCardTrnModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CrCardOrderAdd">
+            <input message="tns:CrCardOrderAddInput" />
+            <output message="tns:CrCardOrderAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CrCardAutoPayAdd">
+            <input message="tns:CrCardAutoPayAddInput" />
+            <output message="tns:CrCardAutoPayAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CrCardAutoPayMod">
+            <input message="tns:CrCardAutoPayModInput" />
+            <output message="tns:CrCardAutoPayModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CrCardAutoPayInq">
+            <input message="tns:CrCardAutoPayInqInput" />
+            <output message="tns:CrCardAutoPayInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CrCardHolderInq">
+            <input message="tns:CrCardHolderInqInput" />
+            <output message="tns:CrCardHolderInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CrCardPendTrnInq">
+            <input message="tns:CrCardPendTrnInqInput" />
+            <output message="tns:CrCardPendTrnInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CrCardProcIdSrch">
+            <input message="tns:CrCardProcIdSrchInput" />
+            <output message="tns:CrCardProcIdSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="CrCardBalXferAdd">
+            <input message="tns:CrCardBalXferAddInput" />
+            <output message="tns:CrCardBalXferAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+    </portType>
+
+    <!-- This starts the Binding section  -->
+
+    <binding name="CrCardServiceSoapBinding" type="tns:CrCardService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+
+        <operation name="Ping">
+            <soap:operation soapAction="http://jackhenry.com/ws/Ping" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CrCardTrnHistSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/CrCardTrnHistSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CrCardAcctInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/CrCardAcctInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CrCardRwrdInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/CrCardRwrdInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CrCardTrnAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/CrCardTrnAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CrCardAct">
+            <soap:operation soapAction="http://jackhenry.com/ws/CrCardAct" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CrCardRptLostAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/CrCardRptLostAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CrCardStmtSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/CrCardStmtSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CrCardStmtGen">
+            <soap:operation soapAction="http://jackhenry.com/ws/CrCardStmtGen" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CrCardAcctSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/CrCardAcctSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CrCardStmtMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/CrCardStmtMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CrCardStmtInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/CrCardStmtInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CrCardTrnMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/CrCardTrnMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CrCardOrderAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/CrCardOrderAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CrCardAutoPayAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/CrCardAutoPayAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CrCardAutoPayMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/CrCardAutoPayMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CrCardAutoPayInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/CrCardAutoPayInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CrCardHolderInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/CrCardHolderInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CrCardPendTrnInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/CrCardPendTrnInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CrCardProcIdSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/CrCardProcIdSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="CrCardBalXferAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/CrCardBalXferAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+    </binding>
+
+    <!-- This starts the Service section  -->
+
+    <service name="CrCardService">
+        <documentation>Service Description for the CrCardService Interface</documentation>
+        <port name="CrCardServiceSoap" binding="tns:CrCardServiceSoapBinding">
+            <soap:address location="https://jackhenry.com/jxchange/2008/ServiceGateway/CrCard.svc" />
+        </port>
+    </service>
+</definitions>

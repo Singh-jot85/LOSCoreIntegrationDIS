@@ -1,0 +1,858 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+    xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+    xmlns:ns="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://jackhenry.com/jxchange/TPG/2008"
+    targetNamespace="http://jackhenry.com/jxchange/TPG/2008">
+
+    <!-- This starts the Types section  -->
+
+    <types>
+        <xsd:schema elementFormDefault="qualified" attributeFormDefault="qualified"
+            targetNamespace="http://jackhenry.com/jxchange/TPG/2008"
+            xmlns="http://jackhenry.com/jxchange/TPG/2008" version="2024.2.03"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+            <xsd:include schemaLocation="TPG_TransactionMaster.xsd" />
+
+        </xsd:schema>
+    </types>
+
+    <!-- This starts the Message section  -->
+
+    <message name="MessageFault">
+        <part name="parameters" element="tns:HdrFault" />
+    </message>
+
+    <message name="PingInput">
+        <part name="parameters" element="tns:Ping" />
+    </message>
+    <message name="PingOutput">
+        <part name="parameters" element="tns:PingResponse" />
+    </message>
+
+    <message name="StopChkAddInput">
+        <part name="parameters" element="tns:StopChkAdd" />
+    </message>
+    <message name="StopChkAddOutput">
+        <part name="parameters" element="tns:StopChkAddResponse" />
+    </message>
+
+    <message name="XferAddInput">
+        <part name="parameters" element="tns:XferAdd" />
+    </message>
+    <message name="XferAddOutput">
+        <part name="parameters" element="tns:XferAddResponse" />
+    </message>
+
+    <message name="StopChkCanInput">
+        <part name="parameters" element="tns:StopChkCan" />
+    </message>
+    <message name="StopChkCanOutput">
+        <part name="parameters" element="tns:StopChkCanResponse" />
+    </message>
+
+    <message name="TrnAddInput">
+        <part name="parameters" element="tns:TrnAdd" />
+    </message>
+    <message name="TrnAddOutput">
+        <part name="parameters" element="tns:TrnAddResponse" />
+    </message>
+
+    <message name="XferModInput">
+        <part name="parameters" element="tns:XferMod" />
+    </message>
+    <message name="XferModOutput">
+        <part name="parameters" element="tns:XferModResponse" />
+    </message>
+
+    <message name="TrnModInput">
+        <part name="parameters" element="tns:TrnMod" />
+    </message>
+    <message name="TrnModOutput">
+        <part name="parameters" element="tns:TrnModResponse" />
+    </message>
+
+    <message name="XferAddValidateInput">
+        <part name="parameters" element="tns:XferAddValidate" />
+    </message>
+    <message name="XferAddValidateOutput">
+        <part name="parameters" element="tns:XferAddValidateResponse" />
+    </message>
+
+    <message name="TrnAddValidateInput">
+        <part name="parameters" element="tns:TrnAddValidate" />
+    </message>
+    <message name="TrnAddValidateOutput">
+        <part name="parameters" element="tns:TrnAddValidateResponse" />
+    </message>
+
+    <message name="StopChkAddValidateInput">
+        <part name="parameters" element="tns:StopChkAddValidate" />
+    </message>
+    <message name="StopChkAddValidateOutput">
+        <part name="parameters" element="tns:StopChkAddValidateResponse" />
+    </message>
+
+    <message name="AcctAnlysTrnAddInput">
+        <part name="parameters" element="tns:AcctAnlysTrnAdd" />
+    </message>
+    <message name="AcctAnlysTrnAddOutput">
+        <part name="parameters" element="tns:AcctAnlysTrnAddResponse" />
+    </message>
+
+    <message name="AcctAnlysTrnModInput">
+        <part name="parameters" element="tns:AcctAnlysTrnMod" />
+    </message>
+    <message name="AcctAnlysTrnModOutput">
+        <part name="parameters" element="tns:AcctAnlysTrnModResponse" />
+    </message>
+
+    <message name="AcctNSFTrnModInput">
+        <part name="parameters" element="tns:AcctNSFTrnMod" />
+    </message>
+    <message name="AcctNSFTrnModOutput">
+        <part name="parameters" element="tns:AcctNSFTrnModResponse" />
+    </message>
+
+    <message name="TrnAddQuoteInput">
+        <part name="parameters" element="tns:TrnAddQuote" />
+    </message>
+    <message name="TrnAddQuoteOutput">
+        <part name="parameters" element="tns:TrnAddQuoteResponse" />
+    </message>
+
+    <message name="TrnAddQuoteCanInput">
+        <part name="parameters" element="tns:TrnAddQuoteCan" />
+    </message>
+    <message name="TrnAddQuoteCanOutput">
+        <part name="parameters" element="tns:TrnAddQuoteCanResponse" />
+    </message>
+
+    <message name="TrnAddQuoteCommInput">
+        <part name="parameters" element="tns:TrnAddQuoteComm" />
+    </message>
+    <message name="TrnAddQuoteCommOutput">
+        <part name="parameters" element="tns:TrnAddQuoteCommResponse" />
+    </message>
+
+    <message name="SafeDepPmtAddInput">
+        <part name="parameters" element="tns:SafeDepPmtAdd" />
+    </message>
+    <message name="SafeDepPmtAddOutput">
+        <part name="parameters" element="tns:SafeDepPmtAddResponse" />
+    </message>
+
+    <message name="SafeDepPmtModInput">
+        <part name="parameters" element="tns:SafeDepPmtMod" />
+    </message>
+    <message name="SafeDepPmtModOutput">
+        <part name="parameters" element="tns:SafeDepPmtModResponse" />
+    </message>
+
+    <message name="IssItemMultiAddInput">
+        <part name="parameters" element="tns:IssItemMultiAdd" />
+    </message>
+    <message name="IssItemMultiAddOutput">
+        <part name="parameters" element="tns:IssItemMultiAddResponse" />
+    </message>
+
+    <message name="PosPayItemModInput">
+        <part name="parameters" element="tns:PosPayItemMod" />
+    </message>
+    <message name="PosPayItemModOutput">
+        <part name="parameters" element="tns:PosPayItemModResponse" />
+    </message>
+
+    <message name="SvcFeeTrnAddInput">
+        <part name="parameters" element="tns:SvcFeeTrnAdd" />
+    </message>
+    <message name="SvcFeeTrnAddOutput">
+        <part name="parameters" element="tns:SvcFeeTrnAddResponse" />
+    </message>
+
+    <message name="SvcFeeTrnModInput">
+        <part name="parameters" element="tns:SvcFeeTrnMod" />
+    </message>
+    <message name="SvcFeeTrnModOutput">
+        <part name="parameters" element="tns:SvcFeeTrnModResponse" />
+    </message>
+
+    <message name="AcctReconItemModInput">
+        <part name="parameters" element="tns:AcctReconItemMod" />
+    </message>
+    <message name="AcctReconItemModOutput">
+        <part name="parameters" element="tns:AcctReconItemModResponse" />
+    </message>
+
+    <message name="PmtHubCrXferAddInput">
+        <part name="parameters" element="tns:PmtHubCrXferAdd" />
+    </message>
+    <message name="PmtHubCrXferAddOutput">
+        <part name="parameters" element="tns:PmtHubCrXferAddResponse" />
+    </message>
+
+    <message name="PmtHubCrXferModInput">
+        <part name="parameters" element="tns:PmtHubCrXferMod" />
+    </message>
+    <message name="PmtHubCrXferModOutput">
+        <part name="parameters" element="tns:PmtHubCrXferModResponse" />
+    </message>
+
+    <message name="PmtHubPmtRqAddInput">
+        <part name="parameters" element="tns:PmtHubPmtRqAdd" />
+    </message>
+    <message name="PmtHubPmtRqAddOutput">
+        <part name="parameters" element="tns:PmtHubPmtRqAddResponse" />
+    </message>
+
+    <message name="PmtHubPmtRqModInput">
+        <part name="parameters" element="tns:PmtHubPmtRqMod" />
+    </message>
+    <message name="PmtHubPmtRqModOutput">
+        <part name="parameters" element="tns:PmtHubPmtRqModResponse" />
+    </message>
+
+    <message name="AcctExcTrnModInput">
+        <part name="parameters" element="tns:AcctExcTrnMod" />
+    </message>
+    <message name="AcctExcTrnModOutput">
+        <part name="parameters" element="tns:AcctExcTrnModResponse" />
+    </message>
+
+    <message name="StopChkModInput">
+        <part name="parameters" element="tns:StopChkMod" />
+    </message>
+    <message name="StopChkModOutput">
+        <part name="parameters" element="tns:StopChkModResponse" />
+    </message>
+
+    <message name="PromoXferAddInput">
+        <part name="parameters" element="tns:PromoXferAdd" />
+    </message>
+    <message name="PromoXferAddOutput">
+        <part name="parameters" element="tns:PromoXferAddResponse" />
+    </message>
+
+    <message name="PromoXferModInput">
+        <part name="parameters" element="tns:PromoXferMod" />
+    </message>
+    <message name="PromoXferModOutput">
+        <part name="parameters" element="tns:PromoXferModResponse" />
+    </message>
+
+    <!-- This starts the PortType section  -->
+
+    <portType name="TransactionService">
+
+        <operation name="Ping">
+            <input message="tns:PingInput" />
+            <output message="tns:PingOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="StopChkAdd">
+            <input message="tns:StopChkAddInput" />
+            <output message="tns:StopChkAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="XferAdd">
+            <input message="tns:XferAddInput" />
+            <output message="tns:XferAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="StopChkCan">
+            <input message="tns:StopChkCanInput" />
+            <output message="tns:StopChkCanOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TrnAdd">
+            <input message="tns:TrnAddInput" />
+            <output message="tns:TrnAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="XferMod">
+            <input message="tns:XferModInput" />
+            <output message="tns:XferModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TrnMod">
+            <input message="tns:TrnModInput" />
+            <output message="tns:TrnModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="XferAddValidate">
+            <input message="tns:XferAddValidateInput" />
+            <output message="tns:XferAddValidateOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TrnAddValidate">
+            <input message="tns:TrnAddValidateInput" />
+            <output message="tns:TrnAddValidateOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="StopChkAddValidate">
+            <input message="tns:StopChkAddValidateInput" />
+            <output message="tns:StopChkAddValidateOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="AcctAnlysTrnAdd">
+            <input message="tns:AcctAnlysTrnAddInput" />
+            <output message="tns:AcctAnlysTrnAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="AcctAnlysTrnMod">
+            <input message="tns:AcctAnlysTrnModInput" />
+            <output message="tns:AcctAnlysTrnModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="AcctNSFTrnMod">
+            <input message="tns:AcctNSFTrnModInput" />
+            <output message="tns:AcctNSFTrnModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TrnAddQuote">
+            <input message="tns:TrnAddQuoteInput" />
+            <output message="tns:TrnAddQuoteOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TrnAddQuoteCan">
+            <input message="tns:TrnAddQuoteCanInput" />
+            <output message="tns:TrnAddQuoteCanOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TrnAddQuoteComm">
+            <input message="tns:TrnAddQuoteCommInput" />
+            <output message="tns:TrnAddQuoteCommOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="SafeDepPmtAdd">
+            <input message="tns:SafeDepPmtAddInput" />
+            <output message="tns:SafeDepPmtAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="SafeDepPmtMod">
+            <input message="tns:SafeDepPmtModInput" />
+            <output message="tns:SafeDepPmtModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="IssItemMultiAdd">
+            <input message="tns:IssItemMultiAddInput" />
+            <output message="tns:IssItemMultiAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="PosPayItemMod">
+            <input message="tns:PosPayItemModInput" />
+            <output message="tns:PosPayItemModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="SvcFeeTrnAdd">
+            <input message="tns:SvcFeeTrnAddInput" />
+            <output message="tns:SvcFeeTrnAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="SvcFeeTrnMod">
+            <input message="tns:SvcFeeTrnModInput" />
+            <output message="tns:SvcFeeTrnModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="AcctReconItemMod">
+            <input message="tns:AcctReconItemModInput" />
+            <output message="tns:AcctReconItemModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="PmtHubCrXferAdd">
+            <input message="tns:PmtHubCrXferAddInput" />
+            <output message="tns:PmtHubCrXferAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="PmtHubCrXferMod">
+            <input message="tns:PmtHubCrXferModInput" />
+            <output message="tns:PmtHubCrXferModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="PmtHubPmtRqAdd">
+            <input message="tns:PmtHubPmtRqAddInput" />
+            <output message="tns:PmtHubPmtRqAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="PmtHubPmtRqMod">
+            <input message="tns:PmtHubPmtRqModInput" />
+            <output message="tns:PmtHubPmtRqModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="AcctExcTrnMod">
+            <input message="tns:AcctExcTrnModInput" />
+            <output message="tns:AcctExcTrnModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="StopChkMod">
+            <input message="tns:StopChkModInput" />
+            <output message="tns:StopChkModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="PromoXferAdd">
+            <input message="tns:PromoXferAddInput" />
+            <output message="tns:PromoXferAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="PromoXferMod">
+            <input message="tns:PromoXferModInput" />
+            <output message="tns:PromoXferModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+    </portType>
+
+    <!-- This starts the Binding section  -->
+
+    <binding name="TransactionServiceSoapBinding" type="tns:TransactionService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+
+        <operation name="Ping">
+            <soap:operation soapAction="http://jackhenry.com/ws/Ping" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="StopChkAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/StopChkAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="XferAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/XferAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="StopChkCan">
+            <soap:operation soapAction="http://jackhenry.com/ws/StopChkCan" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TrnAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/TrnAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="XferMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/XferMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TrnMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/TrnMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="XferAddValidate">
+            <soap:operation soapAction="http://jackhenry.com/ws/XferAddValidate" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TrnAddValidate">
+            <soap:operation soapAction="http://jackhenry.com/ws/TrnAddValidate" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="StopChkAddValidate">
+            <soap:operation soapAction="http://jackhenry.com/ws/StopChkAddValidate" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="AcctAnlysTrnAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/AcctAnlysTrnAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="AcctAnlysTrnMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/AcctAnlysTrnMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="AcctNSFTrnMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/AcctNSFTrnMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TrnAddQuote">
+            <soap:operation soapAction="http://jackhenry.com/ws/TrnAddQuote" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TrnAddQuoteCan">
+            <soap:operation soapAction="http://jackhenry.com/ws/TrnAddQuoteCan" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TrnAddQuoteComm">
+            <soap:operation soapAction="http://jackhenry.com/ws/TrnAddQuoteComm" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="SafeDepPmtAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/SafeDepPmtAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="SafeDepPmtMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/SafeDepPmtMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="IssItemMultiAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/IssItemMultiAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="PosPayItemMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/PosPayItemMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="SvcFeeTrnAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/SvcFeeTrnAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="SvcFeeTrnMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/SvcFeeTrnMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="AcctReconItemMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/AcctReconItemMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="PmtHubCrXferAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/PmtHubCrXferAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="PmtHubCrXferMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/PmtHubCrXferMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="PmtHubPmtRqAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/PmtHubPmtRqAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="PmtHubPmtRqMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/PmtHubPmtRqMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="AcctExcTrnMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/AcctExcTrnMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="StopChkMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/StopChkMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="PromoXferAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/PromoXferAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="PromoXferMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/PromoXferMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+    </binding>
+
+    <!-- This starts the Service section  -->
+
+    <service name="TransactionService">
+        <documentation>Service Description for the TransactionService Interface</documentation>
+        <port name="TransactionServiceSoap" binding="tns:TransactionServiceSoapBinding">
+            <soap:address location="https://jackhenry.com/jxchange/2008/ServiceGateway/Transaction.svc" />
+        </port>
+    </service>
+</definitions>

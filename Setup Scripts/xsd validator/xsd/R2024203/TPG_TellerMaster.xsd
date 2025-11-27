@@ -1,0 +1,4033 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns="http://jackhenry.com/jxchange/TPG/2008" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://jackhenry.com/jxchange/TPG/2008" version="2024.2.03" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:import schemaLocation="oasis-200401-wss-wssecurity-secext-1.0.xsd" namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" />
+  <xsd:group name="Main">
+    <xsd:sequence>
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">JHA Transaction Messages</xsd:documentation>
+      </xsd:annotation>
+      <xsd:element ref="Ping" />
+      <xsd:element ref="PingResponse" />
+      <xsd:element ref="HdrFault" />
+      <xsd:element ref="TellerTrnAdd" />
+      <xsd:element ref="TellerTrnAddResponse" />
+      <xsd:element ref="TellerTrnInq" />
+      <xsd:element ref="TellerTrnInqResponse" />
+      <xsd:element ref="TellerTrnMod" />
+      <xsd:element ref="TellerTrnModResponse" />
+      <xsd:element ref="TellerTrnSrch" />
+      <xsd:element ref="TellerTrnSrchResponse" />
+      <xsd:element ref="TellerDrwSrch" />
+      <xsd:element ref="TellerDrwSrchResponse" />
+      <xsd:element ref="TellerDrwTrnsitnSrch" />
+      <xsd:element ref="TellerDrwTrnsitnSrchResponse" />
+      <xsd:element ref="TellerCurrTrnAdd" />
+      <xsd:element ref="TellerCurrTrnAddResponse" />
+      <xsd:element ref="TellerCurrTrnMod" />
+      <xsd:element ref="TellerCurrTrnModResponse" />
+      <xsd:element ref="TellerCurrTrnInq" />
+      <xsd:element ref="TellerCurrTrnInqResponse" />
+      <xsd:element ref="TellerCurrTrnSrch" />
+      <xsd:element ref="TellerCurrTrnSrchResponse" />
+      <xsd:element ref="TellerDrwMod" />
+      <xsd:element ref="TellerDrwModResponse" />
+      <xsd:element ref="TellerNonCustAdd" />
+      <xsd:element ref="TellerNonCustAddResponse" />
+      <xsd:element ref="TellerNonCustMod" />
+      <xsd:element ref="TellerNonCustModResponse" />
+      <xsd:element ref="TellerNonCustInq" />
+      <xsd:element ref="TellerNonCustInqResponse" />
+      <xsd:element ref="TellerCustSrch" />
+      <xsd:element ref="TellerCustSrchResponse" />
+    </xsd:sequence>
+  </xsd:group>
+  <xsd:element name="Ping" type="PingRq_MType" />
+  <xsd:complexType name="PingRq_MType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">This is a common Ping request for checking, testing,
+                and keep alive</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="PingRq" type="PingRq_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PingRq_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Generic Text for the ping request</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="Ver_1_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The object tag that represents the first iteration of
+                the object</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:element name="PingResponse" type="PingRs_MType" />
+  <xsd:complexType name="PingRs_MType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">This is a common Ping response which should echo back
+                the string that was sent in the PingRq</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="PingRs" type="PingRs_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:element minOccurs="0" name="SvcProdVer" type="ProdVer_Type" />
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="Ver_2" type="Ver_2_CType" />
+          <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+        </xsd:sequence>
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PingRs_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">String echoed back from the PingRq. The element value
+                will contain Error when the Ping request to a service provider is not successful <Jx><CanonicalVal>Error</CanonicalVal></Jx></xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="OpenEnum_Type" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="OpenEnum_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Defines a string type which is Enum but is Bank defined
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string" />
+  </xsd:simpleType>
+  <xsd:complexType name="ProdVer_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Release version of product</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="JHANull_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The nillable element used as an attribute for elements. JHANull=true
+                        will convey to service providers to null the matching field to element to
+                        null.</ElemDesc>
+          <CanonicalVal>true,false</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ClosedEnum_Type" />
+  </xsd:simpleType>
+  <xsd:simpleType name="ClosedEnum_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Defines a string type which is Enum and has set values
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string" />
+  </xsd:simpleType>
+  <xsd:simpleType name="Rstr_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Describes the level of restrictions that can exist at a parent and/or
+                        child node</ElemDesc>
+          <ElemDefault>ReadWrite</ElemDefault>
+          <CanonicalVal>NoAccess,NoAccessPart,ReadWrite,ReadWritePart,ReadOnly,ReadOnlyPart,Hid</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ClosedEnum_Type" />
+  </xsd:simpleType>
+  <xsd:complexType name="Ver_2_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The object tag that represents the second iteration of
+                the object</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:element name="HdrFault" type="HdrFault_MType" />
+  <xsd:complexType name="HdrFault_MType">
+    <xsd:sequence>
+      <xsd:element name="FaultHdr" nillable="true" type="FaultHdr_CType" />
+      <xsd:element minOccurs="0" name="FaultRecInfoArray" nillable="true" type="FaultRecInfoArray_AType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="FaultVer_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FaultHdr_CType">
+    <xsd:annotation>
+      <xsd:documentation>Jxchange header for soap envelop</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="JxVer" type="FaultJxVer_Type" />
+      <xsd:element name="AuditUsrId" type="FaultAuditUsrId_Type" />
+      <xsd:element name="AuditWsId" type="FaultAuditWsId_Type" />
+      <xsd:element minOccurs="0" name="AuthenUsrId" type="FaultAuthenUsrId_Type">
+        <xsd:annotation>
+          <xsd:documentation>
+            <Deprecate>
+              <Dt>2012-01-01</Dt>
+              <Cmnt>The AuthenUsrId will be delivered as part of the Authentication
+                                User Credentials element (AuthenUsrCred_CType) in the form of a WS
+                                Security-Security Token. The Attribute name identity claims name is
+                                to be used to deliver a user identification
+                                (http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name)</Cmnt>
+            </Deprecate>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="ConsumerName" type="FaultConsumerName_Type" />
+      <xsd:element minOccurs="0" name="ConsumerProd" type="FaultConsumerProd_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="FaultVer_1_CType" />
+        <xsd:element minOccurs="0" name="jXLogTrackingId" type="FaultjXLogTrackingId_Type" />
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="Ver_2" type="FaultVer_2_CType" />
+          <xsd:element minOccurs="0" name="InstRtId" type="InstRtId_Type" />
+          <xsd:element minOccurs="0" name="InstEnv" type="InstEnv_Type" />
+          <xsd:sequence minOccurs="0">
+            <xsd:element name="Ver_3" type="FaultVer_3_CType" />
+            <xsd:element minOccurs="0" name="BusCorrelId" type="BusCorrelId_Type" />
+            <xsd:sequence minOccurs="0">
+              <xsd:element name="Ver_4" type="FaultVer_4_CType" />
+              <xsd:element minOccurs="0" name="WorkflowCorrelId" type="WorkflowCorrelId_Type" />
+              <xsd:sequence minOccurs="0">
+                <xsd:element name="Ver_5" type="FaultVer_5_CType" />
+                <xsd:element minOccurs="0" name="ValidConsmName" type="ValidConsmName_Type" />
+                <xsd:element minOccurs="0" name="ValidConsmProd" type="ValidConsmProd_Type" />
+                <xsd:sequence minOccurs="0">
+                  <xsd:element name="Ver_6" type="FaultVer_6_CType" />
+                  <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+                </xsd:sequence>
+              </xsd:sequence>
+            </xsd:sequence>
+          </xsd:sequence>
+        </xsd:sequence>
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FaultJxVer_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The element will contain the version Jx is running for Soap Header
+                        Fault</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultAuditUsrId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>This is the User Id which the consumer would like written to the audit
+                        as performing the requested service. It will vary but could be down to the
+                        user id. It will not be use to authenticate however just audit for Soap
+                        Header Fault .</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultAuditWsId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>This is the WorkStation Id which the consumer would like written to
+                        the audit as performing the requested service for Soap Header Fault . It
+                        will vary but could be down to the user id.</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultAuthenUsrId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>This is the User Id which the consumer would like the service provider
+                        to use to authenticate with for Soap Header Fault . It is a user id which
+                        the provider will understand</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultConsumerName_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The name of the service consumer (Business name) for Soap Header
+                        Fault</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultConsumerProd_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The name of the product which is consuming the service (Business
+                        Product Name) for Soap Header Fault</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultVer_1_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The object tag that represents the first iteration of
+                the object for Soap Fault Header</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:complexType name="FaultjXLogTrackingId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>An identification provided by jXchange to be able to trace the request
+                        and response of a message from the third party gateway, internal gateway,
+                        and service provider for Soap Header Fault</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultVer_2_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The object tag that represents the second iteration of
+                the object for Soap Fault Header</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:complexType name="InstRtId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The identification of the entity of submitted message. A financial
+                        institution entity will utilize the routing transit or ABA nine (9) digit
+                        number assigned to financial institutions for the purpose of routing as
+                        assigned by the American Bankers Association. Any leading zeros must be
+                        provided for a complete routing and transit number. A non-financial
+                        institution entity will use a mutually agreed upon identification that must
+                        contain at least one non-integer character. When a record is directed to a
+                        specific Financial Institution within a holding company, the institution
+                        routing identification is the specific Financial Institution routing
+                        identification and not the holding company identification. </ElemDesc>
+          <CanonicalVal>JHA</CanonicalVal>
+        </Jx>
+        <CoreDirector>
+          <ElemRules>Required on all message requests</ElemRules>
+        </CoreDirector>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="InstEnv_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>An identification provided by the consumer that defines the
+                        environment in which the institution is operating.</ElemDesc>
+          <CanonicalVal>PROD</CanonicalVal>
+          <ElemUsage>This is the Environment in which the Institution is operating.
+                        Example: [ PROD, TEST, AUDIT, SYM001, SYM101, ... ] The absence of this
+                        element will equate to "PROD" = Production Environment. It will be the
+                        responsibility of the sender to send the appropriate data to identify the
+                        environment if necessary.</ElemUsage>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="OpenEnum_Type" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultVer_3_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The object tag that represents the third iteration of
+                the object for Soap Fault Header</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:complexType name="BusCorrelId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The correlation identification as related to business functions and
+                        activities</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultVer_4_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The object tag that represents the fourth iteration of
+                the object for Soap Fault Header</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:complexType name="WorkflowCorrelId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The correlation identification as related to workflow functions and
+                        activities</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultVer_5_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The object tag that represents the fifth iteration of
+                the object for Soap Fault Header</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:complexType name="ValidConsmName_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The consumer name that can be validated by Enterprise goverance. The
+                        canonical values are managed in an consumer/product Enterprise
+                        table</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ValidConsmProd_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The consumer product name that can be validated by Enterprise
+                        goverance. The canonical values are managed in an consumer/product
+                        Enterprise table</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultVer_6_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The object tag that represents the sixth iteration of
+                the object for Soap Fault Header</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:complexType name="FaultRecInfoArray_AType">
+    <xsd:annotation>
+      <xsd:documentation>Array of messages that can be returned in a fault message
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="FaultMsgRec" type="FaultMsgRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FaultMsgRec_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Message Record includes the Error responses for the
+                soap envelope - can occur multiple times</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ErrCode" type="FaultErrCode_Type" />
+      <xsd:element name="ErrCat" type="FaultErrCat_Type" />
+      <xsd:element name="ErrDesc" type="FaultErrDesc_Type" />
+      <xsd:element minOccurs="0" name="ErrElem" type="FaultErrElem_Type" />
+      <xsd:element minOccurs="0" name="ErrElemVal" type="FaultErrElemVal_Type" />
+      <xsd:element minOccurs="0" name="ErrLoc" type="FaultErrLoc_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="FaultVer_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FaultErrCode_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Soap Header Fault Error Code</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultErrCat_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Soap Header Fault Error Catagory</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultErrDesc_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Soap Header Fault Error Description</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultErrElem_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Soap Header Fault when an Error or Fault occurs this optional element
+                        will contain the element which is causing the error condition</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultErrElemVal_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Soap Header Fault when an Error or Fault occurs this optional element
+                        will contain the value of the element which is causing the error
+                        condition</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultErrLoc_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Soap Header Fault Error Location - This is typically the program that
+                        generated the error condition</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="TellerTrnAdd" type="TellerTrnAddRq_MType" />
+  <xsd:complexType name="TellerTrnAddRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="ErrOvrRdInfoArray" nillable="true" type="ErrOvrRdInfoArray_AType" />
+      <xsd:element name="TellerDrwId" type="TellerDrwId_Type" />
+      <xsd:element name="TellerTrn" type="TellerTrn_CType" />
+      <xsd:element minOccurs="0" name="TellerBusDt" type="TellerBusDt_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MsgRqHdr_CType">
+    <xsd:annotation>
+      <xsd:documentation>Default message request headers</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="jXchangeHdr" type="jXchangeHdr_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:element minOccurs="0" name="AuthenUsrCred" type="AuthenUsrCred_CType" />
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="Ver_2" type="Ver_2_CType" />
+          <xsd:element minOccurs="0" name="AuthenProdCred" type="AuthenProdCred_CType" />
+          <xsd:sequence minOccurs="0">
+            <xsd:element name="Ver_3" type="Ver_3_CType" />
+            <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+          </xsd:sequence>
+        </xsd:sequence>
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="jXchangeHdr_CType">
+    <xsd:annotation>
+      <xsd:documentation>Jxchange headers for tracking</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="JxVer" type="JxVer_Type" />
+      <xsd:element name="AuditUsrId" type="AuditUsrId_Type" />
+      <xsd:element name="AuditWsId" type="AuditWsId_Type" />
+      <xsd:element minOccurs="0" name="AuthenUsrId" type="AuthenUsrId_Type">
+        <xsd:annotation>
+          <xsd:documentation>
+            <Deprecate>
+              <Dt>2012-01-01</Dt>
+              <Cmnt>The AuthenUsrId will be delivered as part of the Authentication
+                                User Credentials element (AuthenUsrCred_CType) in the form of a WS
+                                Security-Security Token. The Attribute name identity claims name is
+                                to be used to deliver a user identification
+                                (http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name)</Cmnt>
+            </Deprecate>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="ConsumerName" type="ConsumerName_Type" />
+      <xsd:element minOccurs="0" name="ConsumerProd" type="ConsumerProd_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:element minOccurs="0" name="jXLogTrackingId" type="jXLogTrackingId_Type" />
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="Ver_2" type="Ver_2_CType" />
+          <xsd:element minOccurs="0" name="InstRtId" type="InstRtId_Type" />
+          <xsd:element minOccurs="0" name="InstEnv" type="InstEnv_Type" />
+          <xsd:sequence minOccurs="0">
+            <xsd:element name="Ver_3" type="Ver_3_CType" />
+            <xsd:element minOccurs="0" name="BusCorrelId" type="BusCorrelId_Type" />
+            <xsd:sequence minOccurs="0">
+              <xsd:element name="Ver_4" type="Ver_4_CType" />
+              <xsd:element minOccurs="0" name="WorkflowCorrelId" type="WorkflowCorrelId_Type" />
+              <xsd:sequence minOccurs="0">
+                <xsd:element name="Ver_5" type="Ver_5_CType" />
+                <xsd:element minOccurs="0" name="ValidConsmName" type="ValidConsmName_Type" />
+                <xsd:element minOccurs="0" name="ValidConsmProd" type="ValidConsmProd_Type" />
+                <xsd:sequence minOccurs="0">
+                  <xsd:element name="Ver_6" type="Ver_6_CType" />
+                  <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+                </xsd:sequence>
+              </xsd:sequence>
+            </xsd:sequence>
+          </xsd:sequence>
+        </xsd:sequence>
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="JxVer_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The element will contain the version Jx is
+                running</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="AuditUsrId_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">This is the User Id which the consumer would like
+                written to the audit as performing the requested service. It will vary but could be
+                down to the user id. It will not be use to authenticate however just audit.
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="AuditWsId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>This is the WorkStation Id which the consumer would like written to
+                        the audit as performing the requested service. It will vary but could be
+                        down to the user id. </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="AuthenUsrId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>This is the User Id which the consumer would like the service provider
+                        to use to authenticate with. It is a user id which the provider will
+                        understand </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConsumerName_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The name of the service consumer (Business name)
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConsumerProd_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The name of the product which is consuming the service
+                (Business Product Name) </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="jXLogTrackingId_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">An identification provided by jXchange to be able to
+                trace the request and response of a message from the third party gateway, internal
+                gateway, and service provider </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="Ver_3_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The object tag that represents the third iteration of
+                the object</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:complexType name="Ver_4_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The object tag that represents the fourth iteration of
+                the object</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:complexType name="Ver_5_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The object tag that represents the fifth iteration of
+                the object</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:complexType name="Ver_6_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The object tag that represents the sixth iteration of
+                the object</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:complexType name="AuthenUsrCred_CType">
+    <xsd:annotation>
+      <xsd:documentation>Authentication of the end User Credentials in the form of a WS
+                Security Element that contains a single SAML V2.0 Assertion.
+                http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element ref="wsse:Security" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AuthenProdCred_CType">
+    <xsd:annotation>
+      <xsd:documentation>Authentication of the Consumer Product Credentials in the form of a
+                WS Security Element that contains a single SAML V2.0 Assertion.
+                http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element ref="wsse:Security" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ErrOvrRdInfoArray_AType">
+    <xsd:annotation>
+      <xsd:documentation>Array - of overrides for faults </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="ErrOvrRd" type="ErrOvrRd_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ErrOvrRd_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Error Code Override - Array of ErrCode
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="ErrCode" type="ErrCode_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:element minOccurs="0" name="BusSvcType" type="BusSvcType_Type" />
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="Ver_2" type="Ver_2_CType" />
+          <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+        </xsd:sequence>
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ErrCode_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Error Code</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="BusSvcType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Business Service Type used to convey certain Add and Mod message handling</ElemDesc>
+          <CanonicalVal>NoValidate</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="TellerDrwId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>This is the Teller Drawer Identification.</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="TellerTrn_CType">
+    <xsd:sequence>
+      <xsd:element name="TellerTrnInfo" type="TellerTrnInfo_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TellerTrnInfo_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="TellerTrnCode" type="TellerTrnCode_Type" />
+      <xsd:element minOccurs="0" name="CashIn" type="CashIn_Type" />
+      <xsd:element minOccurs="0" name="CashOut" type="CashOut_Type" />
+      <xsd:element minOccurs="0" name="ChkDepAmt" type="ChkDepAmt_Type" />
+      <xsd:element minOccurs="0" name="ChkCashAmt" type="ChkCashAmt_Type" />
+      <xsd:element minOccurs="0" name="TrnAmt" type="TrnAmt_Type" />
+      <xsd:element minOccurs="0" name="TrnDt" type="EffDt_Type" />
+      <xsd:element minOccurs="0" name="TrnEntryTime" type="TrnEntryTime_Type" />
+      <xsd:element minOccurs="0" name="TrnUsrId" type="TrnUsrId_Type" />
+      <xsd:element minOccurs="0" name="TellerTrnDetArray" type="TellerTrnDetArray_AType" />
+      <xsd:element minOccurs="0" name="TellerDrwComptArray" type="TellerDrwComptArray_AType" />
+      <xsd:element minOccurs="0" name="CashMachArray" type="CashMachArray_AType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TellerTrnCode_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> Type of Teller Transaction</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="OpenEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="CashIn_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Cash-In Amount</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:decimal">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="CashOut_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> Cash-Out Amount</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:decimal">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ChkDepAmt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> The total amount of checks deposited</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:decimal">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ChkCashAmt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The total amount of checks cashed</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:decimal">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="TrnAmt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> The amount of transactions</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:decimal">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="EffDt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The date assigned to transactions when it is different from the
+                        posting date. </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:date">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="TrnEntryTime_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The time a transaction was accepted </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:time">
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="TrnUsrId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>This is the User Identification that initiated a
+                        transaction.</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="TellerTrnDetArray_AType">
+    <xsd:annotation>
+      <xsd:documentation> Array of teller transaction information </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="TellerTrnDet" type="TellerTrnDet_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TellerTrnDet_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="TellerTrnItemId" type="TellerTrnItemId_Type" />
+      <xsd:element minOccurs="0" name="Amt" type="Amt_Type" />
+      <xsd:element minOccurs="0" name="AcctId" type="AcctId_Type" />
+      <xsd:element minOccurs="0" name="AcctType" type="AcctType_Type" />
+      <xsd:element minOccurs="0" name="ChkNum" type="ChkNum_Type" />
+      <xsd:element minOccurs="0" name="ChkType" type="ChkType_Type" />
+      <xsd:element minOccurs="0" name="RmkArray" type="Rmk_AType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TellerTrnItemId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>This identifies the teller transaction item that makes up the teller
+                        transaction</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="Amt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Amount - quantity</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:decimal">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="AcctId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The number(s) or character(s) that identifies an account record
+                    </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+        <xsd:attribute name="MaskVal" type="MaskVal_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="SrchType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The search type element used as an attribute for elements. The search
+                        type conveys to the service provider the type of search expression for
+                        search message filters</ElemDesc>
+          <CanonicalVal>Exact,StartsWith,EndsWith,Contains,ContainsAll</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ClosedEnum_Type" />
+  </xsd:simpleType>
+  <xsd:simpleType name="MaskVal_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The service providers masked value for a clear text element</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string" />
+  </xsd:simpleType>
+  <xsd:complexType name="AcctType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The number(s) or character(s) that categorize the Acct Id </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ChkNum_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The number(s) or characters(s) assigned to a monetary drafts often
+                        times referred to as the serial number.</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ChkType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The type of check</ElemDesc>
+          <CanonicalVal>OnUs,Forn</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="Rmk_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Array - Application or user remarks free form text
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="RmkInfo" nillable="true" type="RmkInfo_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RmkInfo_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="Rmk" nillable="true" type="Rmk_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Rmk_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Application or user remarks free form text </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+        <xsd:attribute name="SrchType" type="SrchType_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="TellerDrwComptArray_AType">
+    <xsd:annotation>
+      <xsd:documentation>Array of compartment information </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="TellerDrwComptRec" type="TellerDrwComptRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TellerDrwComptRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="ComptId" type="ComptId_Type" />
+      <xsd:element minOccurs="0" name="CashCntType" type="CashType_Type" />
+      <xsd:element minOccurs="0" name="CashCntDet" type="CashCntDet_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ComptId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> This is the Compartment Identification.</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="CashType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> The Cash type</ElemDesc>
+          <CanonicalVal>CashIn,CashOut</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="CashCntDet_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="CurrDenomCode" type="CurrDenomCode_Type" />
+      <xsd:element minOccurs="0" name="CurrDenomDesc" type="CurrDenomDesc_Type" />
+      <xsd:element minOccurs="0" name="CashItemCnt" type="CashItemCnt_Type" />
+      <xsd:element minOccurs="0" name="CashAmt" type="Amt_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CurrDenomCode_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> The code that references the type of currency denomination
+                    </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="CurrDenomDesc_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The description of the currency code denomination </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="CashItemCnt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> The number/count for a specifc currency</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:int">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="CashMachArray_AType">
+    <xsd:annotation>
+      <xsd:documentation> Array of cash machine information </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="CashMachTrnDet" type="CashMachTrnDet_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CashMachTrnDet_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="TellerDrwId" type="TellerDrwId_Type" />
+      <xsd:element minOccurs="0" name="CashIn" type="CashIn_Type" />
+      <xsd:element minOccurs="0" name="CashOut" type="CashOut_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TellerBusDt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> The Teller Business Date</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:date">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="Custom_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Institution Specific Data - provides an extension point
+                for custom variations of the jXchange vocabulary. ***Placed before xml content not
+                described in a given target namespace. Used as marker/guard/sentinel element to
+                prevent an ambiguous situation for validating parsers as a tactic to prevent
+                violating the Unique Particle Attribution constraint (UPA). </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##other" processContents="lax" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="TellerTrnAddResponse" type="TellerTrnAddRs_MType" />
+  <xsd:complexType name="TellerTrnAddRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="TrnRcptId" nillable="true" type="TrnRcptId_Type" />
+      <xsd:element minOccurs="0" name="RsStat" nillable="true" type="RsStat_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MsgRsHdr_CType">
+    <xsd:annotation>
+      <xsd:documentation>Default message response headers</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="jXchangeHdr" type="jXchangeHdr_CType" />
+      <xsd:element minOccurs="0" name="MsgRecInfoArray" type="MsgRecInfoArray_AType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MsgRecInfoArray_AType">
+    <xsd:annotation>
+      <xsd:documentation>Array - of messages that can be returned in a response
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="MsgRec" type="MsgRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MsgRec_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Message Record includes the Error responses - Usually
+                can occur multiple times</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ErrCode" type="ErrCode_Type" />
+      <xsd:element name="ErrCat" type="ErrCat_Type" />
+      <xsd:element name="ErrDesc" type="ErrDesc_Type" />
+      <xsd:element minOccurs="0" name="ErrElem" type="ErrElem_Type" />
+      <xsd:element minOccurs="0" name="ErrElemVal" type="ErrElemVal_Type" />
+      <xsd:element minOccurs="0" name="ErrLoc" type="ErrLoc_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ErrCat_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Error Catagory</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ErrDesc_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Error Description</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ErrElem_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>When an Error or Fault occurs this optional element will contain the
+                        element which is causing the error condition</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ErrElemVal_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>When an Error or Fault occurs this optional element will contain the
+                        value of the element which is causing the error condition</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ErrLoc_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Error Location - This is typically the program that generated the
+                        error condition</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="TrnRcptId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The receipt provided for a successful transaction entry </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="RsStat_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Status of the response <Jx><CanonicalVal>Success,Fail</CanonicalVal></Jx></xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="TellerTrnInq" type="TellerTrnInqRq_MType" />
+  <xsd:complexType name="TellerTrnInqRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element name="TrnRcptId" type="TrnRcptId_Type" />
+      <xsd:element minOccurs="0" name="ActIntent" nillable="true" type="ActIntent_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ActIntent_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Conveys that consumer intention for a subsequent operation for the
+                        data set included in the response</ElemDesc>
+          <CanonicalVal>ReadOnly,Upd,Dlt,Add</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="TellerTrnInqResponse" type="TellerTrnInqRs_MType" />
+  <xsd:complexType name="TellerTrnInqRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="TrnRcptId" type="TrnRcptId_Type" />
+      <xsd:element minOccurs="0" name="TellerTrnInfoRec" nillable="true" type="TellerTrnInfoRec_CType" />
+      <xsd:element minOccurs="0" name="ActIntent" nillable="true" type="ActIntent_Type" />
+      <xsd:element minOccurs="0" name="ActIntentKey" nillable="true" type="ActIntentKey_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TellerTrnInfoRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="TellerTrnInfo" type="TellerTrnInfo_CType" />
+      <xsd:element minOccurs="0" name="TellerDrwId" type="TellerDrwId_Type" />
+      <xsd:element minOccurs="0" name="TellerTrnCodeDesc" type="TellerTrnCodeDesc_Type" />
+      <xsd:element minOccurs="0" name="TellerBusDt" type="TellerBusDt_Type" />
+      <xsd:sequence>
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TellerTrnCodeDesc_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The description of the teller transaction code - Cash Check, DDA
+                        Deposit, Safe Deposit Payment</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ActIntentKey_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The service provider key delivered to the consumer to be submitted in
+                        a subsequent modification operation</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="TellerTrnMod" type="TellerTrnModRq_MType" />
+  <xsd:complexType name="TellerTrnModRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="ErrOvrRdInfoArray" nillable="true" type="ErrOvrRdInfoArray_AType" />
+      <xsd:element name="TrnRcptId" type="TrnRcptId_Type" />
+      <xsd:element minOccurs="0" name="TellerTrn" nillable="true" type="TellerTrn_CType" />
+      <xsd:element name="ActIntentKey" nillable="true" type="ActIntentKey_Type" />
+      <xsd:element minOccurs="0" name="Dlt" nillable="true" type="Dlt_Type" />
+      <xsd:element minOccurs="0" name="ModRmkArray" nillable="true" type="Rmk_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Dlt_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Delete - for delete entity <Jx><CanonicalVal>true,false</CanonicalVal></Jx></xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="TellerTrnModResponse" type="TellerTrnModRs_MType" />
+  <xsd:complexType name="TellerTrnModRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="RsStat" nillable="true" type="RsStat_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="TellerTrnSrch" type="TellerTrnSrchRq_MType" />
+  <xsd:complexType name="TellerTrnSrchRq_MType">
+    <xsd:sequence>
+      <xsd:element name="SrchMsgRqHdr" type="SrchMsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="TrnDetLowAmt" nillable="true" type="LowAmt_Type" />
+      <xsd:element minOccurs="0" name="TrnDetHighAmt" nillable="true" type="HighAmt_Type" />
+      <xsd:element minOccurs="0" name="TrnUsrId" nillable="true" type="TrnUsrId_Type" />
+      <xsd:element minOccurs="0" name="TellerBusStartDt" nillable="true" type="StartDt_Type" />
+      <xsd:element minOccurs="0" name="TellerBusEndDt" nillable="true" type="EndDt_Type" />
+      <xsd:element minOccurs="0" name="AcctId" nillable="true" type="AcctId_Type" />
+      <xsd:element minOccurs="0" name="AcctType" nillable="true" type="AcctType_Type" />
+      <xsd:element minOccurs="0" name="TellerTrnCode" nillable="true" type="TellerTrnCode_Type" />
+      <xsd:element minOccurs="0" name="CashInLowAmt" nillable="true" type="LowAmt_Type" />
+      <xsd:element minOccurs="0" name="CashInHighAmt" nillable="true" type="HighAmt_Type" />
+      <xsd:element minOccurs="0" name="CashOutLowAmt" nillable="true" type="LowAmt_Type" />
+      <xsd:element minOccurs="0" name="CashOutHighAmt" nillable="true" type="HighAmt_Type" />
+      <xsd:element minOccurs="0" name="Rmk" nillable="true" type="Rmk_Type" />
+      <xsd:element minOccurs="0" name="TellerDrwIdArray" nillable="true" type="TellerDrwIdArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="SrchMsgRqHdr_CType">
+    <xsd:annotation>
+      <xsd:documentation>Search specific message request headers</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="jXchangeHdr" type="jXchangeHdr_CType" />
+      <xsd:element name="MaxRec" type="MaxRec_Type" />
+      <xsd:element minOccurs="0" name="Cursor" type="Cursor_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:element minOccurs="0" name="AuthenUsrCred" type="AuthenUsrCred_CType" />
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="Ver_2" type="Ver_2_CType" />
+          <xsd:element minOccurs="0" name="AuthenProdCred" type="AuthenProdCred_CType" />
+          <xsd:sequence minOccurs="0">
+            <xsd:element name="Ver_3" type="Ver_3_CType" />
+            <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+          </xsd:sequence>
+        </xsd:sequence>
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MaxRec_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> When returning multiple records, this is the maximum number of
+                        records to be returned</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:int" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="Cursor_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> When returning multiple records and allowing a subsequent call to
+                        retrieve more records this is the "state" information that allows the next
+                        call to understand where it left off</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="LowAmt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The value that designates a starting point for amount
+                        selections</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:decimal">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="HighAmt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The value that designates an ending point for amount selections
+                    </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:decimal">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="StartDt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The date that designates the starting point for date
+                        selections</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:date">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="EndDt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The date that designates the ending point for date
+                        selections</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:date">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="TellerDrwIdArray_AType">
+    <xsd:annotation>
+      <xsd:documentation> Array of teller drawer identifications</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="TellerDrwIdRec" type="TellerDrwIdRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TellerDrwIdRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="TellerDrwId" type="TellerDrwId_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="TellerTrnSrchResponse" type="TellerTrnSrchRs_MType" />
+  <xsd:complexType name="TellerTrnSrchRs_MType">
+    <xsd:sequence>
+      <xsd:element name="SrchMsgRsHdr" type="SrchMsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="TrnDetLowAmt" nillable="true" type="LowAmt_Type" />
+      <xsd:element minOccurs="0" name="TrnDetHighAmt" nillable="true" type="HighAmt_Type" />
+      <xsd:element minOccurs="0" name="TrnUsrId" nillable="true" type="TrnUsrId_Type" />
+      <xsd:element minOccurs="0" name="TellerBusStartDt" nillable="true" type="StartDt_Type" />
+      <xsd:element minOccurs="0" name="TellerBusEndDt" nillable="true" type="EndDt_Type" />
+      <xsd:element minOccurs="0" name="AcctId" nillable="true" type="AcctId_Type" />
+      <xsd:element minOccurs="0" name="AcctType" nillable="true" type="AcctType_Type" />
+      <xsd:element minOccurs="0" name="TellerTrnCode" nillable="true" type="TellerTrnCode_Type" />
+      <xsd:element minOccurs="0" name="CashInLowAmt" nillable="true" type="LowAmt_Type" />
+      <xsd:element minOccurs="0" name="CashInHighAmt" nillable="true" type="HighAmt_Type" />
+      <xsd:element minOccurs="0" name="CashOutLowAmt" nillable="true" type="LowAmt_Type" />
+      <xsd:element minOccurs="0" name="CashOutHighAmt" nillable="true" type="HighAmt_Type" />
+      <xsd:element minOccurs="0" name="Rmk" nillable="true" type="Rmk_Type" />
+      <xsd:element minOccurs="0" name="TellerDrwIdArray" nillable="true" type="TellerDrwIdArray_AType" />
+      <xsd:element minOccurs="0" name="TellerTrnSrchRecArray" nillable="true" type="TellerTrnSrchRecArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="SrchMsgRsHdr_CType">
+    <xsd:annotation>
+      <xsd:documentation>Search specific message response headers</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="jXchangeHdr" type="jXchangeHdr_CType" />
+      <xsd:element minOccurs="0" name="SentRec" type="SentRec_Type" />
+      <xsd:element minOccurs="0" name="MoreRec" type="MoreRec_Type" />
+      <xsd:element minOccurs="0" name="Cursor" type="Cursor_Type" />
+      <xsd:element minOccurs="0" name="TotRec" type="TotRec_Type" />
+      <xsd:element minOccurs="0" name="MsgRecInfoArray" type="MsgRecInfoArray_AType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="SentRec_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> Number of records sent in the response</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:int" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="MoreRec_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Indicates if there are more records that could be returned<Jx><CanonicalVal>true,false</CanonicalVal></Jx></xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="TotRec_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Indicates the total records the the request selected which could be
+                        larger than MaxRec</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:int" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="TellerTrnSrchRecArray_AType">
+    <xsd:annotation>
+      <xsd:documentation> An Array of teller transaction information that provides
+    general information about the transaction</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="TellerTrnSrchRec" type="TellerTrnSrchRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TellerTrnSrchRec_CType">
+    <xsd:sequence>
+      <xsd:element name="TrnRcptId" type="TrnRcptId_Type" />
+      <xsd:element minOccurs="0" name="TrnDetAmt" type="TrnAmt_Type" />
+      <xsd:element minOccurs="0" name="TrnUsrId" type="TrnUsrId_Type" />
+      <xsd:element minOccurs="0" name="TellerBusDt" type="TellerBusDt_Type" />
+      <xsd:element minOccurs="0" name="AcctId" type="AcctId_Type" />
+      <xsd:element minOccurs="0" name="AcctType" type="AcctType_Type" />
+      <xsd:element minOccurs="0" name="TellerTrnCode" type="TellerTrnCode_Type" />
+      <xsd:element minOccurs="0" name="TrnDt" type="EffDt_Type" />
+      <xsd:element minOccurs="0" name="TrnEntryTime" type="TrnEntryTime_Type" />
+      <xsd:element minOccurs="0" name="CashIn" type="CashIn_Type" />
+      <xsd:element minOccurs="0" name="CashOut" type="CashOut_Type" />
+      <xsd:element minOccurs="0" name="RmkArray" type="Rmk_AType" />
+      <xsd:element minOccurs="0" name="TellerDrwId" type="TellerDrwId_Type" />
+      <xsd:sequence>
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="TellerDrwSrch" type="TellerDrwSrchRq_MType" />
+  <xsd:complexType name="TellerDrwSrchRq_MType">
+    <xsd:sequence>
+      <xsd:element name="SrchMsgRqHdr" type="SrchMsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="TellerDrwId" type="TellerDrwId_Type" />
+      <xsd:element minOccurs="0" name="BrCode" nillable="true" type="BrCode_Type" />
+      <xsd:element minOccurs="0" name="TellerDrwStat" nillable="true" type="TellerDrwStat_Type" />
+      <xsd:element minOccurs="0" name="TellerUsrId" nillable="true" type="TellerUsrId_Type" />
+      <xsd:element minOccurs="0" name="IncXtendElemArray" nillable="true" type="IncXtendElem_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="BrCode_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Branch Code</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="OpenEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="TellerDrwStat_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en"> Status of the teller drawer <Jx><CanonicalVal>Test,Live</CanonicalVal></Jx></xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="TellerUsrId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> This is the Teller User Identification .</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="IncXtendElem_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Array - List of "x_" element by name which are to be
+                included in the response</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="IncXtendElemInfo" nillable="true" type="IncXtendElemInfo_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="IncXtendElemInfo_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="XtendElem" nillable="true" type="XtendElem_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XtendElem_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en"> Included Extended elements which the consumer would
+                ask by name fill out to ask for "x_" prefix elements to be included in the response
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="TellerDrwSrchResponse" type="TellerDrwSrchRs_MType" />
+  <xsd:complexType name="TellerDrwSrchRs_MType">
+    <xsd:sequence>
+      <xsd:element name="SrchMsgRsHdr" type="SrchMsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="TellerDrwId" nillable="true" type="TellerDrwId_Type" />
+      <xsd:element minOccurs="0" name="BrCode" nillable="true" type="BrCode_Type" />
+      <xsd:element minOccurs="0" name="TellerDrwStat" nillable="true" type="TellerDrwStat_Type" />
+      <xsd:element minOccurs="0" name="TellerUsrId" nillable="true" type="TellerUsrId_Type" />
+      <xsd:element minOccurs="0" name="TellerDrwSrchRecArray" nillable="true" type="TellerDrwSrchRecArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TellerDrwSrchRecArray_AType">
+    <xsd:annotation>
+      <xsd:documentation>An Array of teller drawer information that provides general
+    information about the teller drawer</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="TellerDrwSrchRec" type="TellerDrwSrchRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TellerDrwSrchRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="TellerDrwId" type="TellerDrwId_Type" />
+      <xsd:element minOccurs="0" name="TellerDrwIdDesc" type="TellerDrwIdDesc_Type" />
+      <xsd:element minOccurs="0" name="BrCode" nillable="true" type="BrCode_Type" />
+      <xsd:element minOccurs="0" name="TellerDrwStat" type="TellerDrwStat_Type" />
+      <xsd:element minOccurs="0" name="TellerUsrId" type="TellerUsrId_Type" />
+      <xsd:element minOccurs="0" name="TellerDrwWsId" type="TellerDrwWsId_Type" />
+      <xsd:element minOccurs="0" name="TellerDrwType" type="TellerDrwType_Type" />
+      <xsd:element minOccurs="0" name="CashMachInfo" type="CashMachInfo_CType" />
+      <xsd:element minOccurs="0" name="LastTrnsitnInfo" type="TrnsitnInfo_CType" />
+      <xsd:element minOccurs="0" name="x_TellerDrwComptArray" type="x_TellerDrwComptArray_AType" />
+      <xsd:element name="Ver_1" type="Ver_1_CType" />
+      <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TellerDrwIdDesc_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The description of the Teller Drawer Id</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="TellerDrwWsId_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en"> This is the WorkStation Id that is assigned to teller
+                drawer. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="TellerDrwType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> Teller Drawer Type</ElemDesc>
+          <CanonicalVal>Teller,ATM,Disp,TCR,Vault,CoinMach,Ln,CSR,NonCash</CanonicalVal>
+          <Defalult>Teller</Defalult>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="CashMachInfo_CType">
+    <xsd:annotation>
+      <xsd:documentation> Cash machine information record </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="CashMachTypeCode" type="CashMachTypeCode_Type" />
+      <xsd:element minOccurs="0" name="CashMachIPInfoArray" type="CashMachIPInfoArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CashMachTypeCode_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The code that designates the type of cash machine </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="OpenEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="CashMachIPInfoArray_AType">
+    <xsd:annotation>
+      <xsd:documentation>Array of cash machine information </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="CashMachIPInfoRec" type="CashMachIPInfoRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CashMachIPInfoRec_CType">
+    <xsd:annotation>
+      <xsd:documentation>Cash machine IP information record </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="CashMachIPType" type="CashMachIPType_Type" />
+      <xsd:element minOccurs="0" name="CashMachIPAddr" type="CashMachIPAddr_Type" />
+      <xsd:element minOccurs="0" name="CashMachIPPort" type="CashMachIPPort_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CashMachIPType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>This identifies the Cash Machine IP is for Cash or Coin and which side
+                        Left of Right</ElemDesc>
+          <CanonicalVal>LeftCash,RightCash,LeftCoin,RightCoin</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="CashMachIPAddr_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The IP address of the cash machine</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="CashMachIPPort_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The IP port of the cash machine</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:decimal">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="TrnsitnInfo_CType">
+    <xsd:annotation>
+      <xsd:documentation>Teller drawer transition information record
+   </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="TrnsitnDt" type="TrnsitnDt_Type" />
+      <xsd:element minOccurs="0" name="TrnsitnTime" type="TrnsitnTime_Type" />
+      <xsd:element minOccurs="0" name="BegBalAmt" type="StartAmt_Type" />
+      <xsd:element minOccurs="0" name="EndBalAmt" type="EndAmt_Type" />
+      <xsd:element minOccurs="0" name="CashIn" type="CashIn_Type" />
+      <xsd:element minOccurs="0" name="CashOut" type="CashOut_Type" />
+      <xsd:element minOccurs="0" name="OvrAmt" type="OvrAmt_Type" />
+      <xsd:element minOccurs="0" name="ShortAmt" type="ShortAmt_Type" />
+      <xsd:element minOccurs="0" name="CashMachCashIn" type="CashIn_Type" />
+      <xsd:element minOccurs="0" name="CashMachCashOut" type="CashOut_Type" />
+      <xsd:element minOccurs="0" name="CashMachCashInBatch" type="CashIn_Type" />
+      <xsd:element minOccurs="0" name="CashMachCashOutBatch" type="CashOut_Type" />
+      <xsd:element minOccurs="0" name="TrnsitnClsTime" type="TrnsitnClsTime_Type" />
+      <xsd:element minOccurs="0" name="TrnsitnClsDt" type="TrnsitnClsDt_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TrnsitnDt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The teller drawer transition date</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:date">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="TrnsitnTime_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The teller drawer Transition time</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="StartAmt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The starting amount of the drawer at transition </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:decimal">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="EndAmt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> The ending amount of the drawer at transition </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:decimal">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="OvrAmt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> The overage amount of the drawer at transition </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:decimal">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ShortAmt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The shortage amount of the drawer at transition </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:decimal">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="TrnsitnClsTime_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> The teller drawer transition closing time</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="TrnsitnClsDt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> The teller drawer transition close date</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:date">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="x_TellerDrwComptArray_AType">
+    <xsd:annotation>
+      <xsd:documentation>Array of compartment information </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="TellerDrwComptRec" type="TellerDrwComptRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="TellerDrwTrnsitnSrch" type="TellerDrwTrnsitnSrchRq_MType" />
+  <xsd:complexType name="TellerDrwTrnsitnSrchRq_MType">
+    <xsd:sequence>
+      <xsd:element name="SrchMsgRqHdr" type="SrchMsgRqHdr_CType" />
+      <xsd:element name="TellerDrwId" type="TellerDrwId_Type" />
+      <xsd:element minOccurs="0" name="TrnsitnStartDt" nillable="true" type="StartDt_Type" />
+      <xsd:element minOccurs="0" name="TrnsitnEndDt" nillable="true" type="EndDt_Type" />
+      <xsd:element minOccurs="0" name="LastTrnsitnType" nillable="true" type="LastTrnsitnType_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="LastTrnsitnType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Should only the most recent transition entry for the teller drawer be
+                        returned</ElemDesc>
+          <ElemDefault>false</ElemDefault>
+          <CanonicalVal>true,false</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="TellerDrwTrnsitnSrchResponse" type="TellerDrwTrnsitnSrchRs_MType" />
+  <xsd:complexType name="TellerDrwTrnsitnSrchRs_MType">
+    <xsd:sequence>
+      <xsd:element name="SrchMsgRsHdr" type="SrchMsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="TellerDrwId" nillable="true" type="TellerDrwId_Type" />
+      <xsd:element minOccurs="0" name="TrnsitnStartDt" nillable="true" type="StartDt_Type" />
+      <xsd:element minOccurs="0" name="TrnsitnEndDt" nillable="true" type="EndDt_Type" />
+      <xsd:element minOccurs="0" name="LastTrnsitnType" nillable="true" type="LastTrnsitnType_Type" />
+      <xsd:element minOccurs="0" name="TrnsitnSrchArray" nillable="true" type="TrnsitnSrchArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TrnsitnSrchArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">An Array of teller drawer transition history
+    is returned in the search service</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="TrnsitnSrchRec" type="TrnsitnSrchRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TrnsitnSrchRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="TellerDrwId" type="TellerDrwId_Type" />
+      <xsd:element minOccurs="0" name="TrnsitnDt" type="TrnsitnDt_Type" />
+      <xsd:element minOccurs="0" name="TrnsitnTime" type="TrnsitnTime_Type" />
+      <xsd:element minOccurs="0" name="BegBalAmt" type="StartAmt_Type" />
+      <xsd:element minOccurs="0" name="EndBalAmt" type="EndAmt_Type" />
+      <xsd:element minOccurs="0" name="CashIn" type="CashIn_Type" />
+      <xsd:element minOccurs="0" name="CashOut" type="CashOut_Type" />
+      <xsd:element minOccurs="0" name="OvrAmt" type="OvrAmt_Type" />
+      <xsd:element minOccurs="0" name="ShortAmt" type="ShortAmt_Type" />
+      <xsd:element minOccurs="0" name="CashMachCashIn" type="CashIn_Type" />
+      <xsd:element minOccurs="0" name="CashMachCashOut" type="CashOut_Type" />
+      <xsd:element minOccurs="0" name="CashMachCashInBatch" type="CashIn_Type" />
+      <xsd:element minOccurs="0" name="CashMachCashOutBatch" type="CashOut_Type" />
+      <xsd:element minOccurs="0" name="TrnsitnClsTime" type="TrnsitnClsTime_Type" />
+      <xsd:element minOccurs="0" name="TrnsitnClsDt" type="TrnsitnClsDt_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="TellerCurrTrnAdd" type="TellerCurrTrnAddRq_MType" />
+  <xsd:complexType name="TellerCurrTrnAddRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="ErrOvrRdInfoArray" nillable="true" type="ErrOvrRdInfoArray_AType" />
+      <xsd:element minOccurs="0" name="TrnRcptId" nillable="true" type="TrnRcptId_Type" />
+      <xsd:element minOccurs="0" name="CTRRptDt" type="CTRRptDt_Type" />
+      <xsd:element name="CurrTrnInfo" type="CurrTrnInfo_CType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CTRRptDt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> The date of the currency transaction report </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:date" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="CurrTrnInfo_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="CurrTrnAcctArray" nillable="true" type="CurrTrnAcctArray_AType" />
+      <xsd:element minOccurs="0" name="CurrTrnCustArray" nillable="true" type="CurrTrnCustArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CurrTrnAcctArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Array of Currency Transaction Account Information
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="CurrTrnAcctDetail" type="CurrTrnAcctDetail_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CurrTrnAcctDetail_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="AcctId" type="AcctId_Type" />
+      <xsd:element minOccurs="0" name="AcctType" type="AcctType_Type" />
+      <xsd:element minOccurs="0" name="CashIn" type="CashIn_Type" />
+      <xsd:element minOccurs="0" name="CashOut" type="CashOut_Type" />
+      <xsd:element minOccurs="0" name="CTRCatType" type="CTRCatType_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CTRCatType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The category related to the currency transaction report</ElemDesc>
+          <CanonicalVal>FornCurr,WireXfer,NegInstPur,NegInstCash,CurrExch,DepWthdwl,Oth,AcctAffWthdwl,Pmt,Adv,PrepaidAccess</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="CurrTrnCustArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">An array of person(s)affected by the
+                transaction.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="CurrTrnCustDetail" nillable="true" type="CurrTrnCustDetail_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CurrTrnCustDetail_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="CTREntityType" type="CTREntityType_Type" />
+      <xsd:element minOccurs="0" name="CustId" type="CustId_Type" />
+      <xsd:element minOccurs="0" name="NonCustId" type="CustId_Type">
+        <xsd:annotation>
+          <xsd:documentation>Either the Customer Id or the Non Customer Id is utilized,
+                        not both. </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="CustName" type="PersonName_CType" />
+      <xsd:element minOccurs="0" name="TaxId" type="TaxId_Type" />
+      <xsd:element minOccurs="0" name="TINCode" type="TINCode_Type" />
+      <xsd:element minOccurs="0" name="IdVerifyArray" type="IdVerifyArray_AType" />
+      <xsd:element minOccurs="0" name="TrnOwnerExmpRsnType" type="TrnOwnerExmpRsnType_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CTREntityType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> Identifies the party of the currency transaction report</ElemDesc>
+          <CanonicalVal>Benf,TrnOwner,Cour</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="CustId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The identifier attached to a customer</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+        <xsd:attribute name="OvrrdInstRtId" type="OvrrdInstRtId_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="OvrrdInstRtId_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Describes the Institution Routing Identifier or Bank
+                Number/Location used to override the InstRtId found in a message header.
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string" />
+  </xsd:simpleType>
+  <xsd:complexType name="PersonName_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="ComName" nillable="true" type="ComName_Type" />
+      <xsd:element minOccurs="0" name="FirstName" nillable="true" type="FirstName_Type" />
+      <xsd:element minOccurs="0" name="MiddleName" nillable="true" type="MiddleName_Type" />
+      <xsd:element minOccurs="0" name="LastName" nillable="true" type="LastName_Type" />
+      <xsd:element minOccurs="0" name="x_PersonName" type="x_PersonName_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ComName_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Common Name : This is the full text line name like : George Washington
+                    </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="SrchType" type="SrchType_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FirstName_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>First Name</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="SrchType" type="SrchType_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="MiddleName_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Middle Name</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="SrchType" type="SrchType_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="LastName_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Last Name</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="SrchType" type="SrchType_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="x_PersonName_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="TitlePrefix" nillable="true" type="TitlePrefix_Type" />
+      <xsd:element minOccurs="0" name="NameSuffix" nillable="true" type="NameSuffix_Type" />
+      <xsd:element minOccurs="0" name="LegalName" nillable="true" type="LegalName_Type" />
+      <xsd:element minOccurs="0" name="SalName" nillable="true" type="SalName_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:element minOccurs="0" name="AbbName" type="AbbName_Type" />
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="Ver_2" type="Ver_2_CType" />
+          <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+        </xsd:sequence>
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TitlePrefix_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Title Prefix - Examples Mr. Mrs. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="NameSuffix_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Name Suffix - Example jr. or MD </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="LegalName_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Used by entities like trusts, or businesses in the case
+                where an individual is "doing business as" a company, or when the legal name is
+                different than the ComName</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+        <xsd:attribute name="SrchType" type="SrchType_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="SalName_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Salutation Name : This would be a full text line name
+                like which is to be used in Mailings Example : Mr. and Mrs. George Washington
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="AbbName_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>An abbreviated individual's or entity's name</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="SrchType" type="SrchType_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="TaxId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Tax Identifier</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="MaskVal" type="MaskVal_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+        <xsd:attribute name="SrchType" type="SrchType_Type" use="optional" />
+        <xsd:attribute name="OvrrdInstRtId" type="OvrrdInstRtId_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="TINCode_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The code that designates the type of Tax identification
+                        number</ElemDesc>
+          <CanonicalVal>SSN,EIN,Forn</CanonicalVal>
+          <ElemCanocType>TINCode is a Hybrid open enumeration</ElemCanocType>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="OpenEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="IdVerifyArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Array - of Identification verification values
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="IdVerify" nillable="true" type="IdVerify_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="IdVerify_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="IdVerifyDesc" nillable="true" type="IdVerifyDesc_Type" />
+      <xsd:element minOccurs="0" name="IdVerifyCode" nillable="true" type="IdVerifyCode_Type" />
+      <xsd:element minOccurs="0" name="IdVerifyVal" nillable="true" type="IdVerifyVal_Type" />
+      <xsd:element minOccurs="0" name="IdVerifyBy" nillable="true" type="IdVerifyBy_Type" />
+      <xsd:element minOccurs="0" name="IdIssueBy" nillable="true" type="IdIssueBy_Type" />
+      <xsd:element minOccurs="0" name="IdVerifyQueryArray" type="IdVerifyQueryArray_AType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="IdVerifyDesc_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The description of the identification code that is used
+                to authenticate the customer</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="IdVerifyCode_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The identification code that is used to authenticate the
+                        customer</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="OpenEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="IdVerifyVal_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The identification value that is used to authenticate the
+                        customer</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="IdVerifyBy_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The individual that verified the authenticity of the identification
+                        value (IdVerifyId)</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="IdIssueBy_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The individual that issued the identification value
+                        (IdVerifyId)</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="IdVerifyQueryArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Array - of identification query/questions and their
+                respective values for customer/account verification </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="IdVerifyQueryInfo" nillable="true" type="IdVerifyQueryInfo_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="IdVerifyQueryInfo_CType">
+    <xsd:sequence>
+      <xsd:element name="IdVerifyQuery" type="IdVerifyQuery_Type" />
+      <xsd:element name="IdVerifyQueryVal" type="IdVerifyQueryVal_Type" />
+      <xsd:element minOccurs="0" name="IdVerifyQueryDataType" nillable="true" type="IdVerifyQueryDataType_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="IdVerifyQuery_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>A description of the query/question that could be used for
+                        customer/account identification purposes </ElemDesc>
+          <CanonicalVal>IssLoc,IssDt,ExpDt,ConDt,IssState,VerifId,DocType</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="OpenEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="IdVerifyQueryVal_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>A value that corresponds with the description of the query/question
+                        (IdVerifyQuery) that could be used for customer/account identification
+                        purposes </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="IdVerifyQueryDataType_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">This element identifies what type of attributes
+                corresponds with the IdVerifyQueryVal <Jx><CanonicalVal>Dt,Decimal,Integer,String</CanonicalVal></Jx></xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="TrnOwnerExmpRsnType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> Reason why individual conducting the transaction is exempt from
+                        reporting.</ElemDesc>
+          <CanonicalVal>ArmoredCar,MailDep,NightDep,ATM,MultiTrn,ConductBenf</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="TellerCurrTrnAddResponse" type="TellerCurrTrnAddRs_MType" />
+  <xsd:complexType name="TellerCurrTrnAddRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="CurrTrnId" nillable="true" type="CurrTrnId_Type" />
+      <xsd:element minOccurs="0" name="RsStat" nillable="true" type="RsStat_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CurrTrnId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>An identifier provided for each submitted currency transaction
+                        report</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="TellerCurrTrnMod" type="TellerCurrTrnModRq_MType" />
+  <xsd:complexType name="TellerCurrTrnModRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="ErrOvrRdInfoArray" nillable="true" type="ErrOvrRdInfoArray_AType" />
+      <xsd:element name="CurrTrnId" type="CurrTrnId_Type" />
+      <xsd:element minOccurs="0" name="CTRRptDt" nillable="true" type="CTRRptDt_Type" />
+      <xsd:element minOccurs="0" name="TrnRcptId" nillable="true" type="TrnRcptId_Type" />
+      <xsd:element minOccurs="0" name="CurrTrnInfo" nillable="true" type="CurrTrnInfo_CType" />
+      <xsd:element name="ActIntentKey" type="ActIntentKey_Type" />
+      <xsd:element minOccurs="0" name="Dlt" nillable="true" type="Dlt_Type" />
+      <xsd:element minOccurs="0" name="ModRmkArray" nillable="true" type="Rmk_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="TellerCurrTrnModResponse" type="TellerCurrTrnModRs_MType" />
+  <xsd:complexType name="TellerCurrTrnModRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="RsStat" nillable="true" type="RsStat_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="TellerCurrTrnInq" type="TellerCurrTrnInqRq_MType" />
+  <xsd:complexType name="TellerCurrTrnInqRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element name="CurrTrnId" type="CurrTrnId_Type" />
+      <xsd:element minOccurs="0" name="IncXtendElemArray" nillable="true" type="IncXtendElem_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:element minOccurs="0" name="ActIntent" nillable="true" type="ActIntent_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="TellerCurrTrnInqResponse" type="TellerCurrTrnInqRs_MType" />
+  <xsd:complexType name="TellerCurrTrnInqRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="CurrTrnId" nillable="true" type="CurrTrnId_Type" />
+      <xsd:element minOccurs="0" name="CurrTrnInqRec" nillable="true" type="CurrTrnInqRec_CType" />
+      <xsd:element minOccurs="0" name="ActIntent" nillable="true" type="ActIntent_Type" />
+      <xsd:element minOccurs="0" name="ActIntentKey" nillable="true" type="ActIntentKey_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CurrTrnInqRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="CurrTrnInfo" type="CurrTrnInfo_CType" />
+      <xsd:element minOccurs="0" name="TellerTrnRcptArray" type="TellerTrnRcptArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TellerTrnRcptArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Array of Teller Transaction Receipt details
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="TellerTrnRcptRec" type="TellerTrnRcptRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TellerTrnRcptRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="TrnRcptId" type="TrnRcptId_Type" />
+      <xsd:element minOccurs="0" name="TellerDrwId" type="TellerDrwId_Type" />
+      <xsd:element minOccurs="0" name="TellerTrnItemId" type="TellerTrnItemId_Type" />
+      <xsd:element minOccurs="0" name="TrnDt" type="EffDt_Type" />
+      <xsd:element minOccurs="0" name="TrnEntryTime" type="TrnEntryTime_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="TellerCurrTrnSrch" type="TellerCurrTrnSrchRq_MType" />
+  <xsd:complexType name="TellerCurrTrnSrchRq_MType">
+    <xsd:sequence>
+      <xsd:element name="SrchMsgRqHdr" type="SrchMsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="FirstName" nillable="true" type="FirstName_Type" />
+      <xsd:element minOccurs="0" name="LastName" nillable="true" type="LastName_Type" />
+      <xsd:element minOccurs="0" name="ComName" nillable="true" type="ComName_Type" />
+      <xsd:element minOccurs="0" name="TaxId" nillable="true" type="TaxId_Type" />
+      <xsd:element minOccurs="0" name="CustId" nillable="true" type="CustId_Type" />
+      <xsd:element minOccurs="0" name="AcctId" nillable="true" type="AcctId_Type" />
+      <xsd:element minOccurs="0" name="AcctType" nillable="true" type="AcctType_Type" />
+      <xsd:element minOccurs="0" name="CTRRptStartDt" nillable="true" type="StartDt_Type" />
+      <xsd:element minOccurs="0" name="CTRRptEndDt" nillable="true" type="EndDt_Type" />
+      <xsd:element minOccurs="0" name="CashInLowAmt" nillable="true" type="LowAmt_Type" />
+      <xsd:element minOccurs="0" name="CashInHighAmt" nillable="true" type="HighAmt_Type" />
+      <xsd:element minOccurs="0" name="CashOutLowAmt" nillable="true" type="LowAmt_Type" />
+      <xsd:element minOccurs="0" name="CashOutHighAmt" nillable="true" type="HighAmt_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="TellerCurrTrnSrchResponse" type="TellerCurrTrnSrchRs_MType" />
+  <xsd:complexType name="TellerCurrTrnSrchRs_MType">
+    <xsd:sequence>
+      <xsd:element name="SrchMsgRsHdr" type="SrchMsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="FirstName" nillable="true" type="FirstName_Type" />
+      <xsd:element minOccurs="0" name="LastName" nillable="true" type="LastName_Type" />
+      <xsd:element minOccurs="0" name="ComName" nillable="true" type="ComName_Type" />
+      <xsd:element minOccurs="0" name="TaxId" nillable="true" type="TaxId_Type" />
+      <xsd:element minOccurs="0" name="CustId" nillable="true" type="CustId_Type" />
+      <xsd:element minOccurs="0" name="AcctId" nillable="true" type="AcctId_Type" />
+      <xsd:element minOccurs="0" name="AcctType" nillable="true" type="AcctType_Type" />
+      <xsd:element minOccurs="0" name="CTRRptStartDt" nillable="true" type="StartDt_Type" />
+      <xsd:element minOccurs="0" name="CTRRptEndDt" nillable="true" type="EndDt_Type" />
+      <xsd:element minOccurs="0" name="CashInLowAmt" nillable="true" type="LowAmt_Type" />
+      <xsd:element minOccurs="0" name="CashInHighAmt" nillable="true" type="HighAmt_Type" />
+      <xsd:element minOccurs="0" name="CashOutLowAmt" nillable="true" type="LowAmt_Type" />
+      <xsd:element minOccurs="0" name="CashOutHighAmt" nillable="true" type="HighAmt_Type" />
+      <xsd:element minOccurs="0" name="TellerCurrTrnSrchRecArray" nillable="true" type="TellerCurrTrnSrchRecArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TellerCurrTrnSrchRecArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en"> Array of responses for Teller Currency
+    Transaction Search </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="TellerCurrTrnSrchRec" type="TellerCurrTrnSrchRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TellerCurrTrnSrchRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="CurrTrnId" nillable="true" type="CurrTrnId_Type" />
+      <xsd:element minOccurs="0" name="CustName" nillable="true" type="PersonName_CType" />
+      <xsd:element minOccurs="0" name="TaxId" nillable="true" type="TaxId_Type" />
+      <xsd:element minOccurs="0" name="CustId" nillable="true" type="CustId_Type" />
+      <xsd:element minOccurs="0" name="NonCustId" nillable="true" type="CustId_Type">
+        <xsd:annotation>
+          <xsd:documentation>Either the Customer Id or the Non Customer Id is utilized,
+      not both. </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="AcctId" nillable="true" type="AcctId_Type" />
+      <xsd:element minOccurs="0" name="AcctType" nillable="true" type="AcctType_Type" />
+      <xsd:element minOccurs="0" name="CTRRptDt" nillable="true" type="CTRRptDt_Type" />
+      <xsd:element minOccurs="0" name="CashIn" nillable="true" type="CashIn_Type" />
+      <xsd:element minOccurs="0" name="CashOut" nillable="true" type="CashOut_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="TellerDrwMod" type="TellerDrwModRq_MType" />
+  <xsd:complexType name="TellerDrwModRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="ErrOvrRdInfoArray" nillable="true" type="ErrOvrRdInfoArray_AType" />
+      <xsd:element name="DrwActType" type="DrwActType_Type" />
+      <xsd:element minOccurs="0" name="ClaimModInfo" nillable="true" type="ClaimModInfo_CType" />
+      <xsd:element minOccurs="0" name="RlsModInfo" nillable="true" type="RlsModInfo_CType" />
+      <xsd:element minOccurs="0" name="TrnsitnModInfo" nillable="true" type="TrnsitnModInfo_CType" />
+      <xsd:element minOccurs="0" name="BalModInfo" nillable="true" type="BalModInfo_CType" />
+      <xsd:element minOccurs="0" name="ModRmkArray" nillable="true" type="Rmk_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DrwActType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Indicates the type of teller drawer activity</ElemDesc>
+          <CanonicalVal>Claim,Rls,Trnsitn,Bal</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ClaimModInfo_CType">
+    <xsd:annotation>
+      <xsd:documentation>Teller drawer Claim Modification information record
+   </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="TellerDrwId" type="TellerDrwId_Type" />
+      <xsd:element minOccurs="0" name="TellerUsrId" type="TellerUsrId_Type" />
+      <xsd:element minOccurs="0" name="TellerBusDt" type="TellerBusDt_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RlsModInfo_CType">
+    <xsd:annotation>
+      <xsd:documentation>Teller drawer Release Modification information record
+   </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="TellerDrwId" type="TellerDrwId_Type" />
+      <xsd:element minOccurs="0" name="TellerUsrId" type="TellerUsrId_Type" />
+      <xsd:element minOccurs="0" name="TellerBusDt" type="TellerBusDt_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TrnsitnModInfo_CType">
+    <xsd:annotation>
+      <xsd:documentation>Teller drawer transition Modification information record
+   </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="TellerDrwId" type="TellerDrwId_Type" />
+      <xsd:element minOccurs="0" name="TellerUsrId" type="TellerUsrId_Type" />
+      <xsd:element minOccurs="0" name="TellerBusDt" type="TellerBusDt_Type" />
+      <xsd:element minOccurs="0" name="OvrAmt" type="OvrAmt_Type" />
+      <xsd:element minOccurs="0" name="ShortAmt" type="ShortAmt_Type" />
+      <xsd:element minOccurs="0" name="TrnsitnClsTime" type="TrnsitnClsTime_Type" />
+      <xsd:element minOccurs="0" name="TrnsitnClsDt" type="TrnsitnClsDt_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="BalModInfo_CType">
+    <xsd:annotation>
+      <xsd:documentation>Teller drawer Balance Modification information record
+   </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="TellerDrwId" type="TellerDrwId_Type" />
+      <xsd:element minOccurs="0" name="TellerUsrId" type="TellerUsrId_Type" />
+      <xsd:element minOccurs="0" name="TellerBusDt" type="TellerBusDt_Type" />
+      <xsd:element minOccurs="0" name="TellerDrwComptArray" nillable="true" type="TellerDrwComptArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="TellerDrwModResponse" type="TellerDrwModRs_MType" />
+  <xsd:complexType name="TellerDrwModRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="RsStat" nillable="true" type="RsStat_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="TellerNonCustAdd" type="TellerNonCustAddRq_MType" />
+  <xsd:complexType name="TellerNonCustAddRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="ErrOvrRdInfoArray" nillable="true" type="ErrOvrRdInfoArray_AType" />
+      <xsd:element name="TellerNonCustDetail" type="TellerNonCustDetail_CType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TellerNonCustDetail_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="CustName" type="PersonName_CType" />
+      <xsd:element minOccurs="0" name="CustType" type="CustType_Type" />
+      <xsd:element minOccurs="0" name="Addr" type="Addr_CType" />
+      <xsd:element minOccurs="0" name="TaxId" type="TaxId_Type" />
+      <xsd:element minOccurs="0" name="TINCode" type="TINCode_Type" />
+      <xsd:element minOccurs="0" name="BirthDt" type="BirthDt_Type" />
+      <xsd:element minOccurs="0" name="OccType" type="OccType_Type" />
+      <xsd:element minOccurs="0" name="Gender" type="Gender_Type" />
+      <xsd:element minOccurs="0" name="NAICSCode" type="NAICSCode_Type" />
+      <xsd:element minOccurs="0" name="IdVerifyArray" type="IdVerifyArray_AType" />
+      <xsd:element minOccurs="0" name="PhoneArray" type="PhoneArray_AType" />
+      <xsd:element minOccurs="0" name="EmailArray" type="EmailArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CustType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Identifies the type of customer, for example business or
+                        individual</ElemDesc>
+          <CanonicalVal>Bus,Indv</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="OpenEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="Addr_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="FreeFormAddrArray" type="FreeFormAddr_AType" />
+      <xsd:element minOccurs="0" name="StreetAddr1" nillable="true" type="StreetAddr1_Type" />
+      <xsd:element minOccurs="0" name="StreetAddr2" nillable="true" type="StreetAddr2_Type" />
+      <xsd:element minOccurs="0" name="City" nillable="true" type="City_Type" />
+      <xsd:element minOccurs="0" name="StateProv" nillable="true" type="StateProv_Type" />
+      <xsd:element minOccurs="0" name="StateCode" nillable="true" type="StateCode_Type" />
+      <xsd:element minOccurs="0" name="PostalCode" nillable="true" type="PostalCode_Type" />
+      <xsd:element minOccurs="0" name="DlvryPt" nillable="true" type="DlvryPt_Type" />
+      <xsd:element minOccurs="0" name="County" nillable="true" type="County_Type" />
+      <xsd:element minOccurs="0" name="Cntry" nillable="true" type="Cntry_Type" />
+      <xsd:element minOccurs="0" name="CntryType" nillable="true" type="CntryType_Type" />
+      <xsd:element minOccurs="0" name="BusAddr" nillable="true" type="BusAddr_Type" />
+      <xsd:element minOccurs="0" name="FornAddr" nillable="true" type="FornAddr_Type" />
+      <xsd:element minOccurs="0" name="InvAddr" nillable="true" type="InvAddr_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:element minOccurs="0" name="StreetAddr3" nillable="true" type="StreetAddr3_Type" />
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="Ver_2" type="Ver_2_CType" />
+          <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+        </xsd:sequence>
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FreeFormAddr_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Array - Free Form array of address lines 1 - 11 in a
+                printable/usable form - Generally not parsed </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="11" name="AddrLineInfo" nillable="true" type="AddrLineInfo_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AddrLineInfo_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="AddrLine" nillable="true" type="AddrLine_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AddrLine_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Free Form element of address lines 1 - 11 in a printable/usable form -
+                        Generally not parsed </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="StreetAddr1_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The street address</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+        <xsd:attribute name="JHANA" type="JHANA_Type" use="optional" />
+        <xsd:attribute name="MaskVal" type="MaskVal_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="JHANA_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The Not Applicable element used as an attribute for elements. When a
+                        NON-Closed Enumerated element in a jX contract needs to convey Not
+                        Applicable, set the JHANA attribute to JHANA=true. The JHANA attribute will
+                        be ignored when an element’s JHANull attribute equals true. </ElemDesc>
+          <CanonicalVal>true,false</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ClosedEnum_Type" />
+  </xsd:simpleType>
+  <xsd:complexType name="StreetAddr2_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The second line of street address</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+        <xsd:attribute name="JHANA" type="JHANA_Type" use="optional" />
+        <xsd:attribute name="MaskVal" type="MaskVal_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="City_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The city name</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+        <xsd:attribute name="JHANA" type="JHANA_Type" use="optional" />
+        <xsd:attribute name="MaskVal" type="MaskVal_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="StateProv_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The state or province or region</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="StateCode_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The 2 alpha long code which represents a state </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+        <xsd:attribute name="MaskVal" type="MaskVal_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="PostalCode_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The postal code or zip code</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+        <xsd:attribute name="SrchType" type="SrchType_Type" use="optional" />
+        <xsd:attribute name="MaskVal" type="MaskVal_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="DlvryPt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The delivery point added to the zip </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="County_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The county </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="Cntry_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The Country Name </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+        <xsd:attribute name="MaskVal" type="MaskVal_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="CntryType_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The Country abbrev from ISO 3166</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+        <xsd:attribute name="MaskVal" type="MaskVal_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="BusAddr_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Is this a Business address? where "Y" states it is a Business
+                        address</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FornAddr_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Is this a Foreign Adddress? </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="InvAddr_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Is this address invalid based on that mail has been returned from this
+                        address</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="StreetAddr3_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The third line of street address</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+        <xsd:attribute name="JHANA" type="JHANA_Type" use="optional" />
+        <xsd:attribute name="MaskVal" type="MaskVal_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="BirthDt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Date of Birth</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:date">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+        <xsd:attribute name="MaskVal" type="MaskVal_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="OccType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Occupation description of the Customer. </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="Gender_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Sex </ElemDesc>
+          <CanonicalVal>Male,Female,Other</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="NAICSCode_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>NAICS Code - A valid NAICS (Northern American Industry Classification
+                        System) code. </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="PhoneArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Array - of PhoneInfo </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="PhoneInfo" nillable="true" type="PhoneInfo_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PhoneInfo_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="PhoneNum" nillable="true" type="PhoneNum_Type" />
+      <xsd:element minOccurs="0" name="PhoneType" nillable="true" type="PhoneType_Type" />
+      <xsd:element minOccurs="0" name="PhoneTime" nillable="true" type="PhoneTime_Type" />
+      <xsd:element minOccurs="0" name="PhoneExt" nillable="true" type="PhoneExt_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:element minOccurs="0" name="ConStartTime" type="ConStartTime_Type" />
+        <xsd:element minOccurs="0" name="ConEndTime" type="ConEndTime_Type" />
+        <xsd:element minOccurs="0" name="MobPhoneInfo" type="MobPhoneInfo_CType" />
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="Ver_2" type="Ver_2_CType" />
+          <xsd:element minOccurs="0" name="PrioritySeq" type="PrioritySeq_Type" />
+          <xsd:sequence minOccurs="0">
+            <xsd:element name="Ver_3" type="Ver_3_CType" />
+            <xsd:element minOccurs="0" name="PhoneNumDsp" type="PhoneNumDsp_Type" />
+            <xsd:sequence minOccurs="0">
+              <xsd:element name="Ver_4" type="Ver_4_CType" />
+              <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+            </xsd:sequence>
+          </xsd:sequence>
+        </xsd:sequence>
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PhoneNum_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Phone Number </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="SrchType" type="SrchType_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="PhoneType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Phone Type - Examples - Home, Work, Fax, Cell </ElemDesc>
+          <CanonicalVal>Home,SecdHome,Bus,SecdBus,HomeCell,BusCell,PersonalCell,HomeFax,BusFax,SecdBusCell</CanonicalVal>
+          <ElemCanocType>PhoneType is a Hybrid open enumeration</ElemCanocType>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="OpenEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="PhoneTime_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Phone Time - Best usage time - Day or Evening
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="PhoneExt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Phone Extension</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConStartTime_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The Greenwich Mean time when contact availability starts</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:time">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConEndTime_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The Greenwich Mean time when contact availability ends</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:time">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="MobPhoneInfo_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="MobPrvdCode" nillable="true" type="MobPrvdCode_Type" />
+      <xsd:element minOccurs="0" name="MobPrvdCodeDesc" nillable="true" type="MobPrvdCodeDesc_Type" />
+      <xsd:element minOccurs="0" name="MobPrvdDom" nillable="true" type="MobPrvdDom_Type" />
+      <xsd:element minOccurs="0" name="MobBB" nillable="true" type="MobBB_Type" />
+      <xsd:element minOccurs="0" name="MobSendTestText" nillable="true" type="MobSendTestText_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MobPrvdCode_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The provider code of the mobile service</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="OpenEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="MobPrvdCodeDesc_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The description of the provider code for the mobile service</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="MobPrvdDom_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The domain of the provider of the mobile service</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="OpenEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="MobBB_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Is the mobile phone a Blackberry</ElemDesc>
+          <CanonicalVal>true,false</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="MobSendTestText_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Send a test text</ElemDesc>
+          <CanonicalVal>true,false</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="PrioritySeq_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The assignment of a priority sequence for an array of items</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:int">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="PhoneNumDsp_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> Phone Number Display - Based on format codes which may include
+                        special formatting. Examples: (XXX)XXX-XXXX, XXX-XXX-XXXX, XXX/XXX/XXXX,
+                        XXX.XXX.XXXX, XXX-XXX-XXXXXXX, XXXXX-XXX-XXX-XXXX </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="EmailArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Array - of EmailInfo </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="EmailInfo" nillable="true" type="EmailInfo_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="EmailInfo_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="EmailAddr" nillable="true" type="EmailAddr_Type" />
+      <xsd:element minOccurs="0" name="EmailType" nillable="true" type="EmailType_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="EmailAddr_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>E-mail Address</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+        <xsd:attribute name="SrchType" type="SrchType_Type" use="optional" />
+        <xsd:attribute name="NotOccurType" type="NotOccurType_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="NotOccurType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>This conveys to the service provider if the notification occurrence
+                        should be withheld. true = withhold notification false, which is the default
+                        = send notification</ElemDesc>
+          <CanonicalVal>true,false</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ClosedEnum_Type" />
+  </xsd:simpleType>
+  <xsd:complexType name="EmailType_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        <ElemDesc>E-mail Type - Examples - Home, Work, Statment,Notice</ElemDesc>
+        <CanonicalVal>Prim,Secd,OLB</CanonicalVal>
+        <ElemCanocType>EmailType is a Hybrid open enumeration</ElemCanocType>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="OpenEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="TellerNonCustAddResponse" type="TellerNonCustAddRs_MType" />
+  <xsd:complexType name="TellerNonCustAddRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="NonCustId" nillable="true" type="CustId_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="TellerNonCustMod" type="TellerNonCustModRq_MType" />
+  <xsd:complexType name="TellerNonCustModRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="ErrOvrRdInfoArray" nillable="true" type="ErrOvrRdInfoArray_AType" />
+      <xsd:element name="NonCustId" type="CustId_Type" />
+      <xsd:element minOccurs="0" name="TellerNonCustDetail" nillable="true" type="TellerNonCustDetail_CType" />
+      <xsd:element name="ActIntentKey" type="ActIntentKey_Type" />
+      <xsd:element minOccurs="0" name="Dlt" nillable="true" type="Dlt_Type" />
+      <xsd:element minOccurs="0" name="ModRmkArray" nillable="true" type="Rmk_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="TellerNonCustModResponse" type="TellerNonCustModRs_MType" />
+  <xsd:complexType name="TellerNonCustModRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="RsStat" nillable="true" type="RsStat_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="TellerNonCustInq" type="TellerNonCustInqRq_MType" />
+  <xsd:complexType name="TellerNonCustInqRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element name="NonCustId" type="CustId_Type" />
+      <xsd:element minOccurs="0" name="IncXtendElemArray" nillable="true" type="IncXtendElem_AType" />
+      <xsd:element minOccurs="0" name="ActIntent" nillable="true" type="ActIntent_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="TellerNonCustInqResponse" type="TellerNonCustInqRs_MType" />
+  <xsd:complexType name="TellerNonCustInqRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="NonCustId" nillable="true" type="CustId_Type" />
+      <xsd:element minOccurs="0" name="TellerNonCustInqRec" nillable="true" type="TellerNonCustInqRec_CType" />
+      <xsd:element minOccurs="0" name="ActIntent" nillable="true" type="ActIntent_Type" />
+      <xsd:element minOccurs="0" name="ActIntentKey" nillable="true" type="ActIntentKey_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TellerNonCustInqRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="TellerNonCustDetail" type="TellerNonCustDetail_CType" />
+      <xsd:element minOccurs="0" name="TINDesc" type="TINDesc_Type" />
+      <xsd:element minOccurs="0" name="NAICSDesc" type="NAICSDesc_Type" />
+      <xsd:element name="Ver_1" type="Ver_1_CType" />
+      <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TINDesc_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The description of the code that designates the type of Tax
+                        identification number </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="NAICSDesc_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The NAICS Code Description</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="TellerCustSrch" type="TellerCustSrchRq_MType" />
+  <xsd:complexType name="TellerCustSrchRq_MType">
+    <xsd:sequence>
+      <xsd:element name="SrchMsgRqHdr" type="SrchMsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="FirstName" nillable="true" type="FirstName_Type" />
+      <xsd:element minOccurs="0" name="LastName" nillable="true" type="LastName_Type" />
+      <xsd:element minOccurs="0" name="ComName" nillable="true" type="ComName_Type" />
+      <xsd:element minOccurs="0" name="TaxId" nillable="true" type="TaxId_Type" />
+      <xsd:element minOccurs="0" name="CustId" nillable="true" type="CustId_Type" />
+      <xsd:element minOccurs="0" name="AcctId" nillable="true" type="AcctId_Type" />
+      <xsd:element minOccurs="0" name="AcctType" nillable="true" type="AcctType_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="TellerCustSrchResponse" type="TellerCustSrchRs_MType" />
+  <xsd:complexType name="TellerCustSrchRs_MType">
+    <xsd:sequence>
+      <xsd:element name="SrchMsgRsHdr" type="SrchMsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="FirstName" nillable="true" type="FirstName_Type" />
+      <xsd:element minOccurs="0" name="LastName" nillable="true" type="LastName_Type" />
+      <xsd:element minOccurs="0" name="ComName" nillable="true" type="ComName_Type" />
+      <xsd:element minOccurs="0" name="TaxId" nillable="true" type="TaxId_Type" />
+      <xsd:element minOccurs="0" name="CustId" nillable="true" type="CustId_Type" />
+      <xsd:element minOccurs="0" name="AcctId" nillable="true" type="AcctId_Type" />
+      <xsd:element minOccurs="0" name="AcctType" nillable="true" type="AcctType_Type" />
+      <xsd:element minOccurs="0" name="TellerCustSrchRecArray" nillable="true" type="TellerCustSrchRecArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TellerCustSrchRecArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">PENDING - Array of responses for Teller Customer Search
+   </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="TellerCustSrchRec" type="TellerCustSrchRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TellerCustSrchRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="CustId" type="CustId_Type" />
+      <xsd:element minOccurs="0" name="NonCustId" type="CustId_Type" />
+      <xsd:element minOccurs="0" name="FirstName" nillable="true" type="FirstName_Type" />
+      <xsd:element minOccurs="0" name="LastName" nillable="true" type="LastName_Type" />
+      <xsd:element minOccurs="0" name="ComName" nillable="true" type="ComName_Type" />
+      <xsd:element minOccurs="0" name="TaxId" nillable="true" type="TaxId_Type" />
+      <xsd:element minOccurs="0" name="TINCode" type="TINCode_Type" />
+      <xsd:element minOccurs="0" name="TINDesc" type="TINDesc_Type" />
+      <xsd:element minOccurs="0" name="CustType" type="CustType_Type" />
+      <xsd:element minOccurs="0" name="AcctId" nillable="true" type="AcctId_Type" />
+      <xsd:element minOccurs="0" name="AcctType" nillable="true" type="AcctType_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

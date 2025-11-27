@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+    xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+    xmlns:ns="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://jackhenry.com/jxchange/TPG/2008"
+    targetNamespace="http://jackhenry.com/jxchange/TPG/2008">
+
+    <!-- This starts the Types section  -->
+
+    <types>
+        <xsd:schema elementFormDefault="qualified" attributeFormDefault="qualified"
+            targetNamespace="http://jackhenry.com/jxchange/TPG/2008"
+            xmlns="http://jackhenry.com/jxchange/TPG/2008" version="2024.2.03"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+            <xsd:include schemaLocation="TPG_TellerMaster.xsd" />
+
+        </xsd:schema>
+    </types>
+
+    <!-- This starts the Message section  -->
+
+    <message name="MessageFault">
+        <part name="parameters" element="tns:HdrFault" />
+    </message>
+
+    <message name="PingInput">
+        <part name="parameters" element="tns:Ping" />
+    </message>
+    <message name="PingOutput">
+        <part name="parameters" element="tns:PingResponse" />
+    </message>
+
+    <message name="TellerTrnAddInput">
+        <part name="parameters" element="tns:TellerTrnAdd" />
+    </message>
+    <message name="TellerTrnAddOutput">
+        <part name="parameters" element="tns:TellerTrnAddResponse" />
+    </message>
+
+    <message name="TellerTrnInqInput">
+        <part name="parameters" element="tns:TellerTrnInq" />
+    </message>
+    <message name="TellerTrnInqOutput">
+        <part name="parameters" element="tns:TellerTrnInqResponse" />
+    </message>
+
+    <message name="TellerTrnModInput">
+        <part name="parameters" element="tns:TellerTrnMod" />
+    </message>
+    <message name="TellerTrnModOutput">
+        <part name="parameters" element="tns:TellerTrnModResponse" />
+    </message>
+
+    <message name="TellerTrnSrchInput">
+        <part name="parameters" element="tns:TellerTrnSrch" />
+    </message>
+    <message name="TellerTrnSrchOutput">
+        <part name="parameters" element="tns:TellerTrnSrchResponse" />
+    </message>
+
+    <message name="TellerDrwSrchInput">
+        <part name="parameters" element="tns:TellerDrwSrch" />
+    </message>
+    <message name="TellerDrwSrchOutput">
+        <part name="parameters" element="tns:TellerDrwSrchResponse" />
+    </message>
+
+    <message name="TellerDrwTrnsitnSrchInput">
+        <part name="parameters" element="tns:TellerDrwTrnsitnSrch" />
+    </message>
+    <message name="TellerDrwTrnsitnSrchOutput">
+        <part name="parameters" element="tns:TellerDrwTrnsitnSrchResponse" />
+    </message>
+
+    <message name="TellerCurrTrnAddInput">
+        <part name="parameters" element="tns:TellerCurrTrnAdd" />
+    </message>
+    <message name="TellerCurrTrnAddOutput">
+        <part name="parameters" element="tns:TellerCurrTrnAddResponse" />
+    </message>
+
+    <message name="TellerCurrTrnModInput">
+        <part name="parameters" element="tns:TellerCurrTrnMod" />
+    </message>
+    <message name="TellerCurrTrnModOutput">
+        <part name="parameters" element="tns:TellerCurrTrnModResponse" />
+    </message>
+
+    <message name="TellerCurrTrnInqInput">
+        <part name="parameters" element="tns:TellerCurrTrnInq" />
+    </message>
+    <message name="TellerCurrTrnInqOutput">
+        <part name="parameters" element="tns:TellerCurrTrnInqResponse" />
+    </message>
+
+    <message name="TellerCurrTrnSrchInput">
+        <part name="parameters" element="tns:TellerCurrTrnSrch" />
+    </message>
+    <message name="TellerCurrTrnSrchOutput">
+        <part name="parameters" element="tns:TellerCurrTrnSrchResponse" />
+    </message>
+
+    <message name="TellerDrwModInput">
+        <part name="parameters" element="tns:TellerDrwMod" />
+    </message>
+    <message name="TellerDrwModOutput">
+        <part name="parameters" element="tns:TellerDrwModResponse" />
+    </message>
+
+    <message name="TellerNonCustAddInput">
+        <part name="parameters" element="tns:TellerNonCustAdd" />
+    </message>
+    <message name="TellerNonCustAddOutput">
+        <part name="parameters" element="tns:TellerNonCustAddResponse" />
+    </message>
+
+    <message name="TellerNonCustModInput">
+        <part name="parameters" element="tns:TellerNonCustMod" />
+    </message>
+    <message name="TellerNonCustModOutput">
+        <part name="parameters" element="tns:TellerNonCustModResponse" />
+    </message>
+
+    <message name="TellerNonCustInqInput">
+        <part name="parameters" element="tns:TellerNonCustInq" />
+    </message>
+    <message name="TellerNonCustInqOutput">
+        <part name="parameters" element="tns:TellerNonCustInqResponse" />
+    </message>
+
+    <message name="TellerCustSrchInput">
+        <part name="parameters" element="tns:TellerCustSrch" />
+    </message>
+    <message name="TellerCustSrchOutput">
+        <part name="parameters" element="tns:TellerCustSrchResponse" />
+    </message>
+
+    <!-- This starts the PortType section  -->
+
+    <portType name="TellerService">
+
+        <operation name="Ping">
+            <input message="tns:PingInput" />
+            <output message="tns:PingOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TellerTrnAdd">
+            <input message="tns:TellerTrnAddInput" />
+            <output message="tns:TellerTrnAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TellerTrnInq">
+            <input message="tns:TellerTrnInqInput" />
+            <output message="tns:TellerTrnInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TellerTrnMod">
+            <input message="tns:TellerTrnModInput" />
+            <output message="tns:TellerTrnModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TellerTrnSrch">
+            <input message="tns:TellerTrnSrchInput" />
+            <output message="tns:TellerTrnSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TellerDrwSrch">
+            <input message="tns:TellerDrwSrchInput" />
+            <output message="tns:TellerDrwSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TellerDrwTrnsitnSrch">
+            <input message="tns:TellerDrwTrnsitnSrchInput" />
+            <output message="tns:TellerDrwTrnsitnSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TellerCurrTrnAdd">
+            <input message="tns:TellerCurrTrnAddInput" />
+            <output message="tns:TellerCurrTrnAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TellerCurrTrnMod">
+            <input message="tns:TellerCurrTrnModInput" />
+            <output message="tns:TellerCurrTrnModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TellerCurrTrnInq">
+            <input message="tns:TellerCurrTrnInqInput" />
+            <output message="tns:TellerCurrTrnInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TellerCurrTrnSrch">
+            <input message="tns:TellerCurrTrnSrchInput" />
+            <output message="tns:TellerCurrTrnSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TellerDrwMod">
+            <input message="tns:TellerDrwModInput" />
+            <output message="tns:TellerDrwModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TellerNonCustAdd">
+            <input message="tns:TellerNonCustAddInput" />
+            <output message="tns:TellerNonCustAddOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TellerNonCustMod">
+            <input message="tns:TellerNonCustModInput" />
+            <output message="tns:TellerNonCustModOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TellerNonCustInq">
+            <input message="tns:TellerNonCustInqInput" />
+            <output message="tns:TellerNonCustInqOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+        <operation name="TellerCustSrch">
+            <input message="tns:TellerCustSrchInput" />
+            <output message="tns:TellerCustSrchOutput" />
+            <fault name="Fault" message="tns:MessageFault" />
+        </operation>
+
+    </portType>
+
+    <!-- This starts the Binding section  -->
+
+    <binding name="TellerServiceSoapBinding" type="tns:TellerService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+
+        <operation name="Ping">
+            <soap:operation soapAction="http://jackhenry.com/ws/Ping" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TellerTrnAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/TellerTrnAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TellerTrnInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/TellerTrnInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TellerTrnMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/TellerTrnMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TellerTrnSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/TellerTrnSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TellerDrwSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/TellerDrwSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TellerDrwTrnsitnSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/TellerDrwTrnsitnSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TellerCurrTrnAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/TellerCurrTrnAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TellerCurrTrnMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/TellerCurrTrnMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TellerCurrTrnInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/TellerCurrTrnInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TellerCurrTrnSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/TellerCurrTrnSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TellerDrwMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/TellerDrwMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TellerNonCustAdd">
+            <soap:operation soapAction="http://jackhenry.com/ws/TellerNonCustAdd" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TellerNonCustMod">
+            <soap:operation soapAction="http://jackhenry.com/ws/TellerNonCustMod" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TellerNonCustInq">
+            <soap:operation soapAction="http://jackhenry.com/ws/TellerNonCustInq" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+        <operation name="TellerCustSrch">
+            <soap:operation soapAction="http://jackhenry.com/ws/TellerCustSrch" />
+            <input>
+                <soap:body use="literal" />
+            </input>
+            <output>
+                <soap:body use="literal" />
+            </output>
+            <fault name="Fault">
+                <soap:fault name="Fault" use="literal" />
+            </fault>
+        </operation>
+
+    </binding>
+
+    <!-- This starts the Service section  -->
+
+    <service name="TellerService">
+        <documentation>Service Description for the TellerService Interface</documentation>
+        <port name="TellerServiceSoap" binding="tns:TellerServiceSoapBinding">
+            <soap:address location="https://jackhenry.com/jxchange/2008/ServiceGateway/Teller.svc" />
+        </port>
+    </service>
+</definitions>

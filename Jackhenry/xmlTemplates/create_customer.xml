@@ -56,7 +56,7 @@
             
             <CustDetail>
                 <PersonName>
-                    <ConName>{{CustDetail.PersonName.ConName}}</ConName>
+                    <ComName>{{CustDetail.PersonName.ComName}}</ComName>
 
                     {% if conditioningData.partyType == "individual" %}
                     <FirstName>{{CustDetail.PersonName.FirstName}}</FirstName>
@@ -64,15 +64,14 @@
                     <LastName>{{CustDetail.PersonName.LastName}}</LastName>
                     {% endif %}
 
-                    <x_PersonName>
-                        {% if conditioningData.partyType == "individual" %}
-                        <NameSuffix>{{CustDetail.PersonName.x_PersonName.NameSuffix}}</NameSuffix>
-                        {% endif %}
 
-                        {% if conditioningData.partyType == "entity" %}
+                    {% if conditioningData.partyType == "individual" or conditionData.isSoleProp == true %}
+                    <x_PersonName>
+                        <NameSuffix>{{CustDetail.PersonName.x_PersonName.NameSuffix}}</NameSuffix>
                         <LegalName>{{CustDetail.PersonName.x_PersonName.LegalName}}</LegalName>
-                        {% endif %}
                     </x_PersonName>
+                    {% endif %}
+
                 </PersonName>
 
                 <Addr>
@@ -108,7 +107,10 @@
                 <PhoneArray>
                     <PhoneInfo>
                         <PhoneType>{{CustDetail.PhoneArray.PhoneInfo.PhoneType}}</PhoneType>
-                        <PhoneExt>{{CustDetail.PhoneArray.PhoneInfo.PhoneExt}}</PhoneExt>
+                        <Ver_1 />
+                        <Ver_2 />
+                        <Ver_3 />
+                        <Ver_4 />
                         <PhoneNum>{{CustDetail.PhoneArray.PhoneInfo.PhoneNum}}</PhoneNum>
                     </PhoneInfo>
                 </PhoneArray>
@@ -117,7 +119,7 @@
                     <CrScoreInfo>
                         <CrScoreId>{{CustDetail.CrScoreArray.CrScoreInfo.CrScoreId}}</CrScoreId>
 
-                        {% if conditioningData.partyType == "individual" %}
+                        {% if conditioningData.partyType == "entity" %}
                         <CertCode>{{CustDetail.CrScoreArray.CrScoreInfo.CertCode}}</CertCode>
                         <CertCodeDt>{{CustDetail.CrScoreArray.CrScoreInfo.CertCodeDt}}</CertCodeDt>
                         {% endif %}
@@ -153,10 +155,11 @@
                 <OffCode>{{BusDetail.OffCode}}</OffCode>
                 <CustCode>{{BusDetail.CustCode}}</CustCode>
 
+                {% if conditioningData.partyType == "individual" or conditionData.isSoleProp == true %}
                 <InsiderCode>{{BusDetail.InsiderCode}}</InsiderCode>
-
-                <LangType>{{BusDetail.LangType}}</LangType>
                 <NetWorth>{{BusDetail.NetWorth}}</NetWorth>
+                {% endif %}
+
                 <NetWorthAmt>{{BusDetail.NetWorthAmt}}</NetWorthAmt>
             </BusDetail>
 
@@ -174,7 +177,6 @@
                     <CRACountyCode>{{RegDetail.CRARec.CRACountyCode}}</CRACountyCode>
                     <CRACenTract>{{RegDetail.CRARec.CRACenTract}}</CRACenTract>
                     <CRASMSACode>{{RegDetail.CRARec.CRASMSACode}}</CRASMSACode>
-                    <CRALoc>{{RegDetail.CRARec.CRALoc}}</CRALoc>
                     <CRAIncmLvl>{{RegDetail.CRARec.CRAIncmLvl}}</CRAIncmLvl>
                 </CRARec>
             </RegDetail>

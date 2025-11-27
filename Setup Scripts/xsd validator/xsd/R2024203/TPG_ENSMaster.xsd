@@ -1,0 +1,3863 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns="http://jackhenry.com/jxchange/TPG/2008" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://jackhenry.com/jxchange/TPG/2008" version="2024.2.03" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:import schemaLocation="oasis-200401-wss-wssecurity-secext-1.0.xsd" namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" />
+  <xsd:group name="Main">
+    <xsd:sequence>
+      <xsd:element ref="Ping" />
+      <xsd:element ref="PingResponse" />
+      <xsd:element ref="HdrFault" />
+      <xsd:element ref="NotSndAdd" />
+      <xsd:element ref="NotSndAddResponse" />
+      <xsd:element ref="NotRecipAdd" />
+      <xsd:element ref="NotRecipAddResponse" />
+      <xsd:element ref="NotRecipMod" />
+      <xsd:element ref="NotRecipModResponse" />
+      <xsd:element ref="NotRecipInq" />
+      <xsd:element ref="NotRecipInqResponse" />
+      <xsd:element ref="NotRecipSrch" />
+      <xsd:element ref="NotRecipSrchResponse" />
+      <xsd:element ref="NotRecipSubAdd" />
+      <xsd:element ref="NotRecipSubAddResponse" />
+      <xsd:element ref="NotRecipSubMod" />
+      <xsd:element ref="NotRecipSubModResponse" />
+      <xsd:element ref="NotRecipSubInq" />
+      <xsd:element ref="NotRecipSubInqResponse" />
+      <xsd:element ref="NotRecipSubSrch" />
+      <xsd:element ref="NotRecipSubSrchResponse" />
+      <xsd:element ref="NotMobPhoneValidate" />
+      <xsd:element ref="NotMobPhoneValidateResponse" />
+      <xsd:element ref="NotSMSKeyWordAdd" />
+      <xsd:element ref="NotSMSKeyWordAddResponse" />
+      <xsd:element ref="NotSMSKeyWordMod" />
+      <xsd:element ref="NotSMSKeyWordModResponse" />
+      <xsd:element ref="NotSMSKeyWordInq" />
+      <xsd:element ref="NotSMSKeyWordInqResponse" />
+      <xsd:element ref="NotSMSKeyWordSrch" />
+      <xsd:element ref="NotSMSKeyWordSrchResponse" />
+      <xsd:element ref="NotExplDataAdd" />
+      <xsd:element ref="NotExplDataAddResponse" />
+      <xsd:element ref="NotDistGroupAdd" />
+      <xsd:element ref="NotDistGroupAddResponse" />
+      <xsd:element ref="NotDistGroupMod" />
+      <xsd:element ref="NotDistGroupModResponse" />
+      <xsd:element ref="NotDistGroupInq" />
+      <xsd:element ref="NotDistGroupInqResponse" />
+      <xsd:element ref="NotDistGroupSrch" />
+      <xsd:element ref="NotDistGroupSrchResponse" />
+      <xsd:element ref="NotActSrch" />
+      <xsd:element ref="NotActSrchResponse" />
+      <xsd:element ref="NotEmailAlrtAdd" />
+      <xsd:element ref="NotEmailAlrtAddResponse" />
+      <xsd:element ref="NotSMSAlrtAdd" />
+      <xsd:element ref="NotSMSAlrtAddResponse" />
+      <xsd:element ref="FaxSndAdd" />
+      <xsd:element ref="FaxSndAddResponse" />
+      <xsd:element ref="FaxStatInq" />
+      <xsd:element ref="FaxStatInqResponse" />
+    </xsd:sequence>
+  </xsd:group>
+  <xsd:element name="Ping" type="PingRq_MType" />
+  <xsd:complexType name="PingRq_MType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">This is a common Ping request for checking, testing,
+                and keep alive</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="PingRq" type="PingRq_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PingRq_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Generic Text for the ping request</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="Ver_1_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The object tag that represents the first iteration of
+                the object</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:element name="PingResponse" type="PingRs_MType" />
+  <xsd:complexType name="PingRs_MType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">This is a common Ping response which should echo back
+                the string that was sent in the PingRq</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="PingRs" type="PingRs_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:element minOccurs="0" name="SvcProdVer" type="ProdVer_Type" />
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="Ver_2" type="Ver_2_CType" />
+          <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+        </xsd:sequence>
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PingRs_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">String echoed back from the PingRq. The element value
+                will contain Error when the Ping request to a service provider is not successful <Jx><CanonicalVal>Error</CanonicalVal></Jx></xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="OpenEnum_Type" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="OpenEnum_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Defines a string type which is Enum but is Bank defined
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string" />
+  </xsd:simpleType>
+  <xsd:complexType name="ProdVer_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Release version of product</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="JHANull_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The nillable element used as an attribute for elements. JHANull=true
+                        will convey to service providers to null the matching field to element to
+                        null.</ElemDesc>
+          <CanonicalVal>true,false</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ClosedEnum_Type" />
+  </xsd:simpleType>
+  <xsd:simpleType name="ClosedEnum_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Defines a string type which is Enum and has set values
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string" />
+  </xsd:simpleType>
+  <xsd:simpleType name="Rstr_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Describes the level of restrictions that can exist at a parent and/or
+                        child node</ElemDesc>
+          <ElemDefault>ReadWrite</ElemDefault>
+          <CanonicalVal>NoAccess,NoAccessPart,ReadWrite,ReadWritePart,ReadOnly,ReadOnlyPart,Hid</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ClosedEnum_Type" />
+  </xsd:simpleType>
+  <xsd:complexType name="Ver_2_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The object tag that represents the second iteration of
+                the object</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:element name="HdrFault" type="HdrFault_MType" />
+  <xsd:complexType name="HdrFault_MType">
+    <xsd:sequence>
+      <xsd:element name="FaultHdr" nillable="true" type="FaultHdr_CType" />
+      <xsd:element minOccurs="0" name="FaultRecInfoArray" nillable="true" type="FaultRecInfoArray_AType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="FaultVer_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FaultHdr_CType">
+    <xsd:annotation>
+      <xsd:documentation>Jxchange header for soap envelop</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="JxVer" type="FaultJxVer_Type" />
+      <xsd:element name="AuditUsrId" type="FaultAuditUsrId_Type" />
+      <xsd:element name="AuditWsId" type="FaultAuditWsId_Type" />
+      <xsd:element minOccurs="0" name="AuthenUsrId" type="FaultAuthenUsrId_Type">
+        <xsd:annotation>
+          <xsd:documentation>
+            <Deprecate>
+              <Dt>2012-01-01</Dt>
+              <Cmnt>The AuthenUsrId will be delivered as part of the Authentication
+                                User Credentials element (AuthenUsrCred_CType) in the form of a WS
+                                Security-Security Token. The Attribute name identity claims name is
+                                to be used to deliver a user identification
+                                (http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name)</Cmnt>
+            </Deprecate>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="ConsumerName" type="FaultConsumerName_Type" />
+      <xsd:element minOccurs="0" name="ConsumerProd" type="FaultConsumerProd_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="FaultVer_1_CType" />
+        <xsd:element minOccurs="0" name="jXLogTrackingId" type="FaultjXLogTrackingId_Type" />
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="Ver_2" type="FaultVer_2_CType" />
+          <xsd:element minOccurs="0" name="InstRtId" type="InstRtId_Type" />
+          <xsd:element minOccurs="0" name="InstEnv" type="InstEnv_Type" />
+          <xsd:sequence minOccurs="0">
+            <xsd:element name="Ver_3" type="FaultVer_3_CType" />
+            <xsd:element minOccurs="0" name="BusCorrelId" type="BusCorrelId_Type" />
+            <xsd:sequence minOccurs="0">
+              <xsd:element name="Ver_4" type="FaultVer_4_CType" />
+              <xsd:element minOccurs="0" name="WorkflowCorrelId" type="WorkflowCorrelId_Type" />
+              <xsd:sequence minOccurs="0">
+                <xsd:element name="Ver_5" type="FaultVer_5_CType" />
+                <xsd:element minOccurs="0" name="ValidConsmName" type="ValidConsmName_Type" />
+                <xsd:element minOccurs="0" name="ValidConsmProd" type="ValidConsmProd_Type" />
+                <xsd:sequence minOccurs="0">
+                  <xsd:element name="Ver_6" type="FaultVer_6_CType" />
+                  <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+                </xsd:sequence>
+              </xsd:sequence>
+            </xsd:sequence>
+          </xsd:sequence>
+        </xsd:sequence>
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FaultJxVer_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The element will contain the version Jx is running for Soap Header
+                        Fault</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultAuditUsrId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>This is the User Id which the consumer would like written to the audit
+                        as performing the requested service. It will vary but could be down to the
+                        user id. It will not be use to authenticate however just audit for Soap
+                        Header Fault .</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultAuditWsId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>This is the WorkStation Id which the consumer would like written to
+                        the audit as performing the requested service for Soap Header Fault . It
+                        will vary but could be down to the user id.</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultAuthenUsrId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>This is the User Id which the consumer would like the service provider
+                        to use to authenticate with for Soap Header Fault . It is a user id which
+                        the provider will understand</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultConsumerName_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The name of the service consumer (Business name) for Soap Header
+                        Fault</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultConsumerProd_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The name of the product which is consuming the service (Business
+                        Product Name) for Soap Header Fault</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultVer_1_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The object tag that represents the first iteration of
+                the object for Soap Fault Header</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:complexType name="FaultjXLogTrackingId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>An identification provided by jXchange to be able to trace the request
+                        and response of a message from the third party gateway, internal gateway,
+                        and service provider for Soap Header Fault</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultVer_2_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The object tag that represents the second iteration of
+                the object for Soap Fault Header</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:complexType name="InstRtId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The identification of the entity of submitted message. A financial
+                        institution entity will utilize the routing transit or ABA nine (9) digit
+                        number assigned to financial institutions for the purpose of routing as
+                        assigned by the American Bankers Association. Any leading zeros must be
+                        provided for a complete routing and transit number. A non-financial
+                        institution entity will use a mutually agreed upon identification that must
+                        contain at least one non-integer character. When a record is directed to a
+                        specific Financial Institution within a holding company, the institution
+                        routing identification is the specific Financial Institution routing
+                        identification and not the holding company identification. </ElemDesc>
+          <CanonicalVal>JHA</CanonicalVal>
+        </Jx>
+        <CoreDirector>
+          <ElemRules>Required on all message requests</ElemRules>
+        </CoreDirector>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="InstEnv_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>An identification provided by the consumer that defines the
+                        environment in which the institution is operating.</ElemDesc>
+          <CanonicalVal>PROD</CanonicalVal>
+          <ElemUsage>This is the Environment in which the Institution is operating.
+                        Example: [ PROD, TEST, AUDIT, SYM001, SYM101, ... ] The absence of this
+                        element will equate to "PROD" = Production Environment. It will be the
+                        responsibility of the sender to send the appropriate data to identify the
+                        environment if necessary.</ElemUsage>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="OpenEnum_Type" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultVer_3_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The object tag that represents the third iteration of
+                the object for Soap Fault Header</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:complexType name="BusCorrelId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The correlation identification as related to business functions and
+                        activities</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultVer_4_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The object tag that represents the fourth iteration of
+                the object for Soap Fault Header</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:complexType name="WorkflowCorrelId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The correlation identification as related to workflow functions and
+                        activities</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultVer_5_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The object tag that represents the fifth iteration of
+                the object for Soap Fault Header</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:complexType name="ValidConsmName_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The consumer name that can be validated by Enterprise goverance. The
+                        canonical values are managed in an consumer/product Enterprise
+                        table</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ValidConsmProd_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The consumer product name that can be validated by Enterprise
+                        goverance. The canonical values are managed in an consumer/product
+                        Enterprise table</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultVer_6_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The object tag that represents the sixth iteration of
+                the object for Soap Fault Header</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:complexType name="FaultRecInfoArray_AType">
+    <xsd:annotation>
+      <xsd:documentation>Array of messages that can be returned in a fault message
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="FaultMsgRec" type="FaultMsgRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FaultMsgRec_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Message Record includes the Error responses for the
+                soap envelope - can occur multiple times</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ErrCode" type="FaultErrCode_Type" />
+      <xsd:element name="ErrCat" type="FaultErrCat_Type" />
+      <xsd:element name="ErrDesc" type="FaultErrDesc_Type" />
+      <xsd:element minOccurs="0" name="ErrElem" type="FaultErrElem_Type" />
+      <xsd:element minOccurs="0" name="ErrElemVal" type="FaultErrElemVal_Type" />
+      <xsd:element minOccurs="0" name="ErrLoc" type="FaultErrLoc_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="FaultVer_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FaultErrCode_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Soap Header Fault Error Code</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultErrCat_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Soap Header Fault Error Catagory</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultErrDesc_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Soap Header Fault Error Description</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultErrElem_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Soap Header Fault when an Error or Fault occurs this optional element
+                        will contain the element which is causing the error condition</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultErrElemVal_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Soap Header Fault when an Error or Fault occurs this optional element
+                        will contain the value of the element which is causing the error
+                        condition</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaultErrLoc_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Soap Header Fault Error Location - This is typically the program that
+                        generated the error condition</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="NotSndAdd" type="NotSndAddRq_MType" />
+  <xsd:complexType name="NotSndAddRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="ErrOvrRdInfoArray" nillable="true" type="ErrOvrRdInfoArray_AType" />
+      <xsd:element name="InstRtId" type="InstRtId_Type" />
+      <xsd:element name="ConsumerProd" type="ConsumerProd_Type" />
+      <xsd:element name="AlrtName" type="AlrtName_Type" />
+      <xsd:element name="AlrtSndInfoRec" type="AlrtSndInfoRec_CType" />
+      <xsd:element minOccurs="0" name="PubVer" nillable="true" type="PubVer_Type" />
+      <xsd:element minOccurs="0" name="AlrtTestType" nillable="true" type="AlrtTestType_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MsgRqHdr_CType">
+    <xsd:annotation>
+      <xsd:documentation>Default message request headers</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="jXchangeHdr" type="jXchangeHdr_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:element minOccurs="0" name="AuthenUsrCred" type="AuthenUsrCred_CType" />
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="Ver_2" type="Ver_2_CType" />
+          <xsd:element minOccurs="0" name="AuthenProdCred" type="AuthenProdCred_CType" />
+          <xsd:sequence minOccurs="0">
+            <xsd:element name="Ver_3" type="Ver_3_CType" />
+            <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+          </xsd:sequence>
+        </xsd:sequence>
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="jXchangeHdr_CType">
+    <xsd:annotation>
+      <xsd:documentation>Jxchange headers for tracking</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="JxVer" type="JxVer_Type" />
+      <xsd:element name="AuditUsrId" type="AuditUsrId_Type" />
+      <xsd:element name="AuditWsId" type="AuditWsId_Type" />
+      <xsd:element minOccurs="0" name="AuthenUsrId" type="AuthenUsrId_Type">
+        <xsd:annotation>
+          <xsd:documentation>
+            <Deprecate>
+              <Dt>2012-01-01</Dt>
+              <Cmnt>The AuthenUsrId will be delivered as part of the Authentication
+                                User Credentials element (AuthenUsrCred_CType) in the form of a WS
+                                Security-Security Token. The Attribute name identity claims name is
+                                to be used to deliver a user identification
+                                (http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name)</Cmnt>
+            </Deprecate>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="ConsumerName" type="ConsumerName_Type" />
+      <xsd:element minOccurs="0" name="ConsumerProd" type="ConsumerProd_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:element minOccurs="0" name="jXLogTrackingId" type="jXLogTrackingId_Type" />
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="Ver_2" type="Ver_2_CType" />
+          <xsd:element minOccurs="0" name="InstRtId" type="InstRtId_Type" />
+          <xsd:element minOccurs="0" name="InstEnv" type="InstEnv_Type" />
+          <xsd:sequence minOccurs="0">
+            <xsd:element name="Ver_3" type="Ver_3_CType" />
+            <xsd:element minOccurs="0" name="BusCorrelId" type="BusCorrelId_Type" />
+            <xsd:sequence minOccurs="0">
+              <xsd:element name="Ver_4" type="Ver_4_CType" />
+              <xsd:element minOccurs="0" name="WorkflowCorrelId" type="WorkflowCorrelId_Type" />
+              <xsd:sequence minOccurs="0">
+                <xsd:element name="Ver_5" type="Ver_5_CType" />
+                <xsd:element minOccurs="0" name="ValidConsmName" type="ValidConsmName_Type" />
+                <xsd:element minOccurs="0" name="ValidConsmProd" type="ValidConsmProd_Type" />
+                <xsd:sequence minOccurs="0">
+                  <xsd:element name="Ver_6" type="Ver_6_CType" />
+                  <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+                </xsd:sequence>
+              </xsd:sequence>
+            </xsd:sequence>
+          </xsd:sequence>
+        </xsd:sequence>
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="JxVer_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The element will contain the version Jx is
+                running</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="AuditUsrId_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">This is the User Id which the consumer would like
+                written to the audit as performing the requested service. It will vary but could be
+                down to the user id. It will not be use to authenticate however just audit.
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="AuditWsId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>This is the WorkStation Id which the consumer would like written to
+                        the audit as performing the requested service. It will vary but could be
+                        down to the user id. </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="AuthenUsrId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>This is the User Id which the consumer would like the service provider
+                        to use to authenticate with. It is a user id which the provider will
+                        understand </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConsumerName_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The name of the service consumer (Business name)
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConsumerProd_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The name of the product which is consuming the service
+                (Business Product Name) </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="jXLogTrackingId_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">An identification provided by jXchange to be able to
+                trace the request and response of a message from the third party gateway, internal
+                gateway, and service provider </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="Ver_3_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The object tag that represents the third iteration of
+                the object</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:complexType name="Ver_4_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The object tag that represents the fourth iteration of
+                the object</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:complexType name="Ver_5_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The object tag that represents the fifth iteration of
+                the object</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:complexType name="Ver_6_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The object tag that represents the sixth iteration of
+                the object</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:complexType name="AuthenUsrCred_CType">
+    <xsd:annotation>
+      <xsd:documentation>Authentication of the end User Credentials in the form of a WS
+                Security Element that contains a single SAML V2.0 Assertion.
+                http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element ref="wsse:Security" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AuthenProdCred_CType">
+    <xsd:annotation>
+      <xsd:documentation>Authentication of the Consumer Product Credentials in the form of a
+                WS Security Element that contains a single SAML V2.0 Assertion.
+                http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element ref="wsse:Security" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ErrOvrRdInfoArray_AType">
+    <xsd:annotation>
+      <xsd:documentation>Array - of overrides for faults </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="ErrOvrRd" type="ErrOvrRd_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ErrOvrRd_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Error Code Override - Array of ErrCode
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="ErrCode" type="ErrCode_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:element minOccurs="0" name="BusSvcType" type="BusSvcType_Type" />
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="Ver_2" type="Ver_2_CType" />
+          <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+        </xsd:sequence>
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ErrCode_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Error Code</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="BusSvcType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Business Service Type used to convey certain Add and Mod message handling</ElemDesc>
+          <CanonicalVal>NoValidate</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="AlrtName_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The name assigned to an alert package</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+        <xsd:attribute name="SrchType" type="SrchType_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="SrchType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The search type element used as an attribute for elements. The search
+                        type conveys to the service provider the type of search expression for
+                        search message filters</ElemDesc>
+          <CanonicalVal>Exact,StartsWith,EndsWith,Contains,ContainsAll</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ClosedEnum_Type" />
+  </xsd:simpleType>
+  <xsd:complexType name="AlrtSndInfoRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="SndEvrySub" type="SndEvrySub_Type" />
+      <xsd:element minOccurs="0" name="SndAlrtArray" type="SndAlrtArray_AType" />
+      <xsd:element minOccurs="0" name="OvrrdReplyToEmailAddr" type="EmailAddr_Type" />
+      <xsd:element minOccurs="0" name="SndDlyTimeDt" type="SndDlyTimeDt_Type" />
+      <xsd:element minOccurs="0" name="AlrtDataInfoArray" type="AlrtDataInfoArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="SndEvrySub_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Should the alert be sent to all subscribers</ElemDesc>
+          <CanonicalVal>true,false</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="SndAlrtArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">An array of sending alerts</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="SndAlrtRec" nillable="true" type="SndAlrtRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="SndAlrtRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="ConsmRecipId" type="ConsmRecipId_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipAcctId" type="AcctId_Type" />
+      <xsd:element minOccurs="0" name="DistGroupId" type="DistGroupId_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:element minOccurs="0" name="RecipConId" type="RecipConId_Type" />
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="Ver_2" type="Ver_2_CType" />
+          <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+        </xsd:sequence>
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsmRecipId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The idenitifer assigned to a publisher's alert recipient</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="AcctId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The number(s) or character(s) that identifies an account record
+                    </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+        <xsd:attribute name="MaskVal" type="MaskVal_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="MaskVal_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The service providers masked value for a clear text element</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string" />
+  </xsd:simpleType>
+  <xsd:complexType name="DistGroupId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> An identifier assigned to a alert distribution group</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="Custom_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Institution Specific Data - provides an extension point
+                for custom variations of the jXchange vocabulary. ***Placed before xml content not
+                described in a given target namespace. Used as marker/guard/sentinel element to
+                prevent an ambiguous situation for validating parsers as a tactic to prevent
+                violating the Unique Particle Attribution constraint (UPA). </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##other" processContents="lax" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RecipConId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> An identifier assigned to a recipient's alert contacts</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="EmailAddr_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>E-mail Address</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+        <xsd:attribute name="SrchType" type="SrchType_Type" use="optional" />
+        <xsd:attribute name="NotOccurType" type="NotOccurType_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="NotOccurType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>This conveys to the service provider if the notification occurrence
+                        should be withheld. true = withhold notification false, which is the default
+                        = send notification</ElemDesc>
+          <CanonicalVal>true,false</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ClosedEnum_Type" />
+  </xsd:simpleType>
+  <xsd:complexType name="SndDlyTimeDt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> The date and time that an alert will be delayed. Expressed in ISO
+                        8601 time format and should contain either Zulu time or local time and the
+                        UTC offset. Format: [-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm] Valid values
+                        include: 2001-10-26T21:32:52, 2001-10-26T21:32:52+02:00,
+                        2001-10-26T19:32:52Z, 2001-10-26T19:32:52+00:00, -2001-10-26T21:32:52, or
+                        2001-10-26T21:32:52.12679. Examles of same moment: "18:30Z", "22:30+04",
+                        "1130-0700", and "15:00-03:30 see [
+                        http://books.xmlschemata.org/relaxng/ch19-77049.html or
+                        http://en.wikipedia.org/wiki/ISO_8601 ] for further reference</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:dateTime">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="AlrtDataInfoArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">An array of data matched pair
+                substitution</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="AlrtDataInfoRec" nillable="true" type="AlrtDataInfoRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AlrtDataInfoRec_CType">
+    <xsd:sequence>
+      <xsd:element name="Name" type="Name_Type" />
+      <xsd:element name="Val" type="Val_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Name_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en"> Name of a name value pair </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="Val_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en"> Value of a name value pair </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="PubVer_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> The version as related to a publishers configuration and library
+                        contents in ENS</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="AlrtTestType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> Should the alert be treated as a test?</ElemDesc>
+          <CanonicalVal>true,false</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="NotSndAddResponse" type="NotSndAddRs_MType" />
+  <xsd:complexType name="NotSndAddRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="RsStat" nillable="true" type="RsStat_Type" />
+      <xsd:element minOccurs="0" name="AlrtPkgId" nillable="true" type="AlrtPkgId_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MsgRsHdr_CType">
+    <xsd:annotation>
+      <xsd:documentation>Default message response headers</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="jXchangeHdr" type="jXchangeHdr_CType" />
+      <xsd:element minOccurs="0" name="MsgRecInfoArray" type="MsgRecInfoArray_AType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MsgRecInfoArray_AType">
+    <xsd:annotation>
+      <xsd:documentation>Array - of messages that can be returned in a response
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="MsgRec" type="MsgRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MsgRec_CType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Message Record includes the Error responses - Usually
+                can occur multiple times</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ErrCode" type="ErrCode_Type" />
+      <xsd:element name="ErrCat" type="ErrCat_Type" />
+      <xsd:element name="ErrDesc" type="ErrDesc_Type" />
+      <xsd:element minOccurs="0" name="ErrElem" type="ErrElem_Type" />
+      <xsd:element minOccurs="0" name="ErrElemVal" type="ErrElemVal_Type" />
+      <xsd:element minOccurs="0" name="ErrLoc" type="ErrLoc_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ErrCat_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Error Catagory</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ErrDesc_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Error Description</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ErrElem_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>When an Error or Fault occurs this optional element will contain the
+                        element which is causing the error condition</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ErrElemVal_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>When an Error or Fault occurs this optional element will contain the
+                        value of the element which is causing the error condition</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ErrLoc_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Error Location - This is typically the program that generated the
+                        error condition</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="RsStat_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Status of the response <Jx><CanonicalVal>Success,Fail</CanonicalVal></Jx></xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="AlrtPkgId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> An identifier assigned to an alert package</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="NotRecipAdd" type="NotRecipAddRq_MType" />
+  <xsd:complexType name="NotRecipAddRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="ErrOvrRdInfoArray" nillable="true" type="ErrOvrRdInfoArray_AType" />
+      <xsd:element name="InstRtId" type="InstRtId_Type" />
+      <xsd:element name="ConsumerProd" type="ConsumerProd_Type" />
+      <xsd:element name="ConsmRecipId" type="ConsmRecipId_Type" />
+      <xsd:element name="AlrtRecipInfoRec" type="AlrtRecipInfoRec_CType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AlrtRecipInfoRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="ConsmRecipStatType" type="ConsmRecipStatType_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipName" type="PersonName_CType" />
+      <xsd:element minOccurs="0" name="RecipConArray" type="RecipConArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsmRecipStatType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The status as related to an alert publisher recipient</ElemDesc>
+          <CanonicalVal>Act,InAct</CanonicalVal>
+          <Dft>Act</Dft>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="PersonName_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="ComName" nillable="true" type="ComName_Type" />
+      <xsd:element minOccurs="0" name="FirstName" nillable="true" type="FirstName_Type" />
+      <xsd:element minOccurs="0" name="MiddleName" nillable="true" type="MiddleName_Type" />
+      <xsd:element minOccurs="0" name="LastName" nillable="true" type="LastName_Type" />
+      <xsd:element minOccurs="0" name="x_PersonName" type="x_PersonName_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ComName_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Common Name : This is the full text line name like : George Washington
+                    </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="SrchType" type="SrchType_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FirstName_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>First Name</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="SrchType" type="SrchType_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="MiddleName_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Middle Name</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="SrchType" type="SrchType_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="LastName_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Last Name</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="SrchType" type="SrchType_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="x_PersonName_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="TitlePrefix" nillable="true" type="TitlePrefix_Type" />
+      <xsd:element minOccurs="0" name="NameSuffix" nillable="true" type="NameSuffix_Type" />
+      <xsd:element minOccurs="0" name="LegalName" nillable="true" type="LegalName_Type" />
+      <xsd:element minOccurs="0" name="SalName" nillable="true" type="SalName_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:element minOccurs="0" name="AbbName" type="AbbName_Type" />
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="Ver_2" type="Ver_2_CType" />
+          <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+        </xsd:sequence>
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TitlePrefix_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Title Prefix - Examples Mr. Mrs. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="NameSuffix_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Name Suffix - Example jr. or MD </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="LegalName_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Used by entities like trusts, or businesses in the case
+                where an individual is "doing business as" a company, or when the legal name is
+                different than the ComName</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+        <xsd:attribute name="SrchType" type="SrchType_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="SalName_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Salutation Name : This would be a full text line name
+                like which is to be used in Mailings Example : Mr. and Mrs. George Washington
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="AbbName_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>An abbreviated individual's or entity's name</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="SrchType" type="SrchType_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="RecipConArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">An array of contacts for a
+                recipient</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="RecipConInfoRec" nillable="true" type="RecipConInfoRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RecipConInfoRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="RecipConId" type="RecipConId_Type" />
+      <xsd:element minOccurs="0" name="RecipConType" type="RecipConType_Type" />
+      <xsd:element minOccurs="0" name="RecipConName" type="RecipConName_Type" />
+      <xsd:element minOccurs="0" name="RecipCon" type="RecipCon_Type" />
+      <xsd:element minOccurs="0" name="MobPrvdCode" type="MobPrvdCode_Type" />
+      <xsd:element minOccurs="0" name="RecipOptInArray" type="RecipOptInArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RecipConType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> The recipient contact type</ElemDesc>
+          <CanonicalVal>SMSNative,SMSSMTP,EmailHTML,EmailText</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="RecipConName_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>A human readable name as related to a recipient contact
+                        identifier</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="RecipCon_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> A contact as related to a recipient</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+        <xsd:attribute name="SrchType" type="SrchType_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="MobPrvdCode_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The provider code of the mobile service</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="OpenEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="RecipOptInArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">An array of Opt-in related to a recipeint
+                contact</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="RecipOptInInfoRec" nillable="true" type="RecipOptInInfoRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RecipOptInInfoRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="ConsumerProd" type="ConsumerProd_Type" />
+      <xsd:element minOccurs="0" name="RecipConOptInType" type="RecipConOptInType_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RecipConOptInType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> The type of OptIn for a receipient contact</ElemDesc>
+          <CanonicalVal>All,AlrtOnly,None</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="NotRecipAddResponse" type="NotRecipAddRs_MType" />
+  <xsd:complexType name="NotRecipAddRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="RsStat" nillable="true" type="RsStat_Type" />
+      <xsd:element minOccurs="0" name="AlrtRecipId" nillable="true" type="AlrtRecipId_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:element minOccurs="0" name="RecipConRsArray" nillable="true" type="RecipConRsArray_AType" />
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="Ver_2" type="Ver_2_CType" />
+          <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+        </xsd:sequence>
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AlrtRecipId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> An identifier assigned to a alert recipient</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="RecipConRsArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">An array of recipient contacts response for addition and modificaiton</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="RecipConRsInfoRec" nillable="true" type="RecipConRsInfoRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RecipConRsInfoRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="RecipConId" type="RecipConId_Type" />
+      <xsd:element minOccurs="0" name="RecipConType" type="RecipConType_Type" />
+      <xsd:element minOccurs="0" name="RecipConName" type="RecipConName_Type" />
+      <xsd:element minOccurs="0" name="RecipCon" type="RecipCon_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotRecipMod" type="NotRecipModRq_MType" />
+  <xsd:complexType name="NotRecipModRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="ErrOvrRdInfoArray" nillable="true" type="ErrOvrRdInfoArray_AType" />
+      <xsd:element name="InstRtId" type="InstRtId_Type" />
+      <xsd:element minOccurs="0" name="AlrtRecipId" nillable="true" type="AlrtRecipId_Type" />
+      <xsd:element minOccurs="0" name="ConsumerProd" nillable="true" type="ConsumerProd_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipId" nillable="true" type="ConsmRecipId_Type" />
+      <xsd:element minOccurs="0" name="AlrtRecipInfoRec" nillable="true" type="AlrtRecipInfoRec_CType" />
+      <xsd:element minOccurs="0" name="Dlt" nillable="true" type="Dlt_Type" />
+      <xsd:element name="ActIntentKey" type="ActIntentKey_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Dlt_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Delete - for delete entity <Jx><CanonicalVal>true,false</CanonicalVal></Jx></xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ActIntentKey_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The service provider key delivered to the consumer to be submitted in
+                        a subsequent modification operation</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="NotRecipModResponse" type="NotRecipModRs_MType" />
+  <xsd:complexType name="NotRecipModRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="RsStat" nillable="true" type="RsStat_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:element minOccurs="0" name="RecipConRsArray" nillable="true" type="RecipConRsArray_AType" />
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="Ver_2" type="Ver_2_CType" />
+          <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+        </xsd:sequence>
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotRecipInq" type="NotRecipInqRq_MType" />
+  <xsd:complexType name="NotRecipInqRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element name="InstRtId" type="InstRtId_Type" />
+      <xsd:element minOccurs="0" name="AlrtRecipId" nillable="true" type="AlrtRecipId_Type" />
+      <xsd:element minOccurs="0" name="ConsumerProd" nillable="true" type="ConsumerProd_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipId" nillable="true" type="ConsmRecipId_Type" />
+      <xsd:element minOccurs="0" name="ActIntent" nillable="true" type="ActIntent_Type" />
+      <xsd:element minOccurs="0" name="IncXtendElemArray" nillable="true" type="IncXtendElem_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ActIntent_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Conveys that consumer intention for a subsequent operation for the
+                        data set included in the response</ElemDesc>
+          <CanonicalVal>ReadOnly,Upd,Dlt,Add</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="IncXtendElem_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Array - List of "x_" element by name which are to be
+                included in the response</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="IncXtendElemInfo" nillable="true" type="IncXtendElemInfo_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="IncXtendElemInfo_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="XtendElem" nillable="true" type="XtendElem_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XtendElem_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en"> Included Extended elements which the consumer would
+                ask by name fill out to ask for "x_" prefix elements to be included in the response
+            </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="NotRecipInqResponse" type="NotRecipInqRs_MType" />
+  <xsd:complexType name="NotRecipInqRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="InstRtId" nillable="true" type="InstRtId_Type" />
+      <xsd:element minOccurs="0" name="AlrtRecipId" nillable="true" type="AlrtRecipId_Type" />
+      <xsd:element minOccurs="0" name="ConsumerProd" nillable="true" type="ConsumerProd_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipId" nillable="true" type="ConsmRecipId_Type" />
+      <xsd:element minOccurs="0" name="NotRecipInqRec" nillable="true" type="NotRecipInqRec_CType" />
+      <xsd:element minOccurs="0" name="ActIntent" nillable="true" type="ActIntent_Type" />
+      <xsd:element minOccurs="0" name="ActIntentKey" nillable="true" type="ActIntentKey_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="NotRecipInqRec_CType">
+    <xsd:sequence>
+      <xsd:element name="AlrtRecipId" type="AlrtRecipId_Type" />
+      <xsd:element minOccurs="0" name="AlrtRecipInfoRec" type="AlrtRecipInfoRec_CType" />
+      <xsd:element minOccurs="0" name="AlrtRecipAliasArray" type="AlrtRecipAliasArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AlrtRecipAliasArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">An array of alias as related to an alert recipient</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="AlrtRecipAliasInfoRec" nillable="true" type="AlrtRecipAliasInfoRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AlrtRecipAliasInfoRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="ConsumerProd" type="ConsumerProd_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipId" type="ConsmRecipId_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotRecipSrch" type="NotRecipSrchRq_MType" />
+  <xsd:complexType name="NotRecipSrchRq_MType">
+    <xsd:sequence>
+      <xsd:element name="SrchMsgRqHdr" type="SrchMsgRqHdr_CType" />
+      <xsd:element name="InstRtId" type="InstRtId_Type" />
+      <xsd:element minOccurs="0" name="ConsumerProd" nillable="true" type="ConsumerProd_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipStatType" nillable="true" type="ConsmRecipStatType_Type">
+        <xsd:annotation>
+          <xsd:documentation>
+            <Dft xmlns="http://jackhenry.com/jxchange/TPG/2008">Both</Dft>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="ConsmRecipName" nillable="true" type="PersonName_CType" />
+      <xsd:element minOccurs="0" name="RecipCon" nillable="true" type="RecipCon_Type" />
+      <xsd:element minOccurs="0" name="IncXtendElemArray" nillable="true" type="IncXtendElem_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="SrchMsgRqHdr_CType">
+    <xsd:annotation>
+      <xsd:documentation>Search specific message request headers</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="jXchangeHdr" type="jXchangeHdr_CType" />
+      <xsd:element name="MaxRec" type="MaxRec_Type" />
+      <xsd:element minOccurs="0" name="Cursor" type="Cursor_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:element minOccurs="0" name="AuthenUsrCred" type="AuthenUsrCred_CType" />
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="Ver_2" type="Ver_2_CType" />
+          <xsd:element minOccurs="0" name="AuthenProdCred" type="AuthenProdCred_CType" />
+          <xsd:sequence minOccurs="0">
+            <xsd:element name="Ver_3" type="Ver_3_CType" />
+            <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+          </xsd:sequence>
+        </xsd:sequence>
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MaxRec_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> When returning multiple records, this is the maximum number of
+                        records to be returned</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:int" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="Cursor_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> When returning multiple records and allowing a subsequent call to
+                        retrieve more records this is the "state" information that allows the next
+                        call to understand where it left off</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="NotRecipSrchResponse" type="NotRecipSrchRs_MType" />
+  <xsd:complexType name="NotRecipSrchRs_MType">
+    <xsd:sequence>
+      <xsd:element name="SrchMsgRsHdr" type="SrchMsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="InstRtId" nillable="true" type="InstRtId_Type" />
+      <xsd:element minOccurs="0" name="ConsumerProd" nillable="true" type="ConsumerProd_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipStatType" nillable="true" type="ConsmRecipStatType_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipName" nillable="true" type="PersonName_CType" />
+      <xsd:element minOccurs="0" name="RecipCon" nillable="true" type="RecipCon_Type" />
+      <xsd:element minOccurs="0" name="NotRecipSrchRecArray" nillable="true" type="NotRecipSrchRecArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="SrchMsgRsHdr_CType">
+    <xsd:annotation>
+      <xsd:documentation>Search specific message response headers</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="jXchangeHdr" type="jXchangeHdr_CType" />
+      <xsd:element minOccurs="0" name="SentRec" type="SentRec_Type" />
+      <xsd:element minOccurs="0" name="MoreRec" type="MoreRec_Type" />
+      <xsd:element minOccurs="0" name="Cursor" type="Cursor_Type" />
+      <xsd:element minOccurs="0" name="TotRec" type="TotRec_Type" />
+      <xsd:element minOccurs="0" name="MsgRecInfoArray" type="MsgRecInfoArray_AType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="SentRec_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> Number of records sent in the response</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:int" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="MoreRec_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Indicates if there are more records that could be returned<Jx><CanonicalVal>true,false</CanonicalVal></Jx></xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="TotRec_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Indicates the total records the the request selected which could be
+                        larger than MaxRec</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:int" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="NotRecipSrchRecArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en"> An Array of responses for alert recipient search</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="NotRecipSrchRec" type="NotRecipSrchRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="NotRecipSrchRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="ConsumerProd" type="ConsumerProd_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipStatType" type="ConsmRecipStatType_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipName" type="PersonName_CType" />
+      <xsd:element minOccurs="0" name="ConsmRecipId" type="ConsmRecipId_Type" />
+      <xsd:element minOccurs="0" name="RecipCon" type="RecipCon_Type" />
+      <xsd:element minOccurs="0" name="AlrtRecipId" type="AlrtRecipId_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotRecipSubAdd" type="NotRecipSubAddRq_MType" />
+  <xsd:complexType name="NotRecipSubAddRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="ErrOvrRdInfoArray" nillable="true" type="ErrOvrRdInfoArray_AType" />
+      <xsd:element name="InstRtId" type="InstRtId_Type" />
+      <xsd:element name="ConsumerProd" type="ConsumerProd_Type" />
+      <xsd:element name="ConsmRecipId" type="ConsmRecipId_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipAcctId" nillable="true" type="AcctId_Type" />
+      <xsd:element name="AlrtRecipSubInfoRec" type="AlrtRecipSubInfoRec_CType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AlrtRecipSubInfoRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="RecipSubStatType" type="RecipSubStatType_Type" />
+      <xsd:element minOccurs="0" name="RecipSubUTCOffset" type="RecipSubUTCOffset_Type" />
+      <xsd:element minOccurs="0" name="AlrtArray" type="AlrtArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RecipSubStatType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> The status as related to an alert recipient subscription</ElemDesc>
+          <CanonicalVal>Act,InAct,Test</CanonicalVal>
+          <Dft>Act</Dft>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="RecipSubUTCOffset_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The UTC offset as related to the alert recipient's subscribtion. For
+                        example, -6 = CST and -5 = EST. Review
+                        http://en.wikipedia.org/wiki/List_of_UTC_time_offsets for all UTC
+                        offsets</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:decimal">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="AlrtArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">An array of alerts</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="AlrtInfoRec" nillable="true" type="AlrtInfoRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AlrtInfoRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="AlrtName" type="AlrtName_Type" />
+      <xsd:element minOccurs="0" name="AlrtActType" type="AlrtActType_Type" />
+      <xsd:element minOccurs="0" name="AlrtSubConArray" type="AlrtSubConArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AlrtActType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>What is the activity status of an alert?</ElemDesc>
+          <CanonicalVal>Act,InAct</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="AlrtSubConArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">An array of alert subscription
+                contacts</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="AlrtSubConInfoRec" nillable="true" type="AlrtSubConInfoRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AlrtSubConInfoRec_CType">
+    <xsd:sequence>
+      <xsd:element name="RecipConId" type="RecipConId_Type" />
+      <xsd:element minOccurs="0" name="RecipConType" type="RecipConType_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotRecipSubAddResponse" type="NotRecipSubAddRs_MType" />
+  <xsd:complexType name="NotRecipSubAddRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="RsStat" nillable="true" type="RsStat_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotRecipSubMod" type="NotRecipSubModRq_MType" />
+  <xsd:complexType name="NotRecipSubModRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="ErrOvrRdInfoArray" nillable="true" type="ErrOvrRdInfoArray_AType" />
+      <xsd:element name="InstRtId" type="InstRtId_Type" />
+      <xsd:element name="ConsumerProd" type="ConsumerProd_Type" />
+      <xsd:element name="ConsmRecipId" type="ConsmRecipId_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipAcctId" nillable="true" type="AcctId_Type" />
+      <xsd:element minOccurs="0" name="AlrtRecipSubInfoRec" nillable="true" type="AlrtRecipSubInfoRec_CType" />
+      <xsd:element minOccurs="0" name="Dlt" nillable="true" type="Dlt_Type" />
+      <xsd:element name="ActIntentKey" type="ActIntentKey_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotRecipSubModResponse" type="NotRecipSubModRs_MType" />
+  <xsd:complexType name="NotRecipSubModRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="RsStat" nillable="true" type="RsStat_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotRecipSubInq" type="NotRecipSubInqRq_MType" />
+  <xsd:complexType name="NotRecipSubInqRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element name="InstRtId" type="InstRtId_Type" />
+      <xsd:element name="ConsumerProd" type="ConsumerProd_Type" />
+      <xsd:element name="ConsmRecipId" type="ConsmRecipId_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipAcctId" nillable="true" type="AcctId_Type" />
+      <xsd:element minOccurs="0" name="ActIntent" nillable="true" type="ActIntent_Type" />
+      <xsd:element minOccurs="0" name="IncXtendElemArray" nillable="true" type="IncXtendElem_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotRecipSubInqResponse" type="NotRecipSubInqRs_MType" />
+  <xsd:complexType name="NotRecipSubInqRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="InstRtId" nillable="true" type="InstRtId_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipId" nillable="true" type="ConsmRecipId_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipAcctId" nillable="true" type="AcctId_Type" />
+      <xsd:element minOccurs="0" name="NotRecipSubInqRec" nillable="true" type="NotRecipSubInqRec_CType" />
+      <xsd:element minOccurs="0" name="ActIntent" nillable="true" type="ActIntent_Type" />
+      <xsd:element minOccurs="0" name="ActIntentKey" nillable="true" type="ActIntentKey_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="NotRecipSubInqRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="AlrtRecipSubInfoRec" type="AlrtRecipSubInfoRec_CType" />
+      <xsd:element minOccurs="0" name="SMSSubId" type="SMSSubId_Type" />
+      <xsd:element minOccurs="0" name="AlrtRecipId" type="AlrtRecipId_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipName" type="PersonName_CType" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="SMSSubId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>An identifier assigned to a SMS subscription</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="NotRecipSubSrch" type="NotRecipSubSrchRq_MType" />
+  <xsd:complexType name="NotRecipSubSrchRq_MType">
+    <xsd:sequence>
+      <xsd:element name="SrchMsgRqHdr" type="SrchMsgRqHdr_CType" />
+      <xsd:element name="InstRtId" type="InstRtId_Type" />
+      <xsd:element minOccurs="0" name="ConsumerProd" nillable="true" type="ConsumerProd_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipId" nillable="true" type="ConsmRecipId_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipName" nillable="true" type="PersonName_CType" />
+      <xsd:element minOccurs="0" name="ConsmRecipAcctId" nillable="true" type="AcctId_Type" />
+      <xsd:element minOccurs="0" name="RecipConId" nillable="true" type="RecipConId_Type" />
+      <xsd:element minOccurs="0" name="IncXtendElemArray" nillable="true" type="IncXtendElem_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotRecipSubSrchResponse" type="NotRecipSubSrchRs_MType" />
+  <xsd:complexType name="NotRecipSubSrchRs_MType">
+    <xsd:sequence>
+      <xsd:element name="SrchMsgRsHdr" type="SrchMsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="InstRtId" nillable="true" type="InstRtId_Type" />
+      <xsd:element minOccurs="0" name="ConsumerProd" nillable="true" type="ConsumerProd_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipId" nillable="true" type="ConsmRecipId_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipName" nillable="true" type="PersonName_CType" />
+      <xsd:element minOccurs="0" name="ConsmRecipAcctId" nillable="true" type="AcctId_Type" />
+      <xsd:element minOccurs="0" name="RecipConId" nillable="true" type="RecipConId_Type" />
+      <xsd:element minOccurs="0" name="NotRecipSubSrchRecArray" nillable="true" type="NotRecipSubSrchRecArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="NotRecipSubSrchRecArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en"> An Array of responses for alert recipient subscriptions search</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="NotRecipSubSrchRec" type="NotRecipSubSrchRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="NotRecipSubSrchRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="ConsumerProd" type="ConsumerProd_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipName" type="PersonName_CType" />
+      <xsd:element minOccurs="0" name="ConsmRecipId" type="ConsmRecipId_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipAcctId" type="AcctId_Type" />
+      <xsd:element minOccurs="0" name="RecipSubStatType" type="RecipSubStatType_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotMobPhoneValidate" type="NotMobPhoneValidateRq_MType" />
+  <xsd:complexType name="NotMobPhoneValidateRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element name="MobPhoneNum" type="PhoneNum_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:element minOccurs="0" name="IncXtendElemArray" nillable="true" type="IncXtendElem_AType" />
+        <xsd:element minOccurs="0" name="FirstName" nillable="true" type="FirstName_Type" />
+        <xsd:element minOccurs="0" name="LastName" nillable="true" type="LastName_Type" />
+        <xsd:element minOccurs="0" name="LastVerifyDt" nillable="true" type="VerifyDt_Type" />
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="Ver_2" type="Ver_2_CType" />
+          <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+        </xsd:sequence>
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PhoneNum_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Phone Number </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="SrchType" type="SrchType_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="VerifyDt_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en"> Date of verification of beneficial owners as it
+                relates to FinCEN Customer Due Diligence (CDD)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:date">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="NotMobPhoneValidateResponse" type="NotMobPhoneValidateRs_MType" />
+  <xsd:complexType name="NotMobPhoneValidateRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="MobPhoneNum" nillable="true" type="PhoneNum_Type" />
+      <xsd:element minOccurs="0" name="MobPrvdCodeDesc" nillable="true" type="MobPrvdCodeDesc_Type" />
+      <xsd:element minOccurs="0" name="MobPhoneNumStat" nillable="true" type="MobPhoneNumStat_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:element minOccurs="0" name="x_IdMatchInfo" nillable="true" type="x_IdMatchInfo_CType" />
+        <xsd:element minOccurs="0" name="x_ValidateInfo" nillable="true" type="x_ValidateInfo_CType" />
+        <xsd:element minOccurs="0" name="x_SIMInfo" nillable="true" type="x_SIMInfo_CType" />
+        <xsd:element minOccurs="0" name="x_CallFwdInfo" nillable="true" type="x_CallFwdInfo_CType" />
+        <xsd:element minOccurs="0" name="x_PhoneActInfo" nillable="true" type="x_PhoneActInfo_CType" />
+        <xsd:sequence minOccurs="0">
+          <xsd:element name="Ver_2" type="Ver_2_CType" />
+          <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+        </xsd:sequence>
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MobPrvdCodeDesc_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The description of the provider code for the mobile service</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="MobPhoneNumStat_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The status / position of the mobile phone number</ElemDesc>
+          <CanonVal>Act,InAct</CanonVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="x_IdMatchInfo_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="FirstNameMatchType" type="NameMatchType_Type" />
+      <xsd:element minOccurs="0" name="LastNameMatchType" type="NameMatchType_Type" />
+      <xsd:element minOccurs="0" name="EntityConfdScore" type="EntityConfdScore_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="NameMatchType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The category match results for a name</ElemDesc>
+          <CanonicalVal>Exact,Part,NoMatch,NotAvail,HighPart</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="EntityConfdScore_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The value given to an entity based on the confidence of a match
+                        related to that entity </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:decimal">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="x_ValidateInfo_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="ValidRangeType" type="ValidRangeType_Type" />
+      <xsd:element minOccurs="0" name="ReassignPhoneNumType" type="ReassignPhoneNumType_Type" />
+      <xsd:element minOccurs="0" name="LastVerifyDt" type="VerifyDt_Type" />
+      <xsd:element minOccurs="0" name="PhoneNumBlkType" type="PhoneNumBlkType_Type" />
+      <xsd:element minOccurs="0" name="SMSRiskCode" type="SMSRiskCode_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ValidRangeType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Indicates if the phone number can be freely assigned by a
+                        carrier because it is in a valid range</ElemDesc>
+          <CanonicalVal>true,false</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ReassignPhoneNumType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Does the phone number represent a reassigned
+                        number</ElemDesc>
+          <CanonicalVal>true,false</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="PhoneNumBlkType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Has the phone number been blocked for receiving malicious
+                        SMS pumping traffic</ElemDesc>
+          <CanonicalVal>true,false</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="SMSRiskCode_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Indicates if a phone number has been subject to malicious
+                        SMS pumping traffic</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="x_SIMInfo_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="SwapTimeDt" type="SIMSwapTimeDt_Type" />
+      <xsd:element minOccurs="0" name="SwapYears" type="SIMSwapYears_Type" />
+      <xsd:element minOccurs="0" name="SwapMonths" type="SIMSwapMonths_Type" />
+      <xsd:element minOccurs="0" name="SwapDays" type="SIMSwapDays_Type" />
+      <xsd:element minOccurs="0" name="SwapTime" type="SIMSwapTime_Type" />
+      <xsd:element minOccurs="0" name="SwapPeriodType" type="SIMSwapPeriodType_Type" />
+      <xsd:element minOccurs="0" name="CarrierName" type="MobPhoneCarrierName_Type" />
+      <xsd:element minOccurs="0" name="NtwkCode" type="MobPhoneNtwkCode_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="SIMSwapTimeDt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The date and timestamp for whn the SIM was last changed.
+                        Expressed in ISO 8601 time format and should contain either Zulu time or
+                        local time and the UTC offset. Format: [-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]
+                        Valid values include: 2001-10-26T21:32:52, 2001-10-26T21:32:52+02:00,
+                        2001-10-26T19:32:52Z, 2001-10-26T19:32:52+00:00, -2001-10-26T21:32:52, or
+                        2001-10-26T21:32:52.12679. Examles of same moment: "18:30Z", "22:30+04",
+                        "1130-0700", and "15:00-03:30 see [ https://www.w3.org/TR/NOTE-datetime or
+                        http://en.wikipedia.org/wiki/ISO_8601 ] for further reference</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:dateTime">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="SIMSwapYears_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The years duration representing a trailing time period which
+                        indicates if the SIM was changed</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:int">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="SIMSwapMonths_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The months duration representing a trailing time period
+                        which indicates if the SIM was changed</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:int">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="SIMSwapDays_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The days duration representing a trailing time period which
+                        indicates if the SIM was changed</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:int">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="SIMSwapTime_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The time duration representing a trailing time period which
+                        indicates if the SIM was changed</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:time">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="SIMSwapPeriodType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Indicates whether the SIM was changed during the trailing
+                        swap period</ElemDesc>
+          <CanonicalVal>true,false</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="MobPhoneCarrierName_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Mobile phone carrier</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="MobPhoneNtwkCode_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Mobile phone network</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="x_CallFwdInfo_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="EnableType" type="CallFwdEnableType_Type" />
+      <xsd:element minOccurs="0" name="CarrierName" type="MobPhoneCarrierName_Type" />
+      <xsd:element minOccurs="0" name="NtwkCode" type="MobPhoneNtwkCode_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CallFwdEnableType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Indicates that the mobile phone has unconditional cal
+                        forwarding</ElemDesc>
+          <CanonicalVal>true,false</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="x_PhoneActInfo_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="ConnectStat" type="ConnectStat_Type" />
+      <xsd:element minOccurs="0" name="OrgCarrierName" type="MobPhoneCarrierName_Type" />
+      <xsd:element minOccurs="0" name="OrgNtwkCode" type="MobPhoneNtwkCode_Type" />
+      <xsd:element minOccurs="0" name="PortType" type="MobPhonePortType_Type" />
+      <xsd:element minOccurs="0" name="PortCarrierName" type="MobPhoneCarrierName_Type" />
+      <xsd:element minOccurs="0" name="PortNtwkCode" type="MobPhoneNtwkCode_Type" />
+      <xsd:element minOccurs="0" name="RoamType" type="MobPhoneRoamType_Type" />
+      <xsd:element minOccurs="0" name="RoamCarrierName" type="MobPhoneCarrierName_Type" />
+      <xsd:element minOccurs="0" name="RoamNtwkCode" type="MobPhoneNtwkCode_Type" />
+      <xsd:element minOccurs="0" name="PhoneTypeCarrierName" type="MobPhoneCarrierName_Type" />
+      <xsd:element minOccurs="0" name="PhoneTypeNtwkCode" type="MobPhoneNtwkCode_Type" />
+      <xsd:element minOccurs="0" name="PhoneLineType" type="PhoneLineType_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConnectStat_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The mobile phone connect status</ElemDesc>
+          <CanonicalVal>Connect,Absent,Invalid,Unknown</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="MobPhonePortType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Indicates if the mobile home number has been
+                        ported</ElemDesc>
+          <CanonicalVal>true,false</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="MobPhoneRoamType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Indicates if the mobile phone is roaming</ElemDesc>
+          <CanonicalVal>true,false</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="PhoneLineType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Describes the type of phone line</ElemDesc>
+          <CanonicalVal>Land,Mob,FixVoip,NonFixVoip,TollFree,Personal,Prem,ShareCost,UAN,VoiceMail,Pager,Unknown</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="NotSMSKeyWordAdd" type="NotSMSKeyWordAddRq_MType" />
+  <xsd:complexType name="NotSMSKeyWordAddRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="ErrOvrRdInfoArray" nillable="true" type="ErrOvrRdInfoArray_AType" />
+      <xsd:element minOccurs="0" name="InstRtId" nillable="true" type="InstRtId_Type" />
+      <xsd:element name="ConsumerProd" type="ConsumerProd_Type" />
+      <xsd:element name="SMSKeyWordId" type="SMSKeyWordId_Type" />
+      <xsd:element name="AlrtSMSKeyWordInfoRec" type="AlrtSMSKeyWordInfoRec_CType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="SMSKeyWordId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> An identifier assigned to a alert SMS key word</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+        <xsd:attribute name="SrchType" type="SrchType_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="AlrtSMSKeyWordInfoRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="CorrelAlrtName" type="AlrtName_Type" />
+      <xsd:element minOccurs="0" name="SMSKeyWordExpTimeDt" type="SMSKeyWordExpTimeDt_Type" />
+      <xsd:element minOccurs="0" name="KeyWordStaticType" type="KeyWordStaticType_Type" />
+      <xsd:element minOccurs="0" name="KeyWordRecipFilterArray" type="KeyWordRecipFilterArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="SMSKeyWordExpTimeDt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> The date and time that a SMS key word will expire. Expressed in ISO
+                        8601 time format and should contain either Zulu time or local time and the
+                        UTC offset. Format: [-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm] Valid values
+                        include: 2001-10-26T21:32:52, 2001-10-26T21:32:52+02:00,
+                        2001-10-26T19:32:52Z, 2001-10-26T19:32:52+00:00, -2001-10-26T21:32:52, or
+                        2001-10-26T21:32:52.12679. Examles of same moment: "18:30Z", "22:30+04",
+                        "1130-0700", and "15:00-03:30 see [
+                        http://books.xmlschemata.org/relaxng/ch19-77049.html or
+                        http://en.wikipedia.org/wiki/ISO_8601 ] for further reference</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:dateTime">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="KeyWordStaticType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> Is the key word static </ElemDesc>
+          <CanonicalVal>true,false</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="KeyWordRecipFilterArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">An array of key words as related to alert recipients
+                filter</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="KeyWordRecipFilterInfoRec" nillable="true" type="KeyWordRecipFilterInfoRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="KeyWordRecipFilterInfoRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="ConsmRecipName" type="PersonName_CType" />
+      <xsd:element minOccurs="0" name="ConsmRecipAcctId" type="AcctId_Type" />
+      <xsd:element minOccurs="0" name="MobPhoneNum" type="PhoneNum_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotSMSKeyWordAddResponse" type="NotSMSKeyWordAddRs_MType" />
+  <xsd:complexType name="NotSMSKeyWordAddRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="RsStat" nillable="true" type="RsStat_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotSMSKeyWordMod" type="NotSMSKeyWordModRq_MType" />
+  <xsd:complexType name="NotSMSKeyWordModRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="ErrOvrRdInfoArray" nillable="true" type="ErrOvrRdInfoArray_AType" />
+      <xsd:element minOccurs="0" name="InstRtId" nillable="true" type="InstRtId_Type" />
+      <xsd:element name="ConsumerProd" type="ConsumerProd_Type" />
+      <xsd:element name="SMSKeyWordId" type="SMSKeyWordId_Type" />
+      <xsd:element minOccurs="0" name="AlrtSMSKeyWordInfoRec" nillable="true" type="AlrtSMSKeyWordInfoRec_CType" />
+      <xsd:element minOccurs="0" name="Dlt" nillable="true" type="Dlt_Type" />
+      <xsd:element name="ActIntentKey" type="ActIntentKey_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotSMSKeyWordModResponse" type="NotSMSKeyWordModRs_MType" />
+  <xsd:complexType name="NotSMSKeyWordModRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="RsStat" nillable="true" type="RsStat_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotSMSKeyWordInq" type="NotSMSKeyWordInqRq_MType" />
+  <xsd:complexType name="NotSMSKeyWordInqRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="InstRtId" nillable="true" type="InstRtId_Type" />
+      <xsd:element name="ConsumerProd" type="ConsumerProd_Type" />
+      <xsd:element name="SMSKeyWordId" type="SMSKeyWordId_Type" />
+      <xsd:element minOccurs="0" name="IncXtendElemArray" nillable="true" type="IncXtendElem_AType" />
+      <xsd:element minOccurs="0" name="ActIntent" nillable="true" type="ActIntent_Type" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotSMSKeyWordInqResponse" type="NotSMSKeyWordInqRs_MType" />
+  <xsd:complexType name="NotSMSKeyWordInqRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="InstRtId" nillable="true" type="InstRtId_Type" />
+      <xsd:element minOccurs="0" name="ConsumerProd" nillable="true" type="ConsumerProd_Type" />
+      <xsd:element minOccurs="0" name="SMSKeyWordId" nillable="true" type="SMSKeyWordId_Type" />
+      <xsd:element minOccurs="0" name="ActIntent" nillable="true" type="ActIntent_Type" />
+      <xsd:element minOccurs="0" name="ActIntentKey" nillable="true" type="ActIntentKey_Type" />
+      <xsd:element minOccurs="0" name="NotSMSKeyWordInqRec" nillable="true" type="NotSMSKeyWordInqRec_CType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="NotSMSKeyWordInqRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="AlrtSMSKeyWordInfoRec" type="AlrtSMSKeyWordInfoRec_CType" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotSMSKeyWordSrch" type="NotSMSKeyWordSrchRq_MType" />
+  <xsd:complexType name="NotSMSKeyWordSrchRq_MType">
+    <xsd:sequence>
+      <xsd:element name="SrchMsgRqHdr" type="SrchMsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="InstRtId" nillable="true" type="InstRtId_Type" />
+      <xsd:element minOccurs="0" name="ConsumerProd" nillable="true" type="ConsumerProd_Type" />
+      <xsd:element minOccurs="0" name="SMSKeyWordId" nillable="true" type="SMSKeyWordId_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotSMSKeyWordSrchResponse" type="NotSMSKeyWordSrchRs_MType" />
+  <xsd:complexType name="NotSMSKeyWordSrchRs_MType">
+    <xsd:sequence>
+      <xsd:element name="SrchMsgRsHdr" type="SrchMsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="InstRtId" nillable="true" type="InstRtId_Type" />
+      <xsd:element minOccurs="0" name="ConsumerProd" nillable="true" type="ConsumerProd_Type" />
+      <xsd:element minOccurs="0" name="SMSKeyWordId" nillable="true" type="SMSKeyWordId_Type" />
+      <xsd:element minOccurs="0" name="NotSMSKeyWordSrchRecArray" nillable="true" type="NotSMSKeyWordSrchRecArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="NotSMSKeyWordSrchRecArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">An Array of responses for alert distribution group search</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="NotSMSKeyWordSrchRec" type="NotSMSKeyWordSrchRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="NotSMSKeyWordSrchRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="ConsumerProd" type="ConsumerProd_Type" />
+      <xsd:element minOccurs="0" name="SMSKeyWordId" type="SMSKeyWordId_Type" />
+      <xsd:element minOccurs="0" name="CorrelAlrtName" type="AlrtName_Type" />
+      <xsd:element minOccurs="0" name="SMSKeyWordExpTimeDt" type="SMSKeyWordExpTimeDt_Type" />
+      <xsd:element minOccurs="0" name="KeyWordStaticType" type="KeyWordStaticType_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotExplDataAdd" type="NotExplDataAddRq_MType" />
+  <xsd:complexType name="NotExplDataAddRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="ErrOvrRdInfoArray" nillable="true" type="ErrOvrRdInfoArray_AType" />
+      <xsd:element name="InstRtId" type="InstRtId_Type" />
+      <xsd:element name="ConsumerProd" type="ConsumerProd_Type" />
+      <xsd:element name="AlrtExplDataInfoRec" type="AlrtExplDataInfoRec_CType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AlrtExplDataInfoRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="SndDlyTimeDt" type="SndDlyTimeDt_Type" />
+      <xsd:element minOccurs="0" name="EmailSubj" type="EmailSubj_Type" />
+      <xsd:element minOccurs="0" name="EmailSender" type="EmailAddr_Type" />
+      <xsd:element minOccurs="0" name="EmailTextBody" type="EmailBody_Type" />
+      <xsd:element minOccurs="0" name="EmailHTMLBody" type="EmailBody_Type" />
+      <xsd:element minOccurs="0" name="SMSBody" type="SMSBody_Type" />
+      <xsd:element name="AlrtExplRecipArray" type="AlrtExplRecipArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="EmailSubj_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The subject of the email </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="EmailBody_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> The email body content</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="SMSBody_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The SMS body content</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="AlrtExplRecipArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">An array of email recipients for an explict
+                alert</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="AlrtExplRecipInfoRec" nillable="true" type="AlrtExplRecipInfoRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AlrtExplRecipInfoRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="DistGroupId" type="DistGroupId_Type" />
+      <xsd:element minOccurs="0" name="MobPhoneNum" type="PhoneNum_Type" />
+      <xsd:element minOccurs="0" name="AlrtSMSType" type="AlrtSMSType_Type" />
+      <xsd:element minOccurs="0" name="MobPrvdCode" type="MobPrvdCode_Type">
+        <xsd:annotation>
+          <xsd:documentation>Required for Alert SMS Type of SMTP</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="EmailRecipAddr" type="EmailAddr_Type" />
+      <xsd:element minOccurs="0" name="EmailRecipName" type="EmailRecipName_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AlrtSMSType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> The alert SMS type</ElemDesc>
+          <CanonicalVal>Native,SMTP</CanonicalVal>
+          <Dft>Native</Dft>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="EmailRecipName_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> The friendly name assigned to an email address</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="NotExplDataAddResponse" type="NotExplDataAddRs_MType" />
+  <xsd:complexType name="NotExplDataAddRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="RsStat" nillable="true" type="RsStat_Type" />
+      <xsd:element minOccurs="0" name="AlrtPkgId" nillable="true" type="AlrtPkgId_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotDistGroupAdd" type="NotDistGroupAddRq_MType" />
+  <xsd:complexType name="NotDistGroupAddRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="ErrOvrRdInfoArray" nillable="true" type="ErrOvrRdInfoArray_AType" />
+      <xsd:element name="InstRtId" type="InstRtId_Type" />
+      <xsd:element name="DistGroupId" type="DistGroupId_Type" />
+      <xsd:element name="AlrtDistGroupInfoRec" type="AlrtDistGroupInfoRec_CType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AlrtDistGroupInfoRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="DistGroupName" type="DistGroupName_Type" />
+      <xsd:element minOccurs="0" name="DistGroupSubConArray" type="DistGroupSubConArray_AType" />
+      <xsd:element minOccurs="0" name="DistGroupConArray" type="DistGroupConArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DistGroupName_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The alert distribution group name</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+        <xsd:attribute name="SrchType" type="SrchType_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="DistGroupSubConArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">An array of subscriber contacts related to a
+                distribution group</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="DistGroupSubConInfoRec" nillable="true" type="DistGroupSubConInfoRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DistGroupSubConInfoRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="ConsmRecipName" type="PersonName_CType" />
+      <xsd:element minOccurs="0" name="ConsmRecipAcctId" type="AcctId_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DistGroupConArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">An array of discrete contacts related to a distribution
+                group</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="DistGroupConInfoRec" nillable="true" type="DistGroupConInfoRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DistGroupConInfoRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="EmailAddr" type="EmailAddr_Type" />
+      <xsd:element minOccurs="0" name="EmailRecipName" type="EmailRecipName_Type" />
+      <xsd:element minOccurs="0" name="MobPhoneNum" type="PhoneNum_Type" />
+      <xsd:element minOccurs="0" name="MobPrvdCode" type="MobPrvdCode_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotDistGroupAddResponse" type="NotDistGroupAddRs_MType" />
+  <xsd:complexType name="NotDistGroupAddRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="RsStat" nillable="true" type="RsStat_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotDistGroupMod" type="NotDistGroupModRq_MType" />
+  <xsd:complexType name="NotDistGroupModRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="ErrOvrRdInfoArray" nillable="true" type="ErrOvrRdInfoArray_AType" />
+      <xsd:element name="InstRtId" type="InstRtId_Type" />
+      <xsd:element name="DistGroupId" type="DistGroupId_Type" />
+      <xsd:element minOccurs="0" name="AlrtDistGroupInfoRec" nillable="true" type="AlrtDistGroupInfoRec_CType" />
+      <xsd:element minOccurs="0" name="Dlt" nillable="true" type="Dlt_Type" />
+      <xsd:element name="ActIntentKey" type="ActIntentKey_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotDistGroupModResponse" type="NotDistGroupModRs_MType" />
+  <xsd:complexType name="NotDistGroupModRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="RsStat" nillable="true" type="RsStat_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotDistGroupInq" type="NotDistGroupInqRq_MType" />
+  <xsd:complexType name="NotDistGroupInqRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element name="InstRtId" type="InstRtId_Type" />
+      <xsd:element name="DistGroupId" type="DistGroupId_Type" />
+      <xsd:element minOccurs="0" name="ActIntent" nillable="true" type="ActIntent_Type" />
+      <xsd:element minOccurs="0" name="IncXtendElemArray" nillable="true" type="IncXtendElem_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotDistGroupInqResponse" type="NotDistGroupInqRs_MType" />
+  <xsd:complexType name="NotDistGroupInqRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="InstRtId" nillable="true" type="InstRtId_Type" />
+      <xsd:element minOccurs="0" name="DistGroupId" nillable="true" type="DistGroupId_Type" />
+      <xsd:element minOccurs="0" name="NotDistGroupInqRec" nillable="true" type="NotDistGroupInqRec_CType" />
+      <xsd:element minOccurs="0" name="ActIntent" nillable="true" type="ActIntent_Type" />
+      <xsd:element minOccurs="0" name="ActIntentKey" nillable="true" type="ActIntentKey_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="NotDistGroupInqRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="AlrtDistGroupInfoRec" type="AlrtDistGroupInfoRec_CType" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotDistGroupSrch" type="NotDistGroupSrchRq_MType" />
+  <xsd:complexType name="NotDistGroupSrchRq_MType">
+    <xsd:sequence>
+      <xsd:element name="SrchMsgRqHdr" type="SrchMsgRqHdr_CType" />
+      <xsd:element name="InstRtId" type="InstRtId_Type" />
+      <xsd:element minOccurs="0" name="DistGroupName" nillable="true" type="DistGroupName_Type" />
+      <xsd:element minOccurs="0" name="DistGroupType" nillable="true" type="DistGroupType_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DistGroupType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The alert distribution group type</ElemDesc>
+          <CanonicalVal>Sub,ConPt</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+        <xsd:attribute name="SrchType" type="SrchType_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="NotDistGroupSrchResponse" type="NotDistGroupSrchRs_MType" />
+  <xsd:complexType name="NotDistGroupSrchRs_MType">
+    <xsd:sequence>
+      <xsd:element name="SrchMsgRsHdr" type="SrchMsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="InstRtId" nillable="true" type="InstRtId_Type" />
+      <xsd:element minOccurs="0" name="DistGroupName" nillable="true" type="DistGroupName_Type" />
+      <xsd:element minOccurs="0" name="DistGroupType" nillable="true" type="DistGroupType_Type" />
+      <xsd:element minOccurs="0" name="NotDistGroupSrchRecArray" nillable="true" type="NotDistGroupSrchRecArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="NotDistGroupSrchRecArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en"> An Array of responses for alert distribution group search</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="NotDistGroupSrchRec" type="NotDistGroupSrchRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="NotDistGroupSrchRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="DistGroupId" type="DistGroupId_Type" />
+      <xsd:element minOccurs="0" name="DistGroupName" type="DistGroupName_Type" />
+      <xsd:element minOccurs="0" name="DistGroupType" type="DistGroupType_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotActSrch" type="NotActSrchRq_MType" />
+  <xsd:complexType name="NotActSrchRq_MType">
+    <xsd:sequence>
+      <xsd:element name="SrchMsgRqHdr" type="SrchMsgRqHdr_CType" />
+      <xsd:element name="ConsumerProd" type="ConsumerProd_Type" />
+      <xsd:element minOccurs="0" name="InstRtId" nillable="true" type="InstRtId_Type" />
+      <xsd:element minOccurs="0" name="AlrtPkgId" nillable="true" type="AlrtPkgId_Type" />
+      <xsd:element minOccurs="0" name="AlrtPkgSubId" nillable="true" type="AlrtPkgId_Type" />
+      <xsd:element minOccurs="0" name="AlrtName" nillable="true" type="AlrtName_Type" />
+      <xsd:element minOccurs="0" name="AlrtRecipId" nillable="true" type="AlrtRecipId_Type" />
+      <xsd:element minOccurs="0" name="AlrtActCode" nillable="true" type="AlrtActCode_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipId" nillable="true" type="ConsmRecipId_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipAcctId" nillable="true" type="AcctId_Type" />
+      <xsd:element minOccurs="0" name="RecipCon" nillable="true" type="RecipCon_Type" />
+      <xsd:element minOccurs="0" name="StartTimeDt" nillable="true" type="StartTimeDt_Type" />
+      <xsd:element minOccurs="0" name="EndTimeDt" nillable="true" type="EndTimeDt_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AlrtActCode_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The code related to an alert activity</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="OpenEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="StartTimeDt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The date and time that designates the starting point for date/time
+                        selections</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:dateTime">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="EndTimeDt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The date and time that designates the ending point for date/time
+                        selections</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:dateTime">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="NotActSrchResponse" type="NotActSrchRs_MType" />
+  <xsd:complexType name="NotActSrchRs_MType">
+    <xsd:sequence>
+      <xsd:element name="SrchMsgRsHdr" type="SrchMsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="ConsumerProd" nillable="true" type="ConsumerProd_Type" />
+      <xsd:element minOccurs="0" name="InstRtId" nillable="true" type="InstRtId_Type" />
+      <xsd:element minOccurs="0" name="AlrtPkgId" nillable="true" type="AlrtPkgId_Type" />
+      <xsd:element minOccurs="0" name="AlrtPkgSubId" nillable="true" type="AlrtPkgId_Type" />
+      <xsd:element minOccurs="0" name="AlrtName" nillable="true" type="AlrtName_Type" />
+      <xsd:element minOccurs="0" name="AlrtRecipId" nillable="true" type="AlrtRecipId_Type" />
+      <xsd:element minOccurs="0" name="AlrtActCode" nillable="true" type="AlrtActCode_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipId" nillable="true" type="ConsmRecipId_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipAcctId" nillable="true" type="AcctId_Type" />
+      <xsd:element minOccurs="0" name="RecipCon" nillable="true" type="RecipCon_Type" />
+      <xsd:element minOccurs="0" name="StartTimeDt" nillable="true" type="StartTimeDt_Type" />
+      <xsd:element minOccurs="0" name="EndTimeDt" nillable="true" type="EndTimeDt_Type" />
+      <xsd:element minOccurs="0" name="NotActSrchRecArray" nillable="true" type="NotActSrchRecArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="NotActSrchRecArray_AType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en"> An Array of responses for alert activity entries</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="NotActSrchSrchRec" type="NotActSrchSrchRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="NotActSrchSrchRec_CType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="ConsumerProd" type="ConsumerProd_Type" />
+      <xsd:element minOccurs="0" name="PubVer" type="PubVer_Type" />
+      <xsd:element minOccurs="0" name="InstRtId" type="InstRtId_Type" />
+      <xsd:element minOccurs="0" name="AlrtPkgId" type="AlrtPkgId_Type" />
+      <xsd:element minOccurs="0" name="AlrtPkgSubId" type="AlrtPkgId_Type" />
+      <xsd:element minOccurs="0" name="AlrtName" type="AlrtName_Type" />
+      <xsd:element minOccurs="0" name="AlrtRecipId" type="AlrtRecipId_Type" />
+      <xsd:element minOccurs="0" name="AlrtEventTimeDt" type="AlrtEventTimeDt_Type" />
+      <xsd:element minOccurs="0" name="AlrtActCode" type="AlrtActCode_Type" />
+      <xsd:element minOccurs="0" name="ActDesc" type="ActDesc_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipId" type="ConsmRecipId_Type" />
+      <xsd:element minOccurs="0" name="ConsmRecipAcctId" type="AcctId_Type" />
+      <xsd:element minOccurs="0" name="RecipCon" type="RecipCon_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AlrtEventTimeDt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> The date and time that an alert event occured. Expressed in ISO 8601
+                        time format and should contain either Zulu time or local time and the UTC
+                        offset. Format: [-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm] Valid values include:
+                        2001-10-26T21:32:52, 2001-10-26T21:32:52+02:00, 2001-10-26T19:32:52Z,
+                        2001-10-26T19:32:52+00:00, -2001-10-26T21:32:52, or
+                        2001-10-26T21:32:52.12679. Examles of same moment: "18:30Z", "22:30+04",
+                        "1130-0700", and "15:00-03:30 see [
+                        http://books.xmlschemata.org/relaxng/ch19-77049.html or
+                        http://en.wikipedia.org/wiki/ISO_8601 ] for further reference</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:dateTime">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ActDesc_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The description of the code related to an alert activity</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="NotEmailAlrtAdd" type="NotEmailAlrtAddRq_MType" />
+  <xsd:complexType name="NotEmailAlrtAddRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="ErrOvrRdInfoArray" nillable="true" type="ErrOvrRdInfoArray_AType" />
+      <xsd:element name="InstRtId" type="InstRtId_Type" />
+      <xsd:element name="ConsumerProd" type="ConsumerProd_Type" />
+      <xsd:element name="EmailRecipAddr" type="EmailAddr_Type" />
+      <xsd:element name="AlrtName" type="AlrtName_Type" />
+      <xsd:element minOccurs="0" name="EmailBodyType" nillable="true" type="EmailBodyType_Type" />
+      <xsd:element minOccurs="0" name="PubVer" nillable="true" type="PubVer_Type" />
+      <xsd:element minOccurs="0" name="OvrrdFromEmailAddr" nillable="true" type="EmailAddr_Type">
+        <xsd:annotation>
+          <xsd:documentation>Utilize override from email address cautiously and not a best practice</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="OvrrdReplyToEmailAddr" nillable="true" type="EmailAddr_Type" />
+      <xsd:element minOccurs="0" name="EmailRecipName" nillable="true" type="EmailRecipName_Type" />
+      <xsd:element minOccurs="0" name="AlrtDataInfoArray" nillable="true" type="AlrtDataInfoArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="EmailBodyType_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc> The style used for the body of an email</ElemDesc>
+          <CanonicalVal>HTML,Text</CanonicalVal>
+          <ElemDefault>HTML</ElemDefault>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="NotEmailAlrtAddResponse" type="NotEmailAlrtAddRs_MType" />
+  <xsd:complexType name="NotEmailAlrtAddRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="RsStat" nillable="true" type="RsStat_Type" />
+      <xsd:element minOccurs="0" name="AlrtPkgId" nillable="true" type="AlrtPkgId_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotSMSAlrtAdd" type="NotSMSAlrtAddRq_MType" />
+  <xsd:complexType name="NotSMSAlrtAddRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="ErrOvrRdInfoArray" nillable="true" type="ErrOvrRdInfoArray_AType" />
+      <xsd:element name="InstRtId" type="InstRtId_Type" />
+      <xsd:element name="ConsumerProd" type="ConsumerProd_Type" />
+      <xsd:element name="MobPhoneNum" type="PhoneNum_Type" />
+      <xsd:element name="AlrtName" type="AlrtName_Type" />
+      <xsd:element minOccurs="0" name="PubVer" nillable="true" type="PubVer_Type" />
+      <xsd:element minOccurs="0" name="AlrtSMSType" nillable="true" type="AlrtSMSType_Type" />
+      <xsd:element minOccurs="0" name="MobPrvdCode" nillable="true" type="MobPrvdCode_Type">
+        <xsd:annotation>
+          <xsd:documentation>Required for Alert SMS Type of SMTP</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="AlrtDataInfoArray" nillable="true" type="AlrtDataInfoArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NotSMSAlrtAddResponse" type="NotSMSAlrtAddRs_MType" />
+  <xsd:complexType name="NotSMSAlrtAddRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="RsStat" nillable="true" type="RsStat_Type" />
+      <xsd:element minOccurs="0" name="AlrtPkgId" nillable="true" type="AlrtPkgId_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="FaxSndAdd" type="FaxSndAddRq_MType" />
+  <xsd:complexType name="FaxSndAddRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element minOccurs="0" name="ErrOvrRdInfoArray" nillable="true" type="ErrOvrRdInfoArray_AType" />
+      <xsd:element minOccurs="0" name="ConsmRefId" nillable="true" type="ConsmRefId_Type" />
+      <xsd:element name="CoverPageRec" type="CoverPageRec_CType" />
+      <xsd:element name="FaxNumArray" type="FaxNumArray_AType" />
+      <xsd:element name="FaxDocArray" type="FaxDocArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsmRefId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>A reference assigned to an activity by the consumer of the
+                        service</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="CoverPageRec_CType">
+    <xsd:sequence>
+      <xsd:element name="CoverPageFromName" type="ComName_Type" />
+      <xsd:element minOccurs="0" name="CoverPageSubj" type="CoverPageSubj_Type" />
+      <xsd:element minOccurs="0" name="CoverPageRmk" type="Rmk_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CoverPageSubj_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The subject as related to a FAX cover page</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="Rmk_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>Application or user remarks free form text </ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="JHANull" type="JHANull_Type" use="optional" />
+        <xsd:attribute name="Rstr" type="Rstr_Type" use="optional" />
+        <xsd:attribute name="SrchType" type="SrchType_Type" use="optional" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaxNumArray_AType">
+    <xsd:annotation>
+      <xsd:documentation>An array of numbers to send faxes</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="FaxNumRec" type="FaxNumRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FaxNumRec_CType">
+    <xsd:sequence>
+      <xsd:element name="FaxNum" type="PhoneNum_Type">
+        <xsd:annotation>
+          <xsd:documentation>Format must be CXXXYYYZZZZ where C is the country code, XXX is the area code, YYYZZZZ is the seven digit fax number</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="FaxToName" type="ComName_Type" />
+      <xsd:element minOccurs="0" name="FaxCompName" type="LegalName_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FaxDocArray_AType">
+    <xsd:annotation>
+      <xsd:documentation>An array of fax documents</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="FaxDocRec" type="FaxDocRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FaxDocRec_CType">
+    <xsd:sequence>
+      <xsd:element name="FaxFileType" type="FaxFileType_Type" />
+      <xsd:element name="FaxDoc" type="FaxDoc_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FaxFileType_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en"> Identifies the type of file that contains the document
+                image. <Jx><CanonicalVal>PDF,TIFF,Text,DOC,DOCX,JPEG,PNG</CanonicalVal></Jx></xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaxDoc_Type">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en"> The fax document image</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:base64Binary" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="FaxSndAddResponse" type="FaxSndAddRs_MType" />
+  <xsd:complexType name="FaxSndAddRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="RsStat" nillable="true" type="RsStat_Type" />
+      <xsd:element minOccurs="0" name="FaxRsArray" nillable="true" type="FaxRsArray_AType" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FaxRsArray_AType">
+    <xsd:annotation>
+      <xsd:documentation>An array of fax responses</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="FaxRsRec" type="FaxRsRec_CType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FaxRsRec_CType">
+    <xsd:sequence>
+      <xsd:element name="FaxTrnId" type="FaxTrnId_Type" />
+      <xsd:element name="FaxNum" type="PhoneNum_Type" />
+      <xsd:element minOccurs="0" name="Custom" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FaxTrnId_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>A transaction identifier given for a FAX request</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="FaxStatInq" type="FaxStatInqRq_MType" />
+  <xsd:complexType name="FaxStatInqRq_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRqHdr" type="MsgRqHdr_CType" />
+      <xsd:element name="FaxTrnId" type="FaxTrnId_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="FaxStatInqResponse" type="FaxStatInqRs_MType" />
+  <xsd:complexType name="FaxStatInqRs_MType">
+    <xsd:sequence>
+      <xsd:element name="MsgRsHdr" type="MsgRsHdr_CType" />
+      <xsd:element minOccurs="0" name="FaxStat" nillable="true" type="FaxStat_Type" />
+      <xsd:element minOccurs="0" name="FaxRecvTimeDt" nillable="true" type="FaxRecvTimeDt_Type" />
+      <xsd:element minOccurs="0" name="FaxPageCnt" nillable="true" type="FaxPageCnt_Type" />
+      <xsd:element minOccurs="0" name="FaxNumRec" nillable="true" type="FaxNumRec_CType" />
+      <xsd:element minOccurs="0" name="ConsmRefId" nillable="true" type="ConsmRefId_Type" />
+      <xsd:element minOccurs="0" name="FaxErrCode" nillable="true" type="ErrCode_Type" />
+      <xsd:element minOccurs="0" name="FaxErrDesc" nillable="true" type="ErrDesc_Type" />
+      <xsd:element minOccurs="0" name="Custom" nillable="true" type="Custom_CType" />
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Ver_1" type="Ver_1_CType" />
+        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##targetNamespace" processContents="lax" />
+      </xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FaxStat_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The status of a fax</ElemDesc>
+          <CanonicalVal>Pend,Cmplt,Err,Cancel</CanonicalVal>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="ClosedEnum_Type" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaxRecvTimeDt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The fax received date and time</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:dateTime" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="FaxPageCnt_Type">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Jx>
+          <ElemDesc>The number of pages faxed</ElemDesc>
+        </Jx>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:int" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+</xsd:schema>
