@@ -19,7 +19,7 @@ def extract_body_from_xml(xml_content):  # Extract SOAP body
     body = root.find("soap:Body", namespaces)
 
     if body is not None and len(body):
-        print("Body found Successfully in XML")
+        print("\n👍 Body found Successfully in XML")
         return etree.tostring(body[0])
     else:
         return etree.tostring(root)
@@ -54,9 +54,9 @@ if __name__ == "__main__":
     try:
         valid, errs = is_xsd_valid(xml_content, xsd_name)
         if valid:
-            print("\n✅ XSD validation success")
+            print("✅ XSD validation success")
         else:
             print(f"\n❌ XSD validation failed\n")
-            print(f"Errors observed: \n\n➡️ {errs}\n\n")
+            print(f"Errors observed: \n\n➡️ {errs}\n")
     except Exception as e:
         raise Exception from e

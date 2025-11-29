@@ -16,10 +16,10 @@ class PackageResolver(etree.Resolver):
             xsd_data = pkg_resources.resource_string(__name__, resource_path)
             return self.resolve_string(xsd_data, context)
         except FileNotFoundError:
-            LOGGER.error("Failed to resolve imported XSD: %s", filename)
+            print(f"❌ Failed to import XSD: {filename}")
             return None
         except Exception as e:
-            LOGGER.error("Resolver error: %s", e)
+            print(f"❌ Resolver error: {e}")
             return None
 
 
@@ -39,9 +39,9 @@ class XMLValidator:
             return etree.XMLSchema(schema_doc)
 
         except etree.XMLSchemaParseError as e:
-            raise Exception(f"XSD schema parsing error: {e}")
+            print(f"❌ XSD schema parsing error: {e}")
         except Exception as e:
-            raise Exception(f"Error loading XSD schema: {e}")
+            print(f"❌ Error loading XSD schema: {e}")
 
     def _extract_soap_body(self, xml_content):
         try:
@@ -52,7 +52,7 @@ class XMLValidator:
                 return etree.tostring(body[0])
             return etree.tostring(root)
         except Exception as e:
-            raise Exception(f"Failed to extract SOAP body: {e}")
+            print(f"❌ Failed to extract SOAP body: {e}")
 
     def validate(self, xml_content, strip_soap_envelope=True):
         try:
@@ -64,12 +64,10 @@ class XMLValidator:
                 else xml_content
             )
         except etree.XMLSyntaxError as e:
-            raise Exception(f"XML parsing error: {e}")
+            print(f"❌ XML parsing error: {e}")
 
         try:
             self.schema.assertValid(xml_doc)
             return True
         except etree.DocumentInvalid as e:
-            # TODO: Raise the exception instead of sentry
-            LOGGER.debug("XSD Validation Failure: %s", e)
-            raise Exception("XSD Validation Failure:") from e
+            print(f"❌ XSD Validation Failure: {e}")

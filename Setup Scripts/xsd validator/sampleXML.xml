@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <SOAP-ENV:Header>
+        <wsse:Security
+            xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+            xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+            <wsse:UsernameToken
+                xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+                <wsse:Username>svc-JXU-13653-LendrsCoop@jhahosting.com</wsse:Username>
+                <wsse:Password
+                    Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">
+                    qD!9$i4QwL#2Y#3s!bX85T$mu1V#7P$j!6eN5fH$kM!2#7Uz8E</wsse:Password>
+                <wsu:Created
+                    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+                </wsu:Created>
+            </wsse:UsernameToken>
+        </wsse:Security>
+    </SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <CustAdd xmlns="http://jackhenry.com/jxchange/TPG/2008">
+            <MsgRqHdr>
+                <jXchangeHdr>
+                    <JxVer />
+                    <AuditUsrId></AuditUsrId>
+                    <AuditWsId></AuditWsId>
+                    <AuthenUsrId />
+                    <ConsumerName />
+                    <ConsumerProd />
+                    <Ver_1 />
+                    <jXLogTrackingId></jXLogTrackingId>
+                    <Ver_2 />
+                    <InstRtId>211372857</InstRtId>
+                    <InstEnv>UAT</InstEnv>
+                    <Ver_3 />
+                    <BusCorrelId></BusCorrelId>
+                    <Ver_4 />
+                    <WorkflowCorrelId />
+                    <Ver_5 />
+                    <ValidConsmName>LendersCooperative</ValidConsmName>
+                    <ValidConsmProd>LendersCooperativeLOS</ValidConsmProd>
+                    <Ver_6 />
+                </jXchangeHdr>
+            </MsgRqHdr>
+            <ErrOvrRdInfoArray>
+                <ErrOvrRd>
+                    <ErrCode>410023</ErrCode>
+                    <Ver_1 />
+                </ErrOvrRd>
+                <ErrOvrRd>
+                    <ErrCode>410050</ErrCode>
+                    <Ver_1 />
+                </ErrOvrRd>
+                <ErrOvrRd>
+                    <ErrCode>410059</ErrCode>
+                    <Ver_1 />
+                </ErrOvrRd>
+                <ErrOvrRd>
+                    <ErrCode>410079</ErrCode>
+                    <Ver_1 />
+                </ErrOvrRd>
+                <ErrOvrRd>
+                    <ErrCode>410017</ErrCode>
+                    <Ver_1 />
+                </ErrOvrRd>
+            </ErrOvrRdInfoArray>
+            <CustDetail>
+                <PersonName>
+                    <ComName>yoyoy</ComName>
+                </PersonName>
+                <Addr>
+                    <StreetAddr1>34531 Summerset Dr</StreetAddr1>
+                    <StreetAddr2>None</StreetAddr2>
+                    <City>Solon</City>
+                    <StateCode>OH</StateCode>
+                    <PostalCode>44139</PostalCode>
+                    <DlvryPt>5637</DlvryPt>
+                </Addr>
+                <CustType>N</CustType>
+                <NAICSCode>None</NAICSCode>
+                <EmailArray>
+                    <EmailInfo>
+                        <EmailAddr>None</EmailAddr>
+                        <EmailType>Primary E-Mail</EmailType>
+                    </EmailInfo>
+                </EmailArray>
+                <PhoneArray>
+                    <PhoneInfo>
+                        <PhoneType>Business Phone</PhoneType>
+                        <Ver_1 />
+                        <Ver_2 />
+                        <Ver_3 />
+                        <Ver_4 />
+                        <PhoneNum>3019138021</PhoneNum>
+                    </PhoneInfo>
+                </PhoneArray>
+                <Custom />
+                <Ver_1 />
+                <Ver_2 />
+                <Ver_3 />
+                <Ver_4 />
+                <CrScoreArray>
+                    <CrScoreInfo>
+                        <CrScoreId>272</CrScoreId>
+                        <CrScoreModelCode/>
+                        <Ver_1/>
+                        <CertCode>C</CertCode>
+                        <CertCodeDt>2025-08-06</CertCodeDt>
+                    </CrScoreInfo>
+                </CrScoreArray>
+            </CustDetail>
+            <TaxDetail>
+                <TINInfo>
+                    <TINCode>T</TINCode>
+                    <TaxId>718241111</TaxId>
+                </TINInfo>
+				<Custom/>
+				<Ver_1/>
+                <FedWithCode>0</FedWithCode>
+                <StateWithCode>0</StateWithCode>
+            </TaxDetail>
+            <BusDetail>
+				<OffCode>BNO</OffCode>
+                <BrCode>51</BrCode>
+                <CustCode>Q</CustCode>
+				<Ver_1/>
+				<Ver_2/>
+				<Ver_3/>
+				<Ver_4/>
+                <NetWorthAmt>1234546</NetWorthAmt>
+            </BusDetail>
+            <RegDetail>
+				
+                
+                <CRARec>
+                    <CRAStateCode>2</CRAStateCode>
+                    <CRACountyCode>170</CRACountyCode>
+                    <CRACenTract>1.01</CRACenTract>
+                    <CRASMSACode>11260</CRASMSACode>
+                    <CRAIncmLvl>1</CRAIncmLvl>
+                </CRARec>
+				<Ver_1/>
+				<ReqLegalEntityType>True</ReqLegalEntityType>
+				<ExcOwnPct>
+					<Pct_Type/>
+				</ExcOwnPct>
+				<AnnRevenueAmt>None</AnnRevenueAmt>
+
+            </RegDetail>
+        </CustAdd>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
