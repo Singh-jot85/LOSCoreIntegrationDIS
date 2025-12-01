@@ -1,0 +1,158 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <SOAP-ENV:Header>
+        <wsse:Security
+            xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+            xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+            <wsse:UsernameToken
+                xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+                <wsse:Username>{{XUserName}}</wsse:Username>
+                <wsse:Password
+                    Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">
+                    {{XPassword}}</wsse:Password>
+                <wsu:Created
+                    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+                    {{current_timestamp}}</wsu:Created>
+            </wsse:UsernameToken>
+        </wsse:Security>
+    </SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <LOCAdd xmlns="http://jackhenry.com/jxchange/TPG/2008">
+            <MsgRqHdr>
+                <jXchangeHdr>
+                    <JxVer />
+                    <AuditUsrId>{{XAuditUser}}</AuditUsrId>
+                    <AuditWsId>{{XAuditWorkStation}}</AuditWsId>
+                    <AuthenUsrId />
+                    <ConsumerName />
+                    <ConsumerProd />
+                    <Ver_1 />
+                    <jXLogTrackingId>{{$guid}}</jXLogTrackingId>
+                    <Ver_2 />
+                    <InstRtId>{{XInstitutionRoutingID}}</InstRtId>
+                    <InstEnv>{{XEnvironment}}</InstEnv>
+                    <Ver_3 />
+                    <BusCorrelId>{{$guid}}</BusCorrelId>
+                    <Ver_4 />
+                    <WorkflowCorrelId />
+                    <Ver_5 />
+                    <ValidConsmName>{{XValidConsumerName}}</ValidConsmName>
+                    <ValidConsmProd>{{XValidConsumerProduct}}</ValidConsmProd>
+                    <Ver_6 />
+                </jXchangeHdr>
+                <Ver_1 />
+                <Ver_2 />
+                <Ver_3 />
+            </MsgRqHdr>
+
+            <ErrOvrRdInfoArray> 
+                {% for ErrOvrRd in conditioningData.ErrOvrRds %} 
+                <ErrOvrRd>
+                    <ErrCode>{{ErrOvrRd}}</ErrCode>
+                    <Ver_1 />
+                </ErrOvrRd> 
+                {% endfor %} 
+            </ErrOvrRdInfoArray>
+
+            <LOCAcctId JHANull="" Rstr="">{{LOCAdd.LOCAcctId}}</LOCAcctId>
+            <LOCAcctType JHANull="" Rstr="">{{LOCAdd.LOCAcctType}}</LOCAcctType>
+
+            <LOCCustId JHANull="" Rstr="">{{LOCAdd.LOCCustId}}</LOCCustId>
+
+            <LOCRec>
+                <LOCAmt JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCAmt}}</LOCAmt>
+                <LOCExpDt JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCExpDt}}</LOCExpDt>
+                <LOCCode JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCCode}}</LOCCode>
+                <LOCMainLOCId JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCMainLOCId}}</LOCMainLOCId>
+                <LOCStat JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCStat}}</LOCStat>
+                <LOCBrCode JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCBrCode}}</LOCBrCode>
+                <LOCOffCode JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCOffCode}}</LOCOffCode>
+                <LOCPrtcpCode JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCPrtcpCode}}</LOCPrtcpCode>
+                <LOCDDAProtAmt JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCDDAProtAmt}}</LOCDDAProtAmt>
+                <LOCFrzAmt JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCFrzAmt}}</LOCFrzAmt>
+                <LOCTaxRefId JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCTaxRefId}}</LOCTaxRefId>
+                <LOCOrigTerm JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCOrigTerm}}</LOCOrigTerm>
+                <LOCOrigTermUnit JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCOrigTermUnit}}</LOCOrigTermUnit>
+                <LOCOrigAmt JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCOrigAmt}}</LOCOrigAmt>
+                <LOCInfo JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCInfo}}</LOCInfo>
+                <LOCPrtCnsldtStmt JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCPrtCnsldtStmt}}</LOCPrtCnsldtStmt>
+                <LOCStmtDay JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCStmtDay}}</LOCStmtDay>
+                <LOCStmtFreq JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCStmtFreq}}</LOCStmtFreq>
+                <LOCStmtFreqCode JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCStmtFreqCode}}</LOCStmtFreqCode>
+                <LOCSemiDay1 JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCSemiDay1}}</LOCSemiDay1>
+                <LOCSemiDay2 JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCSemiDay2}}</LOCSemiDay2>
+                <LOCCallRptCode JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCCallRptCode}}</LOCCallRptCode>
+                <LOCCollatCode JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCCollatCode}}</LOCCollatCode>
+                <LOCRiskCode JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCRiskCode}}</LOCRiskCode>
+                <LOCLastStmtDt JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCLastStmtDt}}</LOCLastStmtDt>
+                <LOCLastMainDt JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCLastMainDt}}</LOCLastMainDt>
+                <LOCCurBal JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCCurBal}}</LOCCurBal>
+                <LOCTotAdvaAmt JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCTotAdvaAmt}}</LOCTotAdvaAmt>
+                <LOCAvlBal JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCAvlBal}}</LOCAvlBal>
+                <LOCCommBal JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCCommBal}}</LOCCommBal>
+                <LOCRegAvlBal JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCRegAvlBal}}</LOCRegAvlBal>
+                <LOCClsCode JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCClsCode}}</LOCClsCode>
+                <LOCHighAmt JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCHighAmt}}</LOCHighAmt>
+                <LOCLowAmt JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCLowAmt}}</LOCLowAmt>
+                <LOCAvg JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCAvg}}</LOCAvg>
+                <LOCHighAmtDt JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCHighAmtDt}}</LOCHighAmtDt>
+                <LOCLowAmtDt JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCLowAmtDt}}</LOCLowAmtDt>
+                <LOCHighAmtLTD JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCHighAmtLTD}}</LOCHighAmtLTD>
+                <LOCLowAmtLTD JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCLowAmtLTD}}</LOCLowAmtLTD>
+                <LOCAvgLTD JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCAvgLTD}}</LOCAvgLTD>
+                <LOCBankNetTot JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCBankNetTot}}</LOCBankNetTot>
+                <SvcPrvdInfo />
+                <Ver_1 />
+                <LOCRedRvwFreq JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCRedRvwFreq}}</LOCRedRvwFreq>
+                <LOCRedRvwFreqUnits JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCRedRvwFreqUnits}}</LOCRedRvwFreqUnits>
+                <LOCNxtRedDt JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCNxtRedDt}}</LOCNxtRedDt>
+                <LOCRedPct JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCRedPct}}</LOCRedPct>
+                <LOCSchedRedAmt JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCSchedRedAmt}}</LOCSchedRedAmt>
+                <LOCFeeArray>
+                    <LnFeeInfoRec>
+                        <LnFeeText JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCFeeArray.LnFeeInfoRec.LnFeeText}}</LnFeeText>
+                        <LnFeeCode JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCFeeArray.LnFeeInfoRec.LnFeeCode}}</LnFeeCode>
+                        <LnFeeAmt JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCFeeArray.LnFeeInfoRec.LnFeeAmt}}</LnFeeAmt>
+                        <LnFeeAssmntDt JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCFeeArray.LnFeeInfoRec.LnFeeAssmntDt}}</LnFeeAssmntDt>
+                        <LnFeeFreq JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCFeeArray.LnFeeInfoRec.LnFeeFreq}}</LnFeeFreq>
+                        <LnFeeFreqUnits JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCFeeArray.LnFeeInfoRec.LnFeeFreqUnits}}</LnFeeFreqUnits>
+                        <LnFeeDayOfMonth JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCFeeArray.LnFeeInfoRec.LnFeeDayOfMonth}}</LnFeeDayOfMonth>
+                        <LnFeeChgCode JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCFeeArray.LnFeeInfoRec.LnFeeChgCode}}</LnFeeChgCode>
+                        <Ver_1 />
+                        <LnFeeNxtPayDt JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCFeeArray.LnFeeInfoRec.LnFeeNxtPayDt}}</LnFeeNxtPayDt>
+                        <LnFeeLastPmtDt JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCFeeArray.LnFeeInfoRec.LnFeeLastPmtDt}}</LnFeeLastPmtDt>
+                        <LnFeeRemAmt JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCFeeArray.LnFeeInfoRec.LnFeeRemAmt}}</LnFeeRemAmt>
+                        <LnFeeCaplze JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCFeeArray.LnFeeInfoRec.LnFeeCaplze}}</LnFeeCaplze>
+                        <LnFeeId JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCFeeArray.LnFeeInfoRec.LnFeeId}}</LnFeeId>
+                        <LnFeeStat JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCFeeArray.LnFeeInfoRec.LnFeeStat}}</LnFeeStat>
+                        <Ver_2 />
+                    </LnFeeInfoRec>
+                </LOCFeeArray>
+                <LOCFeeAcctId JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCFeeAcctId}}</LOCFeeAcctId>
+                <LOCFeeAcctType JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCFeeAcctType}}</LOCFeeAcctType>
+                <Ver_2 />
+                <LOCGdnceType JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCGdnceType}}</LOCGdnceType>
+                <LOCGdnceBorwAck JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCGdnceBorwAck}}</LOCGdnceBorwAck>
+                <LOCGdnceRedType JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCGdnceRedType}}</LOCGdnceRedType>
+                <LOCLastRedDt JHANull="" Rstr="">{{LOCAdd.LOCRec.LOCLastRedDt}}</LOCLastRedDt>
+                <UserDefInfoArray>
+                    <UserDefInfo>
+                        <UserDefTxt JHANull="" Rstr="">{{LOCAdd.LOCRec.UserDefInfoArray.UserDefInfo.UserDefTxt}}</UserDefTxt>
+                        <UserDefCode JHANull="" Rstr="">{{LOCAdd.LOCRec.UserDefInfoArray.UserDefInfo.UserDefCode}}</UserDefCode>
+                        <UserDefDesc JHANull="" Rstr="">{{LOCAdd.LOCRec.UserDefInfoArray.UserDefInfo.UserDefDesc}}</UserDefDesc>
+                        <UserDefDt JHANull="" Rstr="">{{LOCAdd.LOCRec.UserDefInfoArray.UserDefInfo.UserDefDt}}</UserDefDt>
+                        <UserDefInfo1 JHANull="" Rstr="">{{LOCAdd.LOCRec.UserDefInfoArray.UserDefInfo.UserDefInfo1}}</UserDefInfo1>
+                        <UserDefInfo2 JHANull="" Rstr="">{{LOCAdd.LOCRec.UserDefInfoArray.UserDefInfo.UserDefInfo2}}</UserDefInfo2>
+                        <UserDefInfo3 JHANull="" Rstr="">{{LOCAdd.LOCRec.UserDefInfoArray.UserDefInfo.UserDefInfo3}}</UserDefInfo3>
+                        <Ver_1 />
+                    </UserDefInfo>
+                </UserDefInfoArray>
+                <Ver_3 />
+                <Ver_4 />
+            </LOCRec>
+            <Custom></Custom>
+            <Ver_1 />
+        </LOCAdd>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

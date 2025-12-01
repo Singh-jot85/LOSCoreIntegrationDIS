@@ -1,0 +1,152 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <SOAP-ENV:Header>
+        <wsse:Security
+            xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+            xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+            <wsse:UsernameToken
+                xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+                <wsse:Username>{{X-UserName}}</wsse:Username>
+                <wsse:Password
+                    Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">
+                    {{X-Password}}</wsse:Password>
+                <wsu:Created
+                    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+                    2023-09-06T17:03:47Z</wsu:Created>
+            </wsse:UsernameToken>
+        </wsse:Security>
+    </SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <LOCAdd xmlns="http://jackhenry.com/jxchange/TPG/2008">
+            <MsgRqHdr>
+                <jXchangeHdr>
+                    <JxVer />
+                    <AuditUsrId>{{X-AuditUser}}</AuditUsrId>
+                    <AuditWsId>{{X-AuditWorkStation}}</AuditWsId>
+                    <AuthenUsrId />
+                    <ConsumerName />
+                    <ConsumerProd />
+                    <Ver_1 />
+                    <jXLogTrackingId>{{$guid}}</jXLogTrackingId>
+                    <Ver_2 />
+                    <InstRtId>{{X-InstitutionRoutingID}}</InstRtId>
+                    <InstEnv>{{X-Environment}}</InstEnv>
+                    <Ver_3 />
+                    <BusCorrelId>{{$guid}}</BusCorrelId>
+                    <Ver_4 />
+                    <WorkflowCorrelId />
+                    <Ver_5 />
+                    <ValidConsmName>{{X-ValidConsumerName}}</ValidConsmName>
+                    <ValidConsmProd>{{X-ValidConsumerProduct}}</ValidConsmProd>
+                    <Ver_6 />
+                </jXchangeHdr>
+                <Ver_1 />
+                <Ver_2 />
+                <Ver_3 />
+            </MsgRqHdr>
+            <ErrOvrRdInfoArray>
+                <ErrOvrRd>
+                    <ErrCode>200594</ErrCode>
+                    <Ver_1 />
+                </ErrOvrRd>
+            </ErrOvrRdInfoArray>
+            <LOCAcctId JHANull="" Rstr="">7033659</LOCAcctId>
+            <LOCAcctType JHANull="" Rstr="">L</LOCAcctType>
+            <LOCCustId JHANull="" Rstr="">XAA0052</LOCCustId>
+            <LOCRec>
+                <LOCAmt JHANull="" Rstr="">60000</LOCAmt>
+                <LOCExpDt JHANull="" Rstr="">2027-01-06</LOCExpDt>
+                <LOCCode JHANull="" Rstr="">1</LOCCode>
+                <LOCMainLOCId JHANull="" Rstr=""></LOCMainLOCId>
+                <LOCStat JHANull="" Rstr="">1</LOCStat>
+                <LOCBrCode JHANull="" Rstr="">51</LOCBrCode>
+                <LOCOffCode JHANull="" Rstr="">BNO</LOCOffCode>
+                <LOCPrtcpCode JHANull="" Rstr=""></LOCPrtcpCode>
+                <LOCDDAProtAmt JHANull="" Rstr=""></LOCDDAProtAmt>
+                <LOCFrzAmt JHANull="" Rstr=""></LOCFrzAmt>
+                <LOCTaxRefId JHANull="" Rstr=""></LOCTaxRefId>
+                <LOCOrigTerm JHANull="" Rstr="">14</LOCOrigTerm>
+                <LOCOrigTermUnit JHANull="" Rstr="">Months</LOCOrigTermUnit>
+                <LOCOrigAmt JHANull="" Rstr="">60000</LOCOrigAmt>
+                <LOCInfo JHANull="" Rstr=""></LOCInfo>
+                <LOCPrtCnsldtStmt JHANull="" Rstr="">Y</LOCPrtCnsldtStmt>
+                <LOCStmtDay JHANull="" Rstr="">1</LOCStmtDay>
+                <LOCStmtFreq JHANull="" Rstr="">1</LOCStmtFreq>
+                <LOCStmtFreqCode JHANull="" Rstr="">M</LOCStmtFreqCode>
+                <LOCSemiDay1 JHANull="" Rstr=""></LOCSemiDay1>
+                <LOCSemiDay2 JHANull="" Rstr=""></LOCSemiDay2>
+                <LOCCallRptCode JHANull="" Rstr="">4A</LOCCallRptCode>
+                <LOCCollatCode JHANull="" Rstr="">14</LOCCollatCode>
+                <LOCRiskCode JHANull="" Rstr=""></LOCRiskCode>
+                <LOCLastStmtDt JHANull="" Rstr=""></LOCLastStmtDt>
+                <LOCLastMainDt JHANull="" Rstr=""></LOCLastMainDt>
+                <LOCCurBal JHANull="" Rstr="">60000</LOCCurBal>
+                <LOCTotAdvaAmt JHANull="" Rstr="">60000</LOCTotAdvaAmt>
+                <LOCAvlBal JHANull="" Rstr="">0</LOCAvlBal>
+                <LOCCommBal JHANull="" Rstr=""></LOCCommBal>
+                <LOCRegAvlBal JHANull="" Rstr=""></LOCRegAvlBal>
+                <LOCClsCode JHANull="" Rstr=""></LOCClsCode>
+                <LOCHighAmt JHANull="" Rstr=""></LOCHighAmt>
+                <LOCLowAmt JHANull="" Rstr=""></LOCLowAmt>
+                <LOCAvg JHANull="" Rstr=""></LOCAvg>
+                <LOCHighAmtDt JHANull="" Rstr=""></LOCHighAmtDt>
+                <LOCLowAmtDt JHANull="" Rstr=""></LOCLowAmtDt>
+                <LOCHighAmtLTD JHANull="" Rstr=""></LOCHighAmtLTD>
+                <LOCLowAmtLTD JHANull="" Rstr=""></LOCLowAmtLTD>
+                <LOCAvgLTD JHANull="" Rstr=""></LOCAvgLTD>
+                <LOCBankNetTot JHANull="" Rstr=""></LOCBankNetTot>
+                <SvcPrvdInfo />
+                <Ver_1 />
+                <LOCRedRvwFreq JHANull="" Rstr="">100</LOCRedRvwFreq>
+                <LOCRedRvwFreqUnits JHANull="" Rstr="">Months</LOCRedRvwFreqUnits>
+                <LOCNxtRedDt JHANull="" Rstr="">2099-01-01</LOCNxtRedDt>
+                <LOCRedPct JHANull="" Rstr=""></LOCRedPct>
+                <LOCSchedRedAmt JHANull="" Rstr="">0.01</LOCSchedRedAmt>
+                <LOCFeeArray>
+                    <LnFeeInfoRec>
+                        <LnFeeText JHANull="" Rstr=""></LnFeeText>
+                        <LnFeeCode JHANull="" Rstr="">N</LnFeeCode>
+                        <LnFeeAmt JHANull="" Rstr="">345</LnFeeAmt>
+                        <LnFeeAssmntDt JHANull="" Rstr="">2025-11-18</LnFeeAssmntDt>
+                        <LnFeeFreq JHANull="" Rstr="">35</LnFeeFreq>
+                        <LnFeeFreqUnits JHANull="" Rstr="">1</LnFeeFreqUnits>
+                        <LnFeeDayOfMonth JHANull="" Rstr="">10</LnFeeDayOfMonth>
+                        <LnFeeChgCode JHANull="" Rstr="">3</LnFeeChgCode>
+                        <Ver_1 />
+                        <LnFeeNxtPayDt JHANull="" Rstr=""></LnFeeNxtPayDt>
+                        <LnFeeLastPmtDt JHANull="" Rstr=""></LnFeeLastPmtDt>
+                        <LnFeeRemAmt JHANull="" Rstr="">0</LnFeeRemAmt>
+                        <LnFeeCaplze JHANull="" Rstr="">54</LnFeeCaplze>
+                        <LnFeeId JHANull="" Rstr="">345</LnFeeId>
+                        <LnFeeStat JHANull="" Rstr=""></LnFeeStat>
+                        <Ver_2 />
+                    </LnFeeInfoRec>
+                </LOCFeeArray>
+                <LOCFeeAcctId JHANull="" Rstr="">0</LOCFeeAcctId>
+                <LOCFeeAcctType JHANull="" Rstr=""></LOCFeeAcctType>
+                <Ver_2 />
+                <LOCGdnceType JHANull="" Rstr=""></LOCGdnceType>
+                <LOCGdnceBorwAck JHANull="" Rstr=""></LOCGdnceBorwAck>
+                <LOCGdnceRedType JHANull="" Rstr=""></LOCGdnceRedType>
+                <LOCLastRedDt JHANull="" Rstr=""></LOCLastRedDt>
+                <UserDefInfoArray>
+                    <UserDefInfo>
+                        <UserDefTxt JHANull="" Rstr=""></UserDefTxt>
+                        <UserDefCode JHANull="" Rstr=""></UserDefCode>
+                        <UserDefDesc JHANull="" Rstr=""></UserDefDesc>
+                        <UserDefDt JHANull="" Rstr=""></UserDefDt>
+                        <UserDefInfo1 JHANull="" Rstr=""></UserDefInfo1>
+                        <UserDefInfo2 JHANull="" Rstr=""></UserDefInfo2>
+                        <UserDefInfo3 JHANull="" Rstr=""></UserDefInfo3>
+                        <Ver_1 />
+                    </UserDefInfo>
+                </UserDefInfoArray>
+                <Ver_3 />
+                <Ver_4 />
+            </LOCRec>
+            <Custom></Custom>
+            <Ver_1 />
+        </LOCAdd>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
