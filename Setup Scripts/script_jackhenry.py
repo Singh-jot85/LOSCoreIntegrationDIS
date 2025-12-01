@@ -30,13 +30,15 @@ interfaces = {
                 "loan_account_creation": "execute_create_loan_request",
                 "collateral": "execute_collateral_track_add_request",
                 "payment_term": "execute_payment_schedule_add_request",
-                "rate_detail": "execute_rate_schedule_add_request"
+                "rate_detail": "execute_rate_schedule_add_request",
+                "loc_add": "execute_create_loan_loc_add"
             },
             "get_tranformed_config": {
                 "loan_account_creation": "create_loan",
                 "collateral": "collateral_track_add",
                 "payment_term": "payment_schedule_add",
-                "rate_detail": "rate_schedule_add"
+                "rate_detail": "rate_schedule_add",
+                "loc_add": "create_loan_loc_add" 
             }
         },
         "customer_realtion_addition": {
@@ -70,7 +72,8 @@ interfaces = {
                 "individual": "search_customer"
             }
         },
-        "default_document_type": ""
+        "default_document_type": "",
+        "stepper_list": ["loan_account_creation", "relation", "collateral", "payment_term", "rate_detail", "loc_add"]
     },
     "ci-jackhenry-search_customer": {
         "validation_spec": "{}",
@@ -174,7 +177,7 @@ interfaces = {
     },
 }
 org_config = (
-    OrganizationConfiguration.objeccts.all()
+    OrganizationConfiguration.objects.all()
     .order_by("-version_major", "-version_minor", "-version_patch")
     .first()
 )
@@ -187,3 +190,11 @@ for key, value in interfaces.items():
         "version": configuration.version,
     }
     org_config.save(update_fields=["details"])
+
+
+organization_config = Configuration.objects.filter(interface_type="organization_config")
+for config in organization_config:
+    details = config.details
+    details['corebanking_name'] = "jackhenry"
+    config.details = details
+    config.save()

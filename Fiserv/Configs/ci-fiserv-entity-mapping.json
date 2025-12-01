@@ -18,5 +18,12 @@
         }
     },
     "default_document_type": "",
-    "stepper_list": ["collaterals", "link_collaterals"]
+    "stepper_list": [
+        {
+            "key": "collaterals"
+        },
+        {
+            "key": "link_collaterals"
+        }
+    ]
 }

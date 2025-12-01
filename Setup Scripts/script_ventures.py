@@ -1518,3 +1518,10 @@ for key, value in interfaces.items():
     )
     org_config.details["GLOBAL"][key] = {"name": configuration.name, "version": configuration.version}
     org_config.save()
+
+organization_config = Configuration.objects.filter(interface_type="organization_config")
+for config in organization_config:
+    details = config.details
+    details['corebanking_name'] = "ventures"
+    config.details = details
+    config.save()

@@ -18,7 +18,7 @@
             "collateral": "collateral_track_add",
             "payment_term": "payment_schedule_add",
             "rate_detail": "rate_schedule_add",
-            "loc_add": "create_loan_loc_add" 
+            "loc_add": "create_loan_loc_add"
         }
     },
     "customer_realtion_addition": {
@@ -53,5 +53,24 @@
         }
     },
     "default_document_type": "",
-    "stepper_list": ["loan_account_creation", "relation", "collateral", "payment_term", "rate_detail", "loc_add"]
+    "stepper_list": [
+        {
+            "key": "loan_account_creation"
+        },
+        {
+            "key": "relation"
+        },
+        {
+            "key": "collateral"
+        },
+        {
+            "key": "payment_term"
+        },
+        {
+            "key": "rate_detail"
+        },
+        {
+            "key": "loc_add"
+        }
+    ]
 }

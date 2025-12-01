@@ -150,3 +150,10 @@ for key, value in credentials.items():
     if not created:
         cred.details = value
         cred.save()
+
+organization_config = Configuration.objects.filter(interface_type="organization_config")
+for config in organization_config:
+    details = config.details
+    details['corebanking_name'] = "fiserv"
+    config.details = details
+    config.save()
