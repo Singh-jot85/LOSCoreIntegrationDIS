@@ -65,7 +65,8 @@
                     {% endif %}
 
 
-                    {% if conditioningData.partyType == "individual" or conditionData.isSoleProp == true %}
+                    {% if conditioningData.partyType == "individual" or conditioningData.isSoleProp
+                    == true %}
                     <x_PersonName>
                         <NameSuffix>{{CustDetail.PersonName.x_PersonName.NameSuffix}}</NameSuffix>
                         <LegalName>{{CustDetail.PersonName.x_PersonName.LegalName}}</LegalName>
@@ -93,7 +94,7 @@
                 <BirthDt>{{CustDetail.BirthDt}}</BirthDt>
                 {% endif %}
 
-                {% if conditioningData.isSoleProp %}
+                {% if conditioningData.partyType == "individual" or conditioningData.isSoleProp == true %}
                 <EmplName>{{CustDetail.EmplName}}</EmplName>
                 {% endif %}
 
@@ -155,7 +156,8 @@
                 <OffCode>{{BusDetail.OffCode}}</OffCode>
                 <CustCode>{{BusDetail.CustCode}}</CustCode>
 
-                {% if conditioningData.partyType == "individual" or conditionData.isSoleProp == true %}
+                {% if conditioningData.partyType == "individual" or conditioningData.isSoleProp ==
+                true %}
                 <InsiderCode>{{BusDetail.InsiderCode}}</InsiderCode>
                 <NetWorth>{{BusDetail.NetWorth}}</NetWorth>
                 {% endif %}

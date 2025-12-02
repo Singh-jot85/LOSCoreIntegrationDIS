@@ -37,7 +37,7 @@
                 ),
                 NAICSCode: (.naics_code // null),
                 BirthDt: (if .party_type == "individual" then .dob else null end),
-                EmplName: ( if .party_type == "entity" then .business_name else null end),
+                EmplName: ( .memberof // null),
                 EmailArray: {
                     EmailInfo: {
                         EmailAddr: (.email // null)
@@ -59,10 +59,10 @@
                 },
                 CrScoreArray: {
                     CrScoreInfo: {
-                        CrScoreId: ($root.fico_score // null)
-                    },
-                    CertCode: "C",
-                    CertCodeDt: "2025-08-06"
+                        CrScoreId: ($root.fico_score // null),
+                        CertCode: "C",
+                        CertCodeDt: "2025-08-06"
+                    }
                 }
             }
         ),
