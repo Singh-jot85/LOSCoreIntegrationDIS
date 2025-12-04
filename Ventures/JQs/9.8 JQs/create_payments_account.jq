@@ -71,7 +71,12 @@
                 and .details.outLOAN_BUILDER.AmTable.AmLine?
         ) | (.details.outLOAN_BUILDER.AmTable.AmLine | max_by(.Idx) | .Pmt | tonumber)
         ) else null end ),
-        finalPayment: (null),
+        finalPayment: (.pricing_details[] | select(.term_position == "term_1") | 
+            if .repayment_type == "interest_only"
+                then "DueOnRegularDueDate"
+            else null
+            end // null 
+        ),
         firstPAndIPaymentAmount: (if(.product.product_code == "SB_TL" or .product.product_code == "7A_TL")  then ( .loan_interfaces[] | select(
             .interface_type == "sherman"
             and .is_latest == true
@@ -90,7 +95,12 @@
         interestRateSpreadPercent: ((.differential_rate) // null),
         interestRoundingMethod: (null),
         interestRoundingPerDiem: (null),
-        lineOfCredit: (if .product.product_type.name | ascii_downcase == "line of credit" then true else false end),
+        lineOfCredit:  (
+            if (.product.product_code | IN("SB_LOC","EL_LOC"))
+                then true 
+            else false 
+            end
+        ),
         loanIdentifier: ((.core_integration_response.create_loan.response.responses.AccountNumber) // null | tostring),
         nextInterestAdjustmentDate: (null),
         nextReamortizationDate: (null),
@@ -98,10 +108,19 @@
         paymentFrequency: (.pricing_details[] | select(.term_position == "term_1") | .frequency // null),
         paymentLateFeePercent: (null),
         paymentType: (.pricing_details[] | select(.term_position == "term_1") | $repaymentTypeMapping[.repayment_type] // null ),
-        rateIndex: ((.pricing_details[] | select(.term_position == "term_1" and .rate_index!=null and .index_period_type!=null) | 
-            if (.index_period_type <= 5 and .rate_index == "US Treasury Securities Rate") then  ("Treasury5Year")
-            elif (.index_period_type <= 5 and .rate_index == "Treasury Constant Maturities") then ("CMT5Year")
-            else $rateIndexMapping[.rate_index] end // null) // null),
+        rateIndex: (
+            (.pricing_details[] 
+            | select(.term_position == "term_1" and .rate_index!=null) 
+            | if .index_period_type != null then
+                if (.index_period_type <= 5 and .rate_index == "US Treasury Securities Rate") 
+                    then  ("Treasury5Year")
+                elif (.index_period_type <= 5 and .rate_index == "Treasury Constant Maturities") 
+                    then ("CMT5Year")
+                else null 
+                end
+            else $rateIndexMapping[.rate_index]
+            end) // null
+        ),
         reamortizationPeriod: (null),
         revolvingTermEndDate: (.revolving_term_end_date // null),
         sba1502Status: (null),
