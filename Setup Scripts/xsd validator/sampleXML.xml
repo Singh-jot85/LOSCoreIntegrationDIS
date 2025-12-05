@@ -131,8 +131,6 @@
                 <NetWorthAmt>1234546</NetWorthAmt>
             </BusDetail>
             <RegDetail>
-				
-                
                 <CRARec>
                     <CRAStateCode>2</CRAStateCode>
                     <CRACountyCode>170</CRACountyCode>
@@ -142,11 +140,8 @@
                 </CRARec>
 				<Ver_1/>
 				<ReqLegalEntityType>True</ReqLegalEntityType>
-				<ExcOwnPct>
-					<Pct_Type/>
-				</ExcOwnPct>
-				<AnnRevenueAmt>None</AnnRevenueAmt>
-
+                <Ver_2 />
+				<AnnRevenueAmt>12.34</AnnRevenueAmt>
             </RegDetail>
         </CustAdd>
     </SOAP-ENV:Body>

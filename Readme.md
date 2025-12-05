@@ -5,6 +5,7 @@ Currently we have four core-integrations available in LOS:
 1. **Ventures (Prod. ready)**: In ventures we have multiple tenant's, credentials and configs(some) are different for those.
     - [CDC](https://cdcsbfsandbox.venturesgo.com/)
     - [LFCU](https://lafayettesandbox.venturesgo.com/)
+    - [TrialLSP](https://triallsp.venturesgo.com/)
 2. **CSI (Prod. ready)**
 3. **Fiserv (Prod. ready)**
 4. **JackHenry**  
@@ -46,8 +47,8 @@ Any normal API call to a core_int would look something like this:
 - First a clean loan data from IntegrationSerializer will be passed to SDK along with a `config_key` for JQ transformation.
 - The `config_key` determines which config would be used for JQ transform.
 - The JQ transformed data is then sometimes is show to user for review, and then on some action from user this data is sent to core using the SDK component. The action from user can be in two ways:
-    1. Using task's submit API call that will go in `boarding.py`.
-    2. Using a POST call to `CoreIntegrationViewSet`.
+    1. Using task's submit API call that will go in [`boarding.py`](https://github.com/thesummitgrp/los-app-los-django/blob/main/los/backoffice/bo_tasks/boarding.py).
+    2. Using a POST call to [`CoreIntegrationViewSet`](https://github.com/thesummitgrp/los-app-los-django/blob/4e2d3db38e6216248bcd7aa3584e1df07139dc58/los/requests/api/views.py#L7926).
 - The flow after user's action:
     - Another JQ transformation is performed same as earlier.
     - The transformed data is then sent again to SDK along with a `flavour`.
@@ -57,7 +58,7 @@ Any normal API call to a core_int would look something like this:
 sdk = CoreIntegrationExec(loan_id, tenant, user_id)
 sdk.create_customer(jq_transformed_data, flavour)
 ```
-Here changing the flavour we can execute both `create_company`and `create_contact`
+Here changing the flavour we can execute both `Entity Creation`and `Individual Creation`
 
 # SDK:
 On the SDK side also we have a very clever design to make general code and execute the core integration based on `ci-tenant-map`.
@@ -89,6 +90,7 @@ We also call the adapter of each core integration based on `ci-tenant-map` in th
 Now in each adapter file we use the jq_transformed_payload and flavour to make an API request to core.
 
 # LOS side taks for each core integration
+These are the tasks for each core-integration that we currently have.
 
 ## Ventures:
 Tasks:
