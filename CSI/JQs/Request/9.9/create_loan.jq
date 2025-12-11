@@ -125,7 +125,7 @@
             marginSign: $marginSign,
             lateChargeCode: ((if .product.product_code == "EL_TL" or .product.product_code == "EL_LOC" then $lateChargeCode else null end) // null),
             propertyDescription: null,
-            creditScore1: ((.loan_interfaces[] | select(.interface_type == "fico" and .is_latest == true) | .details.fico_data.FI_LiquidCredit.business_info.decisionData.scoringList.scoring[] | select(.type == "SBSS70") | .totalScore | tostring) // null),
+            creditScore1: (if .ficoSBSS70TotalScore then .ficoSBSS70TotalScore else null end),
             creditScore2: null,
             ddasavChargeNumber: ((.loan_disbursement_details.payee_account) // null),
             transferIdentification: ((if .product.product_type.product_type_code == "TL" then "D" elif .product.product_type.product_type_code == "LOC" then "1" else null end) // null),
