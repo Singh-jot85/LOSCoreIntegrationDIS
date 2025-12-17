@@ -134,7 +134,7 @@
     sop: "50 10 7.1",
     billingContactMethod: "Email",
     billingEmail: (.loan_relations[] | select(.is_primary_borrower == true) | .email),
-    billingName: (.loan_relations[] | select(.is_primary_borrower == true) | .business_name),
+    billingName: (.loan_relations[] | select(.is_primary_borrower == true) | .full_name),
     primaryContactId: (if .primary_contact_id then .primary_contact_id | tonumber else null end),
     referrals: [ 
         { 
@@ -262,6 +262,8 @@
         ( if (.entity_type == "sole_proprietor") then { 
             primary: .is_primary_borrower,
             association: "Operating Company",
+            borrower:(if .relation_type == "borrower" then true else false end),
+            dbaName: .dba_name,
             guaranteeType: "Unsecured Limited",
             company: 
                 {
@@ -276,7 +278,8 @@
         } 
         else { 
             companyId: (if .external_customer_id then .external_customer_id | tonumber else "" end),
-            borrower:true ,
+            borrower:(if .relation_type == "borrower" then true else false end),
+            dbaName: .dba_name,
             association:(if .is_primary_borrower then "Operating Company" else "Affiliate" end) ,
             annualRevenue:( .details.annual_business_revenue ),
             guaranteeType:(if .is_primary_borrower == false and .ownership_percentage>20 then "Unsecured Full" else "Unsecured Limited" end),
