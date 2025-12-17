@@ -1,3 +1,7 @@
+(
+({
+  "4A": "4A - Commercial and industrial loans - US addresses"
+}) as $callreportcode |
 . as $top | [ 
     { 
         first_time_borrower: ( if .customData | select("first_time_borrower") 
@@ -152,6 +156,39 @@
         )
     }, 
     {
+    loc_amount:(if .customData | select("loc_amount") 
+    then {
+    ventures_object:(.customData[] | select(.loc_amount) | .loc_amount.ventures_object),
+    ventures_field:(.customData[] | select(.loc_amount) | .loc_amount.ventures_field), 
+    value:(if (.product.product_code | IN("SB_LOC","EL_LOC"))
+    then .approved_amount | tostring 
+    else empty
+    end )
+    } 
+    else empty 
+    end )
+    }, 
+    {
+    call_report_code:(if .customData | select("call_report_code") 
+    then {
+    ventures_object:(.customData[] | select(.call_report_code) | .call_report_code.ventures_object),
+    ventures_field:(.customData[] | select(.call_report_code) | .call_report_code.ventures_field), 
+    value:(if $callreportcode[.call_code] then $callreportcode[.call_code] else .call_code end) ,
+    } 
+    else empty 
+    end )
+    }, 
+    {
+    loan_docs_to_borrower:(if .customData | select("loan_docs_to_borrower") 
+    then {
+    ventures_object:(.customData[] | select(.loan_docs_to_borrower) | .loan_docs_to_borrower.ventures_object),
+    ventures_field:(.customData[] | select(.loan_docs_to_borrower) | .loan_docs_to_borrower.ventures_field), 
+    value: (.closing_date)
+    } 
+    else empty 
+    end )
+    }, 
+    {
         lumos_credit_score_date:(if .customData | select("lumos_credit_score_date") 
             then {
                 ventures_object:(.customData[] | select(.lumos_credit_score_date) | .lumos_credit_score_date.ventures_object),
@@ -174,3 +211,4 @@
         )
     } 
 ]
+)

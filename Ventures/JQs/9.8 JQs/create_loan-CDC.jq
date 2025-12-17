@@ -1,7 +1,15 @@
 (
 ({
-    "Purchase Equipment or Vehicles": "Equipment",
-    "Working Capital": "Working Capital"
+        "Purchase Commercial Real Estate": "Purchase Commercial Real Estate",
+        "Improvement to Leased Space": "Improvements to Leased Space",
+        "Purchase Equipment": "Purchase Equipment",
+        "Purchase Furniture and Fixtures": "Purchase Furniture and Fixtures",
+        "Purchase Inventory": "Purchase Inventory",
+        "Debt Refinance": "Debt Refinance",
+        "Business Acquisition": "Business Acquisition",
+        "Working Capital": "Working Capital",
+        "Purchase Vehicle(s)": "Purchase Vehicle(s)",
+        "Start Up Financing": "Start Up Financing"
 }) as $purposeType |
 ({
     "Purchase Land only": "Purchase Of Land",
@@ -114,7 +122,7 @@
     sop: "50 10 7.1",
     billingContactMethod: "Email",
     billingEmail: (.loan_relations[] | select(.is_primary_borrower == true) | .email),
-    billingName: (.loan_relations[] | select(.is_primary_borrower == true) | .business_name),
+    billingName: (.loan_relations[] | select(.is_primary_borrower == true) | .full_name),
     primaryContactId: (if .primary_contact_id then .primary_contact_id | tonumber else null end),
     referrals: [ 
         { 
@@ -141,6 +149,7 @@
     collaterals:( 
         .approved_amount as $loan_amount
         | .collateral_types_mapping as $CollateralTypesMapping 
+        | .environment_values.lien_holder_id as $lienHolderCompanyId 
         | [ .collaterals[] 
         | { 
             collateralTypeId: (if .collateral_type and $collateralType[.collateral_type_verbose] and $CollateralTypesMapping[$collateralType[.collateral_type_verbose]] then $CollateralTypesMapping[$collateralType[.collateral_type_verbose]] else ( if .category and $collateralType[.category] and $CollateralTypesMapping[$collateralType[.category]] then $CollateralTypesMapping[$collateralType[.category]] else $CollateralTypesMapping["Other"] end) end),
@@ -149,7 +158,7 @@
             uccFiled:.is_ucc_filing_applicable,
             liens:[ .lien_holders[] | 
                 { 
-                    lienHolderCompanyId:207029,
+                    lienHolderCompanyId:$lienHolderCompanyId ,
                     lienPosition:(if .lien_position == "first" then 1 elif .lien_position == "second" then 2 elif .lien_position == "third" then 3 elif .lien_position == "fourth" then 4 elif .lien_position == "fifth" then 5 else null end),
                     amount:.original_note_amount ,
                     Comment:(if .business_name and .business_name != "" then .business_name else .first_name + " " + .last_name end)
@@ -191,29 +200,31 @@
     ),
     partners: [ 
         {
-            contactId: 236705,
+            contactId: .environment_values.lc_user_id,
             roleType: "LoanOfficer"
         },
         {
-            contactId: 236705,
+            contactId: .environment_values.lc_user_id,
             roleType: "LoanProcessor"
         },
         {
-            contactId: 236705,
+            contactId: .environment_values.lc_user_id,
             roleType: "ClosingOfficer"
         },
         {
-            contactId: 236705,
+            contactId: .environment_values.lc_user_id,
             roleType: "CreditAnalyst"
         },
         {
-            contactId: 236705,
+            contactId: .environment_values.lc_user_id,
             roleType: "ClosingAnalyst"
         } 
     ],
     entities : ( [ .loan_entities[] | ( if (.entity_type == "sole_proprietor") then { 
             primary: .is_primary_borrower,
             association: "Operating Company",
+            borrower:(if .relation_type == "borrower" then true else false end),
+            dbaName: .dba_name,
             guaranteeType: "Unsecured Limited",
             company: 
                 { 
@@ -227,13 +238,15 @@
                     taxIdType: .tin_type,
                     entityType: "Sole Proprietorship",
                     naicsCode: ( if .naics_code then .naics_code | tostring else null end ),
+                    stateOfFormation: .state_of_establishment,
                     businessPhone: ((.work_phone|tostring) // null),
                     currentOwnershipEstablishedDate: .business_established_date
                 } 
         } 
         else {
             companyId: (if .external_customer_id then .external_customer_id | tonumber else "" end),
-            borrower:true ,
+            borrower:(if .relation_type == "borrower" then true else false end),
+            dbaName: .dba_name,
             association:(if .is_primary_borrower then "Operating Company" else "Affiliate" end) ,
             annualRevenue:( .details.annual_business_revenue ),
             guaranteeType:(if .is_primary_borrower == false and .ownership_percentage>20 then "Unsecured Full" else "Unsecured Limited" end),
