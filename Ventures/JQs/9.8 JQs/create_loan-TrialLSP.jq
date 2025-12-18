@@ -263,6 +263,7 @@
             primary: .is_primary_borrower,
             association: "Operating Company",
             borrower:(if .relation_type == "borrower" then true else false end),
+            employeeCount: (if .is_primary_borrower then .number_of_employees else 0 end),
             dbaName: .dba_name,
             guaranteeType: "Unsecured Limited",
             company: 

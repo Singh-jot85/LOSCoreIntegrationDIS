@@ -225,6 +225,7 @@
             association: "Operating Company",
             borrower:(if .relation_type == "borrower" then true else false end),
             dbaName: .dba_name,
+            employeeCount: (if .is_primary_borrower then .number_of_employees else 0 end),
             guaranteeType: "Unsecured Limited",
             company: 
                 { 
