@@ -305,7 +305,7 @@ def get_NCUACategoryCode($collateral; $creTypes):
                                 NextPaymentChangeDate: null,
                                 OTSLoanCategoryCode: null,
                                 OddDaysInterestDue: null,
-                                OrignalLTVRatio: (if .approved_amount then .approved_amount / .total_collateral_value_v2 else null end),
+                                OrignalLTVRatio:(if .approved_amount and .total_collateral_value_v2 then .approved_amount / .total_collateral_value_v2 else null end),
                                 PaymentDueDayNumber: "1",
                                 PaymentMethodCode: "BILL",
                                 PmtChangeLeadDays: null,
@@ -358,7 +358,7 @@ def get_NCUACategoryCode($collateral; $creTypes):
                                     IsNegativeAmortizationAllowed: false,
                                     MarginFixed: (if .differential_rate then (.differential_rate/100 | tostring) else null end),
                                     MaximumInterestRate: (.max_rate/100 // null),
-                                    MinimumInterestRate: ( .loan_approval.approved_rate/100 // null ),
+                                    MinimumInterestRate: ( .min_rate/100 // null ),
                                     NextRateChangeDate: (
                                         if .product.product_code == "SB_LOC" 
                                             then first_of_next_month_date

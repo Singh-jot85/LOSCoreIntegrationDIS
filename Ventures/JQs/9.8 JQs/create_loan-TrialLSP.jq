@@ -274,6 +274,7 @@
                     entityType: "Sole Proprietorship",
                     naicsCode: ( if .naics_code then .naics_code | tostring else null end ),
                     businessPhone: ((.work_phone|tostring) // null),
+                    stateOfFormation: .state_of_establishment,
                     currentOwnershipEstablishedDate: .business_established_date
                 } 
         } 
