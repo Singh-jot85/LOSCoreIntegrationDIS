@@ -388,6 +388,4 @@ def get_NCUACategoryCode($collateral; $creTypes):
     }
 }
 )
-
-
 )
