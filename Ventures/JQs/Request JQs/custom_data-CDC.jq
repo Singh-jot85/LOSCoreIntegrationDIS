@@ -161,7 +161,17 @@
             else empty 
             end
         )
-    }, 
+    },
+    {
+    loan_docs_to_borrower:(if .customData | select("loan_docs_to_borrower") 
+    then {
+    ventures_object:(.customData[] | select(.loan_docs_to_borrower) | .loan_docs_to_borrower.ventures_object),
+    ventures_field:(.customData[] | select(.loan_docs_to_borrower) | .loan_docs_to_borrower.ventures_field), 
+    value: (.closing_date)
+    } 
+    else empty 
+    end )
+    },
     {
         lumos_expected_loss:(if .customData | select("lumos_expected_loss") 
             then {
