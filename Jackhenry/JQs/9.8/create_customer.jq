@@ -70,9 +70,9 @@
             {
                 TINInfo: {
                     TINCode: (
-                        if .tin_type == "EIN" 
+                        if .party_type == "individual" 
                             then "T" 
-                        elif .tin_type == "SSN" 
+                        elif .party_type == "entity" 
                             then "I" 
                         else null 
                         end

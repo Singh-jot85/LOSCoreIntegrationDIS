@@ -3,3 +3,4 @@
 my-workspace/
 *.DS_Store
 CI/
+**/creds.json
