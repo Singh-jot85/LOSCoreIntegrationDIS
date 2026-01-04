@@ -1,21 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<SOAP-ENV:Envelope
-    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <SOAP-ENV:Header>
-        <wsse:Security
-            xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
-            xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
-            <wsse:UsernameToken
-                xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+        <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+            <wsse:UsernameToken xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
                 <wsse:Username>{{XUserName}}</wsse:Username>
-                <wsse:Password
-                    Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">
-                    {{XPassword}}</wsse:Password>
-                <wsu:Created
-                    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
-                    {{current_timestamp}}</wsu:Created>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">{{XPassword}}</wsse:Password>
+                <wsu:Created xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">{{current_timestamp}}</wsu:Created>
             </wsse:UsernameToken>
         </wsse:Security>
     </SOAP-ENV:Header>
@@ -110,11 +100,7 @@
                     <CrScoreInfo>
                         <CrScoreId>{{CustDetail.CrScoreArray.CrScoreInfo.CrScoreId}}</CrScoreId>
                         <CrScoreModelCode />
-                        <Ver_1 /> 
-                        {% if conditioningData.partyType == "entity" %} 
-                        <CertCode>{{CustDetail.CrScoreArray.CrScoreInfo.CertCode}}</CertCode>
-                        <CertCodeDt>{{CustDetail.CrScoreArray.CrScoreInfo.CertCodeDt}}</CertCodeDt>
-                        {% endif %}
+                        <Ver_1 />
                     </CrScoreInfo>
                 </CrScoreArray>
             </CustDetail>
@@ -122,10 +108,8 @@
                 <TINInfo>
                     <TINCode>{{TaxDetail.TINInfo.TINCode}}</TINCode>
                     <TaxId>{{TaxDetail.TINInfo.TaxId}}</TaxId>
-                    {% if conditioningData.partyType == "individual" %}
                     <CertCode>{{TaxDetail.TINInfo.CertCode}}</CertCode>
-                    <CertCodeDt>2025-08-06</CertCodeDt>
-                    {% endif %}
+                    <CertCodeDt>{{TaxDetail.TINInfo.CertCodeDt}}</CertCodeDt>
                 </TINInfo>
                 {% if conditioningData.partyType == "individual" %} 
                 <Alien>
@@ -147,7 +131,6 @@
 				<Ver_4 /> 
                 {% if conditioningData.partyType == "individual" or conditioningData.isSoleProp == true %} 
                 <InsiderCode>{{BusDetail.InsiderCode}}</InsiderCode>
-                <NetWorth>{{BusDetail.NetWorth}}</NetWorth>
                 {% endif %}
                 <NetWorthAmt>{{BusDetail.NetWorthAmt}}</NetWorthAmt>
             </BusDetail>
