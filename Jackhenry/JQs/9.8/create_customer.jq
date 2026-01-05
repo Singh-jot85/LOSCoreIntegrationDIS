@@ -77,8 +77,6 @@
                 CrScoreArray: {
                     CrScoreInfo: {
                         CrScoreId: ($root.fico_score // ""),
-                        CertCode: "C",
-                        CertCodeDt: (.created | split("T")[0] // "")
                     }
                 }
             }
@@ -96,6 +94,7 @@
                     ),
                     TaxId: (.tin // ""),
                     CertCode: "C",
+                    CertCodeDt: (.created | split("T")[0] // "")
                 },
                 Alien: {
                     CitzCntryType: "US"
