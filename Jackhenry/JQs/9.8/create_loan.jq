@@ -121,8 +121,7 @@
             .collaterals[0] | 
             {    
                 PropStreet: (
-                    .collateral_addresses[0] |
-                    select(.address_type == "permanent") |
+                    .collateral_address |
                     "\(.address_line_1) \(.address_line_2)"
                 ),
                 FloodInsurCode: (
