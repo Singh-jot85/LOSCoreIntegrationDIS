@@ -128,10 +128,7 @@
                 <Ver_1 />
 				<Ver_2 />
 				<Ver_3 />
-				<Ver_4 /> 
-                {% if conditioningData.partyType == "individual" or conditioningData.isSoleProp == true %} 
-                <InsiderCode>{{BusDetail.InsiderCode}}</InsiderCode> 
-                {% endif %} 
+				<Ver_4 />
                 <NetWorthAmt>{{BusDetail.NetWorthAmt}}</NetWorthAmt>
             </BusDetail>
             <RegDetail> 

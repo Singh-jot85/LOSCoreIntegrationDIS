@@ -45,7 +45,12 @@
             OffCode: (.details.cra_details?.branch_code // ""),
             NxtSchedPmtDt: (.loan_approval.approved_first_payment_date // ""),
             MatDt: (.maturity_date // ""),
-            IntRate: (.loan_approval.approved_rate/100 // ""),
+            IntRate: ( 
+                if .loan_approval.approved_rate != null
+                    then (.loan_approval.approved_rate/100)
+                else ""
+                end
+            ),
             IntBasis: ($accuralMapping[.accrual_method | tostring] // null),
             BrCode: "51",
             ProdCode: "26",
@@ -106,12 +111,22 @@
             ),
             RateRevTermUnits: "day",
             RateRevTerm: 1,
-            OrigIdxVal: ((.pricing_details[] | select(.term_position == "term_1") | (.prime_rate)/100) // null),
-            RateVar: (
-                (.pricing_details[] | select(.term_position == "term_1") | (.differential_rate)/100) // null
+            OrigIdxVal: (
+                .pricing_details[] | select(.term_position == "term_1") as $term1 |
+                if $term1.prime_rate != null
+                    then ($term1.prime_rate/100) // ""
+                else ""
+                end
             ),
-            RateFlr: (if(.max_rate) then (.min_rate /100) *100 | round / 100 else null end ),
-            RateCeil: (if(.max_rate) then .max_rate /100 else null end),
+            RateVar: (
+                .pricing_details[] | select(.term_position == "term_1") as $term1 | 
+                if $term1.differential_rate 
+                    then (.differential_rate/100) // ""
+                else ""
+                end
+            ),
+            RateFlr: ( if (.min_rate != null) then (.min_rate /100) *100 | round / 100 else null end ),
+            RateCeil: ( if (.max_rate != null) then (.max_rate /100) else null end),
         },
         LnRealEstateInfo: (.collaterals[0] | 
             { 
