@@ -34,24 +34,29 @@
                     <Ver_6 />
                 </jXchangeHdr>
             </MsgRqHdr>
-            <ErrOvrRdInfoArray> {% for ErrOvrRd in conditioningData.ErrOvrRds %} <ErrOvrRd>
+            <ErrOvrRdInfoArray> 
+                {% for ErrOvrRd in conditioningData.ErrOvrRds %}
+                <ErrOvrRd>
                     <ErrCode>{{ErrOvrRd}}</ErrCode>
                     <Ver_1 />
-                </ErrOvrRd> {% endfor %} </ErrOvrRdInfoArray>
+                </ErrOvrRd> 
+                {% endfor %}
+            </ErrOvrRdInfoArray>
             <CustDetail>
                 <PersonName>
-                    <ComName>{{CustDetail.PersonName.ComName}}</ComName> {% if
-                conditioningData.partyType == "individual" %} <FirstName>
-                {{CustDetail.PersonName.FirstName}}</FirstName>
-                    <MiddleName>
-                {{CustDetail.PersonName.MiddleName}}</MiddleName>
-                    <LastName>
-                {{CustDetail.PersonName.LastName}}</LastName> {% endif %} {% if
-                conditioningData.partyType == "individual" or conditioningData.isSoleProp == true %} <x_PersonName>
+                    <ComName>{{CustDetail.PersonName.ComName}}</ComName> 
+                    {% if conditioningData.partyType == "individual" %}
+                    <FirstName>{{CustDetail.PersonName.FirstName}}</FirstName>
+                    <MiddleName>{{CustDetail.PersonName.MiddleName}}</MiddleName>
+                    <LastName>{{CustDetail.PersonName.LastName}}</LastName> 
+                    {% endif %} 
+                    {% if conditioningData.partyType == "individual" or conditioningData.isSoleProp == true %} 
+                    <x_PersonName>
                         <NameSuffix>{{CustDetail.PersonName.x_PersonName.NameSuffix}}</NameSuffix>
                         <LegalName>{{CustDetail.PersonName.x_PersonName.LegalName}}</LegalName>
                     </x_PersonName>
-                {% endif %} </PersonName>
+                    {% endif %} 
+                </PersonName>
                 <Addr>
                     <StreetAddr1>{{CustDetail.Addr.StreetAddr1}}</StreetAddr1>
                     <StreetAddr2>{{CustDetail.Addr.StreetAddr2}}</StreetAddr2>
@@ -60,13 +65,17 @@
                     <PostalCode>{{CustDetail.Addr.PostalCode}}</PostalCode>
                     <DlvryPt>{{CustDetail.Addr.DlvryPt}}</DlvryPt>
                 </Addr>
-                <CustType>
-                {{CustDetail.CustType}}</CustType> {% if conditioningData.isSoleProp or
-                conditioningData.partyType == "entity" %} <NAICSCode>{{CustDetail.NAICSCode}}</NAICSCode>
-                {% endif %} {% if conditioningData.partyType == "individual" %} <BirthDt>
-                {{CustDetail.BirthDt}}</BirthDt> {% endif %} {% if conditioningData.partyType ==
-                "individual" or conditioningData.isSoleProp == true %} <EmplName>
-                {{CustDetail.EmplName}}</EmplName> {% endif %} <EmailArray>
+                <CustType>{{CustDetail.CustType}}</CustType> 
+                {% if conditioningData.isSoleProp or conditioningData.partyType == "entity" %}
+                <NAICSCode>{{CustDetail.NAICSCode}}</NAICSCode>
+                {% endif %}
+                {% if conditioningData.partyType == "individual" %}
+                <BirthDt>{{CustDetail.BirthDt}}</BirthDt>
+                {% endif %}
+                {% if conditioningData.partyType =="individual" or conditioningData.isSoleProp == true %}
+                <EmplName>{{CustDetail.EmplName}}</EmplName>
+                {% endif %}
+                <EmailArray>
                     <EmailInfo>
                         <EmailAddr>{{CustDetail.EmailArray.EmailInfo.EmailAddr}}</EmailAddr>
                         <EmailType>Primary E-Mail</EmailType>
@@ -102,30 +111,34 @@
                     <CertCode>{{TaxDetail.TINInfo.CertCode}}</CertCode>
                     <CertCodeDt>{{TaxDetail.TINInfo.CertCodeDt}}</CertCodeDt>
                 </TINInfo>
-                {% if conditioningData.partyType == "individual" %} <Alien>
+                {% if conditioningData.partyType == "individual" %} 
+                <Alien>
                     <CitzCntryType>{{TaxDetail.Alien.CitzCntryType}}</CitzCntryType>
                 </Alien>
-                {% endif %} <Custom />
+                {% endif %} 
+                <Custom />
 				<Ver_1 /> 
                 <FedWithCode>{{TaxDetail.FedWithCode}}</FedWithCode>
-                <StateWithCode>
-                {{TaxDetail.StateWithCode}}</StateWithCode>
+                <StateWithCode>{{TaxDetail.StateWithCode}}</StateWithCode>
             </TaxDetail>
             <BusDetail>
                 <BrCode>{{BusDetail.BrCode}}</BrCode>
                 <OffCode>{{BusDetail.OffCode}}</OffCode>
-                <CustCode>
-                {{BusDetail.CustCode}}</CustCode>
+                <CustCode>{{BusDetail.CustCode}}</CustCode>
                 <Ver_1 />
 				<Ver_2 />
 				<Ver_3 />
-				<Ver_4 /> {% if
-                conditioningData.partyType == "individual" or conditioningData.isSoleProp == true %} <InsiderCode>
-                {{BusDetail.InsiderCode}}</InsiderCode> {% endif %} <NetWorthAmt>
-                {{BusDetail.NetWorthAmt}}</NetWorthAmt>
+				<Ver_4 /> 
+                {% if conditioningData.partyType == "individual" or conditioningData.isSoleProp == true %} 
+                <InsiderCode>{{BusDetail.InsiderCode}}</InsiderCode> 
+                {% endif %} 
+                <NetWorthAmt>{{BusDetail.NetWorthAmt}}</NetWorthAmt>
             </BusDetail>
-            <RegDetail> {% if conditioningData.partyType == "individual" %} <BenflOwnExclCode>
-                {{RegDetail.BenflOwnExclCode}}</BenflOwnExclCode> {% endif %} <CRARec>
+            <RegDetail> 
+                {% if conditioningData.partyType == "individual" %} 
+                <BenflOwnExclCode>{{RegDetail.BenflOwnExclCode}}</BenflOwnExclCode>
+                {% endif %}
+                <CRARec>
                     <CRAStateCode>{{RegDetail.CRARec.CRAStateCode}}</CRAStateCode>
                     <CRACountyCode>{{RegDetail.CRARec.CRACountyCode}}</CRACountyCode>
                     <CRACenTract>{{RegDetail.CRARec.CRACenTract}}</CRACenTract>
@@ -134,13 +147,10 @@
                     <CRAIncmLvl>{{RegDetail.CRARec.CRAIncmLvl}}</CRAIncmLvl>
                 </CRARec>
                 <Ver_1 />
-                <ReqLegalEntityType>
-                {{RegDetail.ReqLegalEntityType}}</ReqLegalEntityType>
+                <ReqLegalEntityType>{{RegDetail.ReqLegalEntityType}}</ReqLegalEntityType>
                 <Ver_2 />
-                <AnnRevenueAmt>
-                {{RegDetail.AnnRevenueAmt}}</AnnRevenueAmt>
+                <AnnRevenueAmt>{{RegDetail.AnnRevenueAmt}}</AnnRevenueAmt>
             </RegDetail>
         </CustAdd>
     </SOAP-ENV:Body>
-
 </SOAP-ENV:Envelope>

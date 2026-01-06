@@ -1,7 +1,4 @@
 (
-(
-(
-(
     . as $root |
     $root.loan_relations[0] |
     { 
@@ -43,16 +40,16 @@
                 EmailArray: {
                     EmailInfo: {
                         EmailAddr: (
-                        if .email != "" and .email != ""
+                        if .email != null and .email != ""
                             then .email
                         elif (
-                            .children != "" 
+                            .children != null
                             and (.children | length) > 0
                         )
                             then (
                                 .children[] 
                                 | select(.relation_type == "representative") as $representative
-                                | if ($representative.email != "" and $representative.email != "")
+                                | if ($representative.email != null and $representative.email != "")
                                     then $representative.email
                                 else ""
                                 end
@@ -102,7 +99,7 @@
                     CitzCntryType: "US"
                 },
                 FedWithCode: "0",
-                StateWithCode: 0
+                StateWithCode: "0"
             }
         ),
         BusDetail: (
@@ -155,9 +152,7 @@
                     else ""
                     end
                 ),
-                AnnRevenueAmt: (
-                    .details?.annual_revenue // ""
-                )
+                AnnRevenueAmt: (.details?.annual_revenue // "")
             }
         ),
         conditioningData:{
@@ -176,7 +171,4 @@
             partyType: (.party_type // null)
         }
     }
-)
-)
-)
 )

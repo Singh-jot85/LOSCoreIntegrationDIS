@@ -44,12 +44,6 @@
                     <BusSvcType />
                     <Ver_2 />
                 </ErrOvrRd>
-                <ErrOvrRd>
-                    <ErrCode />
-                    <Ver_1 />
-                    <BusSvcType />
-                    <Ver_2 />
-                </ErrOvrRd>
             </ErrOvrRdInfoArray>
 
             <AccountId>

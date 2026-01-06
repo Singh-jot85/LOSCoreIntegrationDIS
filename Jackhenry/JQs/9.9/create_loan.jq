@@ -110,7 +110,7 @@
             RateVar: (
                 (.pricing_details[] | select(.term_position == "term_1") | (.differential_rate)/100) // null
             ),
-            RateFlr: ((.min_rate /100) *100 | round / 100 // null),
+            RateFlr: (if(.max_rate) then (.min_rate /100) *100 | round / 100 else null end ),
             RateCeil: (if(.max_rate) then .max_rate /100 else null end),
         },
         LnRealEstateInfo: (.collaterals[0] | 
@@ -134,7 +134,8 @@
         ),
         LnRegRptInfo: {
             NAICSCode: (.loan_relations[] | select(.is_primary_borrower == true) | .naics_code // null),
-            CRARec: (.details.geocoding_details[0] | 
+            CRARec: (
+                .details.geocoding_details[0] | 
                 {
                     CRAStateCode: (.details.cra_details?.state_code // null),
                     CRACountyCode: (.county_code // null),
@@ -149,17 +150,6 @@
             SBAGuarPct: ((if (.product.product_code | IN("EL_LOC","EL_TL","7A_TL")) then .sba_express_details.sba_guaranty_percent /100 else null end)),
             SBAGuarId: (if (.product.product_code | IN("EL_LOC","EL_TL","7A_TL")) then .sba_number else null end),
             SBABasisPts: (if (.product.product_code | IN("EL_LOC","EL_TL","7A_TL")) then (if (.approved_amount <= 150000) then 1.50 else 3.00 end) else null end)
-            CRARec: (
-                $root.geocoding_details[0] | 
-                {
-                    CRAStateCode: ($root.details.cra_details?.state_code // ""),
-                    CRACountyCode: (.county_code // ""),
-                    CRACenTract: (.tract_code // ""),
-                    CRASMSACode: (.MSA_code // ""),
-                    CRALoc: 1,
-                    CRAIncmLvl: 1,
-                }
-            ),
         }
     }
 }
