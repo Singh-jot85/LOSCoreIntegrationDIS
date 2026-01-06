@@ -5,7 +5,7 @@
     "xml_error_path": "s:Envelope/s:Body/CustSrchResponse/SrchMsgRsHdr/MsgRecInfoArray/MsgRec/ErrDesc",
     "validation_spec": "{}",
     "xml_success_path": "s:Envelope/s:Body/CustSrchResponse/CustSrchRecArray/CustSrchRec/CustId",
-    "request_body_spec": "{ TaxId: ((.loan_relations[] | .tin) // null)}",
+    "request_body_spec": "{\n    CustSrch: {\n        TaxId: ((.loan_relations[0] | .tin) // null)\n    }\n    PersonName: {\n        ComName: ((.loan_relations[0] | .full_name) // null)\n    }\n}",
     "response_body_spec": "{ \n    apiSuccess: .apiSuccess,\n    errors: { \n        errorNum: (if (.errors.errorNum != \"\" and .errors.errorNum != null) then .errors.errorNum else null end),\n        errorMsg: ((if (.errors.errorNum != \"\" and .errors.errorNum != null) then .errors.errorMsg.Error else null end))\n    },\n    responses: (if .apiSuccess == true and .responses.Id \n        then [{ \n            cif: .responses.Id\n        }] \n        else null \n        end\n    )\n}",
     "request_body_spec_config": "{}",
     "response_body_spec_config": "{}"
