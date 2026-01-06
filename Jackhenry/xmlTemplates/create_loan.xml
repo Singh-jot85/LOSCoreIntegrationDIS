@@ -64,6 +64,7 @@
                         <TermUnits>{{LnAdd.LnInfoRec.Term.TermUnits}}</TermUnits>
                     </Term>
                     <RemPmtCnt>{{LnAdd.LnInfoRec.RemPmtCnt}}</RemPmtCnt>
+                    <PmtDayOfMonth>{{LnAdd.LnInfoRec.PmtDayOfMonth}}</PmtDayOfMonth>
                     <PmtTermUnits>{{LnAdd.LnInfoRec.PmtTermUnits}}</PmtTermUnits>
                     <PmtTerm>{{LnAdd.LnInfoRec.PmtTerm}}</PmtTerm>
                     <PmtCode>{{LnAdd.LnInfoRec.PmtCode}}</PmtCode>
@@ -117,7 +118,6 @@
                     <RateVar>{{LnAdd.LnRateInfo.RateVar}}</RateVar>
                     <RateFlr>{{LnAdd.LnRateInfo.RateFlr}}</RateFlr>
                     <RateCeil>{{LnAdd.LnRateInfo.RateCeil}}</RateCeil>
-                    <OrigIdxVal>{{LnAdd.LnRateInfo.OrigIdxVal}}</OrigIdxVal>
                 </LnRateInfo>
 
                 <LnRealEstateInfo>
@@ -140,8 +140,17 @@
                     <SBAGuarId>{{LnAdd.LnRegRptInfo.SBAGuarId}}</SBAGuarId>
                     <SBABasisPts>{{LnAdd.LnRegRptInfo.SBABasisPts}}</SBABasisPts>
                     <GLCostCtr>{{LnAdd.LnRegRptInfo.GLCostCtr}}</GLCostCtr>
+                    <CRARec>
+                        <CRAStateCode>{{LnAdd.LnRegRptInfo.CRARec.CRAStateCode}}</CRAStateCode>
+                        <CRACountyCode>{{LnAdd.LnRegRptInfo.CRARec.CRACountyCode}}</CRACountyCode>
+                        <CRACenTract>{{LnAdd.LnRegRptInfo.CRARec.CRACenTract}}</CRACenTract>
+                        <CRASMSACode>{{LnAdd.LnRegRptInfo.CRARec.CRASMSACode}}</CRASMSACode>
+                        <CRAIncmLvl>{{LnAdd.LnRegRptInfo.CRARec.CRAIncmLvl}}</CRAIncmLvl>
+                        <CRALoc>{{LnAdd.LnRegRptInfo.CRARec.CRALoc}}</CRALoc>
+                    </CRARec>
                 </LnRegRptInfo>
             </LnAdd>
+
         </AcctAdd>
     </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>

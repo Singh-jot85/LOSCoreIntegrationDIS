@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <SOAP-ENV:Header>
+        <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+            <wsse:UsernameToken xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+                <wsse:Username>{{XUserName}}</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">{{XPassword}}</wsse:Password>
+                <wsu:Created xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"> {{current_timestamp}}</wsu:Created>
+            </wsse:UsernameToken>
+        </wsse:Security>
+    </SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <CustSrch xmlns="http://jackhenry.com/jxchange/TPG/2008">
+            <SrchMsgRqHdr>
+                <jXchangeHdr>
+                    <JxVer />
+                    <AuditUsrId>{{XAuditUser}}</AuditUsrId>
+                    <AuditWsId>{{XAuditWorkStation}}</AuditWsId>
+                    <Ver_1 />
+                    <jXLogTrackingId>{{jXLogTrackingId}}</jXLogTrackingId>
+                    <Ver_2 />
+                    <InstRtId>{{XInstitutionRoutingID}}</InstRtId>
+                    <InstEnv>{{XEnvironment}}</InstEnv>
+                    <Ver_3 />
+                    <BusCorrelId>{{BusCorrelId}}</BusCorrelId>
+                    <Ver_4 />
+                    <WorkflowCorrelId />
+                    <Ver_5 />
+                    <ValidConsmName>{{XValidConsumerName}}</ValidConsmName>
+                    <ValidConsmProd>{{XValidConsumerProduct}}</ValidConsmProd>
+                    <Ver_6 />
+                </jXchangeHdr>
+                <MaxRec>20</MaxRec>
+                <Cursor />
+                <Ver_1 />
+                <Ver_2 />
+                <Ver_3 />
+            </SrchMsgRqHdr>
+            <TaxId>{{CustSrch.TaxId}}</TaxId>
+            <PersonName>
+                <ComName>{{CustSrch.PersonName.ComName}}</ComName>
+            </PersonName>
+            <Ver_1 />
+            <Ver_2 />
+            <Ver_3 />
+            <Ver_4 />
+            <IncXtendElemArray>
+                <IncXtendElemInfo>
+                    <XtendElem>x_PersonName</XtendElem>
+                    <Ver_1 />
+                </IncXtendElemInfo>
+            </IncXtendElemArray>
+            <Ver_5 />
+            <Ver_6 />
+            <Ver_7 />
+        </CustSrch>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
