@@ -109,8 +109,7 @@
                     end
                 )
             ),
-            RateRevTermUnits: "day",
-            RateRevTerm: 1,
+            RateRevTermUnits: (if .rate_type == "Variable" then "Day" else "" end),
             OrigIdxVal: (
                 .pricing_details[] | select(.term_position == "term_1") as $term1 |
                 if $term1.prime_rate != null
@@ -150,12 +149,12 @@
         LnRegRptInfo: {
             NAICSCode: (.loan_relations[] | select(.is_primary_borrower == true) | .naics_code // null),
             CRARec: (
-                .details.geocoding_details[0] | 
+                .geocoding_details[0] | 
                 {
-                    CRAStateCode: (.details.cra_details?.state_code // null),
-                    CRACountyCode: (.county_code // null),
-                    CRACenTract: (.tract_code // null),
-                    CRASMSACode: (.MSA_code // null),
+                    CRAStateCode: ( .state_code // null),
+                    CRACountyCode: ( .county_code // null),
+                    CRACenTract: ( .tract_code // null),
+                    CRASMSACode: ( .msa_code // null),
                     CRALoc: 1,
                     CRAIncmLvl: 1
                 }
