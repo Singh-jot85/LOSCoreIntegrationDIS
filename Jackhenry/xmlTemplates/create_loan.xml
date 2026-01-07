@@ -109,6 +109,7 @@
 
                 <LnRateInfo>
                     <RateVarCode>{{LnAdd.LnRateInfo.RateVarCode}}</RateVarCode>
+                    <RateRevTermUnits>{{LnAdd.LnRateInfo.RateRevTermUnits}}</RateRevTermUnits>
                     <RateVar>{{LnAdd.LnRateInfo.RateVar}}</RateVar>
                     <RateFlr>{{LnAdd.LnRateInfo.RateFlr}}</RateFlr>
                     <RateCeil>{{LnAdd.LnRateInfo.RateCeil}}</RateCeil>
