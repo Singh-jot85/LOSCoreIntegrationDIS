@@ -23,38 +23,40 @@ def get_parent_core_id($relation; $flat_relations):
 (
     . as $root |
     $root.loan_relations[0] | 
-    { 
-        CustId: (get_parent_core_id(. ; $root.flat_relations) // ""),
-        CustRelRec: { 
-            IdVerifyBy: ($root.loan_officer_name // null),
-            IdVerifyRsnCode: "1",
-            VerifyDt: (.created | split("T")[0] // "")
-        },
-        BenflOwnInfo:(            
-            { 
-                CustId: .external_customer_id,
-                PersonName: { 
-                    ComName: (.full_name // null)
-                },
-                BenflOwnType: (
-                    if .is_ben_owner_by_control 
-                        then (
-                            if .ownership_percentage 
-                                then "CntlOwn" 
-                            else "Cntl" 
-                            end
-                        ) 
-                    else "Own"
-                    end
-                ),
-                CntlIndivTitle: (
-                    if .is_ben_owner_by_control 
-                        then (.position // "")
-                    else ""
-                    end
-                ),
-                BenflOwnPct: (.effective_ownership_percentage // 0),
-            }
-        )
-    }
+    {
+        CustRelAdd:{
+            CustId: (get_parent_core_id(. ; $root.flat_relations) // ""),
+            CustRelRec: { 
+                IdVerifyBy: ($root.loan_officer_name // null),
+                IdVerifyRsnCode: "1",
+                VerifyDt: (.created | split("T")[0] // "")
+            },
+            BenflOwnInfo:(            
+                { 
+                    CustId: .external_customer_id,
+                    PersonName: { 
+                        ComName: (.full_name // null)
+                    },
+                    BenflOwnType: (
+                        if .is_ben_owner_by_control 
+                            then (
+                                if .ownership_percentage 
+                                    then "CntlOwn" 
+                                else "Cntl" 
+                                end
+                            ) 
+                        else "Own"
+                        end
+                    ),
+                    CntlIndivTitle: (
+                        if .is_ben_owner_by_control 
+                            then (.position // "")
+                        else ""
+                        end
+                    ),
+                    BenflOwnPct: (.effective_ownership_percentage // 0),
+                }
+            )
+        }
+    }   
 )
