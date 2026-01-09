@@ -1,0 +1,56 @@
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <s:Header>
+        <o:Security s:mustUnderstand="1"
+            xmlns:o="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+            <u:Timestamp u:Id="_0">
+                <u:Created>2026-01-08T12:12:59.949Z</u:Created>
+                <u:Expires>2026-01-08T12:17:59.949Z</u:Expires>
+            </u:Timestamp>
+        </o:Security>
+    </s:Header>
+    <s:Body>
+        <s:Fault>
+            <faultcode>s:Client</faultcode>
+            <faultstring xml:lang="en-US">Unable to successfully complete requested action. See
+                detail section for more information in the standard jXchange fault format.</faultstring>
+            <faultactor>Service Gateway</faultactor>
+            <detail>
+                <HdrFault xmlns="http://jackhenry.com/jxchange/TPG/2008"
+                    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <FaultHdr>
+                        <JxVer>R2025.0</JxVer>
+                        <AuditUsrId></AuditUsrId>
+                        <AuditWsId></AuditWsId>
+                        <AuthenUsrId></AuthenUsrId>
+                        <ConsumerName></ConsumerName>
+                        <ConsumerProd></ConsumerProd>
+                        <Ver_1></Ver_1>
+                        <jXLogTrackingId>1bddd8d2-8cd9-40b6-84e6-188d5d71af92</jXLogTrackingId>
+                        <Ver_2></Ver_2>
+                        <InstRtId>211372857</InstRtId>
+                        <InstEnv>UAT</InstEnv>
+                        <Ver_3></Ver_3>
+                        <BusCorrelId>da25db21-f170-4661-8284-539060ac36ef</BusCorrelId>
+                        <Ver_4></Ver_4>
+                        <WorkflowCorrelId></WorkflowCorrelId>
+                        <Ver_5></Ver_5>
+                        <ValidConsmName>LendersCooperative</ValidConsmName>
+                        <ValidConsmProd>LendersCooperativeLOS</ValidConsmProd>
+                    </FaultHdr>
+                    <FaultRecInfoArray>
+                        <FaultMsgRec>
+                            <ErrCode>2</ErrCode>
+                            <ErrCat>Error</ErrCat>
+                            <ErrDesc>Account already exists</ErrDesc>
+                            <ErrElem>LOCCustId LOCAcctId</ErrElem>
+                            <ErrElemVal>XAA0102/79862301</ErrElemVal>
+                            <ErrLoc>LNLINEADD</ErrLoc>
+                        </FaultMsgRec>
+                    </FaultRecInfoArray>
+                </HdrFault>
+            </detail>
+        </s:Fault>
+    </s:Body>
+</s:Envelope>

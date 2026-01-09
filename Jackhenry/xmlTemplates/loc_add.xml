@@ -19,12 +19,12 @@
                     <ConsumerName />
                     <ConsumerProd />
                     <Ver_1 />
-                    <jXLogTrackingId>{{$guid}}</jXLogTrackingId>
+                    <jXLogTrackingId>{{guid}}</jXLogTrackingId>
                     <Ver_2 />
                     <InstRtId>{{XInstitutionRoutingID}}</InstRtId>
                     <InstEnv>{{XEnvironment}}</InstEnv>
                     <Ver_3 />
-                    <BusCorrelId>{{$guid}}</BusCorrelId>
+                    <BusCorrelId>{{guid}}</BusCorrelId>
                     <Ver_4 />
                     <WorkflowCorrelId />
                     <Ver_5 />

@@ -1,0 +1,54 @@
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <s:Header>
+        <o:Security s:mustUnderstand="1"
+            xmlns:o="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+            <u:Timestamp u:Id="_0">
+                <u:Created>2026-01-08T12:12:20.608Z</u:Created>
+                <u:Expires>2026-01-08T12:17:20.608Z</u:Expires>
+            </u:Timestamp>
+        </o:Security>
+    </s:Header>
+    <s:Body>
+        <LOCAddResponse xmlns="http://jackhenry.com/jxchange/TPG/2008"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <MsgRsHdr>
+                <jXchangeHdr>
+                    <JxVer>R2025.0</JxVer>
+                    <AuditUsrId></AuditUsrId>
+                    <AuditWsId></AuditWsId>
+                    <AuthenUsrId></AuthenUsrId>
+                    <ConsumerName></ConsumerName>
+                    <ConsumerProd></ConsumerProd>
+                    <Ver_1></Ver_1>
+                    <jXLogTrackingId>42596e23-b1f3-4aea-ace2-8e8fa4f406e5</jXLogTrackingId>
+                    <Ver_2></Ver_2>
+                    <InstRtId>211372857</InstRtId>
+                    <InstEnv>UAT</InstEnv>
+                    <Ver_3></Ver_3>
+                    <BusCorrelId>7e9dcff8-6995-493c-b867-ef2359e824a3</BusCorrelId>
+                    <Ver_4></Ver_4>
+                    <WorkflowCorrelId></WorkflowCorrelId>
+                    <Ver_5></Ver_5>
+                    <ValidConsmName>LendersCooperative</ValidConsmName>
+                    <ValidConsmProd>LendersCooperativeLOS</ValidConsmProd>
+                </jXchangeHdr>
+                <MsgRecInfoArray>
+                    <MsgRec>
+                        <ErrCode>9920043</ErrCode>
+                        <ErrCat>Warning</ErrCat>
+                        <ErrDesc>The element's value is greater than the provider allows. Element
+                            was truncated.</ErrDesc>
+                        <ErrElem>MsgRqHdr.jXchangeHdr.ValidConsmName</ErrElem>
+                        <ErrElemVal>LendersCooperative/LendersCooperat</ErrElemVal>
+                        <ErrLoc>SetProviderValue</ErrLoc>
+                        <Ver_1></Ver_1>
+                    </MsgRec>
+                </MsgRecInfoArray>
+                <Ver_1></Ver_1>
+            </MsgRsHdr>
+            <RsStat>Success</RsStat>
+            <Ver_1></Ver_1>
+        </LOCAddResponse>
+    </s:Body>
+</s:Envelope>
