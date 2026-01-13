@@ -18,3 +18,9 @@
 #### Jackhenry:
 - XMLs must be validated through an XSD validator, use the added validator file to do so, before making any new changes to the config.
 - Add credential manager with name `ci-jackhenry` and get the creds from any testing env.
+
+### Config Testing:
+`python3 setup_scripts/ConfigTesting/test_configurations.py jq sample_payload.json request`
+`python3 setup_scripts/ConfigTesting/test_configurations.py jq sample_payload.json response`
+`python3 setup_scripts/ConfigTesting/test_configurations.py xml sample_payload.json request`
+`python3 setup_scripts/ConfigTesting/test_configurations.py xml sample_payload.json response`
