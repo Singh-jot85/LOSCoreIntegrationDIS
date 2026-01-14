@@ -1,5 +1,8 @@
 def get_parent($pid; $flat_relations):
-    $flat_relations[] | select(.id == $pid);
+    if $pid != "" and $pid != null
+        then $flat_relations[] | select(.id == $pid)
+    else null
+    end;
 
 def get_parent_core_id($relation; $flat_relations):
     if $relation.parent_id != null
@@ -38,7 +41,10 @@ def get_parent_core_id($relation; $flat_relations):
                         ComName: (.full_name // null)
                     },
                     BenflOwnType: (
-                        if .is_ben_owner_by_control 
+                        get_parent(.parent_id ; $root.flat_relations) as $parent |
+                        if $parent and $parent.relation_type == "owner"
+                            then "OWN"
+                        elif .is_ben_owner_by_control 
                             then (
                                 if .ownership_percentage 
                                     then "CntlOwn" 
@@ -49,7 +55,10 @@ def get_parent_core_id($relation; $flat_relations):
                         end
                     ),
                     CntlIndivTitle: (
-                        if .is_ben_owner_by_control 
+                        get_parent(.parent_id ; $root.flat_relations) as $parent |
+                        if $parent and $parent.relation_type == "owner"
+                            then ""
+                        elif .is_ben_owner_by_control 
                             then (.position // "")
                         else ""
                         end
@@ -57,6 +66,9 @@ def get_parent_core_id($relation; $flat_relations):
                     BenflOwnPct: (.effective_ownership_percentage // 0),
                 }
             )
+        },
+        conditioningData: {
+            ErrOvrRds: [402066]
         }
-    }   
+    }
 )

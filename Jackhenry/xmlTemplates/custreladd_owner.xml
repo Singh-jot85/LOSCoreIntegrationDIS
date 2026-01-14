@@ -10,8 +10,7 @@
         </wsse:Security>
     </SOAP-ENV:Header>
     <SOAP-ENV:Body>
-        <CustRelAdd
-            xmlns="http://jackhenry.com/jxchange/TPG/2008">
+        <CustRelAdd xmlns="http://jackhenry.com/jxchange/TPG/2008">
             <MsgRqHdr>
                 <jXchangeHdr>
                     <JxVer />
@@ -38,6 +37,16 @@
                 <Ver_2 />
                 <Ver_3 />
             </MsgRqHdr>
+            {% if conditioningData and conditioningData.ErrOvrRds %}
+            <ErrOvrRdInfoArray>
+                <ErrOvrRd>
+                    {% for ErrOvrRd in conditioningData.ErrOvrRds %}
+                    <ErrCode>{{ErrOvrRd}}</ErrCode>
+                    <Ver_1 />
+                    {% endfor %}
+                </ErrOvrRd>
+            </ErrOvrRdInfoArray>
+            {% endif %}
             <CustId>{{CustRelAdd.CustId}}</CustId>
             <CustRelRec>
                 <Ver_1 />
