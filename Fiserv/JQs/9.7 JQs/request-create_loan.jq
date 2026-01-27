@@ -28,7 +28,12 @@
     "cash_and_equivalents"  
 ]) as $equipmentCategoryTypes |
 
-
+([
+    "borrower",
+    "co_borrower",
+    "owner",
+    "guarantor"
+]) as $relationsToSend |
 
 
 (
@@ -88,6 +93,7 @@ def get_NCUACategoryCode($collateral; $creTypes):
         else null 
         end 
     );
+. as $root |
 {
     Input: {
         Requests: [
@@ -188,59 +194,79 @@ def get_NCUACategoryCode($collateral; $creTypes):
                             UserFieldValue: (.application_number // null)
                         } ],
                         AccountRoles: ( 
-                            ( (
-                                if (.loan_relations[] | select(.is_primary_borrower == true) | .entity_type == "sole_proprietor" )
+                            [.flat_relations[] | select(
+                                .external_customer_id != null 
+                                and .is_collateral_related == false
+                                and .relation_type | IN($relationsToSend[])
+                            )] as $filteredRelations |
+                            ($filteredRelations[] | select(
+                                .is_primary_borrower == true 
+                                and .entity_type == "sole_proprietor"
+                            )) as $solePropRelation |
+                            (
+                                if $solePropRelation != null
                                     then [
                                         {
-                                            AccountRoleCode: "GUAR",
-                                            AccountRoleValue: (.loan_relations[] | select(.is_primary_borrower == true) | .external_customer_id as $cif | .details.core_integration_response.customer_details[$cif].customer_details.org_cif | tostring // null),
-                                            EntityTypeCode: "ORG",
+                                            AccountRoleCode: "SIGN",
+                                            AccountRoleValue: ($solePropRelation.external_customer_id // null),
+                                            EntityTypeCode: "PERS",
                                             IsRemove: null,
                                             LiabilityAmount: null,
                                             LiabilityPercent: null
                                         },
                                         {
-                                            AccountRoleCode: "SIGN",
-                                            AccountRoleValue: (.loan_relations[] | select(.is_primary_borrower == true) | .external_customer_id // null),
-                                            EntityTypeCode: "PERS",
-                                            IsRemove: null,
-                                            LiabilityAmount: null,
-                                            LiabilityPercent: null
-                                        } 
-                                    ] 
-                                else [ .flat_relations[] 
-                                    | select(
-                                        .external_customer_id != null
-                                        and .is_collateral_related == false
-                                    ) ]
-                                    | map(
-                                        {
-                                            AccountRoleCode: ( 
-                                                if .relation_type == "borrower" 
-                                                    then "GUAR" 
-                                                elif .relation_type == "guarantor"
-                                                    then "GUAR" 
-                                                elif .relation_type == "owner" 
-                                                    then "SIGN" 
-                                                else null 
+                                            AccountRoleCode: "GUAR",
+                                            AccountRoleValue: (
+                                                $solePropRelation.details.core_integration_response as $coreResponse |
+                                                if $coreResponse != null and $coreResponse.customer_details != null
+                                                    then (
+                                                        $coreResponse.customer_details[$solePropRelation.external_customer_id] as $orgDetails |
+                                                        if $orgDetails != null and $orgDetails.customer_details.org_cif != null
+                                                            then ($orgDetails.customer_details.org_cif | tostring)
+                                                        else null
+                                                        end
+                                                    )
+                                                else null
                                                 end
                                             ),
-                                            AccountRoleValue: (.external_customer_id // null),
-                                            EntityTypeCode: (
-                                                if .party_type == "individual" 
-                                                    then "PERS" 
-                                                else "ORG" 
-                                                end
-                                            ),
+                                            EntityTypeCode: "ORG",
                                             IsRemove: null,
                                             LiabilityAmount: null,
                                             LiabilityPercent: null
                                         }
-                                    )
-                                end ) 
-                            ) + 
+                                    ] 
+                                else $filteredRelations | map(
+                                    {
+                                        id: .id,
+                                        relation_id: .relation_id,
+                                        relation_type: .relation_type,
+                                        AccountRoleCode: ( 
+                                            if .relation_type == "borrower" 
+                                                then "GUAR" 
+                                            elif .relation_type == "guarantor"
+                                                then "GUAR" 
+                                            elif .relation_type == "owner" 
+                                                then "SIGN" 
+                                            else null 
+                                            end
+                                        ),
+                                        AccountRoleValue: (.external_customer_id // null),
+                                        EntityTypeCode: (
+                                            if .party_type == "individual" 
+                                                then "PERS" 
+                                            else "ORG" 
+                                            end
+                                        ),
+                                        IsRemove: null,
+                                        LiabilityAmount: null,
+                                        LiabilityPercent: null
+                                    }
+                                )
+                                end
+                            ) 
+                            + 
                             ( 
-                                .details.boarding_details | to_entries
+                                $root.details.boarding_details | to_entries
                                 | map(
                                     select(
                                         ( .key | IN("acto","loff","oemp") )
