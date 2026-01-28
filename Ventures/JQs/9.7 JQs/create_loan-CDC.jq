@@ -111,7 +111,7 @@
     ),
     officeId: (if .details.boarding_details.branchCode then .details.boarding_details.branchCode | tonumber else null end),
     interestRatePercent: .loan_approval.approved_rate,
-    sop: "50 10 7.1",
+    sop: "50 10 8",
     billingContactMethod: "Email",
     billingEmail: (.loan_relations[] | select(.is_primary_borrower == true) | .email),
     billingName: (.loan_relations[] | select(.is_primary_borrower == true) | .business_name),
