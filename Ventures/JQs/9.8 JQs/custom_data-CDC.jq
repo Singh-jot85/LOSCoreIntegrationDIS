@@ -66,13 +66,7 @@
             ventures_field:(.customData[] | select(.living_wage) | .living_wage.ventures_field), 
             value:  .details.impact_data | ( if .living_wage == null 
                 then empty 
-                else (
-                    .living_wage as $wage |
-                    if ($wage and ($wage[0:1] == "$"))
-                        then $wage[1:]
-                    else $wage
-                    end
-                )
+                else .living_wage | tostring | gsub("^[\\$]";"")
                 end
             )
         } 

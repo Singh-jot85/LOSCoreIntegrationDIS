@@ -28,13 +28,6 @@
     "cash_and_equivalents"  
 ]) as $equipmentCategoryTypes |
 
-([
-    "borrower",
-    "co_borrower",
-    "owner",
-    "guarantor"
-]) as $relationsToSend |
-
 
 (
 def first_of_next_month_date:
@@ -194,12 +187,7 @@ def get_NCUACategoryCode($collateral; $creTypes):
                             UserFieldValue: (.application_number // null)
                         } ],
                         AccountRoles: ( 
-                            [.flat_relations[] | select(
-                                .external_customer_id != null 
-                                and .is_collateral_related == false 
-                                and (.relation_type // "" | IN($relationsToSend[]))
-                                and .is_system_created == false
-                            )] as $filteredRelations | 
+                            $root.loan_relations as $filteredRelations |
                             [
                                 $filteredRelations[] | select(
                                     .is_primary_borrower == true 
