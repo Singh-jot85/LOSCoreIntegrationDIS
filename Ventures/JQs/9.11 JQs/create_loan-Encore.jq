@@ -1,15 +1,15 @@
-(
+(    
     ({
-        "Purchase Commercial Real Estate": "Purchase Commercial Real Estate",
-        "Improvement to Leased Space": "Improvements to Leased Space",
-        "Purchase Equipment": "Purchase Equipment",
-        "Purchase Furniture and Fixtures": "Purchase Furniture and Fixtures",
-        "Purchase Inventory": "Purchase Inventory",
-        "Debt Refinance": "Debt Refinance",
-        "Business Acquisition": "Business Acquisition",
-        "Working Capital": "Working Capital",
-        "Purchase Vehicle(s)": "Purchase Vehicle(s)",
-        "Start Up Financing": "Start Up Financing"
+    "Purchase Vehicle(s)": "Purchase Vehicle(s)",
+    "Start Up Financing": "Start Up Financing",
+    "Working Capital": "Working Capital",
+    "Business Acquisition": "Business Acquisition",
+    "Debt Refinance": "Refinance",
+    "Purchase Inventory": "Inventory",
+    "Purchase Furniture and Fixtures": "Purchase Furniture and Fixtures",
+    "Purchase Equipment": "Equipment",
+    "Improvement to Leased Space": "Leasehold Improvements",
+    "Purchase Commercial Real Estate": "Real Estate Purchase"
     }) as $purposeType |
     ({
         "Purchase Land only": "Purchase Of Land",
@@ -43,7 +43,6 @@
         "Motor Vehicle": "Automobile",
         "vehicles": "Automobile",
         "life_insurance": "Life Insurance",
-        "All Assets": "Business Assets",
         "all_assets": "Business Assets",
         "inventory_accounts_receivable": "Inventory",
         "other": "Other",
@@ -68,10 +67,10 @@
         "EL_LOC": "SBA EXPRESS LOC",
         "EL_TL": "SBA EXPRESS TERM",
         "7A_TL": "SMALL SBA 7(a)",
-    }) as $fixedLoanTypes |
+    }) as $fixedLoanTypes | 
     (
         ["EL_LOC", "EL_TL", "7A_TL", "504_TL", "MARC_7A_LOC", "MARC_7A_TL"]
-    ) as $SBAproductCodes | 
+    ) as $SBAproductCodes |
 
 { 
     fundedDate: (.funding_date // null),
@@ -205,22 +204,44 @@
         .approved_amount as $loan_amount 
         | .collateral_types_mapping as $CollateralTypesMapping 
         | .environment_values.lien_holder_id as $lienHolderCompanyId 
-        | [ .collaterals[] 
-        | { 
-            collateralTypeId: (if .collateral_type and $collateralType[.collateral_type_verbose] and $CollateralTypesMapping[$collateralType[.collateral_type_verbose]] then $CollateralTypesMapping[$collateralType[.collateral_type_verbose]] else ( if .category and $collateralType[.category] and $CollateralTypesMapping[$collateralType[.category]] then $CollateralTypesMapping[$collateralType[.category]] else $CollateralTypesMapping["Other"] end) end),
-            value:(if .collateral_value then .collateral_value else $loan_amount end),
-            lienPosition:(if .lien_position == "first" then 1 elif .lien_position == "second" then 2 elif .lien_position == "third" then 3 elif .lien_position == "fourth" then 4 elif .lien_position == "fifth" then 5 elif .lien_position == "subordinate" then 2 else null end),
-            uccFiled:.is_ucc_filing_applicable,
-            liens:[ .lien_holders[] | 
-                { 
-                    lienHolderCompanyId: $lienHolderCompanyId ,
-                    lienPosition:(if .lien_position == "first" then 1 elif .lien_position == "second" then 2 elif .lien_position == "third" then 3 elif .lien_position == "fourth" then 4 elif .lien_position == "fifth" then 5 else null end),
-                    amount:.original_note_amount ,
-                    Comment:(if .business_name and .business_name != "" then .business_name else .first_name + " " + .last_name end)
-                } 
-            ] 
-        } 
-    ] as $collaterals | $collaterals | map( . + {primary: (.value == ($collaterals | max_by(.value) | .value))} )),
+        | [ .collaterals[] | { 
+                collateralTypeId: (
+                    if (
+                        .collateral_type 
+                        and $collateralType[.collateral_type_verbose] 
+                        and $CollateralTypesMapping[$collateralType[.collateral_type_verbose]] 
+                    )
+                        then $CollateralTypesMapping[$collateralType[.collateral_type_verbose]] 
+                    else ( 
+                        if (
+                            .category 
+                            and $collateralType[.category] 
+                            and $CollateralTypesMapping[$collateralType[.category]]
+                        ) 
+                            then $CollateralTypesMapping[$collateralType[.category]] 
+                        else $CollateralTypesMapping["Other"] 
+                        end
+                    ) 
+                    end
+                ), 
+                value:(if .collateral_value then .collateral_value else $loan_amount end),
+                lienPosition:(if .lien_position == "first" then 1 elif .lien_position == "second" then 2 elif .lien_position == "third" then 3 elif .lien_position == "fourth" then 4 elif .lien_position == "fifth" then 5 elif .lien_position == "subordinate" then 2 else null end),
+                uccFiled:.is_ucc_filing_applicable,
+                liens: [ .lien_holders[] | 
+                    { 
+                        lienHolderCompanyId: $lienHolderCompanyId ,
+                        lienPosition:(if .lien_position == "first" then 1 elif .lien_position == "second" then 2 elif .lien_position == "third" then 3 elif .lien_position == "fourth" then 4 elif .lien_position == "fifth" then 5 else null end),
+                        amount:.original_note_amount ,
+                        Comment:(if .business_name and .business_name != "" then .business_name else .first_name + " " + .last_name end)
+                    }
+                ]
+            } 
+        ] as $collaterals | $collaterals | map( . + 
+            {
+                primary: (.value == ($collaterals | max_by(.value) | .value))
+            } 
+        )
+    ),
     mailingAddress: ( [
             .loan_relations[] 
             | select(.is_primary_borrower == true) 
@@ -280,24 +301,19 @@
             primary: .is_primary_borrower,
             association: "Operating Company",
             borrower:(if .relation_type == "borrower" then true else false end),
+            employeeCount: (if .is_primary_borrower then .number_of_employees else 0 end),
             dbaName: .dba_name,
             annualRevenue:( .details.annual_business_revenue ),
-            employeeCount: (if .is_primary_borrower then .number_of_employees else 0 end),
             guaranteeType: "Unsecured Limited",
             company: 
                 {
-                     name: ( 
-                        if (.dba_name and .dba_name !="") 
-                            then .dba_name 
-                        else (if .title and .title != "" then .title + " " + .first_name else .first_name end) + (if .middle_name and .middle_name != "" then " " + .middle_name else "" end) + " " + (if .suffix and .suffix != "" then .last_name + " " + .suffix else .last_name end)
-                        end 
-                    ),
+                    name: ( if (.dba_name and .dba_name !="") then .dba_name else (if(.full_name == .business_name) then .business_name else (if .title then .title + " " + .first_name else .first_name end) + (if .middle_name and .middle_name != "" then " " + .middle_name else "" end) + " " + (if .suffix then .last_name + " " + .suffix else .last_name end) end // null) end ),
                     taxId: .tin,
                     taxIdType: .tin_type,
                     entityType: "Sole Proprietorship",
                     naicsCode: ( if .naics_code then .naics_code | tostring else null end ),
-                    stateOfFormation: .state_of_establishment,
                     businessPhone: ((.work_phone|tostring) // null),
+                    stateOfFormation: .state_of_establishment,
                     currentOwnershipEstablishedDate: .business_established_date
                 } 
         } 
@@ -332,11 +348,10 @@
             ],
             company: 
                 { 
-                    name: ( 
-                        .business_name ),
+                    name: ( .business_name),
                     naicsCode: ( if .naics_code then .naics_code | tostring else null end ),
-                    stateOfFormation: .state_of_establishment,
                     businessPhone: ((.work_phone|tostring) // null),
+                    stateOfFormation: .state_of_establishment,
                     currentOwnershipEstablishedDate: .business_established_date
                 },
             memberOf: [ 
