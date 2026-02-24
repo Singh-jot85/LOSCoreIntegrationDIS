@@ -164,12 +164,7 @@
         end
     ),
     interestRatePercent: .loan_approval.approved_rate,
-    sop: (
-        if .org_config?.sba_sop_version != null and .org_config?.sba_sop_version != ""
-            then .org_config.sba_sop_version
-        else null
-        end
-    ),
+    sop: "50 10 8",
     billingContactMethod: "Email",
     billingEmail: (.loan_relations[] | select(.is_primary_borrower == true) | .email),
     billingName: (.loan_relations[] | select(.is_primary_borrower == true) | .full_name),
